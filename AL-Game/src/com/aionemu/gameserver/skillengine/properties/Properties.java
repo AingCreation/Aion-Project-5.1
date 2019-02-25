@@ -35,46 +35,34 @@ public class Properties {
 
 	@XmlAttribute(name = "first_target", required = true)
 	protected FirstTargetAttribute firstTarget;
-
 	@XmlAttribute(name = "first_target_range", required = true)
 	protected int firstTargetRange;
-
 	@XmlAttribute(name = "awr")
 	protected boolean addWeaponRange;
-
 	@XmlAttribute(name = "target_relation", required = true)
 	protected TargetRelationAttribute targetRelation;
-
 	@XmlAttribute(name = "target_type", required = true)
 	protected TargetRangeAttribute targetType;
-
 	@XmlAttribute(name = "target_distance")
 	protected int targetDistance;
-
 	@XmlAttribute(name = "target_maxcount")
 	protected int targetMaxCount;
-
 	@XmlAttribute(name = "target_status")
 	private List<String> targetStatus;
-
 	@XmlAttribute(name = "revision_distance")
 	protected int revisionDistance;
-
-	@XmlAttribute(name = "effective_width")
-	private int effectiveWidth;
-
+	@XmlAttribute(name = "effective_range")
+	private int effectiveRange;
+	@XmlAttribute(name = "effective_altitude")
+	private int effectiveAltitude;
 	@XmlAttribute(name = "effective_angle")
 	private int effectiveAngle;
-
+	@XmlAttribute(name = "effective_dist")
+	private int effectiveDist;
 	@XmlAttribute(name = "direction")
-	protected int direction;
-
+	protected AreaDirections direction = AreaDirections.NONE;
 	@XmlAttribute(name = "target_species")
-	protected TargetSpeciesAttribute targetSpecies;
-
-	public Properties() {
-		targetSpecies = TargetSpeciesAttribute.ALL;
-	}
+	protected TargetSpeciesAttribute targetSpecies = TargetSpeciesAttribute.ALL;
 
 	/**
 	 * @param skill
@@ -110,8 +98,10 @@ public class Properties {
 				return false;
 			}
 		}
-		if (targetSpecies != TargetSpeciesAttribute.ALL && !TargetSpeciesProperty.set(skill, this)) {
-			return false;
+		if (targetSpecies != TargetSpeciesAttribute.ALL) {
+			if (!TargetSpeciesProperty.set(skill, this)) {
+				return false;
+			}
 		}
 		return true;
 	}
@@ -149,8 +139,10 @@ public class Properties {
 				return false;
 			}
 		}
-		if (targetSpecies != TargetSpeciesAttribute.ALL && !TargetSpeciesProperty.set(skill, this)) {
-			return false;
+		if (targetSpecies != TargetSpeciesAttribute.ALL) {
+			if (!TargetSpeciesProperty.set(skill, this)) {
+				return false;
+			}
 		}
 		return true;
 	}
@@ -191,16 +183,24 @@ public class Properties {
 		return revisionDistance;
 	}
 
-	public int getEffectiveWidth() {
-		return effectiveWidth;
+	public int getEffectiveRange() {
+		return effectiveRange;
+	}
+
+	public int getEffectiveAltitude() {
+		return effectiveAltitude;
+	}
+
+	public int getEffectiveDist() {
+		return effectiveDist;
 	}
 
 	public int getEffectiveAngle() {
 		return effectiveAngle;
 	}
 
-	public boolean isBackDirection() {
-		return direction == 1;
+	public AreaDirections getDirection() {
+		return direction;
 	}
 
 	public TargetSpeciesAttribute getTargetSpecies() {
@@ -208,6 +208,7 @@ public class Properties {
 	}
 
 	public enum CastState {
+
 		CAST_START(true),
 		CAST_END(false);
 

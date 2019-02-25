@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copy Right Archsoft Development-->
+<enchant_rates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <enchant_rate equipment_type="WEAPON">        
+		<item_quality quality="COMMON">
+			<enchant_level min="0" max="5" chance="100"/>
+			<enchant_level min="6" max="10" chance="80"/>
+			<enchant_level min="11" max="15" chance="70"/>
+			<enchant_level min="16" max="20" chance="40"/>
+			<enchant_level min="21" max="25" chance="15"/>
+			<enchant_level min="26" max="255" chance="0"/>
+		</item_quality>
+		<item_quality quality="RARE">
+			<enchant_level min="0" max="5" chance="100"/>
+			<enchant_level min="6" max="10" chance="80"/>
+			<enchant_level min="11" max="15" chance="70"/>
+			<enchant_level min="16" max="20" chance="40"/>
+			<enchant_level min="21" max="25" chance="15"/>
+			<enchant_level min="26" max="255" chance="0"/>
+		</item_quality>
+		<item_quality quality="LEGEND">
+			<enchant_level min="0" max="5" chance="100"/>
+			<enchant_level min="6" max="10" chance="80"/>
+			<enchant_level min="11" max="15" chance="70"/>
+			<enchant_level min="16" max="20" chance="40"/>
+			<enchant_level min="21" max="25" chance="15"/>
+			<enchant_level min="26" max="255" chance="0"/>
+		</item_quality>
+		<item_quality quality="UNIQUE">
+			<enchant_level min="0" max="5" chance="100"/>
+			<enchant_level min="6" max="10" chance="80"/>
+			<enchant_level min="11" max="15" chance="70"/>
+			<enchant_level min="16" max="20" chance="40"/>
+			<enchant_level min="21" max="25" chance="15"/>
+			<enchant_level min="26" max="255" chance="0"/>
+		</item_quality>
+		<item_quality quality="EPIC">
+			<enchant_level min="0" max="5" chance="100"/>
+			<enchant_level min="6" max="10" chance="80"/>
+			<enchant_level min="11" max="15" chance="70"/>
+			<enchant_level min="16" max="20" chance="40"/>
+			<enchant_level min="21" max="25" chance="15"/>
+			<enchant_level min="26" max="255" chance="0"/>
+		</item_quality>
+		<item_quality quality="MYTHIC">
+			<enchant_level min="0" max="5" chance="100"/>
+			<enchant_level min="6" max="10" chance="80"/>
+			<enchant_level min="11" max="15" chance="70"/>
+			<enchant_level min="16" max="20" chance="40"/>
+			<enchant_level min="21" max="25" chance="15"/>
+			<enchant_level min="26" max="255" chance="0"/>
+		</item_quality>
+	</enchant_rate>
+	<enchant_rate equipment_type="ARMOR">        
+		<item_quality quality="COMMON">
+			<enchant_level min="0" max="5" chance="100"/>
+			<enchant_level min="6" max="10" chance="80"/>
+			<enchant_level min="11" max="15" chance="70"/>
+			<enchant_level min="16" max="20" chance="40"/>
+			<enchant_level min="21" max="25" chance="15"/>
+			<enchant_level min="26" max="255" chance="0"/>
+		</item_quality>
+		<item_quality quality="RARE">
+			<enchant_level min="0" max="5" chance="100"/>
+			<enchant_level min="6" max="10" chance="80"/>
+			<enchant_level min="11" max="15" chance="70"/>
+			<enchant_level min="16" max="20" chance="40"/>
+			<enchant_level min="21" max="25" chance="15"/>
+			<enchant_level min="26" max="255" chance="0"/>
+		</item_quality>
+		<item_quality quality="LEGEND">
+			<enchant_level min="0" max="5" chance="100"/>
+			<enchant_level min="6" max="10" chance="80"/>
+			<enchant_level min="11" max="15" chance="70"/>
+			<enchant_level min="16" max="20" chance="40"/>
+			<enchant_level min="21" max="25" chance="15"/>
+			<enchant_level min="26" max="255" chance="0"/>
+		</item_quality>
+		<item_quality quality="UNIQUE">
+			<enchant_level min="0" max="5" chance="100"/>
+			<enchant_level min="6" max="10" chance="80"/>
+			<enchant_level min="11" max="15" chance="70"/>
+			<enchant_level min="16" max="20" chance="40"/>
+			<enchant_level min="21" max="25" chance="15"/>
+			<enchant_level min="26" max="255" chance="0"/>
+		</item_quality>
+		<item_quality quality="EPIC">
+			<enchant_level min="0" max="5" chance="100"/>
+			<enchant_level min="6" max="10" chance="80"/>
+			<enchant_level min="11" max="15" chance="70"/>
+			<enchant_level min="16" max="20" chance="40"/>
+			<enchant_level min="21" max="25" chance="15"/>
+			<enchant_level min="26" max="255" chance="0"/>
+		</item_quality>
+		<item_quality quality="MYTHIC">
+			<enchant_level min="0" max="5" chance="100"/>
+			<enchant_level min="6" max="10" chance="80"/>
+			<enchant_level min="11" max="15" chance="70"/>
+			<enchant_level min="16" max="20" chance="40"/>
+			<enchant_level min="21" max="25" chance="15"/>
+			<enchant_level min="26" max="255" chance="0"/>
+		</item_quality>
+	</enchant_rate>
+	<enchant_rate equipment_type="STIGMA">        
+		<item_quality quality="COMMON">
+			<enchant_level min="0" max="1" chance="100"/>
+			<enchant_level min="2" max="3" chance="50"/>
+			<enchant_level min="4" max="5" chance="10"/>
+			<enchant_level min="6" max="8" chance="0"/>
+			<enchant_level min="9" max="10" chance="0"/>
+			<enchant_level min="11" max="100" chance="0"/>
+		</item_quality>
+		<item_quality quality="RARE">
+			<enchant_level min="0" max="1" chance="100"/>
+			<enchant_level min="2" max="3" chance="50"/>
+			<enchant_level min="4" max="5" chance="10"/>
+			<enchant_level min="6" max="8" chance="0"/>
+			<enchant_level min="9" max="10" chance="0"/>
+			<enchant_level min="11" max="100" chance="0"/>
+		</item_quality>
+		<item_quality quality="LEGEND">
+			<enchant_level min="0" max="1" chance="100"/>
+			<enchant_level min="2" max="3" chance="50"/>
+			<enchant_level min="4" max="5" chance="10"/>
+			<enchant_level min="6" max="8" chance="0"/>
+			<enchant_level min="9" max="10" chance="0"/>
+			<enchant_level min="11" max="100" chance="0"/>
+		</item_quality>
+		<item_quality quality="UNIQUE">
+			<enchant_level min="0" max="1" chance="100"/>
+			<enchant_level min="2" max="3" chance="50"/>
+			<enchant_level min="4" max="5" chance="10"/>
+			<enchant_level min="6" max="8" chance="0"/>
+			<enchant_level min="9" max="10" chance="0"/>
+			<enchant_level min="11" max="100" chance="0"/>
+		</item_quality>
+		<item_quality quality="EPIC">
+			<enchant_level min="0" max="1" chance="100"/>
+			<enchant_level min="2" max="3" chance="50"/>
+			<enchant_level min="4" max="5" chance="10"/>
+			<enchant_level min="6" max="8" chance="0"/>
+			<enchant_level min="9" max="10" chance="0"/>
+			<enchant_level min="11" max="100" chance="0"/>
+		</item_quality>
+		<item_quality quality="MYTHIC">
+			<enchant_level min="0" max="1" chance="100"/>
+			<enchant_level min="2" max="3" chance="50"/>
+			<enchant_level min="4" max="5" chance="10"/>
+			<enchant_level min="6" max="8" chance="0"/>
+			<enchant_level min="9" max="10" chance="0"/>
+			<enchant_level min="11" max="100" chance="0"/>
+		</item_quality>
+	</enchant_rate>
+	<enchant_rate equipment_type="ESTIMA">        
+		<item_quality quality="COMMON">
+			<enchant_level min="0" max="2" chance="100"/>
+			<enchant_level min="3" max="4" chance="50"/>
+			<enchant_level min="5" max="6" chance="25"/>
+			<enchant_level min="7" max="8" chance="10"/>
+			<enchant_level min="9" max="10" chance="5"/>
+			<enchant_level min="11" max="100" chance="1"/>
+		</item_quality>
+		<item_quality quality="RARE">
+			<enchant_level min="0" max="2" chance="100"/>
+			<enchant_level min="3" max="4" chance="50"/>
+			<enchant_level min="5" max="6" chance="25"/>
+			<enchant_level min="7" max="8" chance="10"/>
+			<enchant_level min="9" max="10" chance="5"/>
+			<enchant_level min="11" max="100" chance="1"/>
+		</item_quality>
+		<item_quality quality="LEGEND">
+			<enchant_level min="0" max="2" chance="100"/>
+			<enchant_level min="3" max="4" chance="50"/>
+			<enchant_level min="5" max="6" chance="25"/>
+			<enchant_level min="7" max="8" chance="10"/>
+			<enchant_level min="9" max="10" chance="5"/>
+			<enchant_level min="11" max="100" chance="1"/>
+		</item_quality>
+		<item_quality quality="UNIQUE">
+			<enchant_level min="0" max="2" chance="100"/>
+			<enchant_level min="3" max="4" chance="50"/>
+			<enchant_level min="5" max="6" chance="25"/>
+			<enchant_level min="7" max="8" chance="10"/>
+			<enchant_level min="9" max="10" chance="5"/>
+			<enchant_level min="11" max="100" chance="1"/>
+		</item_quality>
+		<item_quality quality="EPIC">
+			<enchant_level min="0" max="2" chance="100"/>
+			<enchant_level min="3" max="4" chance="50"/>
+			<enchant_level min="5" max="6" chance="25"/>
+			<enchant_level min="7" max="8" chance="10"/>
+			<enchant_level min="9" max="10" chance="5"/>
+			<enchant_level min="11" max="100" chance="1"/>
+		</item_quality>
+		<item_quality quality="MYTHIC">
+			<enchant_level min="0" max="2" chance="100"/>
+			<enchant_level min="3" max="4" chance="50"/>
+			<enchant_level min="5" max="6" chance="25"/>
+			<enchant_level min="7" max="8" chance="10"/>
+			<enchant_level min="9" max="10" chance="5"/>
+			<enchant_level min="11" max="100" chance="1"/>
+		</item_quality>
+	</enchant_rate>
+	<enchant_rate equipment_type="NONE"> <!-- Handle For Unknown Equipment Type -->       
+		<item_quality quality="COMMON">
+			<enchant_level min="0" max="1" chance="100"/>
+			<enchant_level min="2" max="3" chance="50"/>
+			<enchant_level min="4" max="5" chance="10"/>
+			<enchant_level min="6" max="8" chance="0"/>
+			<enchant_level min="9" max="10" chance="0"/>
+			<enchant_level min="11" max="100" chance="0"/>
+		</item_quality>
+		<item_quality quality="RARE">
+			<enchant_level min="0" max="1" chance="100"/>
+			<enchant_level min="2" max="3" chance="50"/>
+			<enchant_level min="4" max="5" chance="10"/>
+			<enchant_level min="6" max="8" chance="0"/>
+			<enchant_level min="9" max="10" chance="0"/>
+			<enchant_level min="11" max="100" chance="0"/>
+		</item_quality>
+		<item_quality quality="LEGEND">
+			<enchant_level min="0" max="1" chance="100"/>
+			<enchant_level min="2" max="3" chance="50"/>
+			<enchant_level min="4" max="5" chance="10"/>
+			<enchant_level min="6" max="8" chance="0"/>
+			<enchant_level min="9" max="10" chance="0"/>
+			<enchant_level min="11" max="100" chance="0"/>
+		</item_quality>
+		<item_quality quality="UNIQUE">
+			<enchant_level min="0" max="1" chance="100"/>
+			<enchant_level min="2" max="3" chance="50"/>
+			<enchant_level min="4" max="5" chance="10"/>
+			<enchant_level min="6" max="8" chance="0"/>
+			<enchant_level min="9" max="10" chance="0"/>
+			<enchant_level min="11" max="100" chance="0"/>
+		</item_quality>
+		<item_quality quality="EPIC">
+			<enchant_level min="0" max="1" chance="100"/>
+			<enchant_level min="2" max="3" chance="50"/>
+			<enchant_level min="4" max="5" chance="10"/>
+			<enchant_level min="6" max="8" chance="0"/>
+			<enchant_level min="9" max="10" chance="0"/>
+			<enchant_level min="11" max="100" chance="0"/>
+		</item_quality>
+		<item_quality quality="MYTHIC">
+			<enchant_level min="0" max="1" chance="100"/>
+			<enchant_level min="2" max="3" chance="50"/>
+			<enchant_level min="4" max="5" chance="10"/>
+			<enchant_level min="6" max="8" chance="0"/>
+			<enchant_level min="9" max="10" chance="0"/>
+			<enchant_level min="11" max="100" chance="0"/>
+		</item_quality>
+	</enchant_rate>
+</enchant_rates>

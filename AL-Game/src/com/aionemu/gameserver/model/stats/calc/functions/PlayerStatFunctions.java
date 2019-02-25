@@ -34,9 +34,6 @@ public class PlayerStatFunctions
 	}
 	
 	public static final void addPredefinedStatFunctions(Player player) {
-		if (player == null) {
-			return;
-		}
 		player.getGameStats().addEffectOnly(null, FUNCTIONS);
 	}
 }

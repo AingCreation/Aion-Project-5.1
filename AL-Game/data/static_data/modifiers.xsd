@@ -11,7 +11,6 @@
 			<xs:element name="mean" type="MeanModifier" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="chance" type="xs:float" default="100"/>
-		<xs:attribute name="level" type="xs:int" use="optional"/>
 	</xs:complexType>
 	<xs:complexType name="Modifier">
 		<xs:attribute name="name" type="modifiersenum"/>
@@ -249,30 +248,42 @@
 			<xs:enumeration value="ENCHANT_OPTION_BOOST"/>
 			<!-- new for f2p and event boost -->
 			<xs:enumeration value="ORDALIE_REWARD"/>
+			<!-- custom -->
+            <xs:enumeration value="HSTR"/>
+            <xs:enumeration value="HVIT"/>
+            <xs:enumeration value="HDEX"/>
+            <xs:enumeration value="HAGI"/>
+            <xs:enumeration value="HKNO"/>
+            <xs:enumeration value="HWIL"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<!-- conditions -->
 	<xs:complexType name="Conditions">
 		<xs:sequence minOccurs="0" maxOccurs="unbounded">
 			<xs:element name="mp" type="MpCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="hp" type="HpCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="dp" type="DpCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="target" type="TargetCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="playermove" type="PlayerMovedCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="abnormal" type="AbnormalStateCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="onfly" type="OnFlyCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="noflying" type="NoFlyingCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="weapon" type="WeaponCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="armor" type="ArmorCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="charge" type="ChargeCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="targetflying" type="TargetFlyingCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="selfflying" type="SelfFlyingCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="combatcheck" type="CombatCheckCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="chain" type="ChainCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="back" type="BackCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="front" type="FrontCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="form" type="FormCondition" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="idianchargeweapon" type="IdianChargeCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="hp" type="HpCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="dp" type="DpCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="target" type="TargetCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="move_casting" type="PlayerMovedCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="arrowcheck" type="ArrowCheckCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="robotcheck" type="RobotCheckCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="abnormal" type="AbnormalStateCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="onfly" type="OnFlyCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="noflying" type="NoFlyingCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="weapon" type="WeaponCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="lefthandweapon" type="LeftHandCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="targetflying" type="TargetFlyingCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="selfflying" type="SelfFlyingCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="combatcheck" type="CombatCheckCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="chain" type="ChainCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="back" type="BackCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="front" type="FrontCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="form" type="FormCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="charge" type="ItemChargeCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="chargeweapon" type="ChargeWeaponCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="chargearmor" type="ChargeArmorCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="polishchargeweapon" type="PolishChargeCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="skillcharge" type="SkillChargeCondition" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Condition" abstract="true"/>
@@ -315,6 +326,16 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="ArrowCheckCondition">
+        <xs:complexContent>
+            <xs:extension base="Condition"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="RobotCheckCondition">
+        <xs:complexContent>
+            <xs:extension base="Condition"/>
+        </xs:complexContent>
+    </xs:complexType>
 	<xs:complexType name="OnFlyCondition">
 		<xs:complexContent>
 			<xs:extension base="Condition">
@@ -344,17 +365,47 @@
 	<xs:complexType name="AbnormalStateCondition">
 		<xs:complexContent>
 			<xs:extension base="Condition">
-			 <xs:attribute name="value" type="AbnormalState"/>
+				<xs:attribute name="value" type="AbnormalState"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="ChargeCondition">
+	<xs:complexType name="ChargeCondition" abstract="true">
 		<xs:complexContent>
 			<xs:extension base="Condition">
-				<xs:attribute name="level" type="xs:int"/>
+				<xs:attribute name="value" type="xs:int"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="ItemChargeCondition">
+        <xs:complexContent>
+            <xs:extension base="ChargeCondition">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ChargeWeaponCondition">
+        <xs:complexContent>
+            <xs:extension base="ChargeCondition">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ChargeArmorCondition">
+        <xs:complexContent>
+            <xs:extension base="ChargeCondition">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="PolishChargeCondition">
+        <xs:complexContent>
+            <xs:extension base="ChargeCondition">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="SkillChargeCondition">
+        <xs:complexContent>
+            <xs:extension base="ChargeCondition">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 	<xs:complexType name="TargetFlyingCondition">
 		<xs:complexContent>
 			<xs:extension base="Condition">
@@ -412,32 +463,46 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="IdianChargeCondition">
-		<xs:complexContent>
-			<xs:extension base="ChargeCondition">
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
+	<xs:complexType name="LeftHandCondition">
+        <xs:complexContent>
+            <xs:extension base="Condition">
+                <xs:attribute name="type" type="LeftHandSlot"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 	<xs:simpleType name="AbnormalState">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="BIND"/>
-			<xs:enumeration value="BLEED"/>
-			<xs:enumeration value="BLIND"/>
-			<xs:enumeration value="CURSE"/>
-			<xs:enumeration value="DEFORM"/>
-			<xs:enumeration value="DISEASE"/>
-			<xs:enumeration value="FEAR"/>
-			<xs:enumeration value="OPENAERIAL"/>
-			<xs:enumeration value="PARALYZE"/>
-			<xs:enumeration value="POISON"/>
-			<xs:enumeration value="SILENCE"/>
-			<xs:enumeration value="SNARE"/>
-			<xs:enumeration value="SPIN"/>
-			<xs:enumeration value="STAGGER"/>
-			<xs:enumeration value="STUMBLE"/>
-			<xs:enumeration value="STUN"/>
-			<xs:enumeration value="SLEEP"/>
-			<xs:enumeration value="NOFLY"/>
+			<xs:enumeration value="BUFF"/>
+            <xs:enumeration value="POISON"/>
+            <xs:enumeration value="BLEED"/>
+            <xs:enumeration value="PARALYZE"/>
+            <xs:enumeration value="SLEEP"/>
+            <xs:enumeration value="ROOT"/>
+            <xs:enumeration value="BLIND"/>
+            <xs:enumeration value="UNK"/>
+            <xs:enumeration value="DISEASE"/>
+            <xs:enumeration value="SILENCE"/>
+            <xs:enumeration value="FEAR"/>
+            <xs:enumeration value="CURSE"/>
+            <xs:enumeration value="CHAOS"/>
+            <xs:enumeration value="STUN"/>
+            <xs:enumeration value="PETRIFICATION"/>
+            <xs:enumeration value="STUMBLE"/>
+            <xs:enumeration value="STAGGER"/>
+            <xs:enumeration value="OPENAERIAL"/>
+            <xs:enumeration value="SNARE"/>
+            <xs:enumeration value="SLOW"/>
+            <xs:enumeration value="SPIN"/>
+            <xs:enumeration value="BIND"/>
+            <xs:enumeration value="DEFORM"/>
+            <xs:enumeration value="CLOSEAERIAL"/>
+            <xs:enumeration value="NOFLY"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="LeftHandSlot">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SHIELD"/>
+            <xs:enumeration value="DUAL"/>
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>

@@ -18,9 +18,11 @@ package com.aionemu.gameserver.network.aion.iteminfo;
 
 import java.nio.ByteBuffer;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.templates.item.Stigma;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
+import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
 
 /**
  * This blob contains stigma info.
@@ -38,20 +40,38 @@ public class StigmaInfoBlobEntry extends ItemBlobEntry {
 	public void writeThisBlob(ByteBuffer buf) {
 		Item item = ownerItem;
 		Stigma stigma = item.getItemTemplate().getStigma();
-
-		writeD(buf, stigma.getSkills().get(0).getSkillId());		// skill id 1
-		if (stigma.getSkills().size() >= 2)
-			writeD(buf, stigma.getSkills().get(1).getSkillId());	// skill id 2
-		else
-			writeD(buf, 0);
-
-		writeD(buf, stigma.getShard());
-
-		skip(buf, 192);
-		writeH(buf, 0x1);	// unk
-		writeH(buf, 0);
-		skip(buf, 96);
-		writeH(buf, 0);		// unk
+		SkillLearnTemplate[] skillTemplates = null;
+		
+		int stimgaSkillId1 = 0;
+	    int stimgaSkillId2 = 0;
+	    for (int i = 1; i <= owner.getLevel(); i++) {
+	    	skillTemplates = DataManager.SKILL_TREE_DATA.getTemplatesFor(owner.getPlayerClass(), i, owner.getRace());
+	    	for (SkillLearnTemplate skillTree : skillTemplates) {
+	    		if (stigma.getSkillGroup1() != null) {
+	    			if (skillTree.getSkillGroup() != null) {
+	    				if (stigma.getSkillGroup1().toLowerCase().equals(skillTree.getSkillGroup().toLowerCase())) {
+	    					stimgaSkillId1 = skillTree.getSkillId();
+	    				}
+	    			}
+	    		} if (stigma.getSkillGroup2() != null) {
+	    			if (skillTree.getSkillGroup() != null) {
+	    				if (stigma.getSkillGroup2().toLowerCase().equals(skillTree.getSkillGroup().toLowerCase())) {
+	    					stimgaSkillId2 = skillTree.getSkillId();
+	    				}	
+	    			}
+	    		}
+	    	}
+	    }
+	    
+	    writeD(buf, stimgaSkillId1);
+	    writeD(buf, stimgaSkillId2);
+	    writeD(buf, stigma.getKinah());
+	    
+	    skip(buf, 192);
+	    writeH(buf, 1);
+	    writeH(buf, 0);
+	    skip(buf, 96);
+	    writeH(buf, 0);
 	}
 
 	@Override

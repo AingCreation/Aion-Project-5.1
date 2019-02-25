@@ -24,6 +24,7 @@ import javolution.util.FastList;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 
@@ -116,6 +117,8 @@ public interface IStorage {
 	 * Add operation should be used for new items incoming into storage from outside
 	 */
 	Item add(Item item);
+	
+	Item add(Item item, ItemAddType addType);
 	
 	/**
 	 * Put operation is used in some operations like unequip

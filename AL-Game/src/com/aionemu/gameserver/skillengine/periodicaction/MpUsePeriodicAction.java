@@ -16,29 +16,37 @@
  */
 package com.aionemu.gameserver.skillengine.periodicaction;
 
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.stats.calc.Stat2;
+import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
+import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.skillengine.model.Effect;
-
-/**
- * @author antness
- */
-public class MpUsePeriodicAction extends PeriodicAction {
-
-	@XmlAttribute(name = "value")
-	protected int value;
-
-	@Override
-	public void act(Effect effect) {
-		Creature effected = effect.getEffected();
-		int maxMp = effected.getGameStats().getMaxMp().getCurrent();
-		int requiredMp = (int) (maxMp * (value / 100f));
-		if (effected.getLifeStats().getCurrentMp() < requiredMp) {
-			effect.endEffect();
-			return;
-		}
-		effected.getLifeStats().reduceMp(requiredMp);
-	}
-
+public class MpUsePeriodicAction
+  extends PeriodicAction
+{
+  @XmlAttribute(name="value")
+  protected int value;
+  @XmlAttribute(name="ratio")
+  protected boolean ratio;
+  @XmlAttribute(name="percent")
+  protected boolean percent;
+  
+  public void act(Effect effect)
+  {
+    Creature effected = effect.getEffected();
+    int requiredMp = this.value;
+    if (effected.getLifeStats().getCurrentMp() < requiredMp)
+    {
+      effect.endEffect();
+      return;
+    }
+    if ((this.ratio) || (this.percent))
+    {
+      int maxMp = effected.getGameStats().getMaxMp().getCurrent();
+      requiredMp = (int)(maxMp * (this.value / 100.0F));
+    }
+    effected.getLifeStats().reduceMp(requiredMp);
+  }
 }

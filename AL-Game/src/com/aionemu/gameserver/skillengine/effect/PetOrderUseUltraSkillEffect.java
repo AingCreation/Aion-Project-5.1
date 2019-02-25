@@ -1,18 +1,18 @@
-/*
- * This file is part of aion-unique <aion-unique.org>.
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
  *
- *  aion-unique is free software: you can redistribute it and/or modify
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  aion-unique is distributed in the hope that it will be useful,
+ *  Aion-Lightning is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
+ *  GNU General Public License for more details. *
  *  You should have received a copy of the GNU General Public License
- *  along with aion-unique.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.aionemu.gameserver.skillengine.effect;
 
@@ -46,18 +46,18 @@ public class PetOrderUseUltraSkillEffect extends EffectTemplate {
 			return;
 		}
 
-		int effectorId = effector.getSummon().getObjectId().intValue();
+		int effectorId = effector.getSummon().getObjectId();
 
 		int npcId = effector.getSummon().getNpcId();
 		int orderSkillId = effect.getSkillId();
 
 		int petUseSkillId = DataManager.PET_SKILL_DATA.getPetOrderSkill(orderSkillId, npcId);
-		int targetId = effect.getEffected().getObjectId().intValue();
+		int targetId = effect.getEffected().getObjectId();
 
 		// Handle automatic release if skill expects so
 		if (release) {
 			SummonController controller = effector.getSummon().getController();
-			if ((controller instanceof SummonController)) {
+			if (controller != null) {
 				effector.getSummon().getController().setReleaseAfterSkill(petUseSkillId);
 			}
 		}
@@ -66,7 +66,8 @@ public class PetOrderUseUltraSkillEffect extends EffectTemplate {
 
 	@Override
 	public void calculate(Effect effect) {
-		if (effect.getEffector() instanceof Player && effect.getEffected() != null)
+		if (effect.getEffector() instanceof Player && effect.getEffected() != null) {
 			super.calculate(effect, null, null);
+		}
 	}
 }

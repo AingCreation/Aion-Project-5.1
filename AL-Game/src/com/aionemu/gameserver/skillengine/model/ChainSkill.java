@@ -14,8 +14,8 @@ public class ChainSkill {
 
 	public void updateChainSkill(String category) {
 		this.category = category;
-		chainCount = 0;
-		useTime = System.currentTimeMillis();
+		this.chainCount = 0;
+		this.useTime = System.currentTimeMillis();
 	}
 
 	public String getCategory() {
@@ -35,7 +35,7 @@ public class ChainSkill {
 	}
 
 	public void increaseChainCount() {
-		chainCount ++;
+		this.chainCount ++;
 	}
 
 	public long getUseTime() {

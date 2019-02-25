@@ -64,19 +64,18 @@ public class AttackShieldObserver extends AttackCalcObserver {
 	 * @param status
 	 */
 	public AttackShieldObserver(int hit, int totalHit, boolean percent, Effect effect, HitType type, int shieldType, int probability) {
-        this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, 0, 0);
-    }
+		this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, 0, 0);
+	}
 
-    public AttackShieldObserver(int hit, int effectorDamage, int totalHit, boolean percent, Effect effect, HitType type, int shieldType, int probability) {
-        this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, effectorDamage, 0);
-    }
+	public AttackShieldObserver(int hit, int effectorDamage, int totalHit, boolean percent, Effect effect, HitType type, int shieldType, int probability) {
+		this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, effectorDamage, 0);
+	}
 
-    public AttackShieldObserver(int hit, int totalHit, boolean percent, Effect effect, HitType type, int shieldType, int probability, int mpValue) {
-        this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, 0, mpValue);
-    }
+	public AttackShieldObserver(int hit, int totalHit, boolean percent, Effect effect, HitType type, int shieldType, int probability, int mpValue) {
+		this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, 0, mpValue);
+	}
 
-	public AttackShieldObserver(int hit, int totalHit, boolean hitPercent, boolean totalHitPercent, Effect effect,
-		HitType type, int shieldType, int probability, int minradius, int maxradius, HealType healType, int effectorDamage, int mpValue) {
+	public AttackShieldObserver(int hit, int totalHit, boolean hitPercent, boolean totalHitPercent, Effect effect, HitType type, int shieldType, int probability, int minradius, int maxradius, HealType healType, int effectorDamage, int mpValue) {
 		this.hit = hit;
 		this.totalHit = totalHit;// total absorbed dmg for shield, percentage for reflector
 		this.effect = effect;
@@ -188,7 +187,13 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					healValue = damage * hit / 100;
 				} else {
 					healValue = hit;
-				} switch (healType) {
+				}
+				
+				if (healType == null) {
+					healType = HealType.HP;
+				}
+				
+				switch (healType) {
 					case HP:
 						effect.getEffected().getLifeStats().increaseHp(TYPE.HP, healValue, effect.getSkillId(), LOG.REGULAR);
 					break;
@@ -201,6 +206,34 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					attackResult.setLaunchSubEffect(false);
 				} if (totalHit <= 0) {
 					effect.endEffect();
+					return;
+				}
+			} else if (this.shieldType == 16) {
+				int damage = attackResult.getDamage();
+				int absorbedDamage = 0;
+				float damageReduce = hit;
+				int MaxDamageAllowed = totalHit;
+		          
+				absorbedDamage = (int)(damage * damageReduce / 100.0F);
+		          
+				MaxDamageAllowed -= absorbedDamage;
+				if (absorbedDamage > 0) {
+		            attackResult.setShieldType(shieldType);
+		            attackResult.setShieldMp((int)(absorbedDamage * (damageReduce / 100.0F)));
+		            effect.getEffected().getLifeStats().reduceMp((int)(absorbedDamage * (damageReduce / 100.0F)));
+				}
+				
+				attackResult.setDamage(damage - absorbedDamage);
+		          
+				int mp = this.effect.getEffected().getLifeStats().getMaxMp();
+				int currentMp = this.effect.getEffected().getLifeStats().getCurrentMp();
+				if (currentMp < (int)(mp * 0.3F)) {
+					this.effect.endEffect();
+					return;
+				}
+				
+				if (this.totalHit <= 0) {
+					this.effect.endEffect();
 					return;
 				}
 			}

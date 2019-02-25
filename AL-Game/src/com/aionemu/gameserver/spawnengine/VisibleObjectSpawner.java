@@ -593,14 +593,23 @@ public class VisibleObjectSpawner
 		return gatherable;
 	}
 	
-	public static Trap spawnTrap(SpawnTemplate spawn, int instanceIndex, Creature creator) {
+	public static Trap spawnTrap(SpawnTemplate spawn, int instanceIndex, Creature creator, int skillId) {
 		int objectId = spawn.getNpcId();
 		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
 		Trap trap = new Trap(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate);
 		trap.setKnownlist(new NpcKnownList(trap));
 		trap.setEffectController(new EffectController(trap));
 		trap.setCreator(creator);
-		trap.setVisualState(CreatureVisualState.HIDE1);
+		trap.getSkillList().addSkill(trap, skillId, 1);
+		if (objectId != 749300 || objectId != 749300) {
+			trap.setVisualState(CreatureVisualState.HIDE1);
+		}
+		try {
+			trap.getAi2().onCustomEvent(1, DataManager.SKILL_DATA.getSkillTemplate(skillId).getProperties().getEffectiveRange());
+		}
+		catch (Exception e) {
+			trap.getAi2().onCustomEvent(1, creator);
+		}
 		SpawnEngine.bringIntoWorld(trap, spawn, instanceIndex);
 		PacketSendUtility.broadcastPacket(trap, new SM_PLAYER_STATE(trap));
 		return trap;
@@ -703,7 +712,14 @@ public class VisibleObjectSpawner
 		return servant;
 	}
 	
-	public static Homing spawnHoming(SpawnTemplate spawn, int instanceIndex, Creature creator, int attackCount, int skillId, int level) {
+	/**
+	 * @param spawn
+	 * @param instanceIndex
+	 * @param creator
+	 * @param attackCount
+	 * @return
+	 */
+	public static Homing spawnHoming(SpawnTemplate spawn, int instanceIndex, Creature creator, int attackCount, int skillId, int level, int homingSkillId) {
 		int objectId = spawn.getNpcId();
 		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(objectId);
 		int creatureLevel = creator.getLevel();
@@ -714,13 +730,7 @@ public class VisibleObjectSpawner
 		homing.setKnownlist(new NpcKnownList(homing));
 		homing.setEffectController(new EffectController(homing));
 		homing.setCreator(creator);
-		int homingSkillId = 0;
-		if (homing.getSkillList() != null) {
-			NpcSkillEntry hmSkill = homing.getSkillList().getRandomSkill();
-			if (hmSkill != null) {
-				homingSkillId = hmSkill.getSkillId();
-			}
-		} if (homingSkillId != 0) {
+		if (homingSkillId != 0) {
 			homing.getSkillList().addSkill(homing, homingSkillId, 1);
 		}
 		homing.setActiveSkillId(homingSkillId);

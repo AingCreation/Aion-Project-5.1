@@ -19,6 +19,7 @@ package com.aionemu.gameserver.model.stats.calc.functions;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.skillengine.condition.Conditions;
 
 /**
  * @author ATracer
@@ -90,6 +91,11 @@ public class StatFunctionProxy implements IStatFunction, Comparable<IStatFunctio
 	public boolean isBonus() {
 		return proxiedFunction.isBonus();
 	}
+	
+	@Override
+	public int getRandomNumber() {
+		return proxiedFunction.getRandomNumber();
+	}
 
 	@Override
 	public int getPriority() {
@@ -114,6 +120,11 @@ public class StatFunctionProxy implements IStatFunction, Comparable<IStatFunctio
 	@Override
 	public boolean hasConditions() {
 		return proxiedFunction.hasConditions();
+	}
+	
+	@Override
+	public Conditions getConditions() {
+		return proxiedFunction.getConditions();
 	}
 
 	@Override

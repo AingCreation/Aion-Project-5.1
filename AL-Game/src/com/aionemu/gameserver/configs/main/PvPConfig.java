@@ -43,6 +43,12 @@ public class PvPConfig
 
   @Property(key="gameserver.pvp.raw.killcount.genocide", defaultValue="50")
   public static int GENOCIDE_KILL_COUNT;
+  
+  @Property(key="gameserver.pvp.raw.killcount.goodlike", defaultValue="80")
+  public static int GOODLIKE_KILL_COUNT;
+  
+  @Property(key="gameserver.pvp.raw.killcount.legendary", defaultValue="100")
+  public static int LEGENDARY_KILL_COUNT;
 
   @Property(key="gameserver.pvp.special_reward.type", defaultValue="0")
   public static int GENOCIDE_SPECIAL_REWARDING;
@@ -87,6 +93,22 @@ public class PvPConfig
   @Property(key = "gameserver.pvp.special.adv.mapid", defaultValue = "600010000")
   public static int ADVANCED_MAPID;
   
+  @Property(key = "gameserver.default.custom.portal.worldid", defaultValue = "210040000")
+  public static int DEFAULT_CUSTOM_PORTAL_WORLDID;
+
+  @Property(key = "gameserver.default.custom.portal.spawn.asmo", defaultValue = "277.5999,1397.0684,104.25,4")
+  public static String DEFAULT_CUSTOM_PORTAL_SPAWN_ASMO;
+
+  @Property(key = "gameserver.default.custom.portal.spawn.ely", defaultValue = "457.18195,1392.9445,115.9263,47")
+  public static String DEFAULT_CUSTOM_PORTAL_SPAWN_ELY;
   
+  @Property(key = "gameserver.default.custom.portal.worldid.2", defaultValue = "210040000")
+  public static int DEFAULT_CUSTOM_PORTAL_WORLDID_2;
+
+  @Property(key = "gameserver.default.custom.portal.spawn.asmo.2", defaultValue = "277.5999,1397.0684,104.25,4")
+  public static String DEFAULT_CUSTOM_PORTAL_SPAWN_ASMO_2;
+
+  @Property(key = "gameserver.default.custom.portal.spawn.ely.2", defaultValue = "457.18195,1392.9445,115.9263,47")
+  public static String DEFAULT_CUSTOM_PORTAL_SPAWN_ELY_2;
   
 }

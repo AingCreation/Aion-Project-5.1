@@ -15,29 +15,28 @@ public class CM_COALESCENCE extends AionClientPacket
 {
 	private int ItemSize;
 	private int upgradedItemObjectId;
-	private int Items;
-	private List<Integer> ItemsList = new ArrayList();
-	
+	private int ItemsObjId;
+	private List<Integer> ItemsList = new ArrayList<Integer>();
+
 	public CM_COALESCENCE(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
 	}
-	
+
 	@Override
 	protected void readImpl() {
-		ItemsList  = new ArrayList<Integer>();
 		upgradedItemObjectId = readD();
 		ItemSize = readH();
-		for (int i=0;i<ItemSize;i++) {
-			Items = readD();
-			ItemsList.add(Items);
+		for (int i = 0; i < ItemSize; i++) {
+			ItemsObjId = readD();
+			ItemsList.add(ItemsObjId);
 		}
 	}
-	
+
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		if (player != null) {
-			CoalescenceService.startCoalescence(player, upgradedItemObjectId, ItemsList);
+			CoalescenceService.startMagicMorph(player, upgradedItemObjectId, ItemsList);
 		} else {}
 	}
 }

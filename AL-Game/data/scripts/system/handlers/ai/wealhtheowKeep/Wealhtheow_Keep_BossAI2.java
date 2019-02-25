@@ -26,6 +26,10 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.commons.network.util.ThreadPoolManager;
 
 import com.aionemu.gameserver.ai2.*;
+import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.ingameshop.InGameShopEn;
+import com.aionemu.gameserver.services.abyss.AbyssPointsService;
+import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.actions.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -173,6 +177,7 @@ public class Wealhtheow_Keep_BossAI2 extends AggressiveNpcAI2
 			}
 		}, 10000);
 		treasureChest();
+		doRewardBoss();
 		cancelPhaseTask();
 		super.handleDied();
 	}
@@ -194,6 +199,29 @@ public class Wealhtheow_Keep_BossAI2 extends AggressiveNpcAI2
 			}
 		});
 	}
+	
+	public void doRewardBoss() {
+        World.getInstance().getWorldMap(WorldMapType.KALDOR.getId()).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+            @Override
+            public void visit(Player player) {
+                if (player.getRace() == Race.ELYOS) {
+                    int qt = 10;
+                    AbyssPointsService.addGp(player, 1000);
+					ItemService.addItem(player, 185000199, 1);
+					ItemService.addItem(player, 166030005, 50);
+                    InGameShopEn.getInstance().addToll(player, qt);
+                    PacketSendUtility.sendBrightYellowMessage(player, "You obtained " + qt + " Web Point.");
+					} else {
+                    int qt = 10;
+                    AbyssPointsService.addGp(player, 1000);
+					ItemService.addItem(player, 185000199, 1);
+					ItemService.addItem(player, 166030005, 50);
+                    InGameShopEn.getInstance().addToll(player, qt);
+                    PacketSendUtility.sendBrightYellowMessage(player, "You obtained " + qt + " Web Point.");
+                }
+            }
+        });
+    }
 	
 	private void announceWealhtheowKeepBoss() {
 		World.getInstance().doOnAllPlayers(new Visitor<Player>() {

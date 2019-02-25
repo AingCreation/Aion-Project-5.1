@@ -103,9 +103,10 @@ public class SM_PLAYER_INFO extends AionServerPacket
 			
 			// * = Wedding
 			if (player.isMarried()) {
-				String partnerName = DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(player.getPartnerId());
-	            nameFormat += "\uE020"+ partnerName;
-			}
+                if (activePlayer.getObjectId() != player.getObjectId() || player.isShowMarried()) {
+                    nameFormat += player.getWeddingsName();
+                }
+            }
 			
 			// * = Server Staff Access Level
 			if (AdminConfig.ADMIN_TAG_ENABLE && player.isGmMode()) {

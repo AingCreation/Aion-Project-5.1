@@ -121,7 +121,7 @@ public class NpcSkillList implements SkillList<Npc> {
 	}
 
 	@Override
-	public boolean addLinkedSkill(Npc creature, int skillId) {
+	public boolean addLinkedSkill(Npc creature, int skillId, int skillLevel) {
 		// TODO Auto-generated method stub
 		return false;
 	}

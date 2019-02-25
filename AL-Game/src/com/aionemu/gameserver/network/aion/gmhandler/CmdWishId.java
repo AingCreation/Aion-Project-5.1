@@ -16,6 +16,7 @@
  */
 package com.aionemu.gameserver.network.aion.gmhandler;
 
+import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.configs.administration.PanelConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -55,16 +56,21 @@ public class CmdWishId extends AbstractGMHandler {
         Integer itemId = Integer.parseInt(p[1]);
 
         if (qty > 0 && itemId > 0) {
-            if (DataManager.ITEM_DATA.getItemTemplate(itemId) == null) {
-                PacketSendUtility.sendMessage(admin, "Item id is incorrect: " + itemId);
-            } else {
-                long count = ItemService.addItem(t, itemId, qty);
-                if (count == 0) {
-                    PacketSendUtility.sendMessage(admin, "You successfully gave " + qty + " x [item:" + itemId + "] to " + t.getName() + ".");
+            if (admin.getAccessLevel() >= CommandsConfig.ADD) {
+            	if (DataManager.ITEM_DATA.getItemTemplate(itemId) == null) {
+                    PacketSendUtility.sendMessage(admin, "Item id is incorrect: " + itemId);
                 } else {
-                    PacketSendUtility.sendMessage(admin, "Item couldn't be added");
+                	long count = ItemService.addItem(t, itemId, qty, "Added By GM: " + admin.getName());
+                    if (count == 0) {
+                        PacketSendUtility.sendMessage(admin, "You successfully gave " + qty + " x [item:" + itemId + "] to " + t.getName() + ".");
+                    } else {
+                        PacketSendUtility.sendMessage(admin, "Item couldn't be added");
+                    }
                 }
-            }
+            } else {
+				PacketSendUtility.sendMessage(admin, "You cant use this action !?");
+				return;
+			}
         }
     }
 

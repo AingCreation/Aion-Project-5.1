@@ -12,7 +12,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Dye extends AdminCommand
 {
 	public Dye() {
-		super("dye");
+		super("dyes");
 	}
 	
 	@Override

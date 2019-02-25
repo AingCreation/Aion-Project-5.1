@@ -30,12 +30,16 @@ public class ItemEnchantTemplate
     @XmlTransient
     private TIntObjectHashMap<List<StatFunction>> enchants = new TIntObjectHashMap();
 	
-    @SuppressWarnings({"unchecked", "rawtypes"})
     public List<StatFunction> getStats(int level) {
-        if (this.enchants.contains(level)) {
-            return (List) this.enchants.get(level);
-        }
-        return null;
+    	if (getItemEnchant() == null)
+			return null;
+		for (ItemEnchantBonus ib : getItemEnchant()) {
+			if (ib.getLevel() != level)
+				continue;
+
+			return ib.getModifiers();
+		}
+		return null;
     }
 	
     public List<ItemEnchantBonus> getItemEnchant() {

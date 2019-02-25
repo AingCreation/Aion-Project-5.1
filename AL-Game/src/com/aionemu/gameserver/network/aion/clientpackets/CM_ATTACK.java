@@ -35,13 +35,7 @@ public class CM_ATTACK extends AionClientPacket {
 	 * Target object id that client wants to TALK WITH or 0 if wants to unselect
 	 */
 	private int targetObjectId;
-	// TODO: Question, are they really needed?
-	@SuppressWarnings("unused")
-	private int attackno;
-
 	private int time;
-	@SuppressWarnings("unused")
-	private int type;
 
 	public CM_ATTACK(int opcode, State state, State... restStates) {
 		super(opcode, state, restStates);
@@ -50,24 +44,27 @@ public class CM_ATTACK extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		targetObjectId = readD();// empty
-		attackno = readC();// empty
+		readC();// attackno
 		time = readH();// empty
-		type = readC();// empty
+		readC();// type
 	}
 
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.getLifeStats().isAlreadyDead())
+		if (player.getLifeStats().isAlreadyDead()) {
 			return;
+		}
 
-		if(player.isProtectionActive())
+		if (player.isProtectionActive()) {
 			player.getController().stopProtectionActiveTask();
+		}
 
 		VisibleObject obj = player.getKnownList().getObject(targetObjectId);
-		if(obj != null && obj instanceof Creature) {
+		if (obj != null && obj instanceof Creature) {
 			player.getController().attackTarget((Creature) obj, time);
-		} else {
+		}
+		else {
 			if (obj != null) {
 				log.warn("Attacking unsupported target" + obj + " id " + obj.getObjectTemplate().getTemplateId());
 			}

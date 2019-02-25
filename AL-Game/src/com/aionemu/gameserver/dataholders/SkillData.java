@@ -47,7 +47,7 @@ public class SkillData
 	public void initializeCooldownGroups() {
         cooldownGroups = new HashMap<Integer, ArrayList<Integer>>();
         for (SkillTemplate skillTemplate: skillTemplates) {
-            int delayId = skillTemplate.getDelayId();
+            int delayId = skillTemplate.getCooldownId();
             if (!cooldownGroups.containsKey(delayId)) {
                 cooldownGroups.put(delayId, new ArrayList<Integer>());
             }

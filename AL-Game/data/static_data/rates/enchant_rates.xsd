@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:include schemaLocation="../global_types.xsd"/>
+    <xs:element name="enchant_rates">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="enchant_rate" type="EnchantRate" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>	
+    <xs:complexType name="EnchantRate">
+		<xs:sequence>
+			<xs:element name="item_quality" type="ItemsQuality" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+		<xs:attribute name="equipment_type" type="equipType"/>
+    </xs:complexType>
+	<xs:complexType name="ItemsQuality">
+		<xs:sequence>
+			<xs:element name="enchant_level" type="EnchantLevel" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+		<xs:attribute name="quality" type="itemQuality"/>
+    </xs:complexType>
+	<xs:complexType name="EnchantLevel">
+        <xs:attribute name="min" type="xs:int"/>
+        <xs:attribute name="max" type="xs:int"/>
+		<xs:attribute name="chance" type="xs:int"/>
+    </xs:complexType>
+</xs:schema>

@@ -19,6 +19,7 @@ package com.aionemu.gameserver.model.stats.calc.functions;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.skillengine.condition.Conditions;
 
 /**
  * @author ATracer
@@ -28,6 +29,8 @@ public interface IStatFunction extends Comparable<IStatFunction>{
 	StatEnum getName();
 
 	boolean isBonus();
+	
+	int getRandomNumber();
 
 	int getPriority();
 
@@ -40,4 +43,6 @@ public interface IStatFunction extends Comparable<IStatFunction>{
 	StatOwner getOwner();
 	
 	boolean hasConditions();
+	
+	Conditions getConditions();
 }

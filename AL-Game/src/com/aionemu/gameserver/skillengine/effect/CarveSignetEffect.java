@@ -1,18 +1,18 @@
-/*
- * This file is part of aion-unique <aion-unique.org>.
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
  *
- *  aion-unique is free software: you can redistribute it and/or modify
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  aion-unique is distributed in the hope that it will be useful,
+ *  Aion-Lightning is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
+ *  GNU General Public License for more details. *
  *  You should have received a copy of the GNU General Public License
- *  along with aion-unique.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.aionemu.gameserver.skillengine.effect;
 
@@ -44,20 +44,21 @@ public class CarveSignetEffect extends DamageEffect {
 	protected String signet;
 	@XmlAttribute(required = true)
 	protected int prob = 100;
-
 	private int nextSignetLevel = 1;
 
 	@Override
 	public void applyEffect(Effect effect) {
 		super.applyEffect(effect);
 
-		if (Rnd.get(0, 100) > prob)
+		if (Rnd.get(0, 100) > prob) {
 			return;
+		}
 
 		Effect placedSignet = effect.getEffected().getEffectController().getAnormalEffect(signet);
 
-		if (placedSignet != null)
+		if (placedSignet != null) {
 			placedSignet.endEffect();
+		}
 
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(signetid + nextSignetLevel - 1);
 		Effect newEffect = new Effect(effect.getEffector(), effect.getEffected(), template, nextSignetLevel, 0);
@@ -67,19 +68,22 @@ public class CarveSignetEffect extends DamageEffect {
 
 	@Override
 	public void calculate(Effect effect) {
-		if (!super.calculate(effect, DamageType.PHYSICAL))
+		if (!super.calculate(effect, DamageType.PHYSICAL)) {
 			return;
+		}
 		Effect placedSignet = effect.getEffected().getEffectController().getAnormalEffect(signet);
 		nextSignetLevel = signetlvlstart > 0 ? signetlvlstart : 1;
 		effect.setCarvedSignet(nextSignetLevel);
 		if (placedSignet != null) {
 			nextSignetLevel = placedSignet.getSkillId() - this.signetid + 2;
-			if ((signetlvlstart > 0) && (nextSignetLevel < signetlvlstart))
+			if ((signetlvlstart > 0) && (nextSignetLevel < signetlvlstart)) {
 				nextSignetLevel = signetlvlstart;
+			}
 
 			effect.setCarvedSignet(nextSignetLevel);
-			if (nextSignetLevel > signetlvl || nextSignetLevel > 5)
+			if (nextSignetLevel > signetlvl || nextSignetLevel > 5) {
 				nextSignetLevel--;
+			}
 		}
 	}
 }

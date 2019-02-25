@@ -1,18 +1,18 @@
-/*
- * This file is part of aion-unique <aion-unique.org>.
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
  *
- *  aion-unique is free software: you can redistribute it and/or modify
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  aion-unique is distributed in the hope that it will be useful,
+ *  Aion-Lightning is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
+ *  GNU General Public License for more details. *
  *  You should have received a copy of the GNU General Public License
- *  along with aion-unique.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.aionemu.gameserver.skillengine.effect.modifier;
 
@@ -47,22 +47,26 @@ public class TargetRaceDamageModifier extends ActionModifier {
 			Player player = (Player) effected;
 			switch (skillTargetRace) {
 				case ASMODIANS:
-					if (player.getRace() == Race.ASMODIANS)
+					if (player.getRace() == Race.ASMODIANS) {
 						return newValue;
+					}
 					break;
 				case ELYOS:
-					if (player.getRace() == Race.ELYOS)
+					if (player.getRace() == Race.ELYOS) {
 						return newValue;
-			default:
-				break;
+					}
+				default:
+					break;
 			}
 		}
 		else if (effected instanceof Npc) {
 			Npc npc = (Npc) effected;
-			if (npc.getObjectTemplate().getRace().toString().equals(skillTargetRace.toString()))
+			if (npc.getObjectTemplate().getRace().toString().equals(skillTargetRace.toString())) {
 				return newValue;
-			else
+			}
+			else {
 				return 0;
+			}
 		}
 
 		return 0;
@@ -75,19 +79,19 @@ public class TargetRaceDamageModifier extends ActionModifier {
 
 			Player player = (Player) effected;
 			Race race = player.getRace();
-			return race == Race.ASMODIANS && skillTargetRace == Race.ASMODIANS || race == Race.ELYOS && skillTargetRace == Race.ELYOS;
+			return (race == Race.ASMODIANS && skillTargetRace == Race.ASMODIANS) || (race == Race.ELYOS && skillTargetRace == Race.ELYOS);
 		}
 		else if (effected instanceof Npc) {
 			Npc npc = (Npc) effected;
 
 			Race race = npc.getObjectTemplate().getRace();
-			if (race == null)
+			if (race == null) {
 				return false;
+			}
 
 			return race.toString().equals(skillTargetRace.toString());
 		}
 
 		return false;
 	}
-
 }

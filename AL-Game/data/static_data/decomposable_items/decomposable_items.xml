@@ -671,6 +671,18 @@
 			<item id="152003014" count="2"/>
 		</items>
 	</decomposable>
+	<!-- compensation bundle -->
+	<decomposable item_id="188055189">
+		<items>
+			<item id="164002167" count="25"/>
+		</items>
+		<items>
+			<item id="186000178" count="1"/>
+		</items>
+		<items>
+			<item id="188910003" count="5"/>
+		</items>
+	</decomposable>
 	<!-- Unknown Bundle -->
 	<decomposable item_id="188051162">
 		<items minlevel="1" maxlevel="20" chance="1">

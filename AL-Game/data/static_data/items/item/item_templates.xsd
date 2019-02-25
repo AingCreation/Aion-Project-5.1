@@ -22,8 +22,9 @@
 		<xs:sequence>
 			<xs:element name="require_skill" type="RequireSkill" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="skill" type="StigmaSkillList"/>
-		<xs:attribute name="shard" type="xs:int"/>
+		<xs:attribute name="skill_group1" type="xs:string"/>
+		<xs:attribute name="skill_group2" type="xs:string"/>
+		<xs:attribute name="kinah" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="WeaponStats">
 		<xs:attribute name="min_damage" type="xs:int"/>
@@ -42,10 +43,13 @@
 		<xs:sequence minOccurs="0" maxOccurs="unbounded">
 			<xs:element name="tradein_item" type="TradeinItem" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
+		<xs:attribute name="ap" type="xs:int" default="0" use="optional"/>
+		<xs:attribute name="price" type="xs:int" default="0" use="optional"/>
 	</xs:complexType>
 	<xs:complexType name="TradeinItem">
 		<xs:attribute name="id" type="itemId"/>
-		<xs:attribute name="price" type="xs:int"/>
+		<xs:attribute name="count" type="xs:int" use="optional"/>
+		<xs:attribute name="price" type="xs:int" use="optional"/>
 	</xs:complexType>
 	<xs:complexType name="Acquisition">
 		<xs:attribute name="ap" type="xs:int" default="0" use="optional"/>
@@ -117,6 +121,7 @@
 		<xs:attribute name="m_slots" type="xs:int"/>
 		<xs:attribute name="max_enchant" type="xs:int"/>
 		<xs:attribute name="max_enchant_bonus" type="xs:int"/>
+		<xs:attribute name="exceed_enchant" type="xs:boolean" default="false"/>
 		<xs:attribute name="return_alias" type="xs:string"/>
 		<xs:attribute name="return_world" type="xs:int"/>
 		<xs:attribute name="equipment_type" type="equipType"/>
@@ -125,6 +130,7 @@
 		<xs:attribute name="attack_type" type="ItemAttackType"/>
 		<xs:attribute name="attack_gap" type="xs:float"/>
         <xs:attribute name="desc" type="xs:string" use="optional"/>
+        <xs:attribute name="name_desc" type="xs:string"/>
 		<xs:attribute name="restrict" type="xs:string"/>
 		<xs:attribute name="restrict_max" type="xs:string"/>
 		<xs:attribute name="option_slot_bonus" type="xs:int"/>
@@ -158,6 +164,7 @@
 		<xs:attribute name="highreform_groupset" type="xs:int" use="optional"/>
 		<xs:attribute name="enchant_base" type="xs:int" use="optional"/>
 		<xs:attribute name="item_custom_set" type="xs:int"/>
+		<xs:attribute name="item_archdaeva" type="xs:boolean" use="optional" default="false"/>
 	</xs:complexType>
 	<xs:simpleType name="itemSlot">
 		<xs:restriction base="xs:string">
@@ -380,7 +387,9 @@
 	</xs:complexType>
 	<xs:complexType name="EquipedLevelAdjAction">
 		<xs:complexContent>
-			<xs:extension base="AbstractItemAction"/>
+			<xs:extension base="AbstractItemAction">
+				<xs:attribute name="count" type="xs:int"/>
+			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="HouseLimitAction">
@@ -521,6 +530,7 @@
 			<xs:enumeration value="WEAPON"/>
 			<xs:enumeration value="ACCESSORY"/>
 			<xs:enumeration value="STIGMA"/>
+			<xs:enumeration value="ESTIMA"/>
 			<xs:enumeration value="NONE"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -621,11 +631,9 @@
 	<xs:simpleType name="Category">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="MANASTONE"/>
-			<xs:enumeration value="SPECIAL_MANASTONE"/>
-			<xs:enumeration value="PRIMARY_MANASTONE"/>
+			<xs:enumeration value="ANCIENT_MANASTONE"/>
 			<xs:enumeration value="GODSTONE"/>
 			<xs:enumeration value="ENCHANTMENT"/>
-			<xs:enumeration value="ENCHANTMENT_AMPLIFICATION"/>
 			<xs:enumeration value="FLUX"/>
 			<xs:enumeration value="BALIC_EMOTION"/>
 			<xs:enumeration value="BALIC_MATERIAL"/>
@@ -634,6 +642,7 @@
 			<xs:enumeration value="RECIPE"/>
 			<xs:enumeration value="GATHERABLE"/>
 			<xs:enumeration value="GATHERABLE_BONUS"/>
+			<xs:enumeration value="DROP_MATERIAL"/>
 			<xs:enumeration value="SWORD"/>
 			<xs:enumeration value="DAGGER"/>
 			<xs:enumeration value="MACE"/>
@@ -644,8 +653,13 @@
 			<xs:enumeration value="STAFF"/>
 			<xs:enumeration value="BOW"/>
 			<xs:enumeration value="SHIELD"/>
+			<xs:enumeration value="HARP"/>
+			<xs:enumeration value="GUN"/>
+			<xs:enumeration value="CANNON"/>
+			<xs:enumeration value="KEYBLADE"/>
 			<xs:enumeration value="JACKET"/>
 			<xs:enumeration value="PANTS"/>
+			<xs:enumeration value="SHARD"/>
 			<xs:enumeration value="SHOES"/>
 			<xs:enumeration value="GLOVES"/>
 			<xs:enumeration value="SHOULDERS"/>
@@ -660,20 +674,17 @@
 			<xs:enumeration value="MEDALS"/>
 			<xs:enumeration value="QUEST"/>
 			<xs:enumeration value="KEY"/>
-			<xs:enumeration value="NONE"/>
+			<xs:enumeration value="TEMPERING"/>
 			<xs:enumeration value="CRAFT_BOOST"/>
 			<xs:enumeration value="COMBINATION"/>
-			<!-- 4.3/4.5 Weapon Type -->
-			<xs:enumeration value="GUN"/>
-			<xs:enumeration value="CANNON"/>
-			<xs:enumeration value="HARP"/>
-			<xs:enumeration value="KEYBLADE"/>
-			<xs:enumeration value="KEYHAMMER"/>
 			<xs:enumeration value="PLUME"/>
+			<xs:enumeration value="STENCHANTMENT"/>
+			<xs:enumeration value="NONE"/>
+			<xs:enumeration value="STIGMABUNDLE"/>
 			<xs:enumeration value="BRACELET"/>
-			<xs:enumeration value="OLDSEAL"/>
-			<!-- 5.1 -->
 			<xs:enumeration value="ESTIMA"/>
+			<xs:enumeration value="ESTIMA"/>
+			<xs:enumeration value="ALL"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="itemType">

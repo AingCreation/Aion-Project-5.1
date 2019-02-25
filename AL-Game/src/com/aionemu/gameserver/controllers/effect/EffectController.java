@@ -26,10 +26,12 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javolution.util.FastMap;
 
+import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABNORMAL_EFFECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.effect.EffectType;
@@ -142,13 +144,13 @@ public class EffectController
 				conflictedEffect.endEffect();
 			}
 			//Max 3 Chants Effect
-            if (nextEffect.isToggle()) {
+            if (nextEffect.isToggle() && !nextEffect.isRiderEffect(nextEffect.getSkillTemplate().getSkillId())) {
                 int mts = 1;
                 if (nextEffect.getSkillSubType() == SkillSubType.CHANT) {
                     mts = 3;
-                } else if (isAethertechEffect(nextEffect.getSkillId())) {
-                    mts = 6;
-                } else {
+                } else if (isBardEffect(nextEffect.getSkillId())) {
+					mts = 2;
+				} else {
                     mts = 1;
                 } if (mapToUpdate.size() >= mts) {
                     Iterator<Effect> iter = mapToUpdate.values().iterator();
@@ -166,7 +168,7 @@ public class EffectController
 				}
 			}
 			//Max 2 Ranger Effect
-            if(nextEffect.isRangerBuff()) {
+			if(nextEffect.isRangerEye()) {
                 Collection<Effect> rangerBuff = this.getRangerEffects();
                 if (rangerBuff.size() >= 2) {
                     Iterator<Effect> rangerIter = rangerBuff.iterator();
@@ -240,6 +242,8 @@ public class EffectController
 			case 2846:
 			case 2847:
 			case 2848:
+			case 4796:
+			case 4794:
                 return true;
         }
         return false;
@@ -297,6 +301,32 @@ public class EffectController
 				return true;
 		}
 		return false;
+	}
+	
+	public boolean hasAbnormalEffect(String stack) {
+		Iterator<Effect> localIterator = this.abnormalEffectMap.values().iterator();
+		while (localIterator.hasNext()) {
+			Effect localEffect = (Effect)localIterator.next();
+			if (localEffect.getStack().equals(stack)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * @param skillId
+	 * @return
+	 */
+	public boolean hasAbnormalEffectBySkillGroup(String skillgroup) {
+		Iterator<Effect> localIterator = this.abnormalEffectMap.values().iterator();
+		while (localIterator.hasNext()) {
+			Effect localEffect = (Effect)localIterator.next();
+			if (localEffect.getSkillTemplate().getSkillGroup().equals(skillgroup)) {
+				return true;
+			}
+		}
+	    return false;
 	}
 
 	public void broadCastEffects() {
@@ -568,6 +598,17 @@ public class EffectController
 		}
 	}
 	
+	public boolean isBardEffect(int skillId) {
+		switch (skillId) {
+			case 4538: // Inspiration
+			case 4589: // Exultation
+			case 4590: // Impassion
+				return true;
+		}
+
+		return false;
+	}
+	
 	public void removeEffectByEffectType(EffectType effectType) {
 		for (Effect effect : abnormalEffectMap.values()) {
 			for (EffectTemplate et : effect.getSuccessEffect()) {
@@ -750,7 +791,7 @@ public class EffectController
         return Collections2.filter(abnormalEffectMap.values(), new Predicate<Effect>() {
             @Override
             public boolean apply(Effect effect) {
-                return effect.isRangerBuff();
+                return effect.isRangerEye();
             }
         });
     }
@@ -830,7 +871,7 @@ public class EffectController
 	
 	public void checkEffectCooldownId(Effect effect) {
 		Collection<Effect> effects = this.getAbnormalEffectsToShow();
-		int delayId = effect.getSkillTemplate().getDelayId();
+		int delayId = effect.getSkillTemplate().getCooldownId();
 		int rDelay = 0;
 		int size = 0;
 		if (delayId == 1)
@@ -852,7 +893,7 @@ public class EffectController
 			Iterator<Effect> iter2 = effects.iterator();
 			while(iter2.hasNext()){
 				Effect nextEffect = iter2.next();
-				if (nextEffect.getSkillTemplate().getDelayId() == rDelay
+				if (nextEffect.getSkillTemplate().getCooldownId() == rDelay
 					&& nextEffect.getTargetSlot() == effect.getTargetSlot()){
 					i++;
 					if(toRemove == null)
@@ -888,7 +929,7 @@ public class EffectController
 						if (et2.getEffectid() == 0)
 							continue;
 						if (et.getEffectid() == et2.getEffectid()) {
-							if (et.getBasicLvl() > et2.getBasicLvl()) {
+							if (et.getBasicLvl() > et2.getBasicLvl() && et.getEffectType() != EffectType.HIDE) {
 								if (nextEffect.getTargetSlotEnum() != SkillTargetSlot.DEBUFF)
 									nextEffect.setEffectResult(EffectResult.CONFLICT);
 								return true;
@@ -934,5 +975,26 @@ public class EffectController
 			}
 		}
 		return false;
+	}
+
+	public boolean hasMagicalStateEffect() {
+		Iterator<Effect> effectIterator = this.abnormalEffectMap.values().iterator();
+		while (effectIterator.hasNext()) {
+			Effect localEffect = effectIterator.next();
+			if (localEffect.isMagicalState()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void reflectEffect(Creature effected, Creature effector,
+			int skillId, int effectsDuration) {
+		// TODO Auto-generated method stub
+		try {
+			SkillEngine.getInstance().applyEffectDirectly(skillId, effected, effector, effectsDuration);
+		} catch (Exception ex) {
+			GameServer.log.error("Exception during skill reflect: " + skillId, ex);
+	    }
 	}
 }

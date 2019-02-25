@@ -33,6 +33,11 @@ public class TribeRelationsData
 		return tribeNameMap.size();
 	}
 	
+	public TribeClass getBaseTribe(TribeClass tribeName) {
+		Tribe tribe = tribeNameMap.get(tribeName);
+		return tribe.getBase();
+	}
+	
 	public boolean hasAggressiveRelations(TribeClass tribeName) {
 		Tribe tribe = tribeNameMap.get(tribeName);
 		if (tribe == null)
@@ -141,5 +146,9 @@ public class TribeRelationsData
 				return true;
 		}
 		return false;
+	}
+	
+	public Tribe getTribeData(TribeClass tribeName) {
+		return tribeNameMap.get(tribeName);
 	}
 }

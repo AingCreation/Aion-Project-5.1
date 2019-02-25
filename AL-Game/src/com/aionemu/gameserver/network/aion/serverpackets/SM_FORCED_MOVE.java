@@ -17,6 +17,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -34,12 +35,25 @@ public class SM_FORCED_MOVE extends AionServerPacket {
 	public SM_FORCED_MOVE(Creature creature, Creature target) {
 		this(creature, target.getObjectId(), target.getX(), target.getY(), target.getZ());
 	}
+	
 	public SM_FORCED_MOVE(Creature creature, int objectId, float x, float y, float z) {
 		this.creature = creature;
 		this.objectId = objectId;
 		this.x = x;
 		this.y = y;
 		this.z = z;
+	}
+	
+	public SM_FORCED_MOVE(Creature creature) {
+	    this(creature, creature.getObjectId(), creature.getX(), creature.getY(), creature.getZ());
+	}
+	  
+	public SM_FORCED_MOVE(Creature creature, float z) {
+		this(creature, creature.getObjectId(), creature.getX(), creature.getY(), z);
+	}
+	  
+	public SM_FORCED_MOVE(Creature creature, int objectId, Point3D point) {
+		this(creature, objectId, point.getX(), point.getY(), point.getZ());
 	}
 
 	/**

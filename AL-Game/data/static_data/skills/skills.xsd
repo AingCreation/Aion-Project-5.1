@@ -2,7 +2,7 @@
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:include schemaLocation="../import.xsd"/>
 	<xs:include schemaLocation="../modifiers.xsd"/>
-	<xs:include schemaLocation="../items/item_templates.xsd"/>
+	<xs:include schemaLocation="../items/item/item_templates.xsd"/>
 	<xs:element name="skill_data" type="skillData"/>
 	<xs:complexType name="skillData">
 		<xs:sequence>
@@ -15,6 +15,7 @@
 			<xs:element name="properties" type="Properties" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="startconditions" type="Conditions" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="useconditions" type="Conditions" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="endconditions" type="Conditions" minOccurs="0" maxOccurs="1" />
 			<xs:element name="useequipmentconditions" type="Conditions" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="effects" type="Effects" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="actions" type="Actions" minOccurs="0" maxOccurs="1"/>
@@ -26,9 +27,10 @@
 		<xs:attribute name="skill_id" type="skillId" use="required"/>
 		<xs:attribute name="name" type="xs:string"/>
 		<xs:attribute name="nameId" type="xs:int"/>
+		<xs:attribute name="name_desc" type="xs:string"/>
 		<xs:attribute name="stack" type="xs:string"/>
-		<xs:attribute name="delayId" type="xs:int"/>
-		<xs:attribute name="skillgroup" type="xs:string"/>
+		<xs:attribute name="skill_group" type="xs:string" use="optional" default="NONE"/>
+		<xs:attribute name="cooldownId" type="xs:int"/>
 		<xs:attribute name="lvl" type="xs:int"/>
 		<xs:attribute name="skilltype" type="skillType" use="required"/>
 		<xs:attribute name="attacktype" type="attackType"/>
@@ -49,13 +51,14 @@
 		<xs:attribute name="chain_skill_prob" type="xs:int" use="optional" default="0"/>
 		<xs:attribute name="cancel_rate" type="xs:int" use="optional" default="0"/>
 		<xs:attribute name="stance" type="xs:boolean" use="optional" default="false"/>
-		<xs:attribute name="skillset_exception" type="xs:int" use="optional" default="0"/>
-		<xs:attribute name="skillset_maxoccur" type="xs:int" use="optional" default="0"/>
 		<xs:attribute name="avatar" type="xs:boolean" use="optional" default="false"/>
 		<xs:attribute name="ground" type="xs:boolean" use="optional" default="false"/>
 		<xs:attribute name="unpottable" type="xs:boolean" use="optional" default="false"/>
 		<xs:attribute name="remove_flyend" type="xs:boolean"/>
 		<xs:attribute name="noremoveatdie" type="xs:boolean"/>
+		<xs:attribute name="boost_casting_time" type="xs:boolean"/>
+		<xs:attribute name="is_minion_skill" type="xs:boolean" use="optional"/>
+		<xs:attribute name="delay_time_lv" type="xs:int" use="optional" default="0"/>
 	</xs:complexType>
 	<xs:complexType name="Effects">
 		<xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -75,7 +78,7 @@
 			<xs:element name="closeaerial" type="CloseAerialEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="bind" type="BindEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="shield" type="ShieldEffect" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="mpshield" type="MpShieldEffect" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="mpshield" type="MPShieldEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="dispel" type="DispelEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="statup" type="StatupEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="statboost" type="StatboostEffect" minOccurs="0" maxOccurs="1"/>
@@ -102,7 +105,6 @@
 			<xs:element name="prochealinstant" type="ProcHealInstantEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="procmphealinstant" type="ProcMPHealInstantEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="procdphealinstant" type="ProcDPHealInstantEffect" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="procxphealinstant" type="ProcXPHealInstantEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="procfphealinstant" type="ProcFPHealInstantEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="carvesignet" type="CarveSignetEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="signet" type="SignetEffect" minOccurs="0" maxOccurs="1"/>
@@ -140,6 +142,7 @@
 			<xs:element name="summongroupgate" type="SummonGroupGateEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="summonservant" type="SummonServantEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="skillatkdraininstant" type="SkillAtkDrainInstantEffect" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="petorderunsummon" type="PetOrderUnSummonEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="petorderuseultraskill" type="PetOrderUseUltraSkillEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="boostheal" type="BoostHealEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="dispelbuff" type="DispelBuffEffect" minOccurs="0" maxOccurs="1"/>
@@ -220,13 +223,8 @@
 			<xs:element name="riderobot" type="RideRobotEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="absstatbuff" type="AbsoluteStatToPCBuff" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="absstatdebuff" type="AbsoluteStatToPCDebuff" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="doubleboost" type="DoubleBoostEffect" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="stunalways" type="StunAlwaysEffect" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="targetchange" type="TargetChangeEffect" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="returncoolreduce" type="ReturnCoolReduceEffect" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="odellarecoverincrease" type="OdellaRecoverIncreaseEffect" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="sprintfpreduce" type="SprintFpReduceEffect" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="deathpenaltyreduce" type="DeathPenaltyReduceEffect" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="absoluteexppointhealinstant" type="AbsoluteEXPPointHealInstantEffect" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Properties">
@@ -239,9 +237,11 @@
 		<xs:attribute name="first_target" type="FirstTargetAttribute"/>
 		<xs:attribute name="target_status" type="StatusList"/>
 		<xs:attribute name="revision_distance" type="xs:int"/>
-		<xs:attribute name="effective_width" type="xs:int"/>
-		<xs:attribute name="effective_angle" type="xs:int"/>
-		<xs:attribute name="direction" type="xs:int" default="0"/>
+		<xs:attribute name="effective_range" type="xs:int" />
+		<xs:attribute name="effective_dist" type="xs:int" />
+		<xs:attribute name="effective_angle" type="xs:int" />
+		<xs:attribute name="effective_altitude" type="xs:int" />
+		<xs:attribute default="NONE" name="direction" type="Directions"/>
 		<xs:attribute name="target_species" type="TargetSpeciesAttribute" default="ALL"/>
 	</xs:complexType>
 	<xs:complexType name="Actions">
@@ -256,6 +256,7 @@
 		<xs:sequence minOccurs="0" maxOccurs="unbounded">
 			<xs:element name="hpuse" type="HpUsePeriodicAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="mpuse" type="MpUsePeriodicAction" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="dpuse" type="DpUsePeriodicAction" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 		<xs:attribute name="checktime" type="xs:int"/>
 	</xs:complexType>
@@ -342,7 +343,7 @@
 			<xs:extension base="Action">
 				<xs:attribute name="value" type="xs:int" use="required"/>
 				<xs:attribute name="delta" type="xs:int"/>
-				<xs:attribute name="ratio" type="xs:boolean"/>
+                <xs:attribute name="ratio" type="xs:boolean"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -359,6 +360,7 @@
 			<xs:extension base="PeriodicAction">
 				<xs:attribute name="value" type="xs:int" use="required"/>
 				<xs:attribute name="delta" type="xs:int" use="optional"/>
+                <xs:attribute name="ratio" type="xs:boolean"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -366,7 +368,14 @@
 		<xs:complexContent>
 			<xs:extension base="PeriodicAction">
 				<xs:attribute name="value" type="xs:int" use="required"/>
-				<xs:attribute name="delta" type="xs:int" use="optional"/>
+				<xs:attribute name="ratio" type="xs:boolean"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DpUsePeriodicAction">
+		<xs:complexContent>
+			<xs:extension base="PeriodicAction">
+				<xs:attribute name="value" type="xs:int" use="required"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -405,11 +414,6 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<!-- EFFECTS -->
-	<xs:complexType name="RideRobotEffect">
-		<xs:complexContent>
-			<xs:extension base="Effect"/>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="AbstractOverTimeEffect" abstract="true">
 		<xs:complexContent>
 			<xs:extension base="Effect">
@@ -422,7 +426,7 @@
 	<xs:complexType name="HideEffect">
 		<xs:complexContent>
 			<xs:extension base="Effect">
-				<xs:attribute name="buffcount" type="xs:int"/>
+				<xs:attribute name="bufcount" type="xs:int"/>
 				<xs:attribute name="type" type="xs:int"/>
 				<xs:attribute name="state" type="CreatureVisualState"/>
 			</xs:extension>
@@ -527,14 +531,14 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="MpShieldEffect">
-		<xs:complexContent>
-			<xs:extension base="ShieldEffect">
-				<xs:attribute name="mp_value" type="xs:int"/>
+    <xs:complexType name="MPShieldEffect">
+        <xs:complexContent>
+            <xs:extension base="ShieldEffect">
+                <xs:attribute name="mp_value" type="xs:int"/>
                 <xs:attribute name="mp_delta" type="xs:int"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 	<xs:complexType name="ProtectEffect">
 		<xs:complexContent>
 			<xs:extension base="ShieldEffect">
@@ -636,10 +640,11 @@
 	<xs:complexType name="TransformEffect" abstract="true">
 		<xs:complexContent>
 			<xs:extension base="Effect">
-				<xs:attribute name="model" type="xs:int" use="required"/>
+				<xs:attribute name="model" type="xs:int" use="optional"/>
 				<xs:attribute name="type" type="TransformType" default="NONE"/>
 				<xs:attribute name="panelid" type="xs:int"/>
-				<xs:attribute name="itemId" type="xs:int" default="0"/>
+				<xs:attribute name="equipmentid" type="xs:int"/>
+				<xs:attribute name="state" type="AbnormalState" default="BUFF" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -661,25 +666,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="AbstractAbsoluteStatEffect" abstract="true">
-		<xs:complexContent>
-			<xs:extension base="Effect">
-				<xs:attribute name="statsetid" type="xs:int"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="AbsoluteStatToPCBuff">
-		<xs:complexContent>
-			<xs:extension base="AbstractAbsoluteStatEffect">
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="AbsoluteStatToPCDebuff">
-		<xs:complexContent>
-			<xs:extension base="AbstractAbsoluteStatEffect">
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="ProcHealInstantEffect">
 		<xs:complexContent>
 			<xs:extension base="AbstractHealEffect"/>
@@ -691,11 +677,6 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="ProcDPHealInstantEffect">
-		<xs:complexContent>
-			<xs:extension base="AbstractHealEffect"/>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="ProcXPHealInstantEffect">
 		<xs:complexContent>
 			<xs:extension base="AbstractHealEffect"/>
 		</xs:complexContent>
@@ -722,12 +703,12 @@
 			<xs:extension base="AbstractHealEffect"/>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="DPHealInstantEffect">
+	<xs:complexType name="XPHealInstantEffect">
 		<xs:complexContent>
 			<xs:extension base="AbstractHealEffect"/>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="XPHealInstantEffect">
+	<xs:complexType name="DPHealInstantEffect">
 		<xs:complexContent>
 			<xs:extension base="AbstractHealEffect"/>
 		</xs:complexContent>
@@ -755,7 +736,9 @@
 	</xs:complexType>
 	<xs:complexType name="SpellAttackInstantEffect">
 		<xs:complexContent>
-			<xs:extension base="DamageEffect"/>
+			<xs:extension base="DamageEffect">
+				<xs:attribute name="twice" type="xs:boolean"/>
+			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="DashEffect">
@@ -774,7 +757,7 @@
 		<xs:complexContent>
 			<xs:extension base="DamageEffect">
 				<xs:attribute name="prob" type="xs:int"/>
-				<xs:attribute name="signetlvlstart" type="xs:int"/>
+        		<xs:attribute name="signetlvlstart" type="xs:int"/>
 				<xs:attribute name="signetlvl" type="xs:int" use="required"/>
 				<xs:attribute name="signetid" type="xs:int" use="required"/>
 				<xs:attribute name="signet" type="xs:string" use="required"/>
@@ -816,14 +799,6 @@
 	<xs:complexType name="EscapeEffect">
 		<xs:complexContent>
 			<xs:extension base="Effect">
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="SkillCooltimeResetEffect">
-		<xs:complexContent>
-			<xs:extension base="Effect">
-				<xs:attribute name="first_cd" type="xs:int" use="required"/>
-				<xs:attribute name="second_cd" type="xs:int" use="required"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -902,6 +877,12 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+    <xs:complexType name="StunAlwaysEffect">
+        <xs:complexContent>
+            <xs:extension base="Effect">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 	<xs:complexType name="AbstractDispelEffect">
 		<xs:complexContent>
 			<xs:extension base="Effect">
@@ -1059,6 +1040,13 @@
 			<xs:extension base="DamageEffect">
 				<xs:attribute name="hp_percent" type="xs:int"/>
 				<xs:attribute name="mp_percent" type="xs:int"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+		<xs:complexType name="PetOrderUnSummonEffect">
+		<xs:complexContent>
+			<xs:extension base="Effect">
+				<xs:attribute name="release" type="xs:boolean"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -1400,14 +1388,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="DoubleBoostEffect">
-		<xs:complexContent>
-			<xs:extension base="Effect">
-				<xs:attribute name="distance" type="xs:float"/>
-				<xs:attribute name="direction" type="xs:float"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="XPBoostEffect">
 		<xs:complexContent>
 			<xs:extension base="BuffEffect"/>
@@ -1438,26 +1418,6 @@
 			<xs:extension base="BuffEffect"/>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="ReturnCoolReduceEffect">
-		<xs:complexContent>
-			<xs:extension base="BuffEffect"/>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="OdellaRecoverIncreaseEffect">
-		<xs:complexContent>
-			<xs:extension base="BuffEffect"/>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="SprintFpReduceEffect">
-		<xs:complexContent>
-			<xs:extension base="BuffEffect"/>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="DeathPenaltyReduceEffect">
-		<xs:complexContent>
-			<xs:extension base="BuffEffect"/>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="CaseHealEffect">
 		<xs:complexContent>
 			<xs:extension base="AbstractHealEffect">
@@ -1470,13 +1430,6 @@
 		<xs:complexContent>
 			<xs:extension base="AbstractHealEffect">
 				<xs:attribute name="value2" type="xs:int"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="AbsoluteEXPPointHealInstantEffect">
-		<xs:complexContent>
-			<xs:extension base="AbstractHealEffect">
-				<xs:attribute name="points" type="xs:int"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -1507,6 +1460,40 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="SkillCooltimeResetEffect">
+		<xs:complexContent>
+			<xs:extension base="Effect">
+				<xs:attribute name="first_cd" type="xs:int" use="required"/>
+				<xs:attribute name="last_cd" type="xs:int" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RideRobotEffect">
+		<xs:complexContent>
+			<xs:extension base="Effect">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AbstractAbsoluteStatEffect" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="Effect">
+				<xs:attribute name="statsetid" type="xs:int" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AbsoluteStatToPCBuff">
+		<xs:complexContent>
+			<xs:extension base="AbstractAbsoluteStatEffect">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AbsoluteStatToPCDebuff">
+		<xs:complexContent>
+			<xs:extension base="AbstractAbsoluteStatEffect">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- MISC -->
 	<xs:simpleType name="TransformType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="AVATAR"/>
@@ -1620,6 +1607,13 @@
 			<xs:enumeration value="POINT"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="Directions">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NONE" />
+			<xs:enumeration value="FRONT" />
+			<xs:enumeration value="BACK" />
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="TargetRelationAttribute">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="NONE"/>
@@ -1663,6 +1657,7 @@
 			<xs:enumeration value="NONE"/>
 			<xs:enumeration value="BASIC"/>
 			<xs:enumeration value="ADVANCED"/>
+			<xs:enumeration value="MAJOR"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="SkillElement">
@@ -1689,6 +1684,7 @@
 			<xs:enumeration value="PHHIT"/>
 			<xs:enumeration value="SKILL"/>
 			<xs:enumeration value="BACKATK"/>
+			<xs:enumeration value="FEAR"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ProvokeType">

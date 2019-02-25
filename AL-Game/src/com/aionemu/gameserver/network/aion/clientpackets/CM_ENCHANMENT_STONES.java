@@ -12,7 +12,6 @@ import com.aionemu.gameserver.model.templates.item.actions.EnchantItemAction;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.EnchantService;
 import com.aionemu.gameserver.services.item.ItemSocketService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -74,31 +73,24 @@ public class CM_ENCHANMENT_STONES extends AionClientPacket
 		switch (actionType) {
 		    case 1: //Enchant Stone.
 		    case 2: //Add Manastone.
-			    EnchantItemAction action = new EnchantItemAction();
-			    Item manastone = player.getInventory().getItemByObjId(stoneUniqueId);
-			    Item targetStone = player.getInventory().getItemByObjId(targetItemUniqueId);
-			    Item targetItem = player.getEquipment().getEquippedItemByObjId(targetItemUniqueId);
-			    if (targetItem == null) {
-				    targetItem = player.getInventory().getItemByObjId(targetItemUniqueId);
-			    }
-			    //Enchant Stigma.
-			    if (manastone.getItemTemplate().isStigma()) {
-				    EnchantService.stigmaEnchant(player, manastone, targetStone);
-			    } else {
-				    //Enchant Stone.
-				    if (action.canAct(player, manastone, targetItem)) {
-					    Item supplement = player.getInventory().getItemByObjId(supplementUniqueId);
-					    if (supplement != null) {
-						    if (supplement.getItemId() / 100000 != 1661) {
-							    return;
-						    }
-					    }
-						action.act(player, manastone, targetItem, supplement, targetFusedSlot);
+		    	EnchantItemAction action = new EnchantItemAction();
+				Item manastone = player.getInventory().getItemByObjId(stoneUniqueId);
+				Item targetItem = player.getEquipment().getEquippedItemByObjId(targetItemUniqueId);
+				if (targetItem == null) {
+					targetItem = player.getInventory().getItemByObjId(targetItemUniqueId);
+				}
+				if (action.canAct(player, manastone, targetItem)) {
+					Item supplement = player.getInventory().getItemByObjId(supplementUniqueId);
+					if (supplement != null) {
+						if (supplement.getItemId() / 100000 != 1661) { // suppliment id check
+							return;
+						}
 					}
+					action.act(player, manastone, targetItem, supplement, supplementUniqueId, targetFusedSlot);
 				}
 		    break;
 		    case 3: //Remove Manastone.
-			    long price = PricesService.getPriceForService(500, player.getRace());
+			    long price = PricesService.getPriceForService(65000, player.getRace());
 			    if (player.getInventory().getKinah() < price) {
 				    PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(price));
 				    return;

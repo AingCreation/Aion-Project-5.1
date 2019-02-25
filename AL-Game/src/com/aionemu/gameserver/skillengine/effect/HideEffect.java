@@ -1,18 +1,18 @@
-/*
- * This file is part of aion-unique <aion-unique.org>.
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
  *
- *  aion-unique is free software: you can redistribute it and/or modify
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  aion-unique is distributed in the hope that it will be useful,
+ *  Aion-Lightning is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
+ *  GNU General Public License for more details. *
  *  You should have received a copy of the GNU General Public License
- *  along with aion-unique.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.aionemu.gameserver.skillengine.effect;
 
@@ -47,9 +47,8 @@ public class HideEffect extends BuffEffect {
 
 	@XmlAttribute
 	protected CreatureVisualState state;
-	@XmlAttribute(name = "buffcount")
+	@XmlAttribute(name = "bufcount")
 	protected int buffCount;
-
 	@XmlAttribute
 	protected int type = 0;
 
@@ -62,19 +61,22 @@ public class HideEffect extends BuffEffect {
 	public void endEffect(Effect effect) {
 		super.endEffect(effect);
 
-		Creature effected = effect.getEffected();
+		final Creature effected = effect.getEffected();
 		effected.getEffectController().unsetAbnormal(AbnormalState.HIDE.getId());
 
 		effected.unsetVisualState(state);
 
-		if ((effected instanceof Player)) {
+		if (effected instanceof Player) {
 			ActionObserver observer = effect.getActionObserver(position);
 			effect.getEffected().getObserveController().removeObserver(observer);
 		}
 
 		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_PLAYER_STATE(effected));
-		if ((SecurityConfig.INVIS) && ((effected instanceof Player)))
+
+		// anti-cheat
+		if (SecurityConfig.INVIS && effected instanceof Player) {
 			PlayerVisualStateService.hideValidate((Player) effected);
+		}
 	}
 
 	@Override
@@ -87,18 +89,26 @@ public class HideEffect extends BuffEffect {
 
 		effected.setVisualState(state);
 
+		// Cancel targeted enemy cast
 		AttackUtil.cancelCastOn(effected);
 
+		// send all to set new 'effected' visual state (remove all visual targetting from 'effected')
 		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_PLAYER_STATE(effected));
 
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
+			@Override
 			public void run() {
+				// do on all who targetting on 'effected' (set target null, cancel attack skill, cancel npc pursuit)
 				AttackUtil.removeTargetFrom(effected, true);
 			}
-		}, 500L);
+		}, 500);
 
-		if ((effected instanceof Player)) {
+		/**
+		 * for player adding: Remove Hide when using any item action . when requesting dialog to any npc . when being attacked . when attacking
+		 */
+		if (effected instanceof Player) {
+
 			if (SecurityConfig.INVIS) {
 				PlayerVisualStateService.hideValidate((Player) effected);
 			}
@@ -114,12 +124,15 @@ public class HideEffect extends BuffEffect {
 					if (skill.isSelfBuff() && bufNumber++ < buffCount) {
 						return;
 					}
+
 					effect.endEffect();
 				}
 			};
 			effected.getObserveController().addObserver(observer);
 			effect.setActionObserver(observer, position);
 
+			// Set attacked and dotattacked observers
+			// type >= 1, hide is maintained even after damage
 			if (type == 0) {
 				effect.setCancelOnDmg(true);
 			}
@@ -132,9 +145,7 @@ public class HideEffect extends BuffEffect {
 					effect.endEffect();
 				}
 			});
-			/**
-			 * for player adding: Remove Hide when using any item action Remove hide when requesting dialog to any npc
-			 */
+
 			effected.getObserveController().attach(new ActionObserver(ObserverType.ITEMUSE) {
 
 				@Override
@@ -148,24 +159,30 @@ public class HideEffect extends BuffEffect {
 				public void npcdialogrequested(Npc npc) {
 					effect.endEffect();
 				}
-
 			});
 		}
-		else if (type == 0) {
-			effect.setCancelOnDmg(true);
+		else { // effected is npc
+			if (type == 0) { // type >= 1, hide is maintained even after damage
+				effect.setCancelOnDmg(true);
 
-			effected.getObserveController().attach(new ActionObserver(ObserverType.ATTACK) {
+				// Remove Hide when attacking
+				effected.getObserveController().attach(new ActionObserver(ObserverType.ATTACK) {
 
-				public void attack(Creature creature) {
-					effect.endEffect();
-				}
-			});
-			effected.getObserveController().attach(new ActionObserver(ObserverType.SKILLUSE) {
+					@Override
+					public void attack(Creature creature) {
+						effect.endEffect();
+					}
+				});
 
-				public void skilluse(Skill skill) {
-					effect.endEffect();
-				}
-			});
+				// Remove Hide when use skill
+				effected.getObserveController().attach(new ActionObserver(ObserverType.SKILLUSE) {
+
+					@Override
+					public void skilluse(Skill skill) {
+						effect.endEffect();
+					}
+				});
+			}
 		}
 	}
 }

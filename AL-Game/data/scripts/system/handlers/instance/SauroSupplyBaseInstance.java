@@ -154,13 +154,13 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler
 					    case 3:
 				            dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 185000178, 1)); //Green Storeroom Key.
 				        break;
-					} switch (Rnd.get(1, 2)) {
+					/*} switch (Rnd.get(1, 2)) {
 				        case 1:
 				            dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 188053623, 1)); //Fire Dragon King's Weapon Bundle [Mythic].
 				        break;
 					    case 2:
 				            dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 188054244, 1)); //Dreaming Nether Water Dragon King's Weapon Chest [Mythic].
-				        break;
+				        break;*/
 					}
 				}
 			break;
@@ -172,13 +172,13 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler
 				    if (player.isOnline()) {
 						dropItems.add(DropRegistrationService.getInstance().regDropItem(index++, player.getObjectId(), npcId, 188052582, 1)); //Dragon's Conquerer Mark Box.
 						dropItems.add(DropRegistrationService.getInstance().regDropItem(index++, player.getObjectId(), npcId, 166500000, 1)); //Amplification Stone.
-					} switch (Rnd.get(1, 2)) {
+					/*} switch (Rnd.get(1, 2)) {
 				        case 1:
 				            dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 188053623, 1)); //Fire Dragon King's Weapon Bundle [Mythic].
 				        break;
 					    case 2:
 				            dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 188054244, 1)); //Dreaming Nether Water Dragon King's Weapon Chest [Mythic].
-				        break;
+				        break;*/
 					}
 				}
 			break;
@@ -199,13 +199,13 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler
 					    case 2:
 				            dropItems.add(DropRegistrationService.getInstance().regDropItem(index++, player.getObjectId(), npcId, 188053219, 1)); //[Event] Sauro Commander's Accessory Box.
 				        break;
-					} switch (Rnd.get(1, 2)) {
+					/*} switch (Rnd.get(1, 2)) {
 				        case 1:
 				            dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 188053623, 1)); //Fire Dragon King's Weapon Bundle [Mythic].
 				        break;
 					    case 2:
 				            dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 188054244, 1)); //Dreaming Nether Water Dragon King's Weapon Chest [Mythic].
-				        break;
+				        break;*/
 					}
 				}
 			break;
@@ -216,11 +216,11 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler
 				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 188053580, 1)); //[Event] Noble Abbey Bundle.
 		    break;
 			case 802181: //Sauro Supply Base Opportunity Bundle.
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000051, 30)); //Major Ancient Crown.
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000052, 30)); //Greater Ancient Crown.
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000051, 1)); //Major Ancient Crown.
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000052, 1)); //Greater Ancient Crown.
 				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000236, 50)); //Blood Mark.
 				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000237, 50)); //Ancient Coin.
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000242, 50)); //Ceramium Medal.
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000242, 2)); //Ceramium Medal.
 			break;
 		}
 	}

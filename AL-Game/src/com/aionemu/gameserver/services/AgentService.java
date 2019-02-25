@@ -19,10 +19,12 @@ package com.aionemu.gameserver.services;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
 import javolution.util.FastMap;
 
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.configs.main.CustomRewardAgentConfig;
 import com.aionemu.gameserver.configs.shedule.AgentSchedule;
 import com.aionemu.gameserver.configs.shedule.AgentSchedule.Agent;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -30,24 +32,28 @@ import com.aionemu.gameserver.model.*;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.ingameshop.InGameShopEn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.agentspawns.*;
 import com.aionemu.gameserver.model.agent.*;
+import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.agentservice.*;
+import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * @author Rinzler (Encom)
+ * @reworok Ione542
  */
 
-public class AgentService
-{
+public class AgentService {
 	private AgentSchedule agentSchedule;
 	private Map<Integer, AgentLocation> agent;
 	private static final int duration = CustomConfig.AGENT_DURATION;
@@ -172,6 +178,198 @@ public class AgentService
                 return false;
         }
     }
+	
+	public void onRewardMasta() {
+		World.getInstance().getWorldMap(WorldMapType.LEVINSHOR.getId()).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
+			@Override
+			public void visit(Player player) {
+				// TODO Auto-generated method stub
+				if(player.getRace() == Race.ELYOS) {
+					int qt = 250;
+                    AbyssPointsService.addGp(player, CustomRewardAgentConfig.AGENT_GP_REWARD);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_1, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_1);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_2, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_2);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_3, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_3);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_4, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_4);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_5, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_5);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_6, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_6);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_7, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_7);
+                    InGameShopEn.getInstance().addToll(player, qt);
+                    PacketSendUtility.sendBrightYellowMessage(player, "You obtained " + qt + " Credit (toll's).");
+				} else {
+					int qt = 150;
+                    AbyssPointsService.addGp(player, CustomRewardAgentConfig.AGENT_GP_REWARD_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_1, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_1_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_2, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_2_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_3, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_3_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_4, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_4_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_5, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_5_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_6, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_6_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_7, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_7_LOSS);
+                    InGameShopEn.getInstance().addToll(player, qt);
+                    PacketSendUtility.sendBrightYellowMessage(player, "You obtained " + qt + " Credit (toll's).");
+				}
+			}
+			
+		});
+	}
+	
+	public void onRewardVeille() {
+		World.getInstance().getWorldMap(WorldMapType.LEVINSHOR.getId()).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
+			@Override
+			public void visit(Player player) {
+				// TODO Auto-generated method stub
+				if(player.getRace() == Race.ASMODIANS) {
+					 int qt = 250;
+					 AbyssPointsService.addGp(player, CustomRewardAgentConfig.AGENT_GP_REWARD);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_1, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_1);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_2, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_2);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_3, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_3);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_4, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_4);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_5, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_5);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_6, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_6);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_7, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_7);
+					 InGameShopEn.getInstance().addToll(player, qt);
+					 PacketSendUtility.sendBrightYellowMessage(player, "You obtained " + qt + " Credit (toll's).");
+				} else {
+					int qt = 150;
+                    AbyssPointsService.addGp(player, CustomRewardAgentConfig.AGENT_GP_REWARD_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_1, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_1_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_2, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_2_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_3, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_3_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_4, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_4_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_5, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_5_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_6, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_6_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_7, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_7_LOSS);
+                    InGameShopEn.getInstance().addToll(player, qt);
+                    PacketSendUtility.sendBrightYellowMessage(player, "You obtained " + qt + " Credit (toll's).");
+				}
+			}
+			
+		});
+	}
+	
+	//KALDOR REWARD
+	public void onRewardMastas() {
+		World.getInstance().getWorldMap(WorldMapType.KALDOR.getId()).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
+			@Override
+			public void visit(Player player) {
+				// TODO Auto-generated method stub
+				if(player.getRace() == Race.ELYOS) {
+					int qt = 250;
+                    AbyssPointsService.addGp(player, CustomRewardAgentConfig.AGENT_GP_REWARD);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_1, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_1);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_2, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_2);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_3, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_3);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_4, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_4);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_5, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_5);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_6, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_6);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_7, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_7);
+                    InGameShopEn.getInstance().addToll(player, qt);
+                    PacketSendUtility.sendBrightYellowMessage(player, "You obtained " + qt + " Credit (toll's).");
+				} else {
+					int qt = 150;
+                    AbyssPointsService.addGp(player, CustomRewardAgentConfig.AGENT_GP_REWARD_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_1, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_1_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_2, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_2_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_3, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_3_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_4, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_4_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_5, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_5_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_6, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_6_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_7, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_7_LOSS);
+                    InGameShopEn.getInstance().addToll(player, qt);
+                    PacketSendUtility.sendBrightYellowMessage(player, "You obtained " + qt + " Credit (toll's).");
+				}
+			}
+			
+		});
+	}
+	
+	public void onRewardVeilles() {
+		World.getInstance().getWorldMap(WorldMapType.KALDOR.getId()).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
+			@Override
+			public void visit(Player player) {
+				// TODO Auto-generated method stub
+				if(player.getRace() == Race.ASMODIANS) {
+					 int qt = 250;
+					 AbyssPointsService.addGp(player, CustomRewardAgentConfig.AGENT_GP_REWARD);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_1, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_1);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_2, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_2);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_3, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_3);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_4, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_4);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_5, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_5);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_6, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_6);
+					 ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_7, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_7);
+					 InGameShopEn.getInstance().addToll(player, qt);
+					 PacketSendUtility.sendBrightYellowMessage(player, "You obtained " + qt + " Credit (toll's).");
+				} else {
+					int qt = 150;
+                    AbyssPointsService.addGp(player, CustomRewardAgentConfig.AGENT_GP_REWARD_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_1, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_1_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_2, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_2_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_3, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_3_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_4, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_4_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_5, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_5_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_6, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_6_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_7, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_7_LOSS);
+                    InGameShopEn.getInstance().addToll(player, qt);
+                    PacketSendUtility.sendBrightYellowMessage(player, "You obtained " + qt + " Credit (toll's).");
+				}
+			}
+			
+		});
+	}
+	
+	public void onRewardDraw() {
+		World.getInstance().getWorldMap(WorldMapType.LEVINSHOR.getId()).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
+			@Override
+			public void visit(Player player) {
+				// TODO Auto-generated method stub
+				if(player.getRace() == Race.ELYOS) {
+					int qt = 150;
+                    //AbyssPointsService.addGp(player, CustomRewardAgentConfig.AGENT_GP_REWARD);
+					AbyssPointsService.addGp(player, CustomRewardAgentConfig.AGENT_GP_REWARD_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_1, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_1_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_2, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_2_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_3, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_3_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_4, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_4_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_5, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_5_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_6, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_6_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_7, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_7_LOSS);
+                    InGameShopEn.getInstance().addToll(player, qt);
+                    PacketSendUtility.sendBrightYellowMessage(player, "You obtained " + qt + " Credit (toll's).");
+				} else {
+					int qt = 150;
+                    AbyssPointsService.addGp(player, CustomRewardAgentConfig.AGENT_GP_REWARD_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_1, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_1_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_2, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_2_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_3, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_3_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_4, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_4_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_5, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_5_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_6, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_6_LOSS);
+					ItemService.addItem(player, CustomRewardAgentConfig.AGENT_ITEM_REWARD_7, CustomRewardAgentConfig.AGENT_ITEM_AMOUNT_7_LOSS);
+                    InGameShopEn.getInstance().addToll(player, qt);
+                    PacketSendUtility.sendBrightYellowMessage(player, "You obtained " + qt + " Credit (toll's).");
+				}
+			}
+			
+		});
+	}
 	
 	public void despawn(AgentLocation loc) {
 		for (VisibleObject npc : loc.getSpawned()) {

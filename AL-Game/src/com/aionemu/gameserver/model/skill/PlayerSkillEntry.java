@@ -37,7 +37,7 @@ public class PlayerSkillEntry extends SkillEntry {
 	private PersistentState persistentState;
 
 	public PlayerSkillEntry(int skillId, boolean isStigma, boolean isLinked, int skillLvl, PersistentState persistentState) {
-		super(skillId, skillLvl);
+		super(skillId, skillLvl, 0);
 		this.isStigma = isStigma;
 		this.isLinked = isLinked;
 		this.persistentState = persistentState;
@@ -54,9 +54,16 @@ public class PlayerSkillEntry extends SkillEntry {
 		return this.isLinked;
 	}
 
+	@Override
 	public void setSkillLvl(int skillLevel) {
 		super.setSkillLvl(skillLevel);
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
+	}
+	
+	@Override
+	public void setSKillLvlBoost(int skillLevel) {
+	    super.setSKillLvlBoost(skillLevel);
+	    setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	/**
@@ -154,6 +161,27 @@ public class PlayerSkillEntry extends SkillEntry {
 				setSkillLvl(skillLevel + 1);
 				currentXp = 0;
 			}
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * @return 
+	 */
+	public boolean addMagicCraftSkillXp(Player player, int xp) {
+		this.currentXp += xp;
+		int requiredExp = (int) ((1000 * 1000) + (1000 * 1000 * 0.4)); // Temp for MagicCraft
+		StatEnum boostStat = StatEnum.getModifier(skillId);
+		if (boostStat != null) {
+			float statRate = player.getGameStats().getStat(boostStat, 100).getCurrent() / 100f;
+			if (statRate > 0)
+				requiredExp /= statRate;
+		}
+
+		if (currentXp > requiredExp) {
+			setSkillLvl(skillLevel + 1);
+			currentXp = 0;
 			return true;
 		}
 		return false;

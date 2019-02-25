@@ -25,6 +25,7 @@ import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.NpcShoutsService;
+import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -168,6 +169,11 @@ public class GeneralInstanceHandler implements InstanceHandler {
 
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
+	}
+	
+	@Override
+	public boolean useSkill(Player player, Skill skill) {
+		return true;
 	}
 
 }

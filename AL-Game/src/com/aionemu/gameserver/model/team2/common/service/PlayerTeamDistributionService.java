@@ -54,15 +54,6 @@ public class PlayerTeamDistributionService
 			if (member.isMentor() || member.getLifeStats().isAlreadyDead()) {
 				continue;
 			}
-			//Reward InGameShop.
-			switch (member.getWorldId()) {
-			    //Idian Depths.
-				case 210090000:
-			    case 220100000:
-			        InGameShopEn.getInstance().addToll(member, (long) (2 * member.getRates().getTollRewardRate()));
-			        PacketSendUtility.sendSys1Message(member, "\uE083", "You have gained <2 Toll Point>");
-			    break;
-			}
 			//Aura Of Growth + Berdin's Star.
 			if (member.getWorldId() == WorldMapType.ILUMA.getId() ||
 			    member.getWorldId() == WorldMapType.NORSVOLD.getId()) {

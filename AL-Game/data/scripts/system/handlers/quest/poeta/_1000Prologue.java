@@ -58,7 +58,11 @@ public class _1000Prologue extends QuestHandler
 		    }
 			qs = player.getQuestStateList().getQuestState(questId);
 			if (qs.getStatus() == QuestStatus.START) {
-			    PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(1, 1));
+			    if (player.getCommonData().isInNewbieGuide()) {
+                return false;
+            } else {
+                PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(1, 1));
+            }
 			    return true;
 		    }
 		}

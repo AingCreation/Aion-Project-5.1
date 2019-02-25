@@ -29,6 +29,7 @@ public abstract class Rates
 	public abstract float getHarmonyRewardRate();
 	public abstract float getGloryRewardRate();
 	public abstract float getTollRewardRate();
+	public abstract int getRateMsSocket();
 	public static Rates getRatesFor(byte membership) {
 		switch (membership) {
 			case 0:

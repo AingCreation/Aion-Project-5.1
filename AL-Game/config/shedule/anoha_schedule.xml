@@ -11,5 +11,6 @@
 		<berserkTime>0 0 15 ? * WED-THU *</berserkTime>
 		<berserkTime>0 0 19 ? * FRI-SAT *</berserkTime>
 		<berserkTime>0 0 2 ? * SUN *</berserkTime>
+		<berserkTime>0 05 19 ? * MON,TUE,WED,THU,FRI,SAT,SUN *</berserkTime>
 	</anoha>
 </anoha_schedule>

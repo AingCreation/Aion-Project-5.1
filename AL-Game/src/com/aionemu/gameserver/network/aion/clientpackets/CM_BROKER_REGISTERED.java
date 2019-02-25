@@ -5,22 +5,36 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.BrokerService;
 
-public class CM_BROKER_REGISTERED extends AionClientPacket
-{
-	private int itemUniqueId;
-	
+
+/**
+ * @author kosyak
+ */
+public class CM_BROKER_REGISTERED extends AionClientPacket {
+
+
+     @SuppressWarnings("unused")
+    private int npcId;
+
+
+    /**
+     *
+     */
     public CM_BROKER_REGISTERED(int opcode, State state, State... restStates) {
         super(opcode, state, restStates);
     }
-	
+
+
     @Override
     protected void readImpl() {
-		itemUniqueId = readD();
+        npcId = readD();
     }
-	
+
+
     @Override
     protected void runImpl() {
         Player player = getConnection().getActivePlayer();
-		BrokerService.getInstance().CalcItemAveLowHigh(player, itemUniqueId);
+        if (player == null)
+            return;
+        BrokerService.getInstance().showRegisteredItems(player);
     }
 }

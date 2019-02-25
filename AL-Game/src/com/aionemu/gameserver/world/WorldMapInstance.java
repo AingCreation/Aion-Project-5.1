@@ -37,6 +37,7 @@ import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.Trap;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.instance.InstanceType;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team2.group.PlayerGroup;
 import com.aionemu.gameserver.model.team2.league.League;
@@ -112,6 +113,7 @@ public abstract class WorldMapInstance {
 	
 	private PlayerAlliance registredAlliance;
 	private League registredLeague;
+    InstanceType instanceType = InstanceType.NORMAL;
 
 	/**
 	 * Constructor.
@@ -512,5 +514,17 @@ public abstract class WorldMapInstance {
 	public Integer getSoloPlayerObj() {
 		return soloPlayer;
 	}
+	
+	public boolean isInNewbieGuide() {
+        return instanceType == InstanceType.NEWBIE_GUIDE;
+    }
+	
+	public InstanceType getInstanceType() {
+        return instanceType;
+    }
+
+    public void setInstanceType(InstanceType type) {
+        this.instanceType = type;
+    }
 
 }

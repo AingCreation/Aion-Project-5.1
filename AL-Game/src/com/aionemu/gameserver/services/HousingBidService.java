@@ -235,124 +235,182 @@ public class HousingBidService extends AbstractCronTask
 	
     @Override
     protected void executeTask() {
-        if (!HousingConfig.ENABLE_HOUSE_AUCTIONS) {
-            return;
-        }
-        while (!isDataLoaded) {
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                return;
-            }
-        }
-        Map<HouseBidEntry, Integer> winners = new HashMap<HouseBidEntry, Integer>();
-        Map<HouseBidEntry, Integer> successSell = new HashMap<HouseBidEntry, Integer>();
-        Map<HouseBidEntry, Integer> failedSell = new HashMap<HouseBidEntry, Integer>();
-        for (Entry<Integer, HouseBidEntry> playerBid : playerBids.entrySet()) {
-            int playerId = playerBid.getKey();
-            HouseBidEntry houseBid = getBidByEntryIndex(playerBid.getValue().getEntryIndex());
-            House house = HousingService.getInstance().getHouseByAddress(houseBid.getAddress());
-            if (playerBid.getValue().getBidPrice() == houseBid.getBidPrice()) {
-                if (house.getOwnerId() == 0) {
-                    winners.put(houseBid, playerId);
-                } else {
-                    successSell.put(houseBid, playerId);
-                }
-            }
-        } for (HouseBidEntry houseBid : houseBids.values()) {
-            House house = HousingService.getInstance().getHouseByAddress(houseBid.getAddress());
-            if (houseBid.getBidCount() > 0) {
-                continue;
-            } if (house.getOwnerId() != 0) {
-                failedSell.put(houseBid, house.getOwnerId());
-            }
-        } if (LoggingConfig.LOG_HOUSE_AUCTION) {
-            log.info("##### Houses sold by admins #####");
-        } for (Entry<HouseBidEntry, Integer> winData : winners.entrySet()) {
-            House wonHouse = HousingService.getInstance().getHouseByAddress(winData.getKey().getAddress());
-            if (getPlayerData(winData.getValue()) == null) {
-                log.warn("Missing Player with ID:" + winData.getValue() + " for Housebid on address:" + winData.getKey().getAddress());
+    	if (!HousingConfig.ENABLE_HOUSE_AUCTIONS) {
+			return;
+		}
+
+		while (!isDataLoaded) {
+			try {
+				Thread.sleep(500);
+			}
+			catch (InterruptedException e) {
+				return;
+			}
+		}
+
+		Map<HouseBidEntry, Integer> winners = new HashMap<HouseBidEntry, Integer>();
+		Map<HouseBidEntry, Integer> successSell = new HashMap<HouseBidEntry, Integer>();
+		Map<HouseBidEntry, Integer> failedSell = new HashMap<HouseBidEntry, Integer>();
+
+		for (Entry<Integer, HouseBidEntry> playerBid : playerBids.entrySet()) {
+			int playerId = playerBid.getKey();
+			HouseBidEntry houseBid = getBidByEntryIndex(playerBid.getValue().getEntryIndex());
+			House house = HousingService.getInstance().getHouseByAddress(houseBid.getAddress());
+			if (playerBid.getValue().getBidPrice() == houseBid.getBidPrice()) {
+				// The player can not be top 1 for both bids, no need to check other
+				if (house.getOwnerId() == 0) {
+					winners.put(houseBid, playerId); // our sold house
+				}
+				else {
+					successSell.put(houseBid, playerId); // player sold house
+				}
+			}
+		}
+
+		for (HouseBidEntry houseBid : houseBids.values()) {
+			House house = HousingService.getInstance().getHouseByAddress(houseBid.getAddress());
+			if (houseBid.getBidCount() > 0) {
 				continue;
-            }
-            AuctionResult result = completeHouseSell(getPlayerData(winData.getValue()), wonHouse);
-        }
-        long time = System.currentTimeMillis();
-        if (LoggingConfig.LOG_HOUSE_AUCTION) {
-            log.info("##### Houses auctioned by players #####");
-        } for (Entry<HouseBidEntry, Integer> sellData : successSell.entrySet()) {
-            House soldHouse = HousingService.getInstance().getHouseByAddress(sellData.getKey().getAddress());
-            PlayerCommonData buyerPcd = getPlayerData(sellData.getValue());
-            PlayerCommonData sellerPcd = getPlayerData(soldHouse.getOwnerId());
-            if (buyerPcd.getPlayerObjId() == soldHouse.getOwnerId()) {
-                continue;
-            } if (sellerPcd.isOnline()) {
-                PacketSendUtility.sendPacket(sellerPcd.getPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_AUCTION_SUCCESS(sellData.getKey().getAddress()));
-            } if (buyerPcd.isOnline()) {
-                PacketSendUtility.sendPacket(buyerPcd.getPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_WIN(sellData.getKey().getAddress()));
-            }
-            long returnKinah = sellData.getKey().getBidPrice() + sellData.getKey().getRefundKinah();
-            if (soldHouse.isInGracePeriod()) {
-                soldHouse.revokeOwner();
-                House newHouse = HousingService.getInstance().activateBoughtHouse(sellerPcd.getPlayerObjId());
-                if (sellerPcd.isOnline()) {
-                    PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_ACQUIRE(sellerPcd.getPlayerObjId(), newHouse.getAddress().getId(), true));
-                    PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_OWNER_INFO(sellerPcd.getPlayer(), newHouse));
-                    sellerPcd.getPlayer().setHouseRegistry(newHouse.getRegistry());
-                }
-                MailFormatter.sendHouseAuctionMail(newHouse, sellerPcd, AuctionResult.GRACE_SUCCESS, time, returnKinah);
-            } else {
-                MailFormatter.sendHouseAuctionMail(soldHouse, sellerPcd, AuctionResult.SUCCESS_SALE, time, returnKinah);
-                soldHouse.revokeOwner();
-            }
-            AuctionResult result = completeHouseSell(buyerPcd, soldHouse);
-        } for (Entry<HouseBidEntry, Integer> notSoldData : failedSell.entrySet()) {
-            HouseBidEntry bidEntry = notSoldData.getKey();
-            PlayerCommonData sellerPcd = getPlayerData(notSoldData.getValue());
-            House bidHouse = HousingService.getInstance().getHouseByAddress(bidEntry.getAddress());
-            if (sellerPcd.isOnline()) {
-                PacketSendUtility.sendPacket(sellerPcd.getPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_AUCTION_FAIL(bidHouse.getAddress().getId()));
-            }
-            AuctionResult result = AuctionResult.FAILED_SALE;
-            long compensation = 0;
-            if (bidHouse.isInGracePeriod()) {
-                long timePassed = (getAuctionStartTime() - bidHouse.getSellStarted().getTime()) / 1000;
-                if (timePassed > 7 * 24 * 3600) {
-                    bidHouse.revokeOwner();
-                    House activatedHouse = HousingService.getInstance().activateBoughtHouse(sellerPcd.getPlayerObjId());
-                    if (sellerPcd.isOnline()) {
-                        if (activatedHouse != null) {
-                            PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_ACQUIRE(sellerPcd.getPlayerObjId(), activatedHouse.getAddress().getId(), true));
-                            sellerPcd.getPlayer().setHouseRegistry(activatedHouse.getRegistry());
-                        }
-                        PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_OWNER_INFO(sellerPcd.getPlayer(), activatedHouse));
-                    }
-                    result = AuctionResult.GRACE_FAIL;
-                    time = System.currentTimeMillis();
-                    compensation = bidHouse.getDefaultAuctionPrice();
-                }
-            } else {
-                bidHouse.setStatus(HouseStatus.ACTIVE);
-                time = bidHouse.getSellStarted().getTime();
-            }
-            bidHouse.save();
-            MailFormatter.sendHouseAuctionMail(bidHouse, sellerPcd, result, time, compensation);
-        }
-        List<HouseBidEntry> copy = new ArrayList<HouseBidEntry>();
-        copy.addAll(houseBids.values());
-        houseBids.clear();
-        playerBids.clear();
-        bidsByIndex.clear();
-        if (LoggingConfig.LOG_HOUSE_AUCTION) {
-            log.info("##### Houses added back to auction #####");
-        } for (HouseBidEntry houseBid : copy) {
-            House house = HousingService.getInstance().getHouseByAddress(houseBid.getAddress());
-            DAOManager.getDAO(HouseBidsDAO.class).deleteHouseBids(house.getObjectId());
-            if (house.getOwnerId() == 0) {
-                house.setStatus(HouseStatus.NOSALE);
-                addHouseToAuction(house);
-                house.save();
-            }
-        }
+			}
+			if (house.getOwnerId() != 0) {
+				// add only player sold houses
+				failedSell.put(houseBid, house.getOwnerId());
+			}
+		}
+
+		// send mails + messages if players are online
+		if (LoggingConfig.LOG_HOUSE_AUCTION) {
+			log.info("[HousingBidService] ##### Houses sold by admins #####");
+		}
+
+		// check houses sold by administrators
+		for (Entry<HouseBidEntry, Integer> winData : winners.entrySet()) {
+			House wonHouse = HousingService.getInstance().getHouseByAddress(winData.getKey().getAddress());
+			if (getPlayerData(winData.getValue()) == null) {
+				log.warn("[HousingBidService] Missing Player with ID:" + winData.getValue() + " for Housebid on address:" + winData.getKey().getAddress());
+				continue;
+			}
+			AuctionResult result = completeHouseSell(getPlayerData(winData.getValue()), wonHouse);
+
+			if (LoggingConfig.LOG_HOUSE_AUCTION) {
+				log.info("[HousingBidService] Address " + wonHouse.getAddress().getId() + " sold for price " + winData.getKey().getBidPrice() + " (bid count: " + winData.getKey().getBidCount() + "; result: " + result + ") to player " + winData.getKey().getLastBiddingPlayer());
+			}
+		}
+
+		// check houses sold by players
+		long time = System.currentTimeMillis();
+
+		if (LoggingConfig.LOG_HOUSE_AUCTION) {
+			log.info("[HousingBidService] ##### Houses auctioned by players #####");
+		}
+		for (Entry<HouseBidEntry, Integer> sellData : successSell.entrySet()) {
+			House soldHouse = HousingService.getInstance().getHouseByAddress(sellData.getKey().getAddress());
+			PlayerCommonData buyerPcd = getPlayerData(sellData.getValue());
+			PlayerCommonData sellerPcd = getPlayerData(soldHouse.getOwnerId());
+
+			if (buyerPcd.getPlayerObjId() == soldHouse.getOwnerId()) {
+				log.warn("[HousingBidService] Selling house to its own owner, cancelling!");
+				continue;
+			}
+
+			if (sellerPcd.isOnline()) {
+				PacketSendUtility.sendPacket(sellerPcd.getPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_AUCTION_SUCCESS(sellData.getKey().getAddress()));
+			}
+			if (buyerPcd.isOnline()) {
+				PacketSendUtility.sendPacket(buyerPcd.getPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_WIN(sellData.getKey().getAddress()));
+			}
+
+			long returnKinah = sellData.getKey().getBidPrice() + sellData.getKey().getRefundKinah();
+			if (soldHouse.isInGracePeriod()) {
+				soldHouse.revokeOwner();
+				// activate previously obtained house
+				House newHouse = HousingService.getInstance().activateBoughtHouse(sellerPcd.getPlayerObjId());
+				if (sellerPcd.isOnline()) {
+					PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_ACQUIRE(sellerPcd.getPlayerObjId(), newHouse.getAddress().getId(), true));
+					PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_OWNER_INFO(sellerPcd.getPlayer(), newHouse));
+					sellerPcd.getPlayer().setHouseRegistry(newHouse.getRegistry());
+				}
+				MailFormatter.sendHouseAuctionMail(newHouse, sellerPcd, AuctionResult.GRACE_SUCCESS, time, returnKinah);
+			}
+			else {
+				MailFormatter.sendHouseAuctionMail(soldHouse, sellerPcd, AuctionResult.SUCCESS_SALE, time, returnKinah);
+				soldHouse.revokeOwner();
+			}
+
+			AuctionResult result = completeHouseSell(buyerPcd, soldHouse);
+
+			if (LoggingConfig.LOG_HOUSE_AUCTION) {
+				log.info("[HousingBidService] Address " + soldHouse.getAddress().getId() + " sold by player " + sellerPcd.getPlayerObjId() + " for price " + sellData.getKey().getBidPrice() + " (bid count: " + sellData.getKey().getBidCount() + "; result: " + result + ") to player " + sellData.getKey().getLastBiddingPlayer());
+			}
+		}
+
+		// not sold houses
+		for (Entry<HouseBidEntry, Integer> notSoldData : failedSell.entrySet()) {
+			HouseBidEntry bidEntry = notSoldData.getKey();
+			PlayerCommonData sellerPcd = getPlayerData(notSoldData.getValue());
+			House bidHouse = HousingService.getInstance().getHouseByAddress(bidEntry.getAddress());
+
+			if (sellerPcd.isOnline()) {
+				PacketSendUtility.sendPacket(sellerPcd.getPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_AUCTION_FAIL(bidHouse.getAddress().getId()));
+			}
+
+			AuctionResult result = AuctionResult.FAILED_SALE;
+			long compensation = 0;
+
+			if (bidHouse.isInGracePeriod()) {
+				long timePassed = (getAuctionStartTime() - bidHouse.getSellStarted().getTime()) / 1000;
+				if (timePassed > 7 * 24 * 3600) { // more than one week, i.e. 2 weeks passed
+					bidHouse.revokeOwner();
+					House activatedHouse = HousingService.getInstance().activateBoughtHouse(sellerPcd.getPlayerObjId());
+					if (sellerPcd.isOnline()) {
+						if (activatedHouse != null) {
+							PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_ACQUIRE(sellerPcd.getPlayerObjId(), activatedHouse.getAddress().getId(), true));
+							sellerPcd.getPlayer().setHouseRegistry(activatedHouse.getRegistry());
+						}
+						PacketSendUtility.sendPacket(sellerPcd.getPlayer(), new SM_HOUSE_OWNER_INFO(sellerPcd.getPlayer(), activatedHouse));
+					}
+
+					result = AuctionResult.GRACE_FAIL;
+					time = System.currentTimeMillis();
+					compensation = bidHouse.getDefaultAuctionPrice();
+				}
+			}
+			else {
+				bidHouse.setStatus(HouseStatus.ACTIVE);
+				time = bidHouse.getSellStarted().getTime();
+			}
+
+			bidHouse.save();
+			MailFormatter.sendHouseAuctionMail(bidHouse, sellerPcd, result, time, compensation);
+			if (LoggingConfig.LOG_HOUSE_AUCTION) {
+				log.info("[HousingBidService] Address " + bidHouse.getAddress().getId() + " not sold for price " + bidEntry.getBidPrice() + " (result: " + result + "; return: " + compensation + " kinah) by player " + sellerPcd.getPlayerObjId());
+			}
+		}
+
+		List<HouseBidEntry> copy = new ArrayList<HouseBidEntry>();
+		copy.addAll(houseBids.values());
+
+		houseBids.clear();
+		playerBids.clear();
+		bidsByIndex.clear();
+
+		// add back auto auctioned houses (with grace period ended) + admin houses not sold
+		if (LoggingConfig.LOG_HOUSE_AUCTION) {
+			log.info("[HousingBidService] ##### Houses added back to auction #####");
+		}
+
+		for (HouseBidEntry houseBid : copy) {
+			House house = HousingService.getInstance().getHouseByAddress(houseBid.getAddress());
+			DAOManager.getDAO(HouseBidsDAO.class).deleteHouseBids(house.getObjectId());
+			if (house.getOwnerId() == 0) {
+				house.setStatus(HouseStatus.NOSALE);
+				addHouseToAuction(house);
+				house.save();
+				if (LoggingConfig.LOG_HOUSE_AUCTION) {
+					log.info("[HousingBidService] Address " + houseBid.getAddress() + " not sold for price " + houseBid.getBidPrice());
+				}
+			}
+		}
     }
 	
     @Override

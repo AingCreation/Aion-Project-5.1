@@ -1,18 +1,18 @@
-/*
- * This file is part of aion-unique <aion-unique.org>.
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
  *
- *  aion-unique is free software: you can redistribute it and/or modify
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  aion-unique is distributed in the hope that it will be useful,
+ *  Aion-Lightning is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
+ *  GNU General Public License for more details. *
  *  You should have received a copy of the GNU General Public License
- *  along with aion-unique.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.aionemu.gameserver.skillengine.effect;
 
@@ -26,6 +26,7 @@ import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
 import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatus;
 import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatusObserver;
 import com.aionemu.gameserver.skillengine.model.Effect;
+
 /**
  * @author Sippolo
  */
@@ -38,6 +39,7 @@ public class OneTimeBoostSkillCriticalEffect extends EffectTemplate {
 	@XmlAttribute
 	private boolean percent;
 
+	@Override
 	public void applyEffect(Effect effect) {
 		effect.addToEffectedController();
 	}
@@ -48,25 +50,30 @@ public class OneTimeBoostSkillCriticalEffect extends EffectTemplate {
 
 		AttackerCriticalStatusObserver observer = new AttackerCriticalStatusObserver(AttackStatus.CRITICAL, count, value, percent) {
 
+			@Override
 			public AttackerCriticalStatus checkAttackerCriticalStatus(AttackStatus stat, boolean isSkill) {
-				if ((stat == status) && (isSkill)) {
-					if (getCount() <= 1)
+				if (stat == this.status && isSkill) {
+					if (this.getCount() <= 1) {
 						effect.endEffect();
-					else {
-						decreaseCount();
 					}
-					acStatus.setResult(true);
+					else {
+						this.decreaseCount();
+					}
+
+					this.acStatus.setResult(true);
 				}
 				else {
-					acStatus.setResult(false);
+					this.acStatus.setResult(false);
 				}
-				return acStatus;
+
+				return this.acStatus;
 			}
 		};
 		effect.getEffected().getObserveController().addAttackCalcObserver(observer);
 		effect.setAttackStatusObserver(observer, position);
 	}
 
+	@Override
 	public void endEffect(Effect effect) {
 		super.endEffect(effect);
 
@@ -74,6 +81,9 @@ public class OneTimeBoostSkillCriticalEffect extends EffectTemplate {
 		effect.getEffected().getObserveController().removeAttackCalcObserver(observer);
 	}
 
+	/**
+	 * @return the percent
+	 */
 	public boolean isPercent() {
 		return percent;
 	}

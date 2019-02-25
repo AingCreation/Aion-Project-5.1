@@ -454,15 +454,21 @@ public class StatFunctions
     public static int calculateMagicalSkillDamage(Creature speller, Creature target, int baseDamages, int bonus, SkillElement element, boolean useMagicBoost, boolean useKnowledge, boolean noReduce, int pvpDamage) {
         CreatureGameStats<?> sgs = speller.getGameStats();
         CreatureGameStats<?> tgs = target.getGameStats();
+		
         int magicBoost = useMagicBoost ? sgs.getMBoost().getCurrent() : 0;
         int mBResist = tgs.getMBResist().getCurrent();
         int MDef = tgs.getMDef().getCurrent();
         int knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100;
-        if ((magicBoost - mBResist) > 3200) {
-            magicBoost = 3201;
-        } else {
-            magicBoost = magicBoost - mBResist;
-        } if ((magicBoost - MDef) < 1) {
+		
+		int finalDamages = 0;
+		
+        if (magicBoost < 0) {
+			magicBoost = 0;
+		}else if (magicBoost > 3200) {
+			magicBoost = 3200;
+		}
+		
+		if ((magicBoost - MDef) < 1) {
             magicBoost = 1;
         } else {
             magicBoost -= MDef;
@@ -481,7 +487,10 @@ public class StatFunctions
         } if (target instanceof Npc) {
             return target.getAi2().modifyDamage((int) damages);
         }
-        return Math.round(damages);
+		
+		finalDamages = Math.round(damages);
+		
+        return finalDamages;
     }
 	
 	/**
@@ -578,70 +587,90 @@ public class StatFunctions
 	 * @param baseDamages
 	 **/
 	public static float adjustDamages(Creature attacker, Creature target, float damages, int pvpDamage, boolean useMovement) {
-        if (attacker instanceof Npc) {
-            if (((Npc) attacker).getAi2() != null) {
-                if (((Npc) attacker).getAi2().getName().equalsIgnoreCase("artifact")) {
-                    return damages;
-                }
-            }
-        } if (attacker.isPvpTarget(target)) {
-            if (pvpDamage > 0) {
-                damages *= pvpDamage * 0.01;
-            }
-            
-			
-			float deltaReduce = 0.5f;		
-			damages = Math.round(damages * deltaReduce);
-            
-            float pvpAttackBonus = attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent();
-			float pvpDefenceBonus = target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent();
-			switch (elements) {
-				case NONE:
-					pvpAttackBonus += attacker.getGameStats().getStat(StatEnum.PVP_PHYSICAL_ATTACK, 0).getCurrent();
-					pvpDefenceBonus += target.getGameStats().getStat(StatEnum.PVP_PHYSICAL_DEFEND, 0).getCurrent();
-				break;
-				case FIRE:
-				case WATER:
-				case WIND:
-				case EARTH:
-				case LIGHT:
-				case DARK:
-					pvpAttackBonus += attacker.getGameStats().getStat(StatEnum.PVP_MAGICAL_ATTACK, 0).getCurrent();
-					pvpDefenceBonus += target.getGameStats().getStat(StatEnum.PVP_MAGICAL_DEFEND, 0).getCurrent();
-				break;
-				default:
-				break;
-			}
-			pvpAttackBonus = pvpAttackBonus * 0.001f;
-			pvpDefenceBonus = pvpDefenceBonus * 0.001f;
-			damages = Math.round(damages + (damages * pvpAttackBonus) - (damages * pvpDefenceBonus));
-			
-			if (attacker.getRace() != target.getRace() && !attacker.isInInstance()) {
-                damages *= Influence.getInstance().getPvpRaceBonus(attacker.getRace());
-            }
-        } else if (target instanceof Npc) {
-            int levelDiff = target.getLevel() - attacker.getLevel();
-            damages *= (1f - getNpcLevelDiffMod(levelDiff, 0));
-        } if (useMovement) {
-            damages = movementDamageBonus(attacker, damages);
-        } if (attacker instanceof Player) {
-        	PlayerClass playerClass = ((Player) attacker).getPlayerClass();
-  			if (playerClass != null ) {
-  				switch (playerClass) {
-  				case AETHERTECH : damages *= 0.8f;
-  					break;
-  				case GUNSLINGER : damages *= 0.7f;
-  					break;
-  				case SONGWEAVER : damages *= 0.7f;
-  					break;
-  				case SORCERER : damages *= 0.7f;
-  					break;
-  				default: damages *= 1f;		
-  				}
-  			}
-        }
-        
-        return damages;
+		// Artifacts haven't this limitation
+				// TODO: maybe set correct artifact npc levels on npc_template.xml and delete this?
+				if (attacker instanceof Npc) {
+					if (((Npc) attacker).getAi2() != null) {
+						if (((Npc) attacker).getAi2().getName().equalsIgnoreCase("artifact")) {
+							return damages;
+						}
+					}
+				}
+
+				if (attacker.isPvpTarget(target)) {
+					// adjust damamage by pvp damage from skill_templates.xml
+					if (pvpDamage > 0) {
+						damages *= pvpDamage * 0.01;
+					}
+
+					// PVP damages is capped of 50% of the actual baseDamage
+					damages = Math.round(damages * 0.50f);
+					float pvpAttackBonus = attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent();
+					float pvpDefenceBonus = target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent();
+					switch (elements) {
+						case NONE:
+							pvpAttackBonus += attacker.getGameStats().getStat(StatEnum.PVP_PHYSICAL_ATTACK, 0).getCurrent();
+							pvpDefenceBonus += target.getGameStats().getStat(StatEnum.PVP_PHYSICAL_DEFEND, 0).getCurrent();
+							break;
+						case FIRE:
+						case WATER:
+						case WIND:
+						case EARTH:
+						case LIGHT:
+						case DARK:
+							pvpAttackBonus += attacker.getGameStats().getStat(StatEnum.PVP_MAGICAL_ATTACK, 0).getCurrent();
+							pvpDefenceBonus += target.getGameStats().getStat(StatEnum.PVP_MAGICAL_DEFEND, 0).getCurrent();
+							break;
+						default:
+							break;
+					}
+					pvpAttackBonus = pvpAttackBonus * 0.001f;
+					pvpDefenceBonus = pvpDefenceBonus * 0.001f;
+					damages = Math.round(damages + (damages * pvpAttackBonus) - (damages * pvpDefenceBonus));
+					// Apply Race modifier
+					if (attacker.getRace() != target.getRace() && !attacker.isInInstance()) {
+						damages *= Influence.getInstance().getPvpRaceBonus(attacker.getRace());
+					}
+				}
+				else if (target instanceof Npc) {
+					int levelDiff = target.getLevel() - attacker.getLevel();
+					damages *= (1f - getNpcLevelDiffMod(levelDiff, 0));
+				}
+				if (useMovement) {
+					damages = movementDamageBonus(attacker, damages);
+				}
+				if (attacker instanceof Player) {
+					PlayerClass playerClass = ((Player) attacker).getPlayerClass();
+					if (playerClass != null) {
+						switch (playerClass) {
+							case GUNSLINGER:
+								damages *= 0.9f;
+								break;
+							case AETHERTECH:
+								damages *= 0.9f;
+								break;
+							case SONGWEAVER:
+								damages *= 0.8f;
+								break;
+							case SORCERER:
+								damages *= 0.8f;
+								break;
+							case SPIRIT_MASTER:
+								damages *= 0.9f;
+								break;
+							case CLERIC:
+								damages *= 0.9f;
+								break;
+							case ASSASSIN:
+								damages *= 0.7f;
+								break;
+							default:
+								damages *= 1f;
+						}
+					}
+				}
+
+				return damages;
     }
 	
 	/**
@@ -820,7 +849,7 @@ public class StatFunctions
 			int damage = (int) (distance * dmgPerMeter);
 			player.getLifeStats().reduceHp(damage, player);
 			player.getObserveController().notifyAttackedObservers(player);
-			PacketSendUtility.sendPacket(player, new SM_ATTACK_STATUS(player, SM_ATTACK_STATUS.TYPE.FALL_DAMAGE, 0, -damage));
+			PacketSendUtility.sendPacket(player, new SM_ATTACK_STATUS(player, player, SM_ATTACK_STATUS.TYPE.FALL_DAMAGE, 0, -damage));
 		}
 		return false;
 	}

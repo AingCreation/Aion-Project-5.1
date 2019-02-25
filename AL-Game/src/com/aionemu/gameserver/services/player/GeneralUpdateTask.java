@@ -9,7 +9,6 @@ import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.PlayerPassportsDAO;
 import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.dao.PlayerSkillListDAO;
-import com.aionemu.gameserver.dao.PlayerStigmasEquippedDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.world.World;
@@ -35,7 +34,6 @@ class GeneralUpdateTask
         DAOManager.getDAO(PlayerQuestListDAO.class).store(player);
         DAOManager.getDAO(PlayerPassportsDAO.class).store(player);
         DAOManager.getDAO(PlayerDAO.class).storePlayer(player);
-        DAOManager.getDAO(PlayerStigmasEquippedDAO.class).storeItems(player);
         for (House house : player.getHouses())
           house.save();
       }

@@ -1,18 +1,18 @@
-/*
- * This file is part of aion-unique <aion-unique.org>.
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
  *
- *  aion-unique is free software: you can redistribute it and/or modify
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  aion-unique is distributed in the hope that it will be useful,
+ *  Aion-Lightning is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
+ *  GNU General Public License for more details. *
  *  You should have received a copy of the GNU General Public License
- *  along with aion-unique.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.aionemu.gameserver.skillengine.effect;
 
@@ -34,7 +34,6 @@ public class OneTimeBoostSkillAttackEffect extends BuffEffect {
 
 	@XmlAttribute
 	private int count;
-
 	@XmlAttribute
 	private SkillType type;
 
@@ -54,10 +53,12 @@ public class OneTimeBoostSkillAttackEffect extends BuffEffect {
 
 					@Override
 					public float getBaseMagicalDamageMultiplier() {
-						if (count++ < stopCount)
+						if (count++ < stopCount) {
 							return percent;
-						else
+						}
+						else {
 							effect.getEffected().getEffectController().removeEffect(effect.getSkillId());
+						}
 
 						return 1.0f;
 					}
@@ -70,12 +71,14 @@ public class OneTimeBoostSkillAttackEffect extends BuffEffect {
 
 					@Override
 					public float getBasePhysicalDamageMultiplier(boolean isSkill) {
-						if (!isSkill)
+						if (!isSkill) {
 							return 1f;
+						}
 
 						if (count++ < stopCount) {
-							if (count == stopCount)
+							if (count == stopCount) {
 								effect.getEffected().getEffectController().removeEffect(effect.getSkillId());
+							}
 							return percent;
 						}
 
@@ -83,6 +86,43 @@ public class OneTimeBoostSkillAttackEffect extends BuffEffect {
 					}
 				};
 				break;
+			case ALL:
+				observer = new AttackCalcObserver() {
+
+					private int count = 0;
+
+					@Override
+					public float getBaseMagicalDamageMultiplier() {
+						if (count++ < stopCount) {
+							return percent;
+						}
+						else {
+							effect.getEffected().getEffectController().removeEffect(effect.getSkillId());
+						}
+
+						return 1.0f;
+					}
+
+					@Override
+					public float getBasePhysicalDamageMultiplier(boolean isSkill) {
+						if (!isSkill) {
+							return 1f;
+						}
+
+						if (count++ < stopCount) {
+							if (count == stopCount) {
+								effect.getEffected().getEffectController().removeEffect(effect.getSkillId());
+							}
+							return percent;
+						}
+
+						return 1.0f;
+					}
+				};
+				break;
+			default:
+				break;
+
 		}
 
 		effect.getEffected().getObserveController().addAttackCalcObserver(observer);

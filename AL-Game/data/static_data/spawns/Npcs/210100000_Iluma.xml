@@ -1584,8 +1584,8 @@
 		<!-- Auronos
 		A creation of Aion that appears at Court of Auronos when the sun sets.
 		It appears to be a golem. -->
-		<spawn npc_id="241162" respawn_time="3600">
-		    <temporary_spawn spawn_time="20.*.*" despawn_time="8.*.*"/>
+		<spawn npc_id="241162" respawn_time="6600">
+		    <!--<temporary_spawn spawn_time="20.*.*" despawn_time="8.*.*"/>-->
 			<spot x="397.15454" y="640.1243" z="292.29446" h="106"/>
 		</spawn>
 		<!-- LF6_F2_Environment_SoulStone_66_An -->

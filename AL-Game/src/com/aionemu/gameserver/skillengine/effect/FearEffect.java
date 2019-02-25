@@ -1,18 +1,18 @@
-/*
- * This file is part of aion-unique <aion-unique.org>.
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
  *
- *  aion-unique is free software: you can redistribute it and/or modify
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  aion-unique is distributed in the hope that it will be useful,
+ *  Aion-Lightning is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
+ *  GNU General Public License for more details. *
  *  You should have received a copy of the GNU General Public License
- *  along with aion-unique.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.aionemu.gameserver.skillengine.effect;
 
@@ -24,14 +24,14 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
-import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
@@ -51,22 +51,18 @@ import com.aionemu.gameserver.world.geo.GeoService;
 public class FearEffect extends EffectTemplate {
 
 	@XmlAttribute
-	protected int resistchance;
+	protected int resistchance = 100;
 
-	public FearEffect() {
-		resistchance = 100;
+	@Override
+	public void applyEffect(Effect effect) {
+		effect.getEffected().getEffectController().removeHideEffects();
+		effect.addToEffectedController();
 	}
 
 	@Override
-    public void applyEffect(Effect effect) {
-        effect.getEffected().getEffectController().removeHideEffects();
-        effect.addToEffectedController();
-    }
-
-	@Override
-    public void calculate(Effect effect) {
-        super.calculate(effect, StatEnum.FEAR_RESISTANCE, null);
-    }
+	public void calculate(Effect effect) {
+		super.calculate(effect, StatEnum.FEAR_RESISTANCE, null);
+	}
 
 	@Override
 	public void startEffect(final Effect effect) {
@@ -75,10 +71,13 @@ public class FearEffect extends EffectTemplate {
 		effected.getController().cancelCurrentSkill();
 		effect.setAbnormal(AbnormalState.FEAR.getId());
 		effected.getEffectController().setAbnormal(AbnormalState.FEAR.getId());
+
+		// PacketSendUtility.broadcastPacketAndReceive(effected, new SM_TARGET_IMMOBILIZE(effected));
 		effected.getController().stopMoving();
 
-		if (effected instanceof Npc)
+		if (effected instanceof Npc) {
 			((NpcAI2) effected.getAi2()).setStateIfNot(AIState.FEAR);
+		}
 		if (GeoDataConfig.FEAR_ENABLE) {
 			ScheduledFuture<?> fearTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new FearTask(effector, effected), 0, 1000);
 			effect.setPeriodicTask(fearTask, position);
@@ -91,8 +90,9 @@ public class FearEffect extends EffectTemplate {
 
 				@Override
 				public void attacked(Creature creature) {
-					if (Rnd.get(0, 100) > resistchance)
+					if (Rnd.get(0, 100) > resistchance) {
 						effected.getEffectController().removeEffect(effect.getSkillId());
+					}
 				}
 			};
 			effected.getObserveController().addObserver(observer);
@@ -115,8 +115,9 @@ public class FearEffect extends EffectTemplate {
 
 		if (resistchance < 100) {
 			ActionObserver observer = effect.getActionObserver(position);
-			if (observer != null)
+			if (observer != null) {
 				effect.getEffected().getObserveController().removeObserver(observer);
+			}
 		}
 	}
 
@@ -135,15 +136,16 @@ public class FearEffect extends EffectTemplate {
 			if (effected.getEffectController().isUnderFear()) {
 				float x = effected.getX();
 				float y = effected.getY();
-				if (!MathUtil.isNearCoordinates(effected, effector, 40))
+				if (!MathUtil.isNearCoordinates(effected, effector, 40)) {
 					return;
+				}
 				byte moveAwayHeading = PositionUtil.getMoveAwayHeading(effector, effected);
 				double radian = Math.toRadians(MathUtil.convertHeadingToDegree(moveAwayHeading));
 				float maxDistance = effected.getGameStats().getMovementSpeedFloat();
 				float x1 = (float) (Math.cos(radian) * maxDistance);
 				float y1 = (float) (Math.sin(radian) * maxDistance);
 				byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
-				Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, x+x1, y+y1, effected.getZ(), true, intentions);
+				Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, x + x1, y + y1, effected.getZ(), true, intentions);
 				if (effected.isFlying()) {
 					closestCollision.setZ(effected.getZ());
 				}

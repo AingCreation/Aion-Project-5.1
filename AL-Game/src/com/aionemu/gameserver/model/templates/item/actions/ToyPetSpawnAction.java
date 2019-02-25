@@ -70,6 +70,8 @@ public class ToyPetSpawnAction extends AbstractItemAction
 			case 220120000: //Tower Of Eternity A.
 			case 220090000: //Habrok.
 			case 710010000: //Pernon.
+			//Restriction Both Race Spawn Kisk.
+			case 600010000: //Silentera.
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_LOCATION);
 				return false;
 			default:

@@ -27,8 +27,8 @@ public class StatSetFunction extends StatFunction {
 	public StatSetFunction() {
 	}
 
-	public StatSetFunction(StatEnum name, int value, boolean bonus) {
-		super(name, value, bonus);
+	public StatSetFunction(StatEnum name, int value) {
+		super(name, value, false);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class StatSetFunction extends StatFunction {
 
 	@Override
 	public final int getPriority() {
-		return 10;
+		return isBonus() ? Integer.MAX_VALUE : Integer.MAX_VALUE - 10;
 	}
 
 	@Override

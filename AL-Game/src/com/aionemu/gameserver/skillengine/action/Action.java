@@ -37,6 +37,6 @@ public abstract class Action {
 	 * 
 	 * @param env
 	 */
-	public abstract void act(Skill skill);
+	public abstract boolean act(Skill skill);
 
 }

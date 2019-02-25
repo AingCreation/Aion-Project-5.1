@@ -4099,17 +4099,6 @@
 	
 	<!-- FISSURE OF OBLIVION 5.1 -->
 	<!-- Fissure Of Oblivion [Elyos] -->
-	<portal_dialog npc_id="834192">
-		<portal_path dialog="10000" loc_id="3021000" instance="true" race="ELYOS">
-		    <portal_req min_level="66" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
-	<!-- Fissure Of Oblivion [Asmodians] -->
-	<portal_dialog npc_id="834193">
-		<portal_path dialog="10000" loc_id="3021000" instance="true" race="ASMODIANS">
-		    <portal_req min_level="66" err_level="27"/>
-		</portal_path>
-	</portal_dialog>
 	<!-- Orb Of Destiny Exit -->
 	<portal_dialog npc_id="834194">
 		<portal_path dialog="10000" loc_id="2101017" race="ELYOS">

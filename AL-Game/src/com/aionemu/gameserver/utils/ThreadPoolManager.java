@@ -60,7 +60,9 @@ public final class ThreadPoolManager
 			}
 		}, "ThreadPool Purge Task");
 		maintainThread.setDaemon(true);
-		scheduleAtFixedRate(maintainThread, 500000, 500000);
+		scheduleAtFixedRate(maintainThread, 150000, 150000);
+		
+		log.info("ThreadPoolManager: Initialized with " + scheduledPool.getPoolSize() + " scheduler, " + instantPool.getPoolSize() + " instant, " + longRunningPool.getPoolSize() + " long running, and forking " + workStealingPool.getPoolSize() + " thread(s).");
 	}
 	
 	private long validate(long delay) {

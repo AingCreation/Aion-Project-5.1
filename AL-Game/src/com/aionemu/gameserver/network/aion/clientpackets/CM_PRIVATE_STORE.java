@@ -74,6 +74,7 @@ public class CM_PRIVATE_STORE extends AionClientPacket
 			int itemId = readD();
 			int count = readH();
 			long price = readD();
+			readD(); // unk ?
 			Item item = activePlayer.getInventory().getItemByObjId(itemObjId);
 			if ((price < 0 || item == null || item.getItemId() != itemId || item.getItemCount() < count) && !cancelStore) {
 				PacketSendUtility.sendMessage(activePlayer, "Invalid item.");

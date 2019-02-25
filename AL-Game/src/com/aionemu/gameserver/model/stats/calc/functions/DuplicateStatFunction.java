@@ -48,7 +48,7 @@ class DuplicateStatFunction extends StatFunction
                     functions.remove(func1);
                 }
             } if (!functions.isEmpty()) {
-                if (getName() == StatEnum.PVP_ATTACK_RATIO || (getName() == StatEnum.PVP_DEFEND_RATIO)) {
+                if (getName() == StatEnum.PVP_ATTACK_RATIO && getName() == StatEnum.PVP_DEFEND_RATIO) {
                     forEach(functions).apply(stat);
                 } else {
                     ((StatFunction) selectMax(functions, on(StatFunction.class).getValue())).apply(stat);

@@ -51,10 +51,10 @@ public class EventGebukMantan {
 	private static final Logger log = LoggerFactory.getLogger(EventGebukMantan.class);
 	private static List<float[]> floatArray = new ArrayList<float[]>();
 	private static final String MANTAN_EVENT_SCHEDULE = EventsConfig.MANTAN_EVENT_SCHEDULE;
-	private static int WORLD_ID = 600010000;
+	private static int WORLD_ID = 600100000;
 	private static int NPC_ID = 831573;
 	private static int[] rewards = {
-166030005, 186000253, 186000242, 186000253, 162000107, 169620062, 188052637};
+188055499, 188055498, 188055497, 166030005, 186000253, 164002167, 166050169, 166050170};
         private static Npc mainN;
 
         public static void ScheduleCron(){
@@ -76,7 +76,7 @@ public class EventGebukMantan {
 
                         @Override
                         public void visit(Player object) {
-                                PacketSendUtility.sendYellowMessageOnCenter(object, "Event, Gebuk mantan di mulai location silentera cayon cepat ikuti untuk mengambil hadiah!");
+                                PacketSendUtility.sendYellowMessageOnCenter(object, "Event, Gebuk mantan di mulai location [pos:Levinshor;0 600100000 859.4 1066.3 0.0 0] cepat gebuk simantan untuk mengambil hadiah!");
                         }
                 });
 
@@ -139,23 +139,23 @@ public class EventGebukMantan {
         }
 
         private static void initCoordinates(){
-				floatArray.add(new float[] { 606.51355f, 677.7499f, 293.61987f, 0f } );
-				floatArray.add(new float[] { 739.3467f, 856.41296f, 293.67105f, 0f } );
-				floatArray.add(new float[] { 852.9203f, 917.0743f, 303.49966f, 0f } );
-				floatArray.add(new float[] { 929.9982f, 803.11456f, 296.6545f, 0f } );
-				floatArray.add(new float[] { 1029.5432f, 963.2532f, 309.9446f, 0f } );
-				floatArray.add(new float[] { 524.0727f, 769.6795f, 299.61633f, 0f } );
-				floatArray.add(new float[] { 591.7274f, 493.83313f, 312.47827f, 0f } );
-				floatArray.add(new float[] { 597.36584f, 1049.0153f, 307.95035f, 0f } );
-				floatArray.add(new float[] { 931.0463f, 683.4869f, 302.39893f, 0f } ); 
+				floatArray.add(new float[] { 875.3577f, 1089.8434f, 332.7829f, 16f } ); //sudah
+				floatArray.add(new float[] { 917.708f, 1156.8873f, 330.25f, 103f } ); //sudah
+				floatArray.add(new float[] { 987.03375f, 1191.5072f, 325.16364f, 85f } ); //sudah
+				floatArray.add(new float[] { 1040.025f, 1141.0299f, 320.1791f, 70f } ); //sudah
+				floatArray.add(new float[] { 1085.9094f, 1099.6996f, 330.00745f, 65f } ); //sudah
+				floatArray.add(new float[] { 1074.1266f, 1013.3673f, 336.8528f, 56f } ); //sudah
+				floatArray.add(new float[] { 1054.117f, 919.644f, 336.88928f, 54f } ); //sudah
+				floatArray.add(new float[] { 1014.0818f, 900.4131f, 323.58768f, 41f } ); //sudah
+				floatArray.add(new float[] { 941.393f, 901.51196f, 323.36313f, 37f } ); //sudah
 				// Event gebuk mantan untuk seseorang yang susah moveon
-				floatArray.add(new float[] { 471.76215f, 556.68567f, 312.0697f, 0f } );
-				floatArray.add(new float[] { 313.79654f, 147.99403f, 307.51978f, 0f } );
-				floatArray.add(new float[] { 724.89526f, 765.0267f, 292.55786f, 0f } );
-				floatArray.add(new float[] { 344.89658f, 1147.9606f, 306.45667f, 0f } );
-				/*floatArray.add(new float[] { 1363.108f, 1464.0858f, 209.09084f, 0f } );
-				floatArray.add(new float[] { 1394.5568f, 1382.9987f, 208.08516f, 0f } );
-				floatArray.add(new float[] { 1516.5026f, 1407.1633f, 201.70367f, 0f } );
+				floatArray.add(new float[] { 902.55316f, 930.18933f, 328.35226f, 33f } ); //sudah
+				floatArray.add(new float[] { 819.7018f, 960.6209f, 336.19098f, 118f } ); //sudah
+				floatArray.add(new float[] { 829.7636f, 1033.1862f, 330.69913f, 119f } ); //sudah
+				floatArray.add(new float[] { 809.5449f, 1080.5912f, 338.7728f, 114f } ); //sudah
+				floatArray.add(new float[] { 894.47107f, 1045.9132f, 332.3143f, 55f } ); //sudah
+				floatArray.add(new float[] { 1020.66864f, 1067.5288f, 331.77188f, 24f } ); //sudah
+				/*floatArray.add(new float[] { 1516.5026f, 1407.1633f, 201.70367f, 0f } );
 				floatArray.add(new float[] { 1493.8002f, 1460.6648f, 176.9295f, 0f } );
 				floatArray.add(new float[] { 1275.4224f, 1352.994f, 204.4608f, 0f } );
 				floatArray.add(new float[] { 1312.3104f, 1234.2994f, 214.66357f, 0f } );

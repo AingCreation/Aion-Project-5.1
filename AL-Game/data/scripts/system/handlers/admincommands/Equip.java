@@ -294,8 +294,8 @@ public class Equip extends AdminCommand
 			if (isWingsUpgrade(targetItem)) {
 				if (targetItem.getEnchantLevel() == enchant) {
 					continue;
-				} if (enchant > 15) {
-					enchant = 15;
+				} if (enchant > 19) {
+					enchant = 19;
 				} if (enchant < 0) {
 					enchant = 0;
 				} if (enchant > targetItem.getItemTemplate().getMaxEnchantLevel()) {
@@ -441,8 +441,8 @@ public class Equip extends AdminCommand
 			if (isTemperingArmor(targetItem)) {
 				if (targetItem.getAuthorize() == tempering) {
 					continue;
-				} if (tempering > 10) {
-					tempering = 10;
+				} if (tempering > 9) {
+					tempering = 9;
 				} if (tempering < 0) {
 					tempering = 0;
 				}
@@ -489,7 +489,8 @@ public class Equip extends AdminCommand
 			return false;
 		} if (item.getItemTemplate().isArmor()) {
 			int pt = item.getItemTemplate().getItemSlot();
-			if (pt == 192 || /* Earring */
+			if (pt == 4 || /* Helm */
+				pt == 192 || /* Earring */
 				pt == 768 || /* Rings */
 				pt == 1024 || /* Necklace */
 				pt == 65536 || /* Belt */

@@ -1,18 +1,18 @@
-/*
- * This file is part of aion-unique <aion-unique.org>.
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
  *
- *  aion-unique is free software: you can redistribute it and/or modify
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  aion-unique is distributed in the hope that it will be useful,
+ *  Aion-Lightning is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
+ *  GNU General Public License for more details. *
  *  You should have received a copy of the GNU General Public License
- *  along with aion-unique.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.aionemu.gameserver.skillengine.effect;
 
@@ -33,24 +33,25 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 @XmlType(name = "ShieldEffect")
 public class ShieldEffect extends EffectTemplate {
 
-	@XmlAttribute
-	protected int hitdelta;
-	@XmlAttribute
-	protected int hitvalue;
-	@XmlAttribute
-	protected boolean percent;
-	@XmlAttribute
-	protected int radius = 0;
-	@XmlAttribute
-	protected int minradius = 0;
-	@XmlAttribute
-	protected Race condrace = null;
+	@XmlAttribute(name="hitdelta")
+	  protected int hitDelta = 0;
+	  @XmlAttribute(name="hitvalue")
+	  protected int hitValue = 0;
+	  @XmlAttribute(name="percent")
+	  protected boolean _percent;
+	  @XmlAttribute(name="radius")
+	  protected int _radius = 0;
+	  @XmlAttribute(name="minradius")
+	  protected int minRadius = 0;
+	  @XmlAttribute(name="condrace")
+	  protected Race _condrace = null;
 
 	@Override
 	public void applyEffect(Effect effect) {
 		// check for condition race, skillId: 10317,10318
-		if (condrace != null && effect.getEffected().getRace() != condrace)
+		if (_condrace != null && effect.getEffected().getRace() != _condrace) {
 			return;
+		}
 
 		effect.addToEffectedController();
 	}
@@ -64,9 +65,9 @@ public class ShieldEffect extends EffectTemplate {
 	public void startEffect(final Effect effect) {
 		int skillLvl = effect.getSkillLevel();
 		int valueWithDelta = value + delta * skillLvl;
-		int hitValueWithDelta = hitvalue + hitdelta * skillLvl;
+		int hitValueWithDelta = hitValue + hitDelta * skillLvl;
 
-		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, percent, effect, hitType, getType(), hitTypeProb);
+		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, _percent, effect, hitType, this.getType(), this.hitTypeProb);
 
 		effect.getEffected().getObserveController().addAttackCalcObserver(asObserver);
 		effect.setAttackShieldObserver(asObserver, position);
@@ -76,18 +77,18 @@ public class ShieldEffect extends EffectTemplate {
 	@Override
 	public void endEffect(Effect effect) {
 		AttackCalcObserver acObserver = effect.getAttackShieldObserver(position);
-		if (acObserver != null)
+		if (acObserver != null) {
 			effect.getEffected().getObserveController().removeAttackCalcObserver(acObserver);
+		}
 		effect.getEffected().getEffectController().setUnderShield(false);
 	}
 
 	/**
-	 * shieldType 1:reflector 2: normal shield 8: protect
-	 * 
+	 * shieldType 0: convertHeal 1: reflector 2: normal shield 8: protect
+	 *
 	 * @return
 	 */
 	public int getType() {
 		return 2;
 	}
-
 }

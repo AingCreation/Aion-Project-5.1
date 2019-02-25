@@ -7662,8 +7662,8 @@ public class SM_SYSTEM_MESSAGE extends AionServerPacket
 	/**
 	 * You do not have enough %0 necessary to use the skill.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_SKILL_NOT_ENOUGH_ITEM(String value0) {
-		return new SM_SYSTEM_MESSAGE(1300018, value0);
+	public static SM_SYSTEM_MESSAGE STR_SKILL_NOT_ENOUGH_ITEM(DescriptionId descriptionId) {
+		return new SM_SYSTEM_MESSAGE(1300018, descriptionId);
 	}
 
 	/**
@@ -9800,6 +9800,11 @@ public class SM_SYSTEM_MESSAGE extends AionServerPacket
 	 */
 	public static final SM_SYSTEM_MESSAGE STR_ERROR_CHANGE_WEAPON_SKIN__THERE_IS_NO_WEAPON = new SM_SYSTEM_MESSAGE(1300398);
 
+	/**
+	 * You must board the robot to use this skill.
+	 */
+	public static final SM_SYSTEM_MESSAGE STR_SKILL_NO_ROBOT = new SM_SYSTEM_MESSAGE(1301067);
+	
 	/**
 	 * You cannot modify the appearance of the selected item as it is not a weapon.
 	 */
@@ -22283,7 +22288,13 @@ public class SM_SYSTEM_MESSAGE extends AionServerPacket
 	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_AP = new SM_SYSTEM_MESSAGE(1402571);
 	public static final SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NEED_QINA = new SM_SYSTEM_MESSAGE(1402572);
 	public static SM_SYSTEM_MESSAGE STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(DescriptionId nameId, DescriptionId nameId2) {
-		return new SM_SYSTEM_MESSAGE(1402579, new Object[]{nameId, nameId2});
+		return new SM_SYSTEM_MESSAGE(1402579, nameId, nameId2);
+	}
+	public static SM_SYSTEM_MESSAGE STR_MSG_STIGMA_GET_HIDDEN_SKILL(int skilllvl, String skillName) {
+		return new SM_SYSTEM_MESSAGE(1402891, skillName, skilllvl);
+	}
+	public static SM_SYSTEM_MESSAGE STR_MSG_STIGMA_DELETE_HIDDEN_SKILL(int skilllvl, String skillName) {
+		return new SM_SYSTEM_MESSAGE(1402895, skillName, skilllvl);
 	}
 	public static SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(DescriptionId descriptionId) {
 		return new SM_SYSTEM_MESSAGE(1402397, descriptionId);

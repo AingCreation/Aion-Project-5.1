@@ -64,7 +64,7 @@ public class AionPacketHandlerFactory
 		addPacket(new CM_MOTION(0x010D, State.IN_GAME)); //5.1
 		addPacket(new CM_DELETE_ITEM(0x013E, State.IN_GAME)); //5.1
 		addPacket(new CM_REVIVE(0x00CF, State.IN_GAME)); //5.1
-		addPacket(new CM_CHARGE_SKILL(0x01A0, State.IN_GAME)); //5.1
+		addPacket(new CM_USE_CHARGE_SKILL(0x01A0, State.IN_GAME)); //5.1
 		addPacket(new CM_DELETE_QUEST(0x012A, State.IN_GAME)); //5.1
 		addPacket(new CM_MACRO_CREATE(0x175, State.IN_GAME)); //5.1
 		addPacket(new CM_GM_BOOKMARK(0x00E3, State.IN_GAME)); //5.1
@@ -82,9 +82,10 @@ public class AionPacketHandlerFactory
 		// ============================================
 		// ==================[LEGION]==================
 		addPacket(new CM_LEGION_WH_KINAH(0x116, State.IN_GAME)); //5.1
+		addPacket(new CM_LEGION_SEND_EMBLEM(0x02F5, State.IN_GAME)); //5.1
+		addPacket(new CM_LEGION_SEND_EMBLEM_INFO(0x00EA, State.IN_GAME)); //5.1
 		addPacket(new CM_LEGION_UPLOAD_INFO(0x17A, State.IN_GAME)); //5.1
-		addPacket(new CM_LEGION_UPLOAD_EMBLEM(0x117B, State.IN_GAME)); //5.1
-		addPacket(new CM_LEGION_SEND_EMBLEM(0x00EA, State.IN_GAME)); //5.1
+		addPacket(new CM_LEGION_UPLOAD_EMBLEM(0x17B, State.IN_GAME)); //5.1
 		addPacket(new CM_LEGION(0x2F7, State.IN_GAME)); //5.1
 		addPacket(new CM_LEGION_SEND_EMBLEM_INFO(0x02F5, State.IN_GAME)); //5.1
 		addPacket(new CM_LEGION_TABS(0x2FD, State.IN_GAME)); //5.1
@@ -133,7 +134,8 @@ public class AionPacketHandlerFactory
 		addPacket(new CM_ENCHANMENT_STONES(0x0100, State.IN_GAME)); //5.1
 		addPacket(new CM_ENCHANTMENT_EXTRACTION(0x1CE, State.IN_GAME)); //5.1
 		// ==================[BROKER]==================
-		addPacket(new CM_BROKER_SETTLE_ACCOUNT(0x13F, State.IN_GAME)); //5.1
+		addPacket(new CM_BROKER_ADD_ITEM(0x13F, State.IN_GAME)); //5.1
+		addPacket(new CM_BROKER_SETTLE_ACCOUNT(0x158, State.IN_GAME)); //5.1
 		addPacket(new CM_BROKER_SETTLE_LIST(0x147, State.IN_GAME)); //5.1
 		addPacket(new CM_BROKER_LIST(0x0131, State.IN_GAME)); //5.1
 		addPacket(new CM_BUY_BROKER_ITEM(0x144, State.IN_GAME)); //5.1
@@ -205,7 +207,7 @@ public class AionPacketHandlerFactory
 		addPacket(new CM_SELECT_ITEM(0x1B6, State.IN_GAME)); //5.1
 		addPacket(new CM_REPORT_PLAYER(0x185, State.IN_GAME)); //5.1
 		addPacket(new CM_INTRUDER_SCAN(0x018E, State.IN_GAME)); //5.1
-		addPacket(new CM_PLAYER_ESSENCE(0x012C, State.IN_GAME)); //5.1
+		addPacket(new CM_UPDATE_CP(0x012C, State.IN_GAME)); //5.1
 		addPacket(new CM_COMPOSITE_STONES(0x1AA, State.IN_GAME)); //5.1
 		addPacket(new CM_QUESTIONNAIRE(0x016B, State.IN_GAME)); //5.1
 		addPacket(new CM_PURIFICATION_ITEM(0x01BD, State.IN_GAME)); //5.1

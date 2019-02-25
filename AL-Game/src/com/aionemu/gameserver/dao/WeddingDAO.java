@@ -1,39 +1,49 @@
 /*
- * This file is part of aion-lightning <aion-lightning.com>.
- *
- *  aion-lightning is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  aion-lightning is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with aion-lightning.  If not, see <http://www.gnu.org/licenses/>.
+ * =====================================================================================*
+ * This file is part of Archsoft (Archsoft Home Software Development)                   *
+ * Aion - Archsoft Development is closed Aion Project that use Old Aion Project Base    *
+ * Like Aion-Unique, Aion-Lightning, Aion-Engine, Aion-Core, Aion-Extreme,              *
+ * Aion-NextGen, Aion-Ger, U3J, Encom And other Aion project, All Credit Content        *
+ * That they make is belong to them/Copyright is belong to them. And All new Content    *
+ * that Archsoft make the copyright is belong to Archsoft.                              *
+ * You may have agreement with Archsoft Development, before use this Engine/Source      *
+ * You have agree with all of Term of Services agreement with Archsoft Development      *
+ * =====================================================================================*
  */
 
+/*
+ * SAO Project
+ */
 package com.aionemu.gameserver.dao;
 
 import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.wedding.Wedding;
+
+import java.sql.Timestamp;
 
 /**
- * @author synchro2
+ * @author Alex, Xnemonix
  */
-
 public abstract class WeddingDAO implements DAO {
 
-	@Override
-	public final String getClassName() {
-		return WeddingDAO.class.getName();
-	}
 
-	public abstract int loadPartnerId(Player player);
+    public abstract void loadPartner(final Player player);
 
-	public abstract void storeWedding(Player partner1, Player partner2);
+    public abstract Timestamp getLastOnlineTime(int playerId);
 
-	public abstract void deleteWedding(Player partner1, Player partner2);
+    public abstract int getWorldId(int playerId);
+
+    public abstract boolean insertWedding(Wedding wedding);
+
+    public abstract void update(Wedding wedding);
+
+    public abstract void removeWedding(int playerId, int partnerId);
+
+    public abstract void insertToLog(Wedding wedding);
+
+    @Override
+    public String getClassName() {
+        return WeddingDAO.class.getName();
+    }
 }

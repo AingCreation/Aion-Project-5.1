@@ -87,41 +87,49 @@ public class MotionTime {
 	}
 	
 	public Times getTimes(Race race, Gender gender) {
-		
-		switch (race) {
-			case ASMODIANS:
-				if (gender == Gender.MALE)
-					return this.getAm();
-				else
-					return this.getAf();
-			case ELYOS:
-				if (gender == Gender.MALE)
-					return this.getEm();
-				else
-					return this.getEf();
-				
-		}
-		
-		return null;
-	}
 
-	public int getTimeForWeapon(Race race, Gender gender, WeaponTypeWrapper weapon) {
-		
-		switch (race) {
-			case ASMODIANS:
-				if (gender == Gender.MALE)
-					return this.getAm().getTimeForWeapon(weapon);
-				else
-					return this.getAf().getTimeForWeapon(weapon);
-			case ELYOS:
-				if (gender == Gender.MALE)
-					return this.getEm().getTimeForWeapon(weapon);
-				else
-					return this.getEf().getTimeForWeapon(weapon);
-				
-		}
-		
-		return 0;
-	}
+        switch (race) {
+            case ASMODIANS:
+                if (gender == Gender.MALE) {
+                    return this.getAm();
+                } else {
+                    return this.getAf();
+                }
+            case ELYOS:
+                if (gender == Gender.MALE) {
+                    return this.getEm();
+                } else {
+                    return this.getEf();
+                }
+		default:
+			break;
+
+        }
+
+        return null;
+    }
+
+    public int getTimeForWeapon(Race race, Gender gender, WeaponTypeWrapper weapon) {
+
+        switch (race) {
+            case ASMODIANS:
+                if (gender == Gender.MALE) {
+                    return this.getAm().getTimeForWeapon(weapon);
+                } else {
+                    return this.getAf().getTimeForWeapon(weapon);
+                }
+            case ELYOS:
+                if (gender == Gender.MALE) {
+                    return this.getEm().getTimeForWeapon(weapon);
+                } else {
+                    return this.getEf().getTimeForWeapon(weapon);
+                }
+		default:
+			break;
+
+        }
+
+        return 0;
+    }
 
 }

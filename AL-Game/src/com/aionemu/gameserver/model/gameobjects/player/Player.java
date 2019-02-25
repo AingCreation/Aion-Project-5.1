@@ -29,8 +29,8 @@ import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.actions.PlayerMode;
-import com.aionemu.gameserver.model.cp.PlayerCPList;
 import com.aionemu.gameserver.model.dorinerk_wardrobe.PlayerWardrobeList;
+import com.aionemu.gameserver.model.wedding.Wedding;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
@@ -59,7 +59,6 @@ import com.aionemu.gameserver.model.items.storage.LegionStorageProxy;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
-import com.aionemu.gameserver.model.skill.linked_skill.PlayerEquippedStigmaList;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.PlayerLifeStats;
 import com.aionemu.gameserver.model.team.legion.Legion;
@@ -80,6 +79,7 @@ import com.aionemu.gameserver.model.templates.ride.RideInfo;
 import com.aionemu.gameserver.model.templates.stats.PlayerStatsTemplate;
 import com.aionemu.gameserver.model.templates.windstreams.WindstreamPath;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
+import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
@@ -88,6 +88,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.conquerors.Conqueror;
+import com.aionemu.gameserver.services.dreamergames.model.PlayerCpList;
 import com.aionemu.gameserver.services.events.*;
 import com.aionemu.gameserver.services.events.bg.*;
 import com.aionemu.gameserver.services.instance.InstanceService;
@@ -124,7 +125,6 @@ public class Player extends Creature
 	private LegionMember legionMember;
 	private MacroList macroList;
 	private PlayerSkillList skillList;
-	private PlayerEquippedStigmaList equipped_stigma;
 	private FriendList friendList;
 	private BlockList blockList;
 	private PetList toyPetList;
@@ -261,18 +261,23 @@ public class Player extends Creature
 	private int crazyKillcount = 0;
 	private int crazyLevel = 0;
 	private F2p f2p;
-	private PlayerCPList cp;
 	private PlayerWardrobeList wardrobe;
 	private PlayerUpgradeArcade upgradeArcade;
 	private PlayerLunaShop lunaShop;
 	private int linkedSkill;
 	private int goldenStarOfLodi;
 	private int unkPoint1;
-	private int cp_slot1 = 0, cp_slot2 = 0, cp_slot3 = 0, cp_slot4 = 0, cp_slot5 = 0, cp_slot6 = 0;
 	private boolean enchantBoost;
 	private boolean authorizeBoost;
 	private int enchantBoostValue;
 	private int authorizeBoostValue;
+	
+	//wedding
+	private boolean showMarried = true;
+    private Wedding wedding;
+    private String newname = null;
+    private String nameFormat = "%s";
+    private String nameSearch;
 
     /*
      * This variables are for the custom PvE and PK system *Outlaw*
@@ -287,6 +292,7 @@ public class Player extends Creature
 	private boolean isGmMode = false;
 	
 	//Pvp System:
+	private long onlineBonusTime = 0;
 	private boolean lawless = false;
 	private boolean bandit = false;
 	private Battleground battleground = null;
@@ -298,6 +304,7 @@ public class Player extends Creature
 	private int banditKillStreak = 0;
 	private boolean isAfk;
 	private boolean isFFA = false;
+	private PlayerCpList cpList;
 	
 	private Player(PlayerCommonData plCommonData) {
 		super(plCommonData.getPlayerObjId(), new PlayerController(), null, plCommonData, null);
@@ -419,14 +426,6 @@ public class Player extends Creature
 
 	public void setSkillList(PlayerSkillList skillList) {
 		this.skillList = skillList;
-	}
-
-	public PlayerEquippedStigmaList getEquipedStigmaList() {
-		return equipped_stigma;
-	}
-
-	public void setEquipedStigmaList(PlayerEquippedStigmaList list) {
-		this.equipped_stigma = list;
 	}
 
 	/**
@@ -2328,17 +2327,71 @@ public class Player extends Creature
  	* This variables are for the marry system
  	*/
 
-	public boolean isMarried() {
-		return partnerId != 0;
-	}
-
-	public int getPartnerId() { 
-		return this.partnerId;
+	public int getPartnerId()
+	{
+	  return this.partnerId;
 	}
 
 	public void setPartnerId(int partnerId) {
 		this.partnerId = partnerId;
 	}
+	
+	public boolean isShowMarried() {
+        return this.showMarried;
+    }
+
+    public void setShowMarried(boolean value) {
+        this.showMarried = value;
+    }
+    
+    public boolean isMarried() {
+        return wedding != null;
+    }
+
+    public Wedding getWedding() {
+        return wedding;
+    }
+
+    public void setWedding(Wedding wedding) {
+        this.wedding = wedding;
+    }
+
+    public String getWeddingsName() {
+        return "\ue020" + wedding.getPartnerName();
+    }
+
+    public String getPlayerSearch() {
+        return nameSearch;
+    }
+
+    public void setPlayerSearch(String rename) {
+        boolean marry = isMarried();
+        String nf = nameFormat;
+        if (rename == null) {
+            if (marry) {
+                nf = "\ue020 %s";
+            }
+            rename = String.format(nf, getName());
+        }
+        this.nameSearch = rename;
+    }
+
+    public String getNewName() {
+        if (newname == null) {
+            newname = getName();
+        }
+        return this.newname;
+    }
+
+    public void setNewName(String name) {
+        if (name == null) {
+            name = getName();
+            if (wedding != null) {
+                name += getWeddingsName();
+            }
+        }
+        this.newname = name;
+    }
 
 	@Override
 	public int getSkillCooldown(SkillTemplate template) {
@@ -2723,14 +2776,6 @@ public class Player extends Creature
 		this.f2p = f2p;
 	}
 
-	public PlayerCPList getCP() {
-		return cp;
-	}
-
-	public void setCP(PlayerCPList cp) {
-		this.cp = cp;
-	}
-
 	public PlayerWardrobeList getWardrobe() {
 		return wardrobe;
 	}
@@ -2800,59 +2845,6 @@ public class Player extends Creature
 
 	public void setUnkPoint1(int unkPoint) {
 		this.unkPoint1 = unkPoint;
-	}
-
-	public int getCreativityPoint() {
-		return getCommonData().getCreativityPoint();
-	}
-
-	public void setCreativityPoint(int point) {
-		getCommonData().setCreativityPoint(point);
-	}
-
-	public int getCPStep() {
-		return getCommonData().getCPStep();
-	}
-
-	public void setCPStep(int step) {
-		getCommonData().setCPStep(step);
-	}
-
-	public int getCPSlot1() {
-		return cp_slot1;
-	}
-	public void setCPSlot1(int point) {
-		this.cp_slot1 = point;
-	}
-	public int getCPSlot2() {
-		return cp_slot2;
-	}
-	public void setCPSlot2(int point) {
-		this.cp_slot2 = point;
-	}
-	public int getCPSlot3() {
-		return cp_slot3;
-	}
-	public void setCPSlot3(int point) {
-		this.cp_slot3 = point;
-	}
-	public int getCPSlot4() {
-		return cp_slot4;
-	}
-	public void setCPSlot4(int point) {
-		this.cp_slot4 = point;
-	}
-	public int getCPSlot5() {
-		return cp_slot5;
-	}
-	public void setCPSlot5(int point) {
-		this.cp_slot5 = point;
-	}
-	public int getCPSlot6() {
-		return cp_slot6;
-	}
-	public void setCPSlot6(int point) {
-		this.cp_slot6 = point;
 	}
 
 	public void clearJoinRequest() {
@@ -3055,8 +3047,41 @@ public class Player extends Creature
 	public void setFFA(boolean isFFA) {
 		this.isFFA = isFFA;
 	}
+	
+	public PlayerCpList getCpList() {
+		return cpList;
+	}
+	  
+	public void setCpList(PlayerCpList cpList) {
+		this.cpList = cpList;
+	}
 
 	public void sendMessage(String string) {
 		PacketSendUtility.sendMessage(this, string);
 	}
+	
+	public long getOnlineBonusTime() {
+        return this.onlineBonusTime;
+    }
+
+    public void setOnlineBonusTime(long value) {
+        this.onlineBonusTime = value;
+    }
+
+	public boolean isMagicalTypeClass() {
+		if (playerCommonData.getPlayerClass() == PlayerClass.MUSE || 
+				playerCommonData.getPlayerClass() == PlayerClass.SONGWEAVER || 
+				playerCommonData.getPlayerClass() == PlayerClass.CLERIC || 
+				playerCommonData.getPlayerClass() == PlayerClass.SORCERER || 
+				playerCommonData.getPlayerClass() == PlayerClass.SPIRIT_MASTER || 
+				playerCommonData.getPlayerClass() == PlayerClass.AETHERTECH ||
+				playerCommonData.getPlayerClass() == PlayerClass.GUNSLINGER) {
+			return true;
+		}
+		return false;	
+	}
+	
+	public void sendPacket(AionServerPacket packet) {
+        PacketSendUtility.sendPacket(this, packet);
+    }
 }

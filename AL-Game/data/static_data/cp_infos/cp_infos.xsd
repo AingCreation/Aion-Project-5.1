@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="../global_types.xsd"/>
+    <xs:include schemaLocation="../import.xsd"/>
+    <xs:element name="cp_infos">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="import" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="cp_info" type="CpInfoEntry" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="CpInfoEntry">
+        <xs:attribute name="id" type="xs:string" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="category" type="xs:string" use="required"/>
+        <xs:attribute name="skill_group" type="xs:string" use="required"/>
+        <xs:attribute name="stat_value" type="xs:int" use="optional"/>
+		<xs:attribute name="cp_count_max" type="xs:int" use="optional"/>
+		<xs:attribute name="cp_cost" type="xs:int" use="optional"/>
+		<xs:attribute name="cp_cost_max" type="xs:int" use="optional"/>
+		<xs:attribute name="cp_cost_adj" type="xs:int" use="optional"/>
+		<xs:attribute name="additional_learn_skill" type="xs:string" use="optional"/>
+    </xs:complexType>
+</xs:schema>

@@ -1,35 +1,21 @@
-/**
- * This file is part of Aion-Lightning <aion-lightning.org>.
- *
- *  Aion-Lightning is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Aion-Lightning is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details. *
- *  You should have received a copy of the GNU General Public License
- *  along with Aion-Lightning.
- *  If not, see <http://www.gnu.org/licenses/>.
- */
 package playercommands;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.ColorChat;
-import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
+import java.util.HashMap;
+
 /**
- * @author Maestross
+ * @author Ione542
  */
 public class cmd_world_channel extends PlayerCommand {
+    public HashMap<Integer, Long> cooldowns = new HashMap<Integer, Long>();
 
     public cmd_world_channel() {
         super("world");
@@ -38,23 +24,32 @@ public class cmd_world_channel extends PlayerCommand {
     @Override
     public void execute(Player player, String... params) {
         int i = 1;
-        int ap = CustomConfig.WORLD_CHANNEL_AP_COSTS;
         boolean check = true;
-        String adminTag = ColorChat.colorChat(" GM " , "4 0 2 0");
+        int cooldownTime = 15; // The number of seconds the player has to wait
+
+        String adminTag = "";
 
         if (params.length < 1) {
             PacketSendUtility.sendMessage(player, "syntax : .world <message>");
             return;
         }
 
-        adminTag += ColorChat.colorChat(player.getName() , "3 1 1 5") + " : ";
+        if (!player.getInventory().decreaseByItemId(188910002, 1)) {
+            PacketSendUtility.sendMessage(player, "You need [item:188910002] to use world chat channel.");
+            return;
+        }
+
+        adminTag += player.getName() + " : ";
 
         StringBuilder sbMessage;
         if (player.isGM()) {
-            sbMessage = new StringBuilder("[World-Chat]" + " " + adminTag);
+            sbMessage = new StringBuilder("\uE058 " + "[color:Staff~;0.5 1 0]" + " " + "[color:" + player.getName() + ";1 0 0.5]" + " \uE027 : ");
+        } else if (player.getRace() == Race.ASMODIANS) {
+            sbMessage = new StringBuilder("\uE058 " + "[color:Asmodian~;0.5 1 0]" + " " + "[color:" + player.getName() + ";1 0.4 0]" + " \uE027 : ");
         } else {
-            sbMessage = new StringBuilder("[World-Chat]" + " " + ColorChat.colorChat(" Player " , "4 0 2 0") + ColorChat.colorChat(player.getName() , "3 1 1 5") + " : ");
+            sbMessage = new StringBuilder("\uE058 " + "[color:Elysean~;0.5 1 0]" + " " + "[color:" + player.getName() + ";1 1 1]" + " \uE027 : ");
         }
+
 
         for (String s : params) {
             if (i++ != 0 && (check)) {
@@ -66,30 +61,30 @@ public class cmd_world_channel extends PlayerCommand {
         int messageLenght = message.length();
 
         final String sMessage = message.substring(0, CustomConfig.MAX_CHAT_TEXT_LENGHT > messageLenght ? messageLenght : CustomConfig.MAX_CHAT_TEXT_LENGHT);
-        if (player.isGM()) {
 
+        if (cooldowns.containsKey(player.getObjectId())) {
+            long secondsLeft = ((cooldowns.get(player.getObjectId()) / 1000) + cooldownTime) - (System.currentTimeMillis() / 1000);
+            if (secondsLeft > 0) {
+                player.sendMessage("You cant do this chat for another " + secondsLeft + " seconds!");
+                return;
+            }
             World.getInstance().doOnAllPlayers(new Visitor<Player>() {
                 @Override
                 public void visit(Player player) {
                     PacketSendUtility.sendMessage(player, sMessage);
                 }
             });
-        } else if (!player.isGM() && !player.isInPrison()) {
-            if (player.getAbyssRank().getAp() < ap) {
-
-                PacketSendUtility.sendMessage(player, "You dont have enough ap, you only have:" + player.getAbyssRank().getAp());
-            } else {
-                AbyssPointsService.addAp(player, -ap);
-                World.getInstance().doOnAllPlayers(new Visitor<Player>() {
-                    @Override
-                    public void visit(Player player) {
-                        PacketSendUtility.sendMessage(player, sMessage);
-                    }
-                });
-            }
+            cooldowns.put(player.getObjectId(), System.currentTimeMillis());
         } else {
-            PacketSendUtility.sendMessage(player, "You dont have enough ap, you only have:" + player.getAbyssRank().getAp());
+            World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+                @Override
+                public void visit(Player player) {
+                    PacketSendUtility.sendMessage(player, sMessage);
+                }
+            });
+            cooldowns.put(player.getObjectId(), System.currentTimeMillis());
         }
+
     }
 
     @Override

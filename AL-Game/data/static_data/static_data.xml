@@ -168,9 +168,6 @@
 	<town_spawns_data>
 		<import file="town_spawns" skipRoot="true"/>
 	</town_spawns_data>
-	<charge_skills>
-		<import file="skills/charge_skills.xml" skipRoot="true"/>
-	</charge_skills>
 	<import file="abyss_bonusattr/abyss_bonusattr.xml"/>
 	<import file="abyss_bonusattr/abyss_groupattr.xml"/>
 	<import file="stats/absolute_stats.xml"/>
@@ -182,6 +179,7 @@
 	<import file="agent/agent_fight.xml"/>
 	<import file="svs/svs.xml"/>
 	<import file="rvr/rvr.xml"/>
+	<import file="skills/skill_charge.xml"/>
 	<import file="moltenus/moltenus.xml"/>
 	<import file="dynamic_rift/dynamic_rift.xml"/>
 	<import file="instance_rift/instance_rift.xml"/>
@@ -209,9 +207,12 @@
 	<abyss_ops>
 		<import file="abyss_op/abyss_ops.xml" skipRoot="true"/>
 	</abyss_ops>
-	<panel_cps>
-		<import file="panel_cp/panel_cps.xml" skipRoot="true"/>
-	</panel_cps>
+	<cp_infos>
+        <import file="cp_infos" skipRoot="true"/>
+    </cp_infos>
+    <player_cp_points>
+        <import file="player_cp_points" skipRoot="true"/>
+    </player_cp_points>
 	<import file="decomposable_select_items/decomposable_select_items.xml"/>
 	<import file="pets/pet_bonusattr.xml"/>
 	<import file="landing/landing_locations.xml"/>
@@ -221,4 +222,10 @@
 	</luna_consume_rewards>
 	<import file="items/item_custom_set.xml"/>
 	<import file="service_bonusattr/f2p_bonusattr.xml"/>
+	<enchant_rates>
+		<import file="rates/enchant_rates.xml" skipRoot="true"/>
+	</enchant_rates>
+	<tempering_rates>
+		<import file="rates/tempering_rates.xml" skipRoot="true"/>
+	</tempering_rates>
 </ae_static_data>

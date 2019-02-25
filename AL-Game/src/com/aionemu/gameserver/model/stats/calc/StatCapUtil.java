@@ -98,6 +98,8 @@ public class StatCapUtil
             case MAXMP:
                 value = 0;
             break;
+		default:
+			break;
         }
         return value;
     }
@@ -134,6 +136,8 @@ public class StatCapUtil
 			case MAGIC_SKILL_BOOST_RESIST:
                 value = Integer.MAX_VALUE;
             break;
+		default:
+			break;
         }
         return value;
     }

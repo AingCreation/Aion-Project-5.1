@@ -49,6 +49,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOKATOBJECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.services.dreamergames.services.TribeRelationService;
 import com.aionemu.gameserver.spawnengine.WalkerGroup;
 import com.aionemu.gameserver.spawnengine.WalkerGroupShift;
 import com.aionemu.gameserver.utils.MathUtil;
@@ -278,15 +279,47 @@ public class Npc extends Creature {
 	}
 
 	@Override
+	public boolean isEnemyFrom(Creature creature) {
+		return TribeRelationService.isAggressive(creature, this) || TribeRelationService.isHostile(creature, this);
+	}
+
+	@Override
 	public boolean isEnemyFrom(Npc npc) {
-		if (npc.isFriendFrom(this))
-			return false;
-		return isAggressiveTo(npc) || npc.getAggroList().isHating(this) || getAggroList().isHating(npc);
+		return TribeRelationService.isAggressive(this, npc) || TribeRelationService.isHostile(this, npc);
 	}
 
 	@Override
 	public boolean isEnemyFrom(Player player) {
-		return isAttackableNpc() || player.isAggroIconTo(this);
+		return player.isEnemyFrom(this);
+	}
+
+	@Override
+	public int getType(Creature creature) {
+		int typeForPlayer = -1;
+		if (TribeRelationService.isInvulnerable(this, creature)) {
+			typeForPlayer = CreatureType.INVULNERABLE.getId();
+		}
+		else if (TribeRelationService.isNone(this, creature)) {
+			typeForPlayer = CreatureType.PEACE.getId();
+		}
+		else if (TribeRelationService.isAggressive(this, creature)) {
+			typeForPlayer = CreatureType.AGGRESSIVE.getId();
+		}
+		else if (TribeRelationService.isHostile(this, creature)) {
+			typeForPlayer = CreatureType.ATTACKABLE.getId();
+		}
+		else if (TribeRelationService.isFriend(this, creature) || TribeRelationService.isNeutral(this, creature)) {
+			typeForPlayer = CreatureType.FRIEND.getId();
+		}
+		else if (TribeRelationService.isSupport(this, creature)) {
+			typeForPlayer = CreatureType.SUPPORT.getId();
+		}
+		if (typeForPlayer == CreatureType.PEACE.getId() || typeForPlayer == CreatureType.SUPPORT.getId()) {
+			if (getObjectTemplate().isDialogNpc()) {
+				typeForPlayer = CreatureType.FRIEND.getId();
+			}
+		}
+		return typeForPlayer;
 	}
 
 	@Override

@@ -410,4 +410,14 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
         }
 		this.pAccuracy = Math.round(owner.getAi2().modifyMaccuracy((int) accuracy));
 	}
+	
+	@Override
+	public Stat2 getPvpAttack() {
+		return null;
+	}
+
+	@Override
+	public Stat2 getPvpDeff() {
+		return null;
+	}
 }

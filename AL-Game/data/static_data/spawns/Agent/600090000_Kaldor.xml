@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Agent Fight Kaldor
+	Aion Fallen 5.1
+	Spawn By Ione542
+ -->
+<spawns>
+    <spawn_map map_id="600090000">
+		<!-- [EMPOWERED MASTARIUS] -->
+		<agent_spawn id="4">
+			<agent_type astate="FIGHT">
+				<!-- Empowered Mastarius Flag -->
+				<spawn npc_id="832831">
+				    <spot x="749.7995" y="1168.4218" z="148.38753" h="75"/>
+				</spawn>
+				<!-- Empowered Mastarius -->
+				<spawn npc_id="235065">
+				    <spot x="749.7995" y="1168.4218" z="148.38753" h="75"/>
+				</spawn>
+				<!-- Mastarius Guard -->
+				<spawn npc_id="235340">
+				    <spot x="763.95135" y="1154.9888" z="148.31764" h="53"/>
+					<spot x="765.4591" y="1179.0068" z="147.63054" h="65"/>
+				</spawn>
+				<!-- Mastarius Warrior -->
+				<spawn npc_id="235341">
+				    <spot x="768.80493" y="1159.1643" z="147.75" h="57"/>
+					<spot x="767.89716" y="1175.3668" z="147.38142" h="65"/>
+				</spawn>
+				<!-- Mastarius Warmage -->
+				<spawn npc_id="235342">
+				    <spot x="772.7163" y="1163.3705" z="147.41046" h="58"/>
+					<spot x="770.6939" y="1171.5355" z="147.33163" h="57"/>
+				</spawn>
+				<!-- Mastarius Enforcer -->
+				<spawn npc_id="235343">
+				    <spot x="762.503" y="1174.5642" z="147.84357" h="59"/>
+					<spot x="759.5237" y="1159.2394" z="148.15477" h="58"/>
+				</spawn>
+				<!-- Mastarius Tracker -->
+				<spawn npc_id="235344">
+				    <spot x="773.40045" y="1157.5277" z="147.3329" h="61"/>
+					<spot x="777.5501" y="1175.0566" z="146.96916" h="58"/>
+				</spawn>
+				<!-- Mastarius Minder -->
+				<spawn npc_id="235345">
+				    <spot x="754.84045" y="1154.4053" z="148.84967" h="60"/>
+					<spot x="760.5808" y="1180.883" z="148.37927" h="57"/>
+				</spawn>
+				<!-- Mastarius's Aether Concentrator I -->
+				<spawn npc_id="296913">
+				    <spot x="780.1733" y="1152.7505" z="146.921" h="59"/>
+				</spawn>
+				<!-- Mastarius's Aether Concentrator II -->
+				<spawn npc_id="296914">
+				    <spot x="783.61346" y="1179.0625" z="146.33275" h="58"/>
+				</spawn>
+				<!-- Empyrean Lord Servant Artifact A Signal -->
+				<spawn npc_id="281446">
+				    <spot x="780.1733" y="1152.7505" z="146.9219" h="59"/>
+					<spot x="783.61346" y="1179.0625" z="146.33275" h="58"/>
+				</spawn>
+				<!-- [EMPOWERED VEILLE] -->
+				<!-- Empowered Veille Flag -->
+				<spawn npc_id="832830">
+					<spot x="740.81604" y="1168.943" z="332.7472" h="118"/>
+				</spawn>
+				<!-- Empowered Veille -->
+				<spawn npc_id="235064">
+				    <spot x="740.81604" y="1168.943" z="148.449" h="118"/>
+				</spawn>
+				<!-- Veille Protector -->
+				<spawn npc_id="235334">
+				    <spot x="730.056" y="1179.1182" z="148.56989" h="119"/>
+					<spot x="724.3503" y="1167.5165" z="148.5" h="111"/>
+				</spawn>
+				<!-- Veille Soldier -->
+				<spawn npc_id="235335">
+				    <spot x="735.9966" y="1178.6787" z="148.54242" h="114"/>
+					<spot x="729.4683" y="1165.5033" z="148.5" h="115"/>
+				</spawn>
+				<!-- Veille Battlemage -->
+				<spawn npc_id="235336">
+				    <spot x="722.9124" y="1181.5868" z="1148.625" h="114"/>
+					<spot x="717.2358" y="1169.5028" z="148.55724" h="111"/>
+				</spawn>
+				<!-- Veille Assassin -->
+				<spawn npc_id="235337">
+				    <spot x="730.69946" y="1185.0201" z="148.54375" h="119"/>
+					<spot x="721.37805" y="1159.4015" z="148.53888" h="0"/>
+				</spawn>
+				<!-- Veille Seeker -->
+				<spawn npc_id="235338">
+				    <spot x="721.82465" y="1177.4445" z="148.51096" h="117"/>
+					<spot x="720.3999" y="1172.4519" z="148.5" h="114"/>
+				</spawn>
+				<!-- Veille Healer -->
+				<spawn npc_id="235339">
+				    <spot x="716.9709" y="1181.3821" z="148.68568" h="116"/>
+					<spot x="712.1634" y="1166.8374" z="148.57266" h="112"/>
+				</spawn>
+				<!-- Veille's Aetheric Concentrator I -->
+				<spawn npc_id="296907">
+				    <spot x="712.7901" y="1187.671" z="147.7623" h="116"/>
+				</spawn>
+				<!-- Veille's Aetheric Concentrator II  -->
+				<spawn npc_id="296908">
+				    <spot x="702.9189" y="1162.2646" z="148.76654" h="84"/>
+				</spawn>
+				<!-- Empyrean Lord Servant Artifact B Signal -->
+				<spawn npc_id="281448">
+				    <spot x="712.7901" y="1187.671" z="147.7623" h="116"/>
+					<spot x="702.9189" y="1162.2646" z="148.76654" h="118"/>
+				</spawn>
+			</agent_type>
+			<agent_type astate="PEACE">
+			    <!-- Empowered Veille Flag -->
+				<spawn npc_id="832830">
+					<spot x="740.81604" y="1168.943" z="332.7472" h="118"/>
+				</spawn>
+				<!-- Empowered Mastarius Flag -->
+				<spawn npc_id="832831">
+				    <spot x="749.7995" y="1168.4218" z="148.38753" h="75"/>
+				</spawn>
+			</agent_type>
+		</agent_spawn>
+    </spawn_map>
+</spawns>

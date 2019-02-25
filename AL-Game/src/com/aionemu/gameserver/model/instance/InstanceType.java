@@ -25,7 +25,8 @@ public enum InstanceType
 	DREADGION,
 	ARENA_PVP,
 	ARENA_TEAM,
-    BATTLEFIELD;
+    BATTLEFIELD,
+    NEWBIE_GUIDE;
 	
     public boolean isDarkPoetaInstance() {
         return this.equals(InstanceType.LF1);

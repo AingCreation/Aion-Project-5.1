@@ -22,29 +22,17 @@ import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
-public class SM_SKILL_LIST extends AionServerPacket
-{
+public class SM_SKILL_LIST extends AionServerPacket {
 	private PlayerSkillEntry[] skillList;
 	private int messageId;
 	private int skillNameId;
 	private String skillLvl;
 	public static final int YOU_LEARNED_SKILL = 1300050;
 	boolean isNew = false;
-	private Player player;
-	private int state;
 	
 	public SM_SKILL_LIST(Player player, PlayerSkillEntry[] basicSkills) {
-		this.player = player;
 		this.skillList = player.getSkillList().getBasicSkills();
 		this.messageId = 0;
-	}
-	
-	public SM_SKILL_LIST(Player player, PlayerSkillEntry[] linkedSkills, int state) {
-		this.player = player;
-		this.skillList = player.getSkillList().getLinkedSkills();
-		this.state = state;
-		this.messageId = 0;
-		this.isNew = true;
 	}
 	
 	public SM_SKILL_LIST(Player player, PlayerSkillEntry stigmaSkill) {
@@ -95,5 +83,6 @@ public class SM_SKILL_LIST extends AionServerPacket
 			writeH(0x00);
 			writeS(skillLvl);
 		}
+		writeH(0);
 	}
 }

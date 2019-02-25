@@ -46,7 +46,11 @@ public class TargetStatusProperty {
 
 		Creature effected = skill.getFirstTarget();
 		boolean result = false;
-
+		
+		if (effected.getEffectController().hasAbnormalEffect(283) && skill.getSkillId() == 2506) {
+			result = true;
+		}
+		
 		for (String status : targetStatus) {
 			if (effected.getEffectController().isAbnormalSet(AbnormalState.valueOf(status)))
 				result = true;

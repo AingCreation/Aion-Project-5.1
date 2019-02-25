@@ -5,8 +5,12 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CHAT_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.model.wedding.WeddingService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.utils.ChatUtil;
+import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.utils.Util;
 
 /**
  * @author ginho1
@@ -29,6 +33,10 @@ public class CM_CHAT_GROUP_INFO extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
+		if (playerName.contains("\ue020")) {
+            playerName = WeddingService.getRealWeddingsName(playerName);
+        }
+		String formatname = Util.convertName(playerName);
 		Player player = getConnection().getActivePlayer();
 		Player target = World.getInstance().findPlayer(playerName);
 		if (target == null) {

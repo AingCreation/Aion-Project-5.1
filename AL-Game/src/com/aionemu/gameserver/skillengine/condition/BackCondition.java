@@ -38,16 +38,18 @@ public class BackCondition extends Condition {
 	 */
 	@Override
 	public boolean validate(Skill env) {
-		if (env.getFirstTarget() == null || env.getEffector() == null)
+		if (env.getFirstTarget() == null || env.getEffector() == null) {
 			return false;
+		}
 
 		return PositionUtil.isBehindTarget(env.getEffector(), env.getFirstTarget());
 	}
 
 	@Override
 	public boolean validate(Effect effect) {
-		if (effect.getEffected() == null || effect.getEffector() == null)
+		if (effect.getEffected() == null || effect.getEffector() == null) {
 			return false;
+		}
 
 		return PositionUtil.isBehindTarget(effect.getEffector(), effect.getEffected());
 	}

@@ -21,6 +21,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
 import com.aionemu.gameserver.model.team2.league.LeagueService;
+import com.aionemu.gameserver.model.wedding.WeddingService;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -55,6 +56,10 @@ public class CM_INVITE_TO_GROUP extends AionClientPacket {
 	 */
 	@Override
 	protected void runImpl() {
+		
+		if (name.contains("\ue020")) {
+            name = WeddingService.getRealWeddingsName(name);
+        }
 
 		name = ChatUtil.getRealAdminName(name);
 		name = name.replace("\uE024", "");

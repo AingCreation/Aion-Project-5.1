@@ -1,14 +1,12 @@
 package com.aionemu.gameserver.model.skill;
 
-import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
 
 public abstract class NpcSkillEntry extends SkillEntry
 {
 	protected long lastTimeUsed = 0;
 	
 	public NpcSkillEntry(int skillId, int skillLevel) {
-		super(skillId, skillLevel);
+		super(skillId, skillLevel, 0);
 	}
 	
 	public abstract boolean isReady(int hpPercentage, long fightingTimeInMSec);

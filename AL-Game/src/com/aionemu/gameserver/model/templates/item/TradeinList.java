@@ -18,8 +18,10 @@
 package com.aionemu.gameserver.model.templates.item;
 
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -32,6 +34,11 @@ import javax.xml.bind.annotation.XmlType;
     "tradeinItem"
 })
 public class TradeinList {
+	
+	@XmlAttribute
+	protected int ap;
+	@XmlAttribute
+	protected int price;
 
     @XmlElement(name = "tradein_item")
     protected List<TradeinItem> tradeinItem;
@@ -39,5 +46,17 @@ public class TradeinList {
     public List<TradeinItem> getTradeinItem() {
         return this.tradeinItem;
     }
+    
+    public TradeinItem getFirstTradeInItem() {
+		return this.tradeinItem.get(0);
+	}
+
+	public int getAp() {
+		return ap;
+	}
+
+	public int getPrice() {
+		return price;
+	}
 
 }

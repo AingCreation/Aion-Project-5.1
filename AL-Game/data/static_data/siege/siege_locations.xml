@@ -428,17 +428,17 @@
 	<!-- FORTRESS 4.7 -->
 	<!-- Wealhtheow's Keep -->
 	<siege_location id="7011" type="FORTRESS" world="600090000" name_id="808285" buff_id="12179" occupy_count="2" siege_duration="3600" influence="8">
-		<siege_reward top="10" itemid="188053140" m_count="1"/> <!-- Wealhtheow's Keep Assault Reward Box: Grade 1 -->
-		<siege_reward top="10" itemid="186000242" m_count="2"/>
-		<siege_reward top="20" itemid="188053141" m_count="1"/> <!-- Wealhtheow's Keep Assault Reward Box: Grade 2 -->
-		<siege_reward top="20" itemid="186000242" m_count="4"/>
-		<siege_reward top="30" itemid="188053142" m_count="1"/> <!-- Wealhtheow's Keep Assault Reward Box: Grade 3 -->
-		<siege_reward top="30" itemid="186000242" m_count="6"/>
-		<siege_reward top="40" itemid="188053143" m_count="1"/> <!-- Wealhtheow's Keep Assault Reward Box: Grade 4 -->
-		<siege_reward top="40" itemid="186000242" m_count="8"/>
+		<siege_reward top="10" itemid="188053237" m_count="2"/> <!-- Wealhtheow's Keep Assault Reward Box: Grade 1 -->
+		<siege_reward top="10" itemid="188053237" m_count="2"/>
+		<siege_reward top="20" itemid="188053237" m_count="2"/> <!-- Wealhtheow's Keep Assault Reward Box: Grade 2 -->
+		<siege_reward top="20" itemid="188053237" m_count="2"/>
+		<siege_reward top="30" itemid="188053237" m_count="2"/> <!-- Wealhtheow's Keep Assault Reward Box: Grade 3 -->
+		<siege_reward top="30" itemid="188053237" m_count="2"/>
+		<siege_reward top="40" itemid="188053237" m_count="2"/> <!-- Wealhtheow's Keep Assault Reward Box: Grade 4 -->
+		<siege_reward top="40" itemid="188053237" m_count="2"/>
 		<legion_reward itemid="185000215" m_count="1"/> <!-- Anoha Sealing Stone -->
-		<legion_reward itemid="188053138" m_count="1"/> <!-- Wealhtheow's Keep Siege Defense Reward Box -->
-		<legion_reward itemid="188053139" m_count="1"/> <!-- Wealhtheow's Keep Siege Defense Consumables Box -->
+		<legion_reward itemid="188053237" m_count="1"/> <!-- Wealhtheow's Keep Siege Defense Reward Box -->
+		<legion_reward itemid="188053237" m_count="1"/> <!-- Wealhtheow's Keep Siege Defense Consumables Box -->
 	</siege_location>
 	<!-- (A): -->
 	<siege_location id="7012" type="ARTIFACT" world="600090000" influence="6">

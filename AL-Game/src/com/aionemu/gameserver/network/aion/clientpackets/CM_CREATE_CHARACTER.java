@@ -21,8 +21,11 @@ import java.util.List;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.GSConfig;
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
+import com.aionemu.gameserver.configs.main.NewbieGuide;
 import com.aionemu.gameserver.dao.InventoryDAO;
+import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
@@ -242,5 +245,14 @@ public class CM_CREATE_CHARACTER extends AionClientPacket {
 			account.addPlayerAccountData(accPlData);
 			client.sendPacket(new SM_CREATE_CHARACTER(accPlData, SM_CREATE_CHARACTER.RESPONSE_OK));
 		}
+		
+		//newbieguide
+        if (NewbieGuide.ENABLED_NEWBIE_GUIDE) {
+            playerCommonData.setinNewbieGuide(1);
+            DAOManager.getDAO(PlayerDAO.class).updateNewbieGuide(player.getObjectId(), 1);
+        } else {
+            playerCommonData.setinNewbieGuide(0);
+            DAOManager.getDAO(PlayerDAO.class).updateNewbieGuide(player.getObjectId(), 0);
+        }
 	}
 }

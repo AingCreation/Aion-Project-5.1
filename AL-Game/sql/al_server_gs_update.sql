@@ -1000,8 +1000,8 @@ CREATE TABLE `player_transfers` (
 -- ----------------------------
 -- Table structure for player_transform
 -- ----------------------------
-DROP TABLE IF EXISTS `player_transform`;
-CREATE TABLE `player_transform` (
+DROP TABLE IF EXISTS `player_transformation`;
+CREATE TABLE `player_transformation` (
   `player_id` int(10) NOT NULL,
   `panel_id` int(5) NOT NULL DEFAULT '0',
   `item_id` int(10) NOT NULL DEFAULT '0'

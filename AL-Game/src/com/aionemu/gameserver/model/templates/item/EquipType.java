@@ -26,12 +26,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum EquipType {
 
-	ARMOR,
-	WEAPON,
-	STIGMA,
-	ESTIMA,
-	ACCESSORY,
-	NONE;
+	ARMOR (1),
+	WEAPON (1),
+	STIGMA (3),
+	ESTIMA (4),
+	ACCESSORY (5),
+	NONE (6);
+	
+	private int id;
+	
+	private EquipType(int id) {
+		this.id = id;
+	}
 
 	public String value() {
 		return name();
@@ -39,6 +45,11 @@ public enum EquipType {
 
 	public static EquipType fromValue(String v) {
 		return valueOf(v);
+	}
+
+	public int getId() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 
 }

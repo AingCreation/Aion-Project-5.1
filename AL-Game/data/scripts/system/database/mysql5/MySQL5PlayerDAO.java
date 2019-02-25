@@ -39,6 +39,7 @@ public class MySQL5PlayerDAO extends PlayerDAO
 	private static final Logger log = LoggerFactory.getLogger(MySQL5PlayerDAO.class);
 	private FastMap<Integer, PlayerCommonData> playerCommonData = new FastMap<Integer, PlayerCommonData>().shared();
 	private FastMap<String, PlayerCommonData> playerCommonDataByName = new FastMap<String, PlayerCommonData>().shared();
+	private MapRegion mr = null;
 
 	/**
 	 * {@inheritDoc}
@@ -98,7 +99,7 @@ public class MySQL5PlayerDAO extends PlayerDAO
 		try {
 			con = DatabaseFactory.getConnection();
 			PreparedStatement stmt = con
-				.prepareStatement("UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, last_online=?, quest_expands=?, npc_expands=?, advenced_stigma_slot_size=?, warehouse_size=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=?, stamps=?, rewarded_pass=?, last_stamp=?, is_archdaeva=?, creativity_point=?, creativity_step=?, growth_aura=?, join_legion_id=?, join_state=?, golden_points=?, luna_consume=?, muni_keys=?, luna_consume_count=?, wardrobe_slot=? WHERE id=?");
+				.prepareStatement("UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, last_online=?, quest_expands=?, npc_expands=?, advenced_stigma_slot_size=?, warehouse_size=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=?, stamps=?, rewarded_pass=?, last_stamp=?, is_archdaeva=?, growth_aura=?, join_legion_id=?, join_state=?, golden_points=?, luna_consume=?, muni_keys=?, luna_consume_count=?, wardrobe_slot=? WHERE id=?");
 
 			log.debug("[DAO: MySQL5PlayerDAO] storing player " + player.getObjectId() + " " + player.getName());
 			PlayerCommonData pcd = player.getCommonData();
@@ -133,17 +134,15 @@ public class MySQL5PlayerDAO extends PlayerDAO
             stmt.setInt(27, pcd.getPassportReward());
             stmt.setTimestamp(28, pcd.getLastStamp());
             stmt.setBoolean(29, pcd.isArchDaeva());
-            stmt.setInt(30, pcd.getCreativityPoint());
-            stmt.setInt(31, pcd.getCPStep());
-            stmt.setLong(32, pcd.getGrowthEnergy());
-			stmt.setInt(33, pcd.getJoinRequestLegionId());
-            stmt.setString(34, pcd.getJoinRequestState().toString());
-			stmt.setLong(35, pcd.getGoldenStarEnergy());
-			stmt.setInt(36, pcd.getLunaConsumePoint());
-			stmt.setInt(37, pcd.getMuniKeys());
-			stmt.setInt(38, pcd.getLunaConsumeCount());
-			stmt.setInt(39, pcd.getWardrobeSlot());
-			stmt.setInt(40, player.getObjectId());
+            stmt.setLong(30, pcd.getGrowthEnergy());
+			stmt.setInt(31, pcd.getJoinRequestLegionId());
+            stmt.setString(32, pcd.getJoinRequestState().toString());
+			stmt.setLong(33, pcd.getGoldenStarEnergy());
+			stmt.setInt(34, pcd.getLunaConsumePoint());
+			stmt.setInt(35, pcd.getMuniKeys());
+			stmt.setInt(36, pcd.getLunaConsumeCount());
+			stmt.setInt(37, pcd.getWardrobeSlot());
+			stmt.setInt(38, player.getObjectId());
 			stmt.execute();
 			stmt.close();
 		}
@@ -284,6 +283,7 @@ public class MySQL5PlayerDAO extends PlayerDAO
 				cd.setDp(resultSet.getInt("dp"));
 				cd.setDeathCount(resultSet.getInt("soul_sickness"));
 				cd.setCurrentReposteEnergy(resultSet.getLong("reposte_energy"));
+				cd.setinNewbieGuide(resultSet.getInt("is_newbie_guide"));
 
 				float x = resultSet.getFloat("x");
 				float y = resultSet.getFloat("y");
@@ -291,15 +291,34 @@ public class MySQL5PlayerDAO extends PlayerDAO
 				byte heading = resultSet.getByte("heading");
 				int worldId = resultSet.getInt("world_id");
 				PlayerInitialData playerInitialData = DataManager.PLAYER_INITIAL_DATA;
-				MapRegion mr = World.getInstance().getWorldMap(worldId).getMainWorldMapInstance().getRegion(x, y, z);
-				if (mr == null && playerInitialData != null) {
-					LocationData ld = playerInitialData.getSpawnLocation(cd.getRace());
-					x = ld.getX();
-					y = ld.getY();
-					z = ld.getZ();
-					heading = ld.getHeading();
-					worldId = ld.getMapId();
-				}
+
+                if (worldId == 0) {
+                    LocationData ld = playerInitialData.getSpawnLocation(cd.getRace());
+                    x = ld.getX();
+                    y = ld.getY();
+                    z = ld.getZ();
+                    heading = ld.getHeading();
+                    worldId = ld.getMapId();
+                } else {
+                    boolean checkThis = World.getInstance().getWorldMap(worldId).isInstanceType();
+                    // this helps to pretend an player loading error
+                    // if you have a better idea do it :)
+                    if (checkThis) {
+                        mr = null;
+                    } else {
+                        mr = World.getInstance().getWorldMap(worldId).getMainWorldMapInstance().getRegion(x, y, z);
+                    }
+
+                    if (mr == null && playerInitialData != null) {
+                        // unstuck unlucky characters :)
+                        LocationData ld = playerInitialData.getSpawnLocation(cd.getRace());
+                        x = ld.getX();
+                        y = ld.getY();
+                        z = ld.getZ();
+                        heading = ld.getHeading();
+                        worldId = ld.getMapId();
+                    }
+                }
 				WorldPosition position = World.getInstance().createPosition(worldId, x, y, z, heading, 0);
 				cd.setPosition(position);
 				cd.setWorldOwnerId(resultSet.getInt("world_owner"));
@@ -309,8 +328,7 @@ public class MySQL5PlayerDAO extends PlayerDAO
                 cd.setPassportReward(resultSet.getInt("rewarded_pass"));
                 cd.setLastStamp(resultSet.getTimestamp("last_stamp"));
                 cd.setArchDaeva(resultSet.getBoolean("is_archdaeva"));
-                cd.setCreativityPoint(resultSet.getInt("creativity_point"));
-                cd.setCPStep(resultSet.getInt("creativity_step"));
+                cd.setAddonCP(resultSet.getInt("addon_cp"));
                 cd.addGrowthEnergy(resultSet.getLong("growth_aura"));
 				cd.setJoinRequestLegionId(resultSet.getInt("join_legion_id"));
                 cd.setJoinRequestState(LegionJoinRequestState.valueOf(resultSet.getString("join_state")));
@@ -808,6 +826,18 @@ public class MySQL5PlayerDAO extends PlayerDAO
 		} finally {
 			DatabaseFactory.close(con);
 		}
+    }
+	
+	@Override
+    public void updateNewbieGuide(final int objectId, final int state) {
+        DB.insertUpdate("UPDATE players SET is_newbie_guide = ? where id = ?", new IUStH() {
+            @Override
+            public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
+                preparedStatement.setInt(1, state);
+                preparedStatement.setInt(2, objectId);
+                preparedStatement.execute();
+            }
+        });
     }
 	
 	@Override

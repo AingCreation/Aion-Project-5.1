@@ -26,9 +26,11 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
+import com.aionemu.gameserver.dao.AdminMailLogDAO;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.MailDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
+import com.aionemu.gameserver.dao.PlayerMailLogDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
@@ -261,6 +263,11 @@ public class MailService {
 		}
 
 		if (attachedItem != null) {
+			if (sender.isGM()) {
+				DAOManager.getDAO(AdminMailLogDAO.class).insertExchange(sender.getObjectId(), sender.getName(), attachedItem.getItemId(), attachedItem.getItemName(), (int)attachedItem.getItemCount(), recipientName, "");
+			} else {
+				DAOManager.getDAO(PlayerMailLogDAO.class).insertExchange(sender.getObjectId(), sender.getName(), attachedItem.getItemId(), attachedItem.getItemName(), (int)attachedItem.getItemCount(), recipientName, "");
+			}
 		}
 
 		/**

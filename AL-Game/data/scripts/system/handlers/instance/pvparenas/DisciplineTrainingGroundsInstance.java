@@ -57,7 +57,7 @@ public class DisciplineTrainingGroundsInstance extends PvPArenaInstance
 		int totalPoints = instanceReward.getTotalPoints();
 		int size = instanceReward.getInstanceRewards().size();
 		float totalAP = (1.0f * size) * 100;
-		float totalGP = (1.0f * size) * 100;
+		//float totalGP = (1.0f * size) * 100;
 		float totalCrucible = (0.01f * size) * 100;
 		float totalCourage = (0.01f * size) * 100;
 		float totalInfinity = (0.01f * size) * 100;
@@ -74,15 +74,15 @@ public class DisciplineTrainingGroundsInstance extends PvPArenaInstance
 				int rank = instanceReward.getRank(score);
 				float percent = reward.getParticipation();
 				int basicAP = 100;
-				int basicGP = 100;
+				//int basicGP = 100;
 				int rankingAP = 431;
-				int rankingGP = 231;
+				//int rankingGP = 231;
 				if (size > 1) {
 					rankingAP = rank == 0 ? 1108 : 431;
-					rankingGP = rank == 0 ? 908 : 231;
+					//rankingGP = rank == 0 ? 908 : 231;
 				}
 				int scoreAP = (int) (totalAP * scoreRate);
-				int scoreGP = (int) (totalGP * scoreRate);
+				//int scoreGP = (int) (totalGP * scoreRate);
 				//<Abyss Points>
 				basicAP *= percent;
 				rankingAP *= percent;
@@ -91,12 +91,12 @@ public class DisciplineTrainingGroundsInstance extends PvPArenaInstance
 				reward.setRankingAP(rankingAP);
 				reward.setScoreAP(scoreAP);
 				//<Glory Points>
-				basicGP *= percent;
-				rankingGP *= percent;
-				rankingGP *= playerRate;
-				reward.setBasicGP(basicGP);
-				reward.setRankingGP(rankingGP);
-				reward.setScoreGP(scoreGP);
+				//basicGP *= percent;
+				//rankingGP *= percent;
+				//rankingGP *= playerRate;
+				//reward.setBasicGP(basicGP);
+				//reward.setRankingGP(rankingGP);
+				//reward.setScoreGP(scoreGP);
 				int basicCrI = 0;
 				basicCrI *= percent;
 				int rankingCrI = 150;

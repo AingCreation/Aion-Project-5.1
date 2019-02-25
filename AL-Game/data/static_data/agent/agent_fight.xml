@@ -12,4 +12,7 @@
 	<agent_location id="2"/>
 	<!-- [ENRAGED MASTARIUS] -->
 	<agent_location id="3"/>
+	<!-- [AGENT FIGHT KALDOR 4.7] -->
+	<!-- [EMPOWERED MASTARIUS & EMPOWERED VEILLE] -->
+	<agent_location id="4"/>
 </agent_fight>

@@ -16,9 +16,6 @@
  */
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -28,9 +25,6 @@ import com.aionemu.gameserver.utils.MathUtil;
 
 public class CM_CRAFT extends AionClientPacket
 {
-	private static final Logger log = LoggerFactory.getLogger(CM_CRAFT.class);
-	private int itemID;
-	private long itemCount;
 	private int unk;
 	private int targetTemplateId;
 	private int recipeId;
@@ -44,36 +38,38 @@ public class CM_CRAFT extends AionClientPacket
 	
 	@Override
 	protected void readImpl() {
-		Player player = getConnection().getActivePlayer();
 		unk = readC();
 		targetTemplateId = readD();
 		recipeId = readD();
 		targetObjId = readD();
 		materialsCount = readH();
 		craftType = readC();
-		if (craftType == 0) {
-			for(int i = 0 ; i < materialsCount ; i++) {
-				itemID = readD();
-				itemCount = readQ();
-				CraftService.checkComponents(player, recipeId, itemID, materialsCount);
-			}
+		for (int i = 0; i < materialsCount; i++) {
+			readD(); // materialId
+			readQ(); // materialCount
 		}
 	}
 	
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
+
 		if (player == null || !player.isSpawned()) {
 			return;
-		} if (player.getController().isInShutdownProgress()) {
+		}
+		// disallow crafting in shutdown progress..
+		if (player.getController().isInShutdownProgress()) {
 			return;
-		} if (unk != 129) {
+		}
+
+		// 129 = Morph Substances
+		if (unk != 129) {
 			VisibleObject staticObject = player.getKnownList().getKnownObjects().get(targetObjId);
-			if (staticObject == null || !MathUtil.isIn3dRange(player, staticObject, 10) ||
-			    staticObject.getObjectTemplate().getTemplateId() != targetTemplateId) {
+			if (staticObject == null || !MathUtil.isIn3dRange(player, staticObject, 10) || staticObject.getObjectTemplate().getTemplateId() != targetTemplateId) {
 				return;
 			}
 		}
+
 		CraftService.startCrafting(player, recipeId, targetObjId, craftType);
 	}
 }

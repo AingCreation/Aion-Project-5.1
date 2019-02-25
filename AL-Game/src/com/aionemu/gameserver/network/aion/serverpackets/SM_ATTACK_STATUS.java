@@ -7,6 +7,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 public class SM_ATTACK_STATUS extends AionServerPacket
 {
 	private Creature creature;
+	private Creature attacker;
 	private TYPE type;
 	private int skillId;
 	private int value;
@@ -26,7 +27,8 @@ public class SM_ATTACK_STATUS extends AionServerPacket
 		ABSORBED_MP(20),
 		MP(21),
 		NATURAL_MP(22),
-		FP_RINGS(23),
+		ATTACK(23),
+		FP_RINGS(24),
 		FP(25),
 		NATURAL_FP(26),
 		AUTO_HEAL_FP(27);
@@ -56,7 +58,7 @@ public class SM_ATTACK_STATUS extends AionServerPacket
         FPHEAL(133),
         REGULARHEAL(170),
         REGULAR(189),
-        ATTACK(193);//old 190 new 193
+        ATTACK(190);//old 190 new 193
 		
 		private int value;
 		
@@ -69,37 +71,50 @@ public class SM_ATTACK_STATUS extends AionServerPacket
 		}
 	}
 	
-	public SM_ATTACK_STATUS(Creature creature, TYPE type, int skillId, int value, LOG log) {
+	public SM_ATTACK_STATUS(Creature creature, Creature attacker, TYPE type, int skillId, int value, LOG log) {
 		this.creature = creature;
+		this.attacker = attacker;
 		this.type = type;
 		this.skillId = skillId;
 		this.value = value;
 		this.logId = log.getValue();
 	}
-	
-	public SM_ATTACK_STATUS(Creature creature, TYPE type, int skillId, int value) {
-		this(creature, type, skillId, value, LOG.REGULAR);
+
+	public SM_ATTACK_STATUS(Creature creature, Creature attacker, TYPE type, int skillId, int value) {
+		this(creature, attacker, type, skillId, value, LOG.REGULAR);
 	}
-	
-	public SM_ATTACK_STATUS(Creature creature, int value) {
-		this(creature, TYPE.REGULAR, 0, value, LOG.REGULAR);
+
+	public SM_ATTACK_STATUS(Creature creature, Creature attacker, int value) {
+		this(creature, attacker, TYPE.REGULAR, 0, value, LOG.REGULAR);
 	}
 	
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(creature.getObjectId());
+	    writeD(attacker.getObjectId());
 		switch (type) {
+			case ATTACK:
+				writeD(-39);
+				break;
 			case DAMAGE:
 			case DELAYDAMAGE:
 				writeD(-value);
-			break;
+				break;
 			default:
 				writeD(value);
 		}
-		writeD(0x00);//5.0
 		writeC(type.getValue());
-		writeC(creature.getLifeStats().getHpPercentage());
+		if (type.getValue() == 19 || type.getValue() == 20 || type.getValue() == 21 || type.getValue() == 22) {
+			writeC(creature.getLifeStats().getMpPercentage());
+		} else {
+			writeC(creature.getLifeStats().getHpPercentage());
+		}
 		writeH(skillId);
-		writeH(logId);
+		writeH(0);
+		if (skillId != 0) {
+			writeH(logId);
+		} else {
+			writeH(LOG.ATTACK.getValue());
+		}
 	}
 }

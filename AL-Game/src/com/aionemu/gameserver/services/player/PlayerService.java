@@ -44,8 +44,8 @@ import com.aionemu.gameserver.dao.MotionDAO;
 import com.aionemu.gameserver.dao.OldNamesDAO;
 import com.aionemu.gameserver.dao.PlayerAppearanceDAO;
 import com.aionemu.gameserver.dao.PlayerBindPointDAO;
-import com.aionemu.gameserver.dao.PlayerCPDAO;
 import com.aionemu.gameserver.dao.PlayerCooldownsDAO;
+import com.aionemu.gameserver.dao.PlayerCpListDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.PlayerEffectsDAO;
 import com.aionemu.gameserver.dao.PlayerEmotionListDAO;
@@ -59,12 +59,12 @@ import com.aionemu.gameserver.dao.PlayerRecipesDAO;
 import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
 import com.aionemu.gameserver.dao.PlayerSettingsDAO;
 import com.aionemu.gameserver.dao.PlayerSkillListDAO;
-import com.aionemu.gameserver.dao.PlayerStigmasEquippedDAO;
 import com.aionemu.gameserver.dao.PlayerTitleListDAO;
 import com.aionemu.gameserver.dao.PlayerUpgradeArcadeDAO;
 import com.aionemu.gameserver.dao.PlayerVarsDAO;
 import com.aionemu.gameserver.dao.PlayerWardrobeDAO;
 import com.aionemu.gameserver.dao.PortalCooldownsDAO;
+import com.aionemu.gameserver.dao.WeddingDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData;
 import com.aionemu.gameserver.dataholders.PlayerInitialData.LocationData;
@@ -128,7 +128,6 @@ public class PlayerService
 	public static void storePlayer(Player player) {
 		DAOManager.getDAO(PlayerDAO.class).storePlayer(player);
 		DAOManager.getDAO(PlayerSkillListDAO.class).storeSkills(player);
-		DAOManager.getDAO(PlayerStigmasEquippedDAO.class).storeItems(player);
 		DAOManager.getDAO(PlayerSettingsDAO.class).saveSettings(player);
 		DAOManager.getDAO(PlayerQuestListDAO.class).store(player);
 		DAOManager.getDAO(PlayerPassportsDAO.class).store(player);
@@ -165,12 +164,11 @@ public class PlayerService
 		MacroList macroses = DAOManager.getDAO(PlayerMacrossesDAO.class).restoreMacrosses(playerObjId);
 		player.setMacroList(macroses);
 		player.setSkillList(DAOManager.getDAO(PlayerSkillListDAO.class).loadSkillList(playerObjId));
-		player.setEquipedStigmaList(DAOManager.getDAO(PlayerStigmasEquippedDAO.class).loadItemsList(playerObjId));
+		player.setCpList(DAOManager.getDAO(PlayerCpListDAO.class).loadCpList(playerObjId));
 		player.setKnownlist(new KnownList(player));
 		player.setFriendList(DAOManager.getDAO(FriendListDAO.class).load(player));
 		player.setBlockList(DAOManager.getDAO(BlockListDAO.class).load(player));
 		player.setTitleList(DAOManager.getDAO(PlayerTitleListDAO.class).loadTitleList(playerObjId));
-		player.setCP(DAOManager.getDAO(PlayerCPDAO.class).loadCP(player));
 		player.setWardrobe(DAOManager.getDAO(PlayerWardrobeDAO.class).load(player));
 		DAOManager.getDAO(F2pDAO.class).loadF2pInfo(player);
 		DAOManager.getDAO(PlayerSettingsDAO.class).loadSettings(player);
@@ -234,6 +232,7 @@ public class PlayerService
 		DAOManager.getDAO(PlayerLifeStatsDAO.class).loadPlayerLifeStat(player);
 		DAOManager.getDAO(PlayerEmotionListDAO.class).loadEmotions(player);
 		DAOManager.getDAO(PlayerUpgradeArcadeDAO.class).load(player);
+		DAOManager.getDAO(WeddingDAO.class).loadPartner(player);
 		if (CacheConfig.CACHE_PLAYERS) {
 			playerCache.put(playerObjId, player);
 		}

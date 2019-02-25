@@ -64,7 +64,7 @@ public class AdjutantAnuhartAI2 extends AggressiveNpcAI2
 	private void startBladeStormEvent() {
 		shield();
 		SkillEngine.getInstance().getSkill(getOwner(), 20747, 1, getOwner()).useNoAnimationSkill();
-		spawn(283099, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0); //Blade Storm.
+		//spawn(283099, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0); //Blade Storm.
 	}
 	
 	private void cancelTask() {

@@ -4,6 +4,10 @@ import com.aionemu.commons.configuration.Property;
 
 public class MembershipConfig
 {
+	@Property(key = "gameserver.membership.additional.chest.drop", defaultValue = "false")
+	public static boolean ADD_CHEST_DROP;
+	@Property(key = "gameserver.membership.additional.chest.drop.announce", defaultValue = "false")
+	public static boolean ADD_CHEST_DROP_ANNOUNCE;
 	@Property(key = "gameserver.instances.title.requirement", defaultValue = "10")
 	public static byte INSTANCES_TITLE_REQ;
 	@Property(key = "gameserver.instances.race.requirement", defaultValue = "10")
@@ -66,4 +70,16 @@ public class MembershipConfig
     public static String PLAYER_TAG_30;
 	@Property(key = "gameserver.player.tag.34", defaultValue="")
     public static String PLAYER_TAG_34;
+	
+	/**
+	 * Toll Online Bonus
+	 */
+	@Property(key = "gameserver.toll.onlinebonus.enable", defaultValue = "true")
+    public static boolean TOLL_ONLINE_BONUS_ENABLE;
+	
+    @Property(key = "gameserver.toll.onlinebonus.time", defaultValue = "60")
+    public static int TOLL_ONLINE_BONUS_TIME;
+	
+    @Property(key = "gameserver.toll.onlinebonus.count", defaultValue = "1")
+    public static int TOLL_ONLINE_BONUS_COUNT;
 }

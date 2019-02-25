@@ -273,20 +273,10 @@ public class AttackUtil
         Creature effected = effect.getEffected();
 		int damage = 0;
 		int baseAttack = 0;
-		/**
-		 * - Some Archdaeva equipment will give boosted combat stats against certain monster types.
-		 * - If the gear and the monster type match, you will get bonus damage.
-		 * - Some items focus on a single monster type while others can affect multiple types.
-		 * - There are four monster types in total: Warrior, Assassin, Mage, and Special.
-	     */
-		if (effector.getEffectController().hasAbnormalEffect(22987) &&
-		    effector.getEffectController().hasAbnormalEffect(22988) &&
-			effector.getEffectController().hasAbnormalEffect(22989) &&
-			effector.getEffectController().hasAbnormalEffect(22990)) {
-			damage = StatFunctions.calculatePhysicalAttackDamage(effect.getEffector(), effect.getEffected(), true) * 2 / 100;
-		} if (effector.getAttackType() == ItemAttackType.PHYSICAL) {
+		
+		if (effector.getAttackType() == ItemAttackType.PHYSICAL) {
 			baseAttack = effector.getGameStats().getMainHandPAttack().getBase();
-		    damage = StatFunctions.calculatePhysicalAttackDamage(effect.getEffector(), effect.getEffected(), true);
+		    damage = StatFunctions.calculatePhysicalAttackDamage(effector, effected, true);
 		} else {
 			if(isMainHand) {
 				baseAttack = effector.getGameStats().getMainHandMAttack().getBase();
@@ -346,6 +336,17 @@ public class AttackUtil
                         damage *= 2;
                     }
                 break;
+                case 8:
+                	if (randomChance <= 33) {
+                		damage *= 1.26F;
+                	} else if (randomChance <= 66) {
+                		damage *= 1.15F;
+                	}
+				break;
+                case 3: 
+                case 4: 
+                case 5: 
+                case 7: 
                 default:
                     damage *= (Rnd.get(25, 100) * 0.02f);
                 break;
@@ -404,8 +405,9 @@ public class AttackUtil
 	 */
 	private static void calculateEffectResult(Effect effect, Creature effected, int damage, AttackStatus status, HitType hitType, boolean ignoreShield) {
 		AttackResult attackResult = new AttackResult(damage, status, hitType);
-		if (!ignoreShield)
+		if (!ignoreShield) {
 			effected.getObserveController().checkShieldStatus(Collections.singletonList(attackResult), effect, effect.getEffector());
+		}
 		effect.setReserved1(attackResult.getDamage());
 		effect.setAttackStatus(attackResult.getAttackStatus());
 		effect.setLaunchSubEffect(attackResult.isLaunchSubEffect());

@@ -33,7 +33,7 @@ public class ItemSocketService
         }
         ItemCategory manastoneCategory = DataManager.ITEM_DATA.getItemTemplate(itemId).getCategory();
         int specialSlotCount = item.getItemTemplate().getSpecialSlots();
-        if (manastoneCategory == ItemCategory.SPECIAL_MANASTONE && specialSlotCount == 0) {
+        if (manastoneCategory == ItemCategory.ANCIENT_MANASTONE && specialSlotCount == 0) {
             return null;
         }
         int specialSlotsOccupied = 0;
@@ -42,7 +42,7 @@ public class ItemSocketService
         HashSet<Integer> allSlots = new HashSet<>();
         for (ManaStone ms : manaStones) {
             ItemCategory category = DataManager.ITEM_DATA.getItemTemplate(ms.getItemId()).getCategory();
-			if (category == ItemCategory.SPECIAL_MANASTONE) {
+			if (category == ItemCategory.ANCIENT_MANASTONE) {
                 specialSlotsOccupied++;
 			} if (category == ItemCategory.MANASTONE) {
 				normalSlotsOccupied++;
@@ -51,11 +51,11 @@ public class ItemSocketService
             if (maxSlot < ms.getSlot()) {
                 maxSlot = ms.getSlot();
             }
-        } if (specialSlotsOccupied >= specialSlotCount && manastoneCategory == ItemCategory.SPECIAL_MANASTONE) {
+        } if (specialSlotsOccupied >= specialSlotCount && manastoneCategory == ItemCategory.ANCIENT_MANASTONE) {
             return null;
         }
-        int start = manastoneCategory == ItemCategory.SPECIAL_MANASTONE ? 0 : specialSlotCount;
-        int end = manastoneCategory == ItemCategory.SPECIAL_MANASTONE ? specialSlotCount : manaStones.size();
+        int start = manastoneCategory == ItemCategory.ANCIENT_MANASTONE ? 0 : specialSlotCount;
+        int end = manastoneCategory == ItemCategory.ANCIENT_MANASTONE ? specialSlotCount : manaStones.size();
         int nextSlot = start;
         boolean slotFound = false;
         for (;nextSlot < end; nextSlot++) {
@@ -66,7 +66,7 @@ public class ItemSocketService
         } if (!slotFound) {
 			if (specialSlotCount == 0 && manastoneCategory == ItemCategory.MANASTONE) {
 				nextSlot = manaStones.size();
-			} if (specialSlotCount > 0 && manastoneCategory == ItemCategory.SPECIAL_MANASTONE) {
+			} if (specialSlotCount > 0 && manastoneCategory == ItemCategory.ANCIENT_MANASTONE) {
 				nextSlot = manaStones.size();
 			} if(specialSlotCount > 0 && manastoneCategory == ItemCategory.MANASTONE) {
 				nextSlot = normalSlotsOccupied;
@@ -120,7 +120,7 @@ public class ItemSocketService
         }
         ItemCategory manastoneCategory = DataManager.ITEM_DATA.getItemTemplate(itemId).getCategory();
         int specialSlotCount = item.getFusionedItemTemplate().getSpecialSlots();
-        if (manastoneCategory == ItemCategory.SPECIAL_MANASTONE && specialSlotCount == 0) {
+        if (manastoneCategory == ItemCategory.ANCIENT_MANASTONE && specialSlotCount == 0) {
             return null;
         }
         int specialSlotsOccupied = 0;
@@ -129,7 +129,7 @@ public class ItemSocketService
         HashSet<Integer> allSlots = new HashSet<>();
         for (ManaStone ms : manaStones) {
             ItemCategory category = DataManager.ITEM_DATA.getItemTemplate(ms.getItemId()).getCategory();
-            if (category == ItemCategory.SPECIAL_MANASTONE) {
+            if (category == ItemCategory.ANCIENT_MANASTONE) {
                 specialSlotsOccupied++;
             } if (category == ItemCategory.MANASTONE) {
 				normalSlotsOccupied++;
@@ -138,11 +138,11 @@ public class ItemSocketService
             if (maxSlot < ms.getSlot()) {
                 maxSlot = ms.getSlot();
             }
-        } if (specialSlotsOccupied >= specialSlotCount && manastoneCategory == ItemCategory.SPECIAL_MANASTONE) {
+        } if (specialSlotsOccupied >= specialSlotCount && manastoneCategory == ItemCategory.ANCIENT_MANASTONE) {
             return null;
         }
-        int start = manastoneCategory == ItemCategory.SPECIAL_MANASTONE ? 0 : specialSlotCount;
-        int end = manastoneCategory == ItemCategory.SPECIAL_MANASTONE ? specialSlotCount : manaStones.size();
+        int start = manastoneCategory == ItemCategory.ANCIENT_MANASTONE ? 0 : specialSlotCount;
+        int end = manastoneCategory == ItemCategory.ANCIENT_MANASTONE ? specialSlotCount : manaStones.size();
         int nextSlot = start;
         boolean slotFound = false;
         for (; nextSlot < end; nextSlot++) {
@@ -153,7 +153,7 @@ public class ItemSocketService
         } if (!slotFound) {
 			if (specialSlotCount == 0 && manastoneCategory == ItemCategory.MANASTONE) {
 				nextSlot = manaStones.size();
-			} if (specialSlotCount > 0 && manastoneCategory == ItemCategory.SPECIAL_MANASTONE) {
+			} if (specialSlotCount > 0 && manastoneCategory == ItemCategory.ANCIENT_MANASTONE) {
 				nextSlot = specialSlotsOccupied;
 			} if(specialSlotCount > 0 && manastoneCategory == ItemCategory.MANASTONE) {
 				nextSlot = normalSlotsOccupied;
@@ -196,23 +196,17 @@ public class ItemSocketService
         }
 		Set<ManaStone> itemStones = item.getItemStones();
 		int specialSlotCount = item.getItemTemplate().getSpecialSlots();
+		if (itemStones.size() <= slotNum)
+			return;
+		int counter = 0;
 		for (ManaStone ms : itemStones) {
-			if (ms.getSlot() == slotNum) {
+			if (counter == slotNum) {
 				ms.setPersistentState(PersistentState.DELETED);
-                DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(Collections.singleton(ms));
-                itemStones.remove(ms);
-                break;
-            } if (ms.getSlot() > specialSlotCount) {
-				ms.setPersistentState(PersistentState.DELETED);
-                DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(Collections.singleton(ms));
-                itemStones.remove(ms);
-                break;
-            } if (ms.getSlot() > slotNum && ms.getSlot() < specialSlotCount) {
-				ms.setPersistentState(PersistentState.DELETED);
-                DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(Collections.singleton(ms));
-                itemStones.remove(ms);
-                break;
-            }
+				DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(Collections.singleton(ms));
+				itemStones.remove(ms);
+				break;
+			} 
+            counter++;
 		}
 		ItemPacketService.updateItemAfterInfoChange(player, item);
     }
@@ -231,24 +225,18 @@ public class ItemSocketService
             return;
         }
 		Set<ManaStone> itemStones = item.getFusionStones();
+		if (itemStones.size() <= slotNum)
+			return;
+		int counter = 0;
 		int specialSlotCount = item.getFusionedItemTemplate().getSpecialSlots();
 		for (ManaStone ms : itemStones) {
-			if (ms.getSlot() == slotNum) {
+			if (counter == slotNum) {
 				ms.setPersistentState(PersistentState.DELETED);
 				DAOManager.getDAO(ItemStoneListDAO.class).storeFusionStones(Collections.singleton(ms));
 				itemStones.remove(ms);
 				break;
-			} if (ms.getSlot() > specialSlotCount) {
-				ms.setPersistentState(PersistentState.DELETED);
-				DAOManager.getDAO(ItemStoneListDAO.class).storeFusionStones(Collections.singleton(ms));
-				itemStones.remove(ms);
-				break;
-			} if (ms.getSlot() > slotNum && ms.getSlot() < specialSlotCount) {
-				ms.setPersistentState(PersistentState.DELETED);
-				DAOManager.getDAO(ItemStoneListDAO.class).storeFusionStones(Collections.singleton(ms));
-				itemStones.remove(ms);
-				break;
-			}
+			} 
+			counter++;
 		}
 		ItemPacketService.updateItemAfterInfoChange(player, item);
     }

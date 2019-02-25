@@ -12,6 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.templates.zone.Point2D;
+import com.aionemu.gameserver.skillengine.properties.AreaDirections;
 
 public class MathUtil
 {
@@ -166,6 +167,26 @@ public class MathUtil
         }
         return ((getDistance(object1, object2) - offset) <= range);
     }
+    
+    public final static boolean isInsideAttackCylinder(VisibleObject obj1, VisibleObject obj2, int length, int radius, AreaDirections directions) {
+		double radian = Math.toRadians(convertHeadingToDegree(obj1.getHeading()));
+		int direction = directions == AreaDirections.FRONT ? 0 : 1;
+		float dx = (float) (Math.cos(Math.PI * direction + radian) * length);
+		float dy = (float) (Math.sin(Math.PI * direction + radian) * length);
+
+		float tdx = obj2.getX() - obj1.getX();
+		float tdy = obj2.getY() - obj1.getY();
+		float tdz = obj2.getZ() - obj1.getZ();
+		float lengthSqr = length * length;
+
+		float dot = tdx * dx + tdy * dy;
+		if (dot < 0.0f || dot > lengthSqr) {
+			return false;
+		}
+
+		// distance squared to the cylinder axis
+		return (tdx * tdx + tdy * tdy + tdz * tdz) - dot * dot / lengthSqr <= radius;
+	}
 
     public final static boolean isInsideAttackCylinder(VisibleObject obj1, VisibleObject obj2, int length, int radius, boolean isFront) {
         double radian = Math.toRadians(convertHeadingToDegree(obj1.getHeading()));

@@ -43,7 +43,7 @@ public class UnityTrainingGroundInstance extends HarmonyArenaInstance
 	@Override
 	protected void reward() {
 		float totalScoreAP = (1.0f * 3) * 100;
-		float totalScoreGP = (1.0f * 3) * 100;
+		//float totalScoreGP = (1.0f * 3) * 100;
 		float totalScoreCourage = (1.0f * 3) * 100;
 		float totalScoreInfinity = (1.0f * 3) * 100;
 		int totalPoints = instanceReward.getTotalPoints();
@@ -55,9 +55,9 @@ public class UnityTrainingGroundInstance extends HarmonyArenaInstance
 			int basicAP = 100;
 			int rankingAP = 0;
 			basicAP *= percent;
-			int basicGP = 100;
-			int rankingGP = 0;
-			basicGP *= percent;
+			//int basicGP = 100;
+			//int rankingGP = 0;
+			//basicGP *= percent;
 			int basicCoI = 0;
 			int rankingCoI = 0;
 			basicCoI *= percent;
@@ -65,30 +65,30 @@ public class UnityTrainingGroundInstance extends HarmonyArenaInstance
 			int rankingCiI = 0;
 			basicCiI *= percent;
 			int scoreAP = (int) (totalScoreAP * scoreRate);
-			int scoreGP = (int) (totalScoreGP * scoreRate);
+			//int scoreGP = (int) (totalScoreGP * scoreRate);
 			switch (rank) {
 				case 0:
 					rankingAP = 681;
-					rankingGP = 481;
+					//rankingGP = 481;
 					rankingCoI = 49;
 					rankingCiI = 49;
 					group.setGloryTicket(1);
 				break;
 				case 1:
 					rankingAP = 487;
-					rankingGP = 287;
+					//rankingGP = 287;
 					rankingCoI = 20;
 					rankingCiI = 20;
 				break;
 				case 2:
 					rankingAP = 251;
-					rankingGP = 151;
+					//rankingGP = 151;
 					rankingCoI = 1;
 					rankingCiI = 1;
 				break;
 			}
 			rankingAP *= percent;
-			rankingGP *= percent;
+			//rankingGP *= percent;
 			rankingCoI *= percent;
 			rankingCiI *= percent;
 			int scoreCoI = (int) (totalScoreCourage * scoreRate);
@@ -96,9 +96,9 @@ public class UnityTrainingGroundInstance extends HarmonyArenaInstance
 			group.setBasicAP(basicAP);
 			group.setRankingAP(rankingAP);
 			group.setScoreAP(scoreAP);
-			group.setBasicGP(basicGP);
-			group.setRankingGP(rankingGP);
-			group.setScoreGP(scoreGP);
+			//group.setBasicGP(basicGP);
+			//group.setRankingGP(rankingGP);
+			//group.setScoreGP(scoreGP);
 			group.setBasicCourage(basicCoI);
 			group.setRankingCourage(rankingCoI);
 			group.setScoreCourage(scoreCoI);

@@ -338,7 +338,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler
 				//<Abyss Points>
 				AbyssPointsService.addAp(player, group.getBasicAP() + group.getRankingAP() + (int) (group.getScoreAP() * playerRate));
 				//<Glory Points>
-				AbyssPointsService.addGp(player, group.getBasicGP() + group.getRankingGP() + (int) (group.getScoreGP() * playerRate));
+				//AbyssPointsService.addGp(player, group.getBasicGP() + group.getRankingGP() + (int) (group.getScoreGP() * playerRate));
 				int courage = group.getBasicCourage() + group.getRankingCourage() + (int) (group.getScoreCourage()* playerRate);
 				if (courage != 0) {
 					ItemService.addItem(player, 186000137, courage);

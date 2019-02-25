@@ -8,11 +8,11 @@
 	<!-- RESHANTA 4.9 -->
 	<!-- Siel's Western Fortress -->
 	<fortress id="1131">
-		<siegeTime>0 0 18 ? * MON,TUE,WED,THU,FRI,SUN *</siegeTime>
+		<siegeTime>0 10 10 ? * MON,TUE,WED,THU,FRI,SAT,SUN *</siegeTime>
 	</fortress>
 	<!-- Siel's Eastern Fortress -->
 	<fortress id="1132">
-		<siegeTime>0 0 18 ? * MON,TUE,WED,THU,FRI,SUN *</siegeTime>
+		<siegeTime>0 10 10 ? * MON,TUE,WED,THU,FRI,SAT,SUN *</siegeTime>
 	</fortress>
 	<!-- Sulfur Fortress -->
 	<fortress id="1141">
@@ -20,7 +20,7 @@
 	</fortress>
 	<!-- Krotan Refuge -->
 	<fortress id="1221">
-		<siegeTime>0 0 20 ? * TUE,THU,FRI,SUN *</siegeTime>
+		<siegeTime>0 35 10 ? * MON,TUE,WED,THU,FRI,SAT,SUN *</siegeTime>
 	</fortress>
 	<!-- Kysis Fortress -->
 	<fortress id="1231">
@@ -60,7 +60,7 @@
 	<!-- KALDOR 4.7 -->
 	<!-- Wealhtheow's Keep -->
 	<fortress id="7011">
-		<siegeTime>0 0 16 ? * SUN *</siegeTime>
+		<siegeTime>0 55 10 ? * MON,TUE,WED,THU,FRI,SAT,SUN *</siegeTime>
 	</fortress>
 	
 	<!-- PANESTERRA 4.7 -->

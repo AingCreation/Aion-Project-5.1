@@ -19,6 +19,7 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import java.util.*;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -32,17 +33,27 @@ public class SM_SKILL_COOLDOWN extends AionServerPacket
     
 	@Override
     protected void writeImpl(AionConnection con) {
+		Player player = con.getActivePlayer();
     	writeH(calculateSize());
-        writeC(1);
+        writeC(0);
         long currentTime = System.currentTimeMillis();
         for (Map.Entry<Integer, Long> entry : cooldowns.entrySet()) {
             int left = (int) ((entry.getValue() - currentTime) / 1000);
             ArrayList<Integer> skillsWithCooldown = DataManager.SKILL_DATA.getSkillsForDelayId(entry.getKey());
             for (int index = 0; index < skillsWithCooldown.size(); index++) {
                 int skillId = skillsWithCooldown.get(index);
-                writeH(skillId);
-                writeD(left > 0 ? left : 0);
-                writeD(DataManager.SKILL_DATA.getSkillTemplate(skillId).getCooldown());
+                int cooldown = DataManager.SKILL_DATA.getSkillTemplate(skillId).getCooldown();
+                if (player.getSkillList().isSkillPresent(skillId)) {
+                	int delaytimelv = DataManager.SKILL_DATA.getSkillTemplate(skillId).getDelayTimeLv() * player.getSkillList().getSkillLevel(skillId);
+                	int cd = cooldown + delaytimelv;
+                	writeH(skillId);
+                    writeD(left > 0 ? left : 0);
+                    writeD(cd * 100);
+                } else {
+                	writeH(skillId);
+                    writeD(left > 0 ? left : 0);
+                    writeD(cooldown * 100);
+                }
             }
         }
     }

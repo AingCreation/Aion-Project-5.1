@@ -64,6 +64,7 @@
     	<mkdir dir="${build.dist.gs}/data" />
     	<mkdir dir="${build.dist.gs}/libs" />
     	<mkdir dir="${build.dist.gs}/sql" />
+		<mkdir dir="${build.dist.gs}/gameserver" />
     	
 		<copy todir="${build.dist.gs}/libs">
             <fileset dir="${build}">
@@ -97,6 +98,12 @@
 
         <copy todir="${build.dist.gs}/sql">
             <fileset dir="sql">
+                <include name="**/*"/>
+            </fileset>
+        </copy>
+		
+		<copy todir="${build.dist.gs}/gameserver">
+            <fileset dir="gameserver">
                 <include name="**/*"/>
             </fileset>
         </copy>

@@ -1,1103 +1,635 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <guides xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="guide.xsd">
     <!-- Asmodians -->
-    <guide title="adventurers_guide10_asmo" level="10" race="ASMODIANS" rewardCount="2">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			In order to stem the increasingly powerful tide of Beritra minions,
-			Kaisinel and Marchutan have established areas to rehabilitate Elyos and Asmodians
-			who have returned after having been away from the war effort.
-			These sanctuaries, known as Abbeys, are where returning Daevas can find support,
-			quests, and dispatch Npc to ease them into their return to Atreia.
+	
+	<!-- MAGE ARMOR AND ACC -->
+    <guide title="adventurers_guide75_asmo_sm" level="75" race="ASMODIANS" classType="SPIRIT_MASTER" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
 			<br><br>]]>
         </message>
-        <reward_info>Hold the Ctrl key to select 2 reward.</reward_info>
-        <select>Go see Melanka in Fatebound Abbey.</select>
-        <survey itemId="164000336" count="1"/>
-		<survey itemId="190100234" count="1"/>
-		<survey itemId="190100055" count="1"/>
-		<survey itemId="190100130" count="1"/>
-		<survey itemId="190100185" count="1"/>
-		<survey itemId="190100060" count="1"/>
-		<survey itemId="190100098" count="1"/>
-		<survey itemId="190100162" count="1"/>
-		<survey itemId="190100233" count="1"/>
-		<survey itemId="190100142" count="1"/>
-		<survey itemId="190100220" count="1"/>
+        <select>Click here to close window</select>
+        <survey itemId="110102101" count="1"/> <!-- Eclipse -->
+		<survey itemId="111101899" count="1"/> <!-- Eclipse -->
+		<survey itemId="112101843" count="1"/> <!-- Eclipse -->
+		<survey itemId="113101906" count="1"/> <!-- Eclipse -->
+		<survey itemId="114101940" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004204" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001423" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001553" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001697" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001468" count="1"/> <!-- Special Elite Emissary -->
     </guide>
-    <guide title="adventurers_guide15_asmo" level="15" race="ASMODIANS" rewardCount="1">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Congratulations!
+	
+	<guide title="adventurers_guide75_asmo_sorc" level="75" race="ASMODIANS" classType="SORCERER" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
 			<br><br>]]>
         </message>
-		<reward_info>Please select 1 reward.</reward_info>
-        <select>Blood for blood!</select>
-		<survey itemId="100001735" count="1"/>
-		<survey itemId="100101332" count="1"/>
-		<survey itemId="100201501" count="1"/>
-		<survey itemId="100501312" count="1"/>
-		<survey itemId="100601429" count="1"/>
-		<survey itemId="100901373" count="1"/>
-		<survey itemId="101301265" count="1"/>
-		<survey itemId="101501355" count="1"/>
-		<survey itemId="101701366" count="1"/>
-		<survey itemId="101801216" count="1"/>
-		<survey itemId="101901125" count="1"/>
-		<survey itemId="102001244" count="1"/>
-		<survey itemId="102101070" count="1"/>
+        <select>Click here to close window</select>
+        <survey itemId="110102102" count="1"/> <!-- Eclipse -->
+		<survey itemId="111101900" count="1"/> <!-- Eclipse -->
+		<survey itemId="112101844" count="1"/> <!-- Eclipse -->
+		<survey itemId="113101907" count="1"/> <!-- Eclipse -->
+		<survey itemId="114101941" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004204" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001423" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001553" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001697" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001468" count="1"/> <!-- Special Elite Emissary -->
     </guide>
-	<guide title="adventurers_guide20_asmo" level="20" race="ASMODIANS" rewardCount="1">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Ah, Stigmas! Such a useful tool. Yes, they're ripped
-			from the souls of displaced Daevas, but don't brood
-			over that part. Rejoice instead that you gain
-			abilities that one on your path might never
-			otherwise obtain.
-			<Br><Br><Br><Br>
-			You are now ready to walk that particular path, my
-			friend. Take these scrolls, and use them to quicken
-			your return to Pandaemonium. Once there, you
-			would do well to speak with Aud and Vergelmir in
-			the Capitol Building. They know more about
-			Stigmas than anyone else I've met.
-			<Br><Br><Br><Br>
-			Until next time,
-			<Br><Br><Br><Br>
-			~Munin
+	
+	<!-- HEALLER ARMOR AND ACC -->
+	<guide title="adventurers_guide75_asmo_cleric" level="75" race="ASMODIANS" classType="CLERIC" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
 			<br><br>]]>
         </message>
-		<reward_info>Please select 1 reward.</reward_info>
-        <select>Stigmas, eh? Should check those out.</select>
-        <survey itemId="188053750" count="1"/>
-		<survey itemId="188053751" count="1"/>
-		<survey itemId="188053752" count="1"/>
-		<survey itemId="188053753" count="1"/>
-		<survey itemId="188053754" count="1"/>
-		<survey itemId="188053755" count="1"/>
-		<survey itemId="188053756" count="1"/>
-		<survey itemId="188053757" count="1"/>
-		<survey itemId="188053758" count="1"/>
-		<survey itemId="188053759" count="1"/>
-		<survey itemId="188053760" count="1"/>
+        <select>Click here to close window</select>
+        <survey itemId="110551445" count="1"/> <!-- Eclipse -->
+		<survey itemId="111502014" count="1"/> <!-- Eclipse -->
+		<survey itemId="112501950" count="1"/> <!-- Eclipse -->
+		<survey itemId="113502024" count="1"/> <!-- Eclipse -->
+		<survey itemId="114502032" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004200" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001423" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001553" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001697" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001468" count="1"/> <!-- Special Elite Emissary -->
     </guide>
-    <guide title="adventurers_guide25_asmo" level="25" race="ASMODIANS" rewardCount="1">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Tell me, child... what is the enemy of an enemy?
-			<br><br><br><br>
-			You are now ready to enter the Fire Temple, and battle
-			the Asmodian traitor known as Kromede. She is
-			despised amongst her own lowbred kin, her treachery
-			considered the most fundamental betrayal of Asmodian
-			ideals. But this does not make her a friend to us. No.
-			She is of the same blood, and must be destroyed
-			along with the rest of her beastly kind. But to enter the
-			Fire Temple, you must first find the key to its doors.
-			You would do well to hunt the underground monsters
-			of the Mt Musphel. One of them will have what you
-			need.
-			<br><br><br><br>
-			Elsewhere, other opportunities have presented
-			themselves to you! If you get the chance, return to our
-			beautiful capital, and speak with Heimdall. He will have an
-			exciting task for you. And while you're in Pandaemonium, why
-			not pick up an augmentation to your wings ?
-			<br><br><br><br>
-			Be safe, child. I will visit you again soon.
-			<br><br><br><br>
-			~Munin
+	
+	<guide title="adventurers_guide75_asmo_chanter" level="75" race="ASMODIANS" classType="CHANTER" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
 			<br><br>]]>
         </message>
-        <reward_info>Please select 1 reward.</reward_info>
-		<select>Blood for blood!</select>
-		<survey itemId="100002065" count="1"/>
-		<survey itemId="100101542" count="1"/>
-		<survey itemId="100201722" count="1"/>
-		<survey itemId="100601618" count="1"/>
-		<survey itemId="101301460" count="1"/>
-		<survey itemId="101501563" count="1"/>
-		<survey itemId="101701563" count="1"/>
-		<survey itemId="101801390" count="1"/>
-		<survey itemId="102001418" count="1"/>
-		<survey itemId="102101233" count="1"/>
+        <select>Click here to close window</select>
+        <survey itemId="110551446" count="1"/> <!-- Eclipse -->
+		<survey itemId="111502015" count="1"/> <!-- Eclipse -->
+		<survey itemId="112501951" count="1"/> <!-- Eclipse -->
+		<survey itemId="113502025" count="1"/> <!-- Eclipse -->
+		<survey itemId="114502033" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004200" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001423" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001553" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001697" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001468" count="1"/> <!-- Special Elite Emissary -->
     </guide>
-    <guide title="adventurers_guide30_asmo" level="30" race="ASMODIANS" rewardCount="1">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Congratulations!
+	
+	<!-- SONGWEAVER ARMOR AND ACC -->
+	<guide title="adventurers_guide75_asmo_SONGWEAVER" level="75" race="ASMODIANS" classType="SONGWEAVER" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
 			<br><br>]]>
         </message>
-        <reward_info>Please select 1 reward.</reward_info>
-		<select>Blood for blood!</select>
-		<survey itemId="100000473" count="1"/>
-		<survey itemId="100100355" count="1"/>
-		<survey itemId="100200463" count="1"/>
-		<survey itemId="100500352" count="1"/>
-		<survey itemId="100600382" count="1"/>
-		<survey itemId="100900349" count="1"/>
-		<survey itemId="101300340" count="1"/>
-		<survey itemId="101500356" count="1"/>
-		<survey itemId="101700368" count="1"/>
-		<survey itemId="101800412" count="1"/>
-		<survey itemId="101900398" count="1"/>
-		<survey itemId="102000426" count="1"/>
-		<survey itemId="102100395" count="1"/>
+        <select>Click here to close window</select>
+        <survey itemId="110102102" count="1"/> <!-- Eclipse -->
+		<survey itemId="111101900" count="1"/> <!-- Eclipse -->
+		<survey itemId="112101844" count="1"/> <!-- Eclipse -->
+		<survey itemId="113101907" count="1"/> <!-- Eclipse -->
+		<survey itemId="114101941" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004204" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001423" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001553" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001697" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001468" count="1"/> <!-- Special Elite Emissary -->
     </guide>
-    <guide title="adventurers_guide35_asmo" level="35" race="ASMODIANS" rewardCount="1">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Do you remember the storm I spoke of last time I
-			contacted you? It is here. And, like all powerful storms, this
-			one is multi-faceted and deadly.
-			<Br><Br><Br><Br>
-			I trust you have found your way to Kromede's Trial? If not,
-			hurry to Beluslan Fortress and speak to Nerita as soon as
-			you can. Kromede's Trial will open your eyes to some
-			cold, hard Asmodian truths, while the treasures to be
-			found there are easily worth your time. However, other
-			areas are also ready for your attention, including Alukina's
-			Palace (though you must first fix the Anair Lighthouse), the
-			Mist Mane Village, and the Lower Abyss Fortresses.
-			<Br><Br><Br><Br>
-			Choose your destiny, my friend! The branches, these
-			choices, are merely a glimpse of life as a Daeva
-			unshackled from the chains of destiny!
-			<Br><Br><Br><Br>
-			Until next time,
-			<Br><Br><Br><Br>
-			~Munin
+	
+	<!-- ENGINE ARMOR AND ACC -->
+	<guide title="adventurers_guide75_asmo_AETHERTECH" level="75" race="ASMODIANS" classType="AETHERTECH" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
 			<br><br>]]>
         </message>
-		<reward_info>Please select 1 reward.</reward_info>
-        <select>Blood for blood!</select>
-		<survey itemId="100000806" count="1"/>
-		<survey itemId="100100605" count="1"/>
-		<survey itemId="100200732" count="1"/>
-		<survey itemId="100500626" count="1"/>
-		<survey itemId="100600685" count="1"/>
-		<survey itemId="100900616" count="1"/>
-		<survey itemId="101300588" count="1"/>
-		<survey itemId="101500629" count="1"/>
-		<survey itemId="101700651" count="1"/>
-		<survey itemId="101800595" count="1"/>
-		<survey itemId="101900591" count="1"/>
-		<survey itemId="102000623" count="1"/>
-		<survey itemId="102100536" count="1"/>
-		<survey itemId="115000894" count="1"/>
+        <select>Click here to close window</select>
+        <survey itemId="110551447" count="1"/> <!-- Eclipse -->
+		<survey itemId="111502016" count="1"/> <!-- Eclipse -->
+		<survey itemId="112501952" count="1"/> <!-- Eclipse -->
+		<survey itemId="113502026" count="1"/> <!-- Eclipse -->
+		<survey itemId="114502034" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004200" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001423" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001553" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001697" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001468" count="1"/> <!-- Special Elite Emissary -->
     </guide>
-    <guide title="adventurers_guide40_asmo" level="40" race="ASMODIANS" rewardCount="1">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Congratulations!
+	
+	<guide title="adventurers_guide75_asmo_GUNSLINGER" level="75" race="ASMODIANS" classType="GUNSLINGER" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
 			<br><br>]]>
         </message>
-		<reward_info>Please select 1 reward.</reward_info>
-        <select>Blood for blood!</select>
-		<survey itemId="100000807" count="1"/>
-		<survey itemId="100100606" count="1"/>
-		<survey itemId="100200733" count="1"/>
-		<survey itemId="100500627" count="1"/>
-		<survey itemId="100600686" count="1"/>
-		<survey itemId="100900617" count="1"/>
-		<survey itemId="101300589" count="1"/>
-		<survey itemId="101500630" count="1"/>
-		<survey itemId="101700652" count="1"/>
-		<survey itemId="101800596" count="1"/>
-		<survey itemId="101900592" count="1"/>
-		<survey itemId="102000624" count="1"/>
-		<survey itemId="102100537" count="1"/>
-		<survey itemId="115000895" count="1"/>
+        <select>Click here to close window</select>
+        <survey itemId="110302078" count="1"/> <!-- Eclipse -->
+		<survey itemId="111302023" count="1"/> <!-- Eclipse -->
+		<survey itemId="112301960" count="1"/> <!-- Eclipse -->
+		<survey itemId="113302048" count="1"/> <!-- Eclipse -->
+		<survey itemId="114302085" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004202" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001423" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001553" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001697" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001468" count="1"/> <!-- Special Elite Emissary -->
     </guide>
-	<guide title="adventurers_guide45_asmo" level="45" race="ASMODIANS" rewardCount="1">
+	
+	<!-- SCOUT ARMOR AND ACC -->
+	<guide title="adventurers_guide75_asmo_sin" level="75" race="ASMODIANS" classType="ASSASSIN" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110302077" count="1"/> <!-- Eclipse -->
+		<survey itemId="111302022" count="1"/> <!-- Eclipse -->
+		<survey itemId="112301959" count="1"/> <!-- Eclipse -->
+		<survey itemId="113302047" count="1"/> <!-- Eclipse -->
+		<survey itemId="114302084" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004202" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001422" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001552" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001696" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001467" count="1"/> <!-- Special Elite Emissary -->
+    </guide>
+	
+	<guide title="adventurers_guide75_asmo_ranger" level="75" race="ASMODIANS" classType="RANGER" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110302077" count="1"/> <!-- Eclipse -->
+		<survey itemId="111302022" count="1"/> <!-- Eclipse -->
+		<survey itemId="112301959" count="1"/> <!-- Eclipse -->
+		<survey itemId="113302047" count="1"/> <!-- Eclipse -->
+		<survey itemId="114302084" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004202" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001422" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001552" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001696" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001467" count="1"/> <!-- Special Elite Emissary -->
+    </guide>
+	
+	<!-- WARRIOR ARMOR AND ACC -->
+	 <guide title="adventurers_guide75_asmo_templar" level="75" race="ASMODIANS" classType="TEMPLAR" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110601865" count="1"/> <!-- Eclipse -->
+		<survey itemId="111601835" count="1"/> <!-- Eclipse -->
+		<survey itemId="112601816" count="1"/> <!-- Eclipse -->
+		<survey itemId="113601812" count="1"/> <!-- Eclipse -->
+		<survey itemId="114601818" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004198" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001422" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001552" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001696" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001467" count="1"/> <!-- Special Elite Emissary -->
+    </guide>
+	
+    <guide title="adventurers_guide75_asmo_glad" level="75" race="ASMODIANS" classType="GLADIATOR" rewardCount="10">
 		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Beritra's invasion monsters will appear in some regions at certain times.
-			Beritra has researched ancient Danuar weapons ever since discovering Ide and Hyperion in Katalam.
-			Deep within the Sauro Supply Base was a hidden cache of Danuar weapon designs and machine parts.
-			Beritra used this new technology to create legions of highly advanced autonomous weapons, which he
-			uses to sow chaos and Balaurea, Abyss, and even Elysea and Asmodae.
-			<br><br><br><br>
-			Walk strong. Let blood boil within your veins, and use
-			the steel of our spirit to strengthen your conviction. The
-			cowards will fall before you like Elyos flowers under
-			Asmodian rain.
-			<br><br><br><br>
-			Blood for blood!
-			<br><br><br><br>
-			~Munin.
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
 			<br><br>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Beritra's invasion, eh...?</select>
-		<survey itemId="162001005" count="50"/>
-		<survey itemId="162001006" count="50"/>
-		<survey itemId="162001007" count="50"/>
-		<survey itemId="162001008" count="50"/>
-		<survey itemId="164002010" count="50"/>
-		<survey itemId="164002011" count="50"/>
-	</guide>
-    <guide title="adventurers_guide50_asmo" level="50" race="ASMODIANS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			The Essence Purifier consumes 50% of the XP bar of a Lv.65 character, and 1 Purified Essence is obtained.
-			Only 2 Essence Purifier's can be purchased from the corresponding NPC in one day.
-			NPCs selling Essence Purifier's and purification designs have been added to cities of both races.
-			The items can be purchased in the Walk of Fame/Hall of Fame in the academies of each race.
-			The following new gear series have the same stats as existing high rank Abyss equipment,
-			but have higher prices and can be equipped by Soldier Rank 1 and above.
-			<br><br><br><br>
-			Blood for blood!
-			<br><br><br><br>
-			~Admin
-			<br><br>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Faith and arms!</select>
-		<survey itemId="100200726" count="1"/>
-		<survey itemId="100000797" count="1"/>
-		<survey itemId="100900610" count="1"/>
-		<survey itemId="100500620" count="1"/>
-		<survey itemId="101700644" count="1"/>
-		<survey itemId="101300582" count="1"/>
-		<survey itemId="101500623" count="1"/>
-		<survey itemId="100600660" count="1"/>
-		<survey itemId="100100599" count="1"/>
-		<survey itemId="101800589" count="1"/>
-		<survey itemId="102000617" count="1"/>
-		<survey itemId="101900585" count="1"/>
-		<survey itemId="102100532" count="1"/>
-	</guide>
-    <guide title="adventurers_guide55_asmo" level="55" race="ASMODIANS" rewardCount="1">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			I see Balaurea has been treating you well, my friend!
-			I have not seen Gelkmaros myself just yet, but my network of 
-			contacts has provided me with more than enough information 
-			to help you along your path.
-			<Br><Br><Br><Br>
-			Taloc is, by all accounts, the greatest Elim that ever existed.
-			He towers above the tallest building, such is the power of the 
-			Aether tangled in his mighty roots. 
-			But the Aether has also corrupted the creatures within Taloc.
-			They have been driven insane by their lust for Taloc's sap,
-			and the great Elim is now in desperate need of help.
-			<Br><Br><Br><Br>
-			I have also heard of a place in Gelkmaros called the Udas Temple.
-			Rumor has it that the two areas there are extremely difficult,
-			and that you will need to work with your fellow Daevas to get
-			through them alive. Similarly, the Archons in Balaurea have
-			discovered a second Dredgion. It needs destroying.
-			<Br><Br><Br><Br>
-			As Last but not least, I believe you would do well to pay Garath
-			in Gelkmaros Fortress a visit.
-			He will be able to help you unlock new power!
-			<Br><Br><Br><Br>
-			Be well, friend. I will be watching your progress.
-			<Br><Br><Br><Br>
-			Until next time,
-			<Br><Br><Br><Br>
-			~Munin
-			<br><br>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Thank you for everything.</select>
-		<survey itemId="100001308" count="1"/>
-		<survey itemId="100100997" count="1"/>
-		<survey itemId="100201159" count="1"/>
-		<survey itemId="100501013" count="1"/>
-		<survey itemId="100601066" count="1"/>
-		<survey itemId="100901002" count="1"/>
-		<survey itemId="101300956" count="1"/>
-		<survey itemId="101501026" count="1"/>
-		<survey itemId="101701038" count="1"/>
-		<survey itemId="101800799" count="1"/>
-		<survey itemId="101900803" count="1"/>
-		<survey itemId="102000837" count="1"/>
-		<survey itemId="102100699" count="1"/>
-		<survey itemId="115001358" count="1"/>
-		<survey itemId="115001360" count="1"/>
-	</guide>
-	<guide title="adventurers_guide60_asmo" level="60" race="ASMODIANS" rewardCount="1">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Still marching on, aren't we ? You've reached an
-			impressive milestone today, my friend. But as
-			before, the Asmodian does not dwell on what he has
-			done, but what there is to do. And there is plenty.
-			<Br><Br><Br><Br>
-			Kaldor:
-			roils and groans with the consequences of an ancient mistake.
-			Cinder-ridden forests choke on the ashen reminders of the dangers of Ide.
-			This place is a struggle between a petrified memory of old, and the growth of a new age trying to forget.
-			Anoha, a forgotten Danuar hero, stands at the heart of it all.
-			His ancient blade, sunken into the stone of Wealhtheow Keep, may hold the answers to how Kaldor met its end.
-			As lava belches forth onto this Ide-soaked land from the depths, Beritra moves across Kaldor with purpose.
-			<Br><Br><Br><Br>
-			Levinshor:
-			The lush land of Levinshor belies a terrible secret,
-			for long ago it was Tiamat seat of power prior to her ascension as a dragon lord.
-			It had long been sealed away by a powerful barrier, but with Tiamat demise,
-			Beritra was able to dispel the barrier and take control of Levinshor for his own purposes.
-			Specifically, he desired the fruits of the Linkgate Foundry research.
-			Seeing Beritra troops on the move, the Elyos and Asmodian forces realized
-			the barrier must’ve been removed, and began their own incursions
-			<Br><Br><Br><Br>
-			As ever, I have something for you! Thank me later.
-			<Br><Br><Br><Br>
-			~Pernos
-			<Br><BR>]]>
-		</message>
-		<select>Faith and arms!</select>
-		<survey itemId="186000236" count="250"/>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110601865" count="1"/> <!-- Eclipse -->
+		<survey itemId="111601835" count="1"/> <!-- Eclipse -->
+		<survey itemId="112601816" count="1"/> <!-- Eclipse -->
+		<survey itemId="113601812" count="1"/> <!-- Eclipse -->
+		<survey itemId="114601818" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004198" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001422" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001552" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001696" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001467" count="1"/> <!-- Special Elite Emissary -->
     </guide>
-	<guide title="adventurers_guide65_asmo" level="65" race="ASMODIANS" rewardCount="1">
+	
+	<!-- Elyosian -->
+	
+	<!-- MAGE ARMOR AND ACC -->
+    <guide title="adventurers_guide75_ely_sm" level="75" race="ELYOS" classType="SPIRIT_MASTER" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110102101" count="1"/> <!-- Eclipse -->
+		<survey itemId="111101899" count="1"/> <!-- Eclipse -->
+		<survey itemId="112101843" count="1"/> <!-- Eclipse -->
+		<survey itemId="113101906" count="1"/> <!-- Eclipse -->
+		<survey itemId="114101940" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004204" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001423" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001553" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001697" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001468" count="1"/> <!-- Special Elite Emissary -->
+    </guide>
+	
+	<guide title="adventurers_guide75_ely_sorc" level="75" race="ELYOS" classType="SORCERER" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110102102" count="1"/> <!-- Eclipse -->
+		<survey itemId="111101900" count="1"/> <!-- Eclipse -->
+		<survey itemId="112101844" count="1"/> <!-- Eclipse -->
+		<survey itemId="113101907" count="1"/> <!-- Eclipse -->
+		<survey itemId="114101941" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004204" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001423" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001553" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001697" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001468" count="1"/> <!-- Special Elite Emissary -->
+    </guide>
+	
+	<!-- HEALLER ARMOR AND ACC -->
+	<guide title="adventurers_guide75_ely_cleric" level="75" race="ELYOS" classType="CLERIC" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110551445" count="1"/> <!-- Eclipse -->
+		<survey itemId="111502014" count="1"/> <!-- Eclipse -->
+		<survey itemId="112501950" count="1"/> <!-- Eclipse -->
+		<survey itemId="113502024" count="1"/> <!-- Eclipse -->
+		<survey itemId="114502032" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004200" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001423" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001553" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001697" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001468" count="1"/> <!-- Special Elite Emissary -->
+    </guide>
+	
+	<guide title="adventurers_guide75_ely_chanter" level="75" race="ELYOS" classType="CHANTER" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110551446" count="1"/> <!-- Eclipse -->
+		<survey itemId="111502015" count="1"/> <!-- Eclipse -->
+		<survey itemId="112501951" count="1"/> <!-- Eclipse -->
+		<survey itemId="113502025" count="1"/> <!-- Eclipse -->
+		<survey itemId="114502033" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004200" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001423" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001553" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001697" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001468" count="1"/> <!-- Special Elite Emissary -->
+    </guide>
+	
+	<!-- SONGWEAVER ARMOR AND ACC -->
+	<guide title="adventurers_guide75_ely_SONGWEAVER" level="75" race="ELYOS" classType="SONGWEAVER" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110102102" count="1"/> <!-- Eclipse -->
+		<survey itemId="111101900" count="1"/> <!-- Eclipse -->
+		<survey itemId="112101844" count="1"/> <!-- Eclipse -->
+		<survey itemId="113101907" count="1"/> <!-- Eclipse -->
+		<survey itemId="114101941" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004204" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001423" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001553" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001697" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001468" count="1"/> <!-- Special Elite Emissary -->
+    </guide>
+	
+	<!-- ENGINE ARMOR AND ACC -->
+	<guide title="adventurers_guide75_ely_AETHERTECH" level="75" race="ELYOS" classType="AETHERTECH" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110551447" count="1"/> <!-- Eclipse -->
+		<survey itemId="111502016" count="1"/> <!-- Eclipse -->
+		<survey itemId="112501952" count="1"/> <!-- Eclipse -->
+		<survey itemId="113502026" count="1"/> <!-- Eclipse -->
+		<survey itemId="114502034" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004200" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001423" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001553" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001697" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001468" count="1"/> <!-- Special Elite Emissary -->
+    </guide>
+	
+	<guide title="adventurers_guide75_ely_GUNSLINGER" level="75" race="ELYOS" classType="GUNSLINGER" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110302078" count="1"/> <!-- Eclipse -->
+		<survey itemId="111302023" count="1"/> <!-- Eclipse -->
+		<survey itemId="112301960" count="1"/> <!-- Eclipse -->
+		<survey itemId="113302048" count="1"/> <!-- Eclipse -->
+		<survey itemId="114302085" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004202" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001423" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001553" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001697" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001468" count="1"/> <!-- Special Elite Emissary -->
+    </guide>
+	
+	<!-- SCOUT ARMOR AND ACC -->
+	<guide title="adventurers_guide75_ely_sin" level="75" race="ELYOS" classType="ASSASSIN" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110302077" count="1"/> <!-- Eclipse -->
+		<survey itemId="111302022" count="1"/> <!-- Eclipse -->
+		<survey itemId="112301959" count="1"/> <!-- Eclipse -->
+		<survey itemId="113302047" count="1"/> <!-- Eclipse -->
+		<survey itemId="114302084" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004202" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001422" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001552" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001696" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001467" count="1"/> <!-- Special Elite Emissary -->
+    </guide>
+	
+	<guide title="adventurers_guide75_ely_ranger" level="75" race="ELYOS" classType="RANGER" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110302077" count="1"/> <!-- Eclipse -->
+		<survey itemId="111302022" count="1"/> <!-- Eclipse -->
+		<survey itemId="112301959" count="1"/> <!-- Eclipse -->
+		<survey itemId="113302047" count="1"/> <!-- Eclipse -->
+		<survey itemId="114302084" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004202" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001422" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001552" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001696" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001467" count="1"/> <!-- Special Elite Emissary -->
+    </guide>
+	
+	<!-- WARRIOR ARMOR AND ACC -->
+	 <guide title="adventurers_guide75_ely_templar" level="75" race="ELYOS" classType="TEMPLAR" rewardCount="10">
+	    <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110601865" count="1"/> <!-- Eclipse -->
+		<survey itemId="111601835" count="1"/> <!-- Eclipse -->
+		<survey itemId="112601816" count="1"/> <!-- Eclipse -->
+		<survey itemId="113601812" count="1"/> <!-- Eclipse -->
+		<survey itemId="114601818" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004198" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001422" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001552" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001696" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001467" count="1"/> <!-- Special Elite Emissary -->
+    </guide>
+	
+    <guide title="adventurers_guide75_ely_glad" level="75" race="ELYOS" classType="GLADIATOR" rewardCount="10">
 		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Still marching on, aren't we ? You've reached an
-			impressive milestone today, my friend. But as
-			before, the Asmodian does not dwell on what he has
-			done, but what there is to do. And there is plenty.
-			<Br><Br><Br><Br>
-			Panesterra was once the domain of the ancient Danuar.
-			The cataclysmic explosion that destroyed Kaldor was so powerful that the fabric of
-			reality was ripped apart, and Panesterra vanished into another dimension.
-			Desperate to return home, the Danuar that were pulled with it gathered as much Ide
-			as they could muster, but the plan backfired; instead of returning home,
-			the land bent and split, becoming nothing more than islands floating in a void.
-			Now, with the power of the Linkgate Foundry, Beritra has invaded Panesterra, intent on exploiting its secrets.
-			<Br><Br><Br><Br>
-			Panesterra sieges will be open periodically.
-			- Entrances become available in the Hall of Fame and Walk of Fame areas at the
-			appointed time and remain spawned for ten minutes, or until all spots are filled
-			<Br><Br><Br><Br>
-			As ever, I have something for you! Thank me later.
-			<Br><Br><Br><Br>
-			~Pernos
-			<Br><BR>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Forward to Panesterra...</select>
-		<survey itemId="100001709" count="1"/>
-		<survey itemId="100101308" count="1"/>
-		<survey itemId="100201480" count="1"/>
-		<survey itemId="100501294" count="1"/>
-		<survey itemId="100601406" count="1"/>
-		<survey itemId="100901343" count="1"/>
-		<survey itemId="101301246" count="1"/>
-		<survey itemId="101501337" count="1"/>
-		<survey itemId="101701345" count="1"/>
-		<survey itemId="101801195" count="1"/>
-		<survey itemId="101901106" count="1"/>
-		<survey itemId="102001223" count="1"/>
-		<survey itemId="102101039" count="1"/>
-		<survey itemId="115001734" count="1"/>
-		<survey itemId="115001735" count="1"/>
-	</guide>
-	<guide title="adventurers_guide68_asmo" level="68" race="ASMODIANS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Greetings, you are a ArchDaeva. The time has come to spread your wings even further
-			and explore Norsvold. So I will do my best to help you as you travel these lands.
-			Take this with you & help it is a gift of sorts for your
-			journey. May Azphel's light protect you & help and illuminate your past.
-			<Br><Br><Br><Br>
-			~Peregrine
-			<Br><BR>]]>
-		</message>
-		<select>Thank you ArchDaeva!</select>
-		<survey itemId="188100335" count="2000"/>
-	</guide>
-	<guide title="adventurers_guide72_asmo" level="72" race="ASMODIANS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Greetings, you are a ArchDaeva. The time has come to spread your wings even further
-			and explore Norsvold. So I will do my best to help you as you travel these lands.
-			Take this with you & help it is a gift of sorts for your
-			journey. May Azphel's light protect you & help and illuminate your past.
-			<Br><Br><Br><Br>
-			~Peregrine
-			<Br><BR>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Thank you ArchDaeva!</select>
-		<survey itemId="188054910" count="1"/>
-		<survey itemId="188054911" count="1"/>
-	</guide>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+        <select>Click here to close window</select>
+        <survey itemId="110601865" count="1"/> <!-- Eclipse -->
+		<survey itemId="111601835" count="1"/> <!-- Eclipse -->
+		<survey itemId="112601816" count="1"/> <!-- Eclipse -->
+		<survey itemId="113601812" count="1"/> <!-- Eclipse -->
+		<survey itemId="114601818" count="1"/> <!-- Eclipse -->
+		<survey itemId="125004198" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="121001422" count="1"/> <!-- Special Elite Emissary -->
+		<survey itemId="120001552" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="122001696" count="2"/> <!-- Special Elite Emissary -->
+		<survey itemId="123001467" count="1"/> <!-- Special Elite Emissary -->
+    </guide>
+	
+	<!-- MISC ASMODIANS -->
+	<guide title="adventurers_guide61_asmo" level="75" race="ASMODIANS" rewardCount="18">
+        <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+		<select>Click here to close window</select>
+        <survey itemId="182400001" count="10000000"/>
+		<survey itemId="169610052" count="1"/>
+        <survey itemId="162000124" count="1000"/>
+        <survey itemId="164002116" count="100"/>
+        <survey itemId="164002117" count="100"/>
+		<survey itemId="164002118" count="100"/>
+		<survey itemId="164002119" count="100"/>
+		<survey itemId="164002120" count="100"/>
+		<survey itemId="164000372" count="1000"/>
+		<survey itemId="164000375" count="1000"/>
+		<survey itemId="160001338" count="1000"/>
+		<survey itemId="160002416" count="1000"/>
+		<survey itemId="160001340" count="1000"/>
+		<survey itemId="162000137" count="1000"/>
+		<survey itemId="160002274" count="1000"/>
+		<survey itemId="168310018" count="20"/>
+		<survey itemId="188054287" count="5"/>
+		<survey itemId="188053786" count="1"/>
+    </guide>
+	
+	<!-- MISC ELYOS -->
+	<guide title="adventurers_guide61_ely" level="75" race="ELYOS" rewardCount="18">
+        <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+		<select>Click here to close window</select>
+        <survey itemId="182400001" count="10000000"/>
+		<survey itemId="169610052" count="1"/>
+        <survey itemId="162000124" count="1000"/>
+        <survey itemId="164002116" count="100"/>
+        <survey itemId="164002117" count="100"/>
+		<survey itemId="164002118" count="100"/>
+		<survey itemId="164002119" count="100"/>
+		<survey itemId="164002120" count="100"/>
+		<survey itemId="164000372" count="1000"/>
+		<survey itemId="164000375" count="1000"/>
+		<survey itemId="160001338" count="1000"/>
+		<survey itemId="160002416" count="1000"/>
+		<survey itemId="160001340" count="1000"/>
+		<survey itemId="162000137" count="1000"/>
+		<survey itemId="160002274" count="1000"/>
+		<survey itemId="168310018" count="20"/>
+		<survey itemId="188054287" count="5"/>
+		<survey itemId="188053786" count="1"/>
+    </guide>
+	
+	<!-- WEAPON PVP ASMODIAN -->
+	<guide title="adventurers_guide63_asmo" level="75" race="ASMODIANS" rewardCount="1">
+        <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+		<select>Click here to close window!</select>
+        <survey itemId="100002107" count="1"/>
+        <survey itemId="100101573" count="1"/>
+        <survey itemId="100201752" count="1"/>
+		<survey itemId="100501530" count="1"/>
+		<survey itemId="100601642" count="1"/>
+		<survey itemId="100901611" count="1"/>
+		<survey itemId="101301490" count="1"/>
+		<survey itemId="101501591" count="1"/>
+		<survey itemId="101701593" count="1"/>
+		<survey itemId="101801410" count="1"/>
+		<survey itemId="101901316" count="1"/>
+		<survey itemId="102001438" count="1"/>
+		<survey itemId="102101253" count="1"/>
+		<survey itemId="115002064" count="1"/>
+    </guide>
+	
+	<!-- WEAPON PVP ELYOS -->
+	<guide title="adventurers_guide63_ely" level="75" race="ELYOS" rewardCount="1">
+        <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+		<select>Click here to close window!</select>
+        <survey itemId="100002107" count="1"/>
+        <survey itemId="100101573" count="1"/>
+        <survey itemId="100201752" count="1"/>
+		<survey itemId="100501530" count="1"/>
+		<survey itemId="100601642" count="1"/>
+		<survey itemId="100901611" count="1"/>
+		<survey itemId="101301490" count="1"/>
+		<survey itemId="101501591" count="1"/>
+		<survey itemId="101701593" count="1"/>
+		<survey itemId="101801410" count="1"/>
+		<survey itemId="101901316" count="1"/>
+		<survey itemId="102001438" count="1"/>
+		<survey itemId="102101253" count="1"/>
+		<survey itemId="115002064" count="1"/>
+    </guide>
+	
+	<!-- WEAPON PVE ASMODIAN -->
 	<guide title="adventurers_guide75_asmo" level="75" race="ASMODIANS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Greetings, you are a ArchDaeva. The time has come to spread your wings even further
-			and explore Norsvold. So I will do my best to help you as you travel these lands.
-			Take this with you & help it is a gift of sorts for your
-			journey. May Azphel's light protect you & help and illuminate your past.
-			<Br><Br><Br><Br>
-			~Peregrine
-			<Br><BR>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Thank you ArchDaeva!</select>
-		<survey itemId="169650001" count="1"/>
-		<survey itemId="169660001" count="1"/>
-	</guide>
-	<guide title="adventurers_guide77_asmo" level="77" race="ASMODIANS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Greetings, you are a ArchDaeva. The time has come to spread your wings even further
-			and explore Norsvold. So I will do my best to help you as you travel these lands.
-			Take this with you & help it is a gift of sorts for your
-			journey. May Azphel's light protect you & help and illuminate your past.
-			<Br><Br><Br><Br>
-			~Peregrine
-			<Br><BR>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Faith and arms!</select>
-		<survey itemId="100002068" count="1"/>
-		<survey itemId="100101546" count="1"/>
-		<survey itemId="100201725" count="1"/>
-		<survey itemId="100501509" count="1"/>
-		<survey itemId="100601621" count="1"/>
-		<survey itemId="100901582" count="1"/>
-		<survey itemId="101301463" count="1"/>
-		<survey itemId="101501567" count="1"/>
-		<survey itemId="101701566" count="1"/>
-		<survey itemId="101801393" count="1"/>
-		<survey itemId="101901297" count="1"/>
-		<survey itemId="102001421" count="1"/>
-		<survey itemId="102101236" count="1"/>
-	</guide>
-	<guide title="adventurers_guide80_asmo" level="80" race="ASMODIANS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Greetings, you are a ArchDaeva. The time has come to spread your wings even further
-			and explore Norsvold. So I will do my best to help you as you travel these lands.
-			Take this with you & help it is a gift of sorts for your
-			journey. May Azphel's light protect you & help and illuminate your past.
-			<Br><Br><Br><Br>
-			~Peregrine
-			<Br><BR>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Faith and arms!</select>
-		<survey itemId="100002013" count="1"/>
-		<survey itemId="100101495" count="1"/>
-		<survey itemId="100201676" count="1"/>
-		<survey itemId="100501453" count="1"/>
-		<survey itemId="100601571" count="1"/>
-		<survey itemId="100901530" count="1"/>
-		<survey itemId="101301414" count="1"/>
-		<survey itemId="101501516" count="1"/>
-		<survey itemId="101701511" count="1"/>
-		<survey itemId="101801346" count="1"/>
-		<survey itemId="101901251" count="1"/>
-		<survey itemId="102001374" count="1"/>
-		<survey itemId="102101189" count="1"/>
-	</guide>
-	<guide title="adventurers_guide83_asmo" level="83" race="ASMODIANS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Greetings, you are a ArchDaeva. The time has come to spread your wings even further
-			and explore Norsvold. So I will do my best to help you as you travel these lands.
-			Take this with you & help it is a gift of sorts for your
-			journey. May Azphel's light protect you & help and illuminate your past.
-			<Br><Br><Br><Br>
-			~Peregrine
-			<Br><BR>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Faith and arms!</select>
-		<survey itemId="100002014" count="1"/>
-		<survey itemId="100101496" count="1"/>
-		<survey itemId="100201677" count="1"/>
-		<survey itemId="100501454" count="1"/>
-		<survey itemId="100601572" count="1"/>
-		<survey itemId="100901531" count="1"/>
-		<survey itemId="101301415" count="1"/>
-		<survey itemId="101501517" count="1"/>
-		<survey itemId="101701512" count="1"/>
-		<survey itemId="101801347" count="1"/>
-		<survey itemId="101901252" count="1"/>
-		<survey itemId="102001375" count="1"/>
-		<survey itemId="102101190" count="1"/>
-	</guide>
+        <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+		<select>Click here to close window!</select>
+        <survey itemId="100001544" count="1"/> 
+        <survey itemId="100101179" count="1"/>
+        <survey itemId="100201349" count="1"/>
+		<survey itemId="100501183" count="1"/>
+		<survey itemId="100601271" count="1"/>
+		<survey itemId="100901198" count="1"/>
+		<survey itemId="101301131" count="1"/>
+		<survey itemId="101501212" count="1"/>
+		<survey itemId="101701230" count="1"/>
+		<survey itemId="101801013" count="1"/>
+		<survey itemId="101900977" count="1"/>
+		<survey itemId="102001040" count="1"/>
+		<survey itemId="102100816" count="1"/>
+		<survey itemId="115001585" count="1"/>
+    </guide>
 	
-	<!-- Elyos -->
-    <guide title="adventurers_guide10_ely" level="10" race="ELYOS" rewardCount="2">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			In order to stem the increasingly powerful tide of Beritra minions,
-			Kaisinel and Marchutan have established areas to rehabilitate Elyos and Asmodians
-			who have returned after having been away from the war effort.
-			These sanctuaries, known as Abbeys, are where returning Daevas can find support,
-			quests, and dispatch Npc to ease them into their return to Atreia.
-			<br><br>]]>
-        </message>
-		<reward_info>Hold the Ctrl key to select 2 reward.</reward_info>
-        <select>Go see Lena in Wisplight Abbey.</select>
-        <survey itemId="164000335" count="1"/>
-		<survey itemId="190100234" count="1"/>
-		<survey itemId="190100055" count="1"/>
-		<survey itemId="190100130" count="1"/>
-		<survey itemId="190100185" count="1"/>
-		<survey itemId="190100060" count="1"/>
-		<survey itemId="190100098" count="1"/>
-		<survey itemId="190100162" count="1"/>
-		<survey itemId="190100233" count="1"/>
-		<survey itemId="190100142" count="1"/>
-		<survey itemId="190100220" count="1"/>
-    </guide>
-    <guide title="adventurers_guide15_ely" level="15" race="ELYOS" rewardCount="1">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Congratulations!
-			<br><br>]]>
-        </message>
-		<reward_info>Please select 1 reward.</reward_info>
-        <select>Faith and arms!</select>
-		<survey itemId="100001734" count="1"/>
-		<survey itemId="100101331" count="1"/>
-		<survey itemId="100201500" count="1"/>
-		<survey itemId="100501311" count="1"/>
-		<survey itemId="100601428" count="1"/>
-		<survey itemId="100901372" count="1"/>
-		<survey itemId="101301264" count="1"/>
-		<survey itemId="101501354" count="1"/>
-		<survey itemId="101701365" count="1"/>
-		<survey itemId="101801215" count="1"/>
-		<survey itemId="101901124" count="1"/>
-		<survey itemId="102001243" count="1"/>
-		<survey itemId="102101069" count="1"/>
-    </guide>
-	<guide title="adventurers_guide20_ely" level="20" race="ELYOS" rewardCount="1">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Ah, Stigmas! Such a useful tool. Yes, they're ripped
-			from the souls of displaced Daevas, but don't brood
-			over that part. Rejoice instead that you gain
-			abilities that one on your path might never
-			otherwise obtain.
-			<Br><Br><Br><Br>
-			You are now ready to walk that particular path, my
-			friend. Take these scrolls, and use them to quicken
-			your return to Sanctum. Once there, you
-			would do well to speak with Miriya and Clymene in
-			Protector's Hall. They know more about
-			Stigmas than anyone else I've met.
-			<Br><Br><Br><Br>
-			Until next time,
-			<Br><Br><Br><Br>
-			~Pernos
-			<br><br>]]>
-        </message>
-		<reward_info>Please select 1 reward.</reward_info>
-        <select>Stigmas, eh? Should check those out.</select>
-        <survey itemId="188053750" count="1"/>
-		<survey itemId="188053751" count="1"/>
-		<survey itemId="188053752" count="1"/>
-		<survey itemId="188053753" count="1"/>
-		<survey itemId="188053754" count="1"/>
-		<survey itemId="188053755" count="1"/>
-		<survey itemId="188053756" count="1"/>
-		<survey itemId="188053757" count="1"/>
-		<survey itemId="188053758" count="1"/>
-		<survey itemId="188053759" count="1"/>
-		<survey itemId="188053760" count="1"/>
-    </guide>
-	<guide title="adventurers_guide25_ely" level="25" race="ELYOS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Tell me, child... what is the enemy of an enemy?
-			<br><br><br><br>
-			You are now ready to enter the Fire Temple, and battle
-			the Asmodian traitor known as Kromede. She is
-			despised amongst her own lowbred kin, her treachery
-			considered the most fundamental betrayal of Asmodian
-			ideals. But this does not make her a friend to us. No.
-			She is of the same blood, and must be destroyed
-			along with the rest of her beastly kind. But to enter the
-			Fire Temple, you must first find the key to its doors.
-			You would do well to hunt the underground monsters
-			of the Kyola Temple. One of them will have what you
-			need.
-			<br><br><br><br>
-			Elsewhere, other opportunities have presented
-			themselves to you! If you get the chance, return to our
-			beautiful capital, and speak with Leah. She will have an
-			exciting task for you. And while you're in Sanctum, why
-			not pick up an augmentation to your wings?
-			<br><br><br><br>
-			Be safe, child. I will visit you again soon.
-			<br><br><br><br>
-			~Pernos
-			<br><br>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Faith and arms!</select>
-		<survey itemId="100002065" count="1"/>
-		<survey itemId="100101542" count="1"/>
-		<survey itemId="100201722" count="1"/>
-		<survey itemId="100601618" count="1"/>
-		<survey itemId="101301460" count="1"/>
-		<survey itemId="101501563" count="1"/>
-		<survey itemId="101701563" count="1"/>
-		<survey itemId="101801390" count="1"/>
-		<survey itemId="102001418" count="1"/>
-		<survey itemId="102101233" count="1"/>
-	</guide>
-	<guide title="adventurers_guide30_ely" level="30" race="ELYOS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Congratulations!
-			<br><br>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Faith and arms!</select>
-		<survey itemId="100000473" count="1"/>
-		<survey itemId="100100355" count="1"/>
-		<survey itemId="100200463" count="1"/>
-		<survey itemId="100500352" count="1"/>
-		<survey itemId="100600382" count="1"/>
-		<survey itemId="100900349" count="1"/>
-		<survey itemId="101300340" count="1"/>
-		<survey itemId="101500356" count="1"/>
-		<survey itemId="101700368" count="1"/>
-		<survey itemId="101800412" count="1"/>
-		<survey itemId="101900398" count="1"/>
-		<survey itemId="102000426" count="1"/>
-		<survey itemId="102100395" count="1"/>
-	</guide>
-    <guide title="adventurers_guide35_ely" level="35" race="ELYOS" rewardCount="1">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Do you remember the storm I spoke of last time I
-			contacted you? It is here. And, like all powerful storms, this
-			one is multi-faceted and deadly.
-			<Br><Br><Br><Br>
-			I trust you have found your way to Kromede's Trial ? If not,
-			hurry to New Heiron Gate and speak to Perento as soon as
-			you can. Kromede's Trial will open your eyes to some
-			cold, hard Elyos truths, while the treasures to be
-			found there are easily worth your time. However, other
-			areas are also ready for your attention, including Aetherogenetics Lab
-			(though you must kill RM-78C), the
-			Jeiaparan Village, and the Lower Abyss Fortress.
-			<Br><Br><Br><Br>
-			Choose your destiny, my friend! The branches, these
-			choices, are merely a glimpse of life as a Daeva
-			unshackled from the chains of destiny!
-			<Br><Br><Br><Br>
-			Until next time,
-			<Br><Br><Br><Br>
-			~Pernos
-			<br><br>]]>
-        </message>
-		<reward_info>Please select 1 reward.</reward_info>
-        <select>Faith and arms!</select>
-		<survey itemId="100000804" count="1"/>
-		<survey itemId="100100603" count="1"/>
-		<survey itemId="100200730" count="1"/>
-		<survey itemId="100500624" count="1"/>
-		<survey itemId="100600683" count="1"/>
-		<survey itemId="100900614" count="1"/>
-		<survey itemId="101300586" count="1"/>
-		<survey itemId="101500627" count="1"/>
-		<survey itemId="101700649" count="1"/>
-		<survey itemId="101800593" count="1"/>
-		<survey itemId="101900589" count="1"/>
-		<survey itemId="102000621" count="1"/>
-		<survey itemId="102100534" count="1"/>
-		<survey itemId="115000892" count="1"/>
-    </guide>
-    <guide title="adventurers_guide40_ely" level="40" race="ELYOS" rewardCount="1">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			So you heve survived this far. I excepted you to, but i did
-			not expect you to reach these heights quite so quickly. I
-			am impressed, my friend! But, with each surpassed
-			milestone comes a slew of fresh challenges.
-			<br><br><br><br>
-			A ship known as the Steel Rake is careering through the
-			skies above as you read this. Its Shulack crew don't care
-			for either Elyos or Asmodians, and kidnap and torture you
-			kin on a daily basis. Stop them. Alternatively, you are now
-			ready to finish up your work in Heiron or take on the
-			Lower Abyss Treasure Rooms.
-			<br><br><br><br>
-			But combat isn't all that's available for you now, no! New
-			skills are ready to be unlocked, and you are now ready to
-			undertake the expert test in a profession of your choosing.
-			<br><br><br><br>
-			Faith and arms!
-			<br><br><br><br>
-			~Pernos
-			<br><br>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Faith and arms!</select>
-		<survey itemId="100000805" count="1"/>
-		<survey itemId="100100604" count="1"/>
-		<survey itemId="100200731" count="1"/>
-		<survey itemId="100500625" count="1"/>
-		<survey itemId="100600684" count="1"/>
-		<survey itemId="100900615" count="1"/>
-		<survey itemId="101300587" count="1"/>
-		<survey itemId="101500628" count="1"/>
-		<survey itemId="101700650" count="1"/>
-		<survey itemId="101800594" count="1"/>
-		<survey itemId="101900590" count="1"/>
-		<survey itemId="102000622" count="1"/>
-		<survey itemId="102100535" count="1"/>
-		<survey itemId="115000893" count="1"/>
-	</guide>
-	<guide title="adventurers_guide45_ely" level="45" race="ELYOS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Beritra's invasion monsters will appear in some regions at certain times.
-			Beritra has researched ancient Danuar weapons ever since discovering Ide and Hyperion in Katalam.
-			Deep within the Sauro Supply Base was a hidden cache of Danuar weapon designs and machine parts.
-			Beritra used this new technology to create legions of highly advanced autonomous weapons, which he
-			uses to sow chaos and Balaurea, Abyss, and even Elysea and Asmodae.
-			<br><br><br><br>
-			Walk strong. Let blood boil within your veins, and use
-			the steel of our spirit to strengthen your conviction. The
-			cowards will fall before you like Asmodians flowers under
-			Elyos rain.
-			<br><br><br><br>
-			Faith and arms!
-			<br><br><br><br>
-			~Pernos.
-			<br><br>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Beritra's invasion, eh...?</select>
-		<survey itemId="162001005" count="50"/>
-		<survey itemId="162001006" count="50"/>
-		<survey itemId="162001007" count="50"/>
-		<survey itemId="162001008" count="50"/>
-		<survey itemId="164002010" count="50"/>
-		<survey itemId="164002011" count="50"/>
-	</guide>
-	<guide title="adventurers_guide50_ely" level="50" race="ELYOS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			The Essence Purifier consumes 50% of the XP bar of a Lv.65 character, and 1 Purified Essence is obtained.
-			Only 2 Essence Purifier's can be purchased from the corresponding NPC in one day.
-			NPCs selling Essence Purifier's and purification designs have been added to cities of both races.
-			The items can be purchased in the Walk of Fame/Hall of Fame in the academies of each race.
-			The following new gear series have the same stats as existing high rank Abyss equipment,
-			but have higher prices and can be equipped by Soldier Rank 1 and above.
-			<br><br><br><br>
-			Faith and arms!
-			<br><br><br><br>
-			~Admin
-			<br><br>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Thank you!</select>
-		<survey itemId="100200723" count="1"/>
-		<survey itemId="100000794" count="1"/>
-		<survey itemId="100900607" count="1"/>
-		<survey itemId="100500617" count="1"/>
-		<survey itemId="101700641" count="1"/>
-		<survey itemId="101300579" count="1"/>
-		<survey itemId="101500620" count="1"/>
-		<survey itemId="100600657" count="1"/>
-		<survey itemId="100100596" count="1"/>
-		<survey itemId="101800586" count="1"/>
-		<survey itemId="102000614" count="1"/>
-		<survey itemId="101900582" count="1"/>
-		<survey itemId="102100531" count="1"/>
-	</guide>
-    <guide title="adventurers_guide55_ely" level="55" race="ELYOS" rewardCount="1">
-        <message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			The summit has been reached! My sincerest
-			congratulations, my child. You have blossomed from a
-			mere seed into the grandest of trees, and now stand
-			shoulder to shoulder with the most feared and respected
-			names in all of Elysea! My pride is immeasurable, but to
-			sit here and rest easy now would be a crime. There is
-			much to do, for this great war is still not won, and Elysea
-			needs its best now more than ever before.
-			<Br><Br><Br><Br>
-			The great halls of Beshmundir Temple have swung open
-			to you. This place will trouble you more than anything
-			you've faced before. Perhaps you would be best off first
-			unlocking the last of your Stigma potential? Hmm....
-			<Br><Br><Br><Br>
-			Elsewhere, two mighty beasts are ready to be tackled.
-			No doubt you have already heard of Padmarashka,
-			ancient drakan that failed to ascend to the
-			ranks of the Dragon Lords, but who still command
-			immense power. You could try fighting them, but be
-			warned... no-one I know of has succeeded yet.
-			<Br><Br><Br><Br>
-			One mountain has been climbed my child, but there is
-			still much to do. Faith and arms!
-			<Br><Br><Br><Br>
-			~Pernos
-			<br><br>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Thank you for everything.</select>
-		<survey itemId="100001307" count="1"/>
-		<survey itemId="100100996" count="1"/>
-		<survey itemId="100201158" count="1"/>
-		<survey itemId="100501012" count="1"/>
-		<survey itemId="100601065" count="1"/>
-		<survey itemId="100901001" count="1"/>
-		<survey itemId="101300955" count="1"/>
-		<survey itemId="101501025" count="1"/>
-		<survey itemId="101701037" count="1"/>
-		<survey itemId="101800798" count="1"/>
-		<survey itemId="101900802" count="1"/>
-		<survey itemId="102000836" count="1"/>
-		<survey itemId="102100698" count="1"/>
-		<survey itemId="115001357" count="1"/>
-		<survey itemId="115001359" count="1"/>
-	</guide>
-	<guide title="adventurers_guide60_ely" level="60" race="ELYOS" rewardCount="1">
-		<message>
-		    <![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Still marching on, aren't we ? You've reached an
-			impressive milestone today, my friend. But as
-			before, the Asmodian does not dwell on what he has
-			done, but what there is to do. And there is plenty.
-			<Br><Br><Br><Br>
-			Kaldor:
-			roils and groans with the consequences of an ancient mistake.
-			Cinder-ridden forests choke on the ashen reminders of the dangers of Ide.
-			This place is a struggle between a petrified memory of old, and the growth of a new age trying to forget.
-			Anoha, a forgotten Danuar hero, stands at the heart of it all.
-			His ancient blade, sunken into the stone of Wealhtheow Keep, may hold the answers to how Kaldor met its end.
-			As lava belches forth onto this Ide-soaked land from the depths, Beritra moves across Kaldor with purpose.
-			<Br><Br><Br><Br>
-			Levinshor:
-			The lush land of Levinshor belies a terrible secret,
-			for long ago it was Tiamat seat of power prior to her ascension as a dragon lord.
-			It had long been sealed away by a powerful barrier, but with Tiamat demise,
-			Beritra was able to dispel the barrier and take control of Levinshor for his own purposes.
-			Specifically, he desired the fruits of the Linkgate Foundry research.
-			Seeing Beritra troops on the move, the Elyos and Asmodian forces realized
-			the barrier must’ve been removed, and began their own incursions
-			<Br><Br><Br><Br>
-			As ever, I have something for you! Thank me later.
-			<Br><Br><Br><Br>
-			~Pernos
-			<Br><BR>]]>
-		</message>
-		<select>Kaldor... Levinshor, eh...?</select>
-		<survey itemId="186000236" count="250"/>
-	</guide>
-	<guide title="adventurers_guide65_ely" level="65" race="ELYOS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Still marching on, aren't we ? You've reached an
-			impressive milestone today, my friend. But as
-			before, the Asmodian does not dwell on what he has
-			done, but what there is to do. And there is plenty.
-			<Br><Br><Br><Br>
-			Panesterra was once the domain of the ancient Danuar.
-			The cataclysmic explosion that destroyed Kaldor was so powerful that the fabric of
-			reality was ripped apart, and Panesterra vanished into another dimension.
-			Desperate to return home, the Danuar that were pulled with it gathered as much Ide
-			as they could muster, but the plan backfired; instead of returning home,
-			the land bent and split, becoming nothing more than islands floating in a void.
-			Now, with the power of the Linkgate Foundry, Beritra has invaded Panesterra, intent on exploiting its secrets.
-			<Br><Br><Br><Br>
-			Panesterra sieges will be open periodically.
-			-Entrances become available in the Hall of Fame and Walk of Fame areas at the
-			appointed time and remain spawned for ten minutes, or until all spots are filled
-			<Br><Br><Br><Br>
-			As ever, I have something for you! Thank me later.
-			<Br><Br><Br><Br>
-			~Pernos
-			<Br><BR>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Forward to Panesterra...</select>
-		<survey itemId="100001709" count="1"/>
-		<survey itemId="100101308" count="1"/>
-		<survey itemId="100201480" count="1"/>
-		<survey itemId="100501294" count="1"/>
-		<survey itemId="100601406" count="1"/>
-		<survey itemId="100901343" count="1"/>
-		<survey itemId="101301246" count="1"/>
-		<survey itemId="101501337" count="1"/>
-		<survey itemId="101701345" count="1"/>
-		<survey itemId="101801195" count="1"/>
-		<survey itemId="101901106" count="1"/>
-		<survey itemId="102001223" count="1"/>
-		<survey itemId="102101039" count="1"/>
-		<survey itemId="115001734" count="1"/>
-		<survey itemId="115001735" count="1"/>
-	</guide>
-	<guide title="adventurers_guide68_ely" level="68" race="ELYOS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Greetings, you are a ArchDaeva. The time has come to spread your wings even further
-			and explore Iluma. So I will do my best to help you as you travel these lands.
-			Take this with you & help it is a gift of sorts for your
-			journey. May Ariel's light protect you & help and illuminate your past.
-			<Br><Br><Br><Br>
-			~Viola
-			<Br><BR>]]>
-		</message>
-		<select>Thank you ArchDaeva!</select>
-		<survey itemId="188100335" count="2000"/>
-	</guide>
-	<guide title="adventurers_guide72_ely" level="72" race="ELYOS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Greetings, you are a ArchDaeva. The time has come to spread your wings even further
-			and explore Iluma. So I will do my best to help you as you travel these lands.
-			Take this with you & help it is a gift of sorts for your
-			journey. May Ariel's light protect you & help and illuminate your past.
-			<Br><Br><Br><Br>
-			~Viola
-			<Br><BR>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Thank you ArchDaeva!</select>
-		<survey itemId="188054910" count="1"/>
-		<survey itemId="188054911" count="1"/>
-	</guide>
+	<!-- WEAPON PVE ELYOS -->
 	<guide title="adventurers_guide75_ely" level="75" race="ELYOS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Greetings, you are a ArchDaeva. The time has come to spread your wings even further
-			and explore Iluma. So I will do my best to help you as you travel these lands.
-			Take this with you & help it is a gift of sorts for your
-			journey. May Ariel's light protect you & help and illuminate your past.
-			<Br><Br><Br><Br>
-			~Viola
-			<Br><BR>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Thank you ArchDaeva!</select>
-		<survey itemId="169650001" count="1"/>
-		<survey itemId="169660001" count="1"/>
-	</guide>
-	<guide title="adventurers_guide77_asmo" level="77" race="ASMODIANS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Greetings, you are a ArchDaeva. The time has come to spread your wings even further
-			and explore Iluma. So I will do my best to help you as you travel these lands.
-			Take this with you & help it is a gift of sorts for your
-			journey. May Ariel's light protect you & help and illuminate your past.
-			<Br><Br><Br><Br>
-			~Viola
-			<Br><BR>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Thank you ArchDaeva!</select>
-		<survey itemId="100002068" count="1"/>
-		<survey itemId="100101546" count="1"/>
-		<survey itemId="100201725" count="1"/>
-		<survey itemId="100501509" count="1"/>
-		<survey itemId="100601621" count="1"/>
-		<survey itemId="100901582" count="1"/>
-		<survey itemId="101301463" count="1"/>
-		<survey itemId="101501567" count="1"/>
-		<survey itemId="101701566" count="1"/>
-		<survey itemId="101801393" count="1"/>
-		<survey itemId="101901297" count="1"/>
-		<survey itemId="102001421" count="1"/>
-		<survey itemId="102101236" count="1"/>
-	</guide>
-	<guide title="adventurers_guide80_asmo" level="80" race="ASMODIANS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Greetings, you are a ArchDaeva. The time has come to spread your wings even further
-			and explore Iluma. So I will do my best to help you as you travel these lands.
-			Take this with you & help it is a gift of sorts for your
-			journey. May Ariel's light protect you & help and illuminate your past.
-			<Br><Br><Br><Br>
-			~Viola
-			<Br><BR>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Thank you ArchDaeva!</select>
-		<survey itemId="100002013" count="1"/>
-		<survey itemId="100101495" count="1"/>
-		<survey itemId="100201676" count="1"/>
-		<survey itemId="100501453" count="1"/>
-		<survey itemId="100601571" count="1"/>
-		<survey itemId="100901530" count="1"/>
-		<survey itemId="101301414" count="1"/>
-		<survey itemId="101501516" count="1"/>
-		<survey itemId="101701511" count="1"/>
-		<survey itemId="101801346" count="1"/>
-		<survey itemId="101901251" count="1"/>
-		<survey itemId="102001374" count="1"/>
-		<survey itemId="102101189" count="1"/>
-	</guide>
-	<guide title="adventurers_guide83_asmo" level="83" race="ASMODIANS" rewardCount="1">
-		<message>
-			<![CDATA[<font size ="6" color="FFB732">Adventurer's Guide"</font>
-			<BR><BR>
-			Greetings, you are a ArchDaeva. The time has come to spread your wings even further
-			and explore Iluma. So I will do my best to help you as you travel these lands.
-			Take this with you & help it is a gift of sorts for your
-			journey. May Ariel's light protect you & help and illuminate your past.
-			<Br><Br><Br><Br>
-			~Viola
-			<Br><BR>]]>
-		</message>
-		<reward_info>Please select 1 reward.</reward_info>
-		<select>Thank you ArchDaeva!</select>
-		<survey itemId="100002014" count="1"/>
-		<survey itemId="100101496" count="1"/>
-		<survey itemId="100201677" count="1"/>
-		<survey itemId="100501454" count="1"/>
-		<survey itemId="100601572" count="1"/>
-		<survey itemId="100901531" count="1"/>
-		<survey itemId="101301415" count="1"/>
-		<survey itemId="101501517" count="1"/>
-		<survey itemId="101701512" count="1"/>
-		<survey itemId="101801347" count="1"/>
-		<survey itemId="101901252" count="1"/>
-		<survey itemId="102001375" count="1"/>
-		<survey itemId="102101190" count="1"/>
-	</guide>
+        <message>
+            <![CDATA[<BR><BR>
+			<font size ="6" color="FFB732">Congratulations! You Have item Starter Pack !"</font>
+			<br><br>]]>
+        </message>
+		<select>Click here to close window!</select>
+        <survey itemId="100001544" count="1"/>
+        <survey itemId="100101179" count="1"/>
+        <survey itemId="100201349" count="1"/>
+		<survey itemId="100501183" count="1"/>
+		<survey itemId="100601271" count="1"/>
+		<survey itemId="100901198" count="1"/>
+		<survey itemId="101301131" count="1"/>
+		<survey itemId="101501212" count="1"/>
+		<survey itemId="101701230" count="1"/>
+		<survey itemId="101801013" count="1"/>
+		<survey itemId="101900977" count="1"/>
+		<survey itemId="102001040" count="1"/>
+		<survey itemId="102100816" count="1"/>
+		<survey itemId="115001585" count="1"/>
+    </guide>
 	
+	<!-- WINGS ASMODIAN -->
+	<guide title="adventurers_guide60_asmo" level="75" race="ASMODIANS" rewardCount="1">
+        <message>
+            <![CDATA[<BR><BR>
+			Congratulations!
+			<br><br>]]>
+        </message>
+		<select>Click here to close window!</select>
+        <survey itemId="187000112" count="1"/>
+        <survey itemId="187000111" count="1"/>
+    </guide>
+	
+	<!-- WINGS ELYOS -->
+	<guide title="adventurers_guide60_ely" level="75" race="ELYOS" rewardCount="1">
+        <message>
+            <![CDATA[<BR><BR>
+			Congratulations!
+			<br><br>]]>
+        </message>
+		<select>Click here to close window!</select>
+        <survey itemId="187000112" count="1"/>
+        <survey itemId="187000111" count="1"/>
+    </guide>
+	
+	<!-- STIGMA -->
+	<guide title="adventurers_guide75" level="75" race="PC_ALL" rewardCount="1">
+        <message>
+            <![CDATA[<BR><BR>
+			Congratulations!
+			<br><br>]]>
+        </message>
+		<select>Click here to close window!</select>
+        <survey itemId="188053750" count="5"/>
+        <survey itemId="188053751" count="5"/>
+		<survey itemId="188053752" count="5"/>
+		<survey itemId="188053753" count="5"/>
+		<survey itemId="188053754" count="5"/>
+		<survey itemId="188053755" count="5"/>
+		<survey itemId="188053756" count="5"/>
+		<survey itemId="188053757" count="5"/>
+		<survey itemId="188053758" count="5"/>
+		<survey itemId="188053759" count="5"/>
+		<survey itemId="188053760" count="5"/>
+    </guide>
 	<!-- Guide Base -->
 	<guide title="adventurers_base1" level="1" race="PC_ALL" rewardCount="1">
 		<message>
@@ -1118,7 +650,7 @@
 			<br><br>]]>
 		</message>
 		<reward_info>Please select 1 reward.</reward_info>
-		<select>Have Fun and Enjoy on EA!</select>
+		<select>Have Fun and Enjoy on DreamerGames!</select>
 		<survey itemId="186000031" count="2"/>
 		<survey itemId="186000096" count="2"/>
 	</guide>
@@ -1140,19 +672,14 @@
 			<br><br>]]>
 		</message>
 		<reward_info>Please select 1 reward.</reward_info>
-		<select>Have Fun and Enjoy on EA!</select>
+		<select>Have Fun and Enjoy on DreamerGames!</select>
 		<survey itemId="186000425" count="2"/> <!-- Mark Of Prophecy -->
 		<survey itemId="188055484" count="1"/> <!-- Small Luna Bundle -->
 		<survey itemId="162001062" count="1"/> <!-- Berdin's Lucky Star -->
-		<survey itemId="165060002" count="1"/> <!-- [Event] Level Reduction Stone -->
-		<survey itemId="162000175" count="2"/> <!-- Full Recovery Potion -->
+		<survey itemId="175060002" count="1"/> <!-- [Event] Level Reduction Stone -->
 		<survey itemId="188053323" count="1"/> <!-- Levinshor Alliance Ancient Manastone Box -->
 		<survey itemId="188053458" count="1"/> <!-- Prime Elite Enchantment Stone Box -->
 		<survey itemId="188053459" count="1"/> <!-- Elite High Grade Composite Manastone Box -->
-		<survey itemId="188053461" count="1"/> <!-- Power Lockbox Cache -->
-		<survey itemId="188053462" count="1"/> <!-- Fortune Lockbox Cache -->
-		<survey itemId="188053463" count="1"/> <!-- Utility Lockbox Cache -->
-		<survey itemId="188053540" count="1"/> <!-- Supply Scroll Bundle -->
 		<survey itemId="188053564" count="1"/> <!-- Illusion Godstone Bundle -->
 		<survey itemId="188053576" count="1"/> <!-- [Event] Premium Power Shard Bundle -->
 		<survey itemId="188053617" count="1"/> <!-- Noble Tidal Idian Bundle -->
@@ -1193,7 +720,7 @@
 			<Br><BR>]]>
 		</message>
 		<reward_info>Please select 1 reward.</reward_info>
-		<select>Have Fun and Enjoy on EA!</select>
+		<select>Have Fun and Enjoy on Epic Aion!</select>
 		<survey itemId="186000393" count="8"/> <!-- Honorable Ceramium Medal -->
 		<survey itemId="186000223" count="8"/> <!-- Honorable Mithril Medal -->
 		<survey itemId="186000242" count="8"/> <!-- Ceramium Medal -->
@@ -1212,10 +739,7 @@
 			<Br><BR>]]>
 		</message>
 		<reward_info>Please select 1 reward.</reward_info>
-		<select>Have Fun and Enjoy on EA!</select>
-		<survey itemId="188053464" count="1"/> <!-- Power Lockbox Cache -->
-		<survey itemId="188053465" count="1"/> <!-- Fortune Lockbox Cache -->
-		<survey itemId="188053466" count="1"/> <!-- Utility Lockbox Cache -->
+		<select>Have Fun and Enjoy on DreamerGames!</select>
 		<survey itemId="152150000" count="2"/> <!-- Uncut Crystal -->
 		<survey itemId="152150001" count="2"/> <!-- Chipped Crystal -->
 		<survey itemId="152150002" count="2"/> <!-- Cloudy Crystal -->
@@ -1239,12 +763,11 @@
 			<Br><BR>]]>
 		</message>
 		<reward_info>Please select 1 reward.</reward_info>
-		<select>Have Fun and Enjoy on EA!</select>
+		<select>Have Fun and Enjoy on DreamerGames!</select>
 		<survey itemId="186000425" count="2"/> <!-- Mark Of Prophecy -->
 		<survey itemId="188055484" count="1"/> <!-- Small Luna Bundle -->
 		<survey itemId="162001062" count="1"/> <!-- Berdin's Lucky Star -->
-		<survey itemId="165060002" count="1"/> <!-- [Event] Level Reduction Stone -->
-		<survey itemId="162000175" count="2"/> <!-- Full Recovery Potion -->
+		<survey itemId="175060002" count="1"/> <!-- [Event] Level Reduction Stone -->
 		<survey itemId="162000212" count="20"/> <!-- Upgraded Honorable Divine Life Serum -->
 		<survey itemId="188055186" count="1"/> <!-- Archdaeva's Remodeled Danuar Armor Box -->
 		<survey itemId="188055187" count="1"/> <!-- Archdaeva's Remodeled Danuar Weapon Box -->
@@ -1263,12 +786,11 @@
 			<Br><BR>]]>
 		</message>
 		<reward_info>Please select 1 reward.</reward_info>
-		<select>Have Fun and Enjoy on EA!</select>
+		<select>Have Fun and Enjoy on DreamerGames!</select>
 		<survey itemId="186000425" count="2"/> <!-- Mark Of Prophecy -->
 		<survey itemId="188055484" count="1"/> <!-- Small Luna Bundle -->
 		<survey itemId="162001062" count="1"/> <!-- Berdin's Lucky Star -->
-		<survey itemId="162000175" count="2"/> <!-- Full Recovery Potion -->
-		<survey itemId="165060002" count="1"/> <!-- [Event] Level Reduction Stone -->
+		<survey itemId="165060001" count="1"/> <!-- [Event] Level Reduction Stone -->
 		<survey itemId="188054603" count="1"/> <!-- Mysterious Commander's Accessory Box -->
 		<survey itemId="188054637" count="1"/> <!-- [Event] Commander Weapon Box -->
 		<survey itemId="188054638" count="1"/> <!-- [Event] Commander Armor Box -->
@@ -1287,7 +809,7 @@
 			<Br><Br><Br><Br>
 			Insignia of Conquest monsters appear all over Inggison and Gelkmaros.
 			You can meet most of Insignia of Conquest monsters by simply walking through the filed but some offerings are in unaccessible areas.
-			- All Insignia of Conquest monsters are level 65. There are various types of offerings. Shulacks, animals, plants, etc.
+			- All Insignia of Conquest monsters are level 75. There are various types of offerings. Shulacks, animals, plants, etc.
 			- Offerings are much stronger than regular monsters.
 			<Br><Br><Br><Br>
 			When you kill an offering you will receive a guide containing "Conqueror's Mark Box".
@@ -1305,7 +827,7 @@
 			<Br><BR>]]>
 		</message>
 		<reward_info>Please select 1 reward.</reward_info>
-		<select>Have Fun and Enjoy on EA!</select>
+		<select>Have Fun and Enjoy on DreamerGames!</select>
 		<survey itemId="188053690" count="1"/> <!-- Inggison Greater Conqueror's Mark Box -->
 		<survey itemId="188053693" count="1"/> <!-- Gelkmaros Greater Conqueror's Mark Box -->
 	</guide>
@@ -1341,12 +863,11 @@
 			<Br><BR>]]>
 		</message>
 		<reward_info>Please select 1 reward.</reward_info>
-		<select>Have Fun and Enjoy on EA!</select>
+		<select>Have Fun and Enjoy on DreamerGames!</select>
 		<survey itemId="186000425" count="2"/> <!-- Mark Of Prophecy -->
 		<survey itemId="188055484" count="1"/> <!-- Small Luna Bundle -->
-		<survey itemId="162000175" count="5"/> <!-- Full Recovery Potion -->
 		<survey itemId="162001062" count="1"/> <!-- Berdin's Lucky Star -->
-		<survey itemId="165060002" count="1"/> <!-- [Event] Level Reduction Stone -->
+		<survey itemId="175060002" count="1"/> <!-- [Event] Level Reduction Stone -->
 		<survey itemId="188054248" count="1"/> <!-- [Event] Delegate's Plate Armor Box -->
 		<survey itemId="188054249" count="1"/> <!-- [Event] Delegate's Chain Armor Box -->
 		<survey itemId="188054250" count="1"/> <!-- [Event] Delegate's Leather Armor Box -->
@@ -1371,7 +892,7 @@
 			<br><br>]]>
 		</message>
 		<reward_info>Please select 1 reward.</reward_info>
-		<select>Have Fun and Enjoy on EA!</select>
+		<select>Have Fun and Enjoy on DreamerGames!</select>
 		<survey itemId="188100297" count="1"/> <!-- Legion Medal Center Piece -->
 		<survey itemId="188100298" count="1"/> <!-- Legion Medal Left Piece -->
 		<survey itemId="188100299" count="1"/> <!-- Legion Medal Right Piece -->
@@ -1390,11 +911,11 @@
 			<Br><BR>]]>
 		</message>
 		<reward_info>Please select 1 reward.</reward_info>
-		<select>Have Fun and Enjoy on EA!</select>
+		<select>Have Fun and Enjoy on DreamerGames!</select>
 		<survey itemId="160010352" count="1"/> <!-- Seed Of Transformation -->
 		<survey itemId="160010353" count="1"/> <!-- Seed Of Transformation -->
 	</guide>
-	<guide title="Event_Awake_65" level="1" race="PC_ALL" rewardCount="1">
+	<guide title="Event_Awake_75" level="1" race="PC_ALL" rewardCount="1">
 		<message>
 			<![CDATA[<font size ="6" color="FFB732">Awake Event"</font>
 			<BR><BR>
@@ -1406,7 +927,7 @@
 			<Br><BR>]]>
 		</message>
 		<reward_info>Please select 1 reward.</reward_info>
-		<select>Have Fun and Enjoy on EA!</select>
+		<select>Have Fun and Enjoy on DreamerGames!</select>
 		<survey itemId="160010356" count="1"/> <!-- Violet Seed Of Transformation -->
 		<survey itemId="160010357" count="1"/> <!-- Violet Seed Of Transformation -->
 	</guide>
@@ -1430,12 +951,11 @@
 			<br><br>]]>
 		</message>
 		<reward_info>Please select 1 reward.</reward_info>
-		<select>Have Fun and Enjoy on EA!</select>
+		<select>Have Fun and Enjoy on DreamerGames!</select>
 		<survey itemId="186000425" count="2"/> <!-- Mark Of Prophecy -->
 		<survey itemId="188055484" count="1"/> <!-- Small Luna Bundle -->
-		<survey itemId="162000175" count="5"/> <!-- Full Recovery Potion -->
 		<survey itemId="162001062" count="1"/> <!-- Berdin's Lucky Star -->
-		<survey itemId="165060002" count="1"/> <!-- [Event] Level Reduction Stone -->
+		<survey itemId="175060002" count="1"/> <!-- [Event] Level Reduction Stone -->
 		<survey itemId="188055157" count="1"/> <!-- Mystery Special Functionary's Divine Weapon Box -->
 		<survey itemId="188055158" count="1"/> <!-- Mystery Special Functionary's Divine Armor Box -->
 	</guide>

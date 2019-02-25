@@ -47,6 +47,10 @@ public class ChainCondition extends Condition {
 	public boolean validate(Skill env) {
 		if ((env.getEffector() instanceof Player) && (precategory != null || selfCount > 0)) {
 			Player pl = (Player) env.getEffector();
+			
+			if (this.time <= 0) {
+		       time = 3000;
+			}
 
 			if (selfCount > 0) {
 				boolean canUse = false;
@@ -68,11 +72,9 @@ public class ChainCondition extends Condition {
 				if (selfCount <= pl.getChainSkills().getChainCount(pl, env.getSkillTemplate(), category)) {
 					return false;
 				}
-				else {
-					env.setIsMultiCast(true);
-				}
+				env.setIsMultiCast(true);
 			}
-			else if (preCount > 0) {
+			else if (preCount > 0 && selfCount > 0) {
 				if (!pl.getChainSkills().chainSkillEnabled(precategory, time) || preCount != pl.getChainSkills().getChainCount(pl, env.getSkillTemplate(), precategory)) {
 					return false;
 				}

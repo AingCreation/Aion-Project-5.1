@@ -3137,7 +3137,7 @@
 			<item id="186000054" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000052" count="2"/>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 		</items>
 	</decomposable_select_item>
 	<!-- Lesser Blood Crusade Reward -->
@@ -3173,7 +3173,7 @@
 			<item id="186000054" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000052" count="2"/>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 		</items>
 	</decomposable_select_item>
 	<!-- Silver Medal Chest -->
@@ -3296,7 +3296,7 @@
 	<!-- Aurunerk's Package -->
 	<decomposable_select_item item_id="188050591">
 	    <items>
-            <item id="186000051" count="2"/>
+            <item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -3317,7 +3317,7 @@
 	<!-- Ickulnerk's Package -->
 	<decomposable_select_item item_id="188050592">
 	    <items>
-            <item id="186000051" count="2"/>
+            <item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -8822,7 +8822,7 @@
 	</decomposable_select_item>
 	<decomposable_select_item item_id="188051755">
 		<items>
-			<item id="186000051" count="3"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="3"/>
 			<item id="186000053" count="3"/>
 			<item id="186000054" count="3"/>
@@ -9422,7 +9422,7 @@
 	<!-- [Event] Major Crown Bundle -->
 	<decomposable_select_item item_id="188051851">
 		<items>
-			<item id="186000051" count="3"/>
+			<item id="186000051" count="1"/>
 		</items>
 	</decomposable_select_item>
 	<!-- [Event] Alchemy Box -->
@@ -13020,7 +13020,7 @@
 	<!-- Major Relic Bundle -->
 	<decomposable_select_item item_id="188051451">
 		<items>
-			<item id="186000051" count="6"/>
+			<item id="186000051" count="1"/>
 		    <item id="186000055" count="6"/>
 		    <item id="186000059" count="6"/>
 		    <item id="186000063" count="6"/>
@@ -13030,7 +13030,7 @@
 	<decomposable_select_item item_id="188051454">
 		<items>
 		    <item id="186000063" count="5"/>
-		    <item id="186000051" count="5"/>
+		    <item id="186000051" count="1"/>
 		    <item id="186000055" count="5"/>
 		    <item id="186000059" count="5"/>
 		</items>
@@ -13039,7 +13039,7 @@
 	<decomposable_select_item item_id="188051455">
 		<items>
 		    <item id="186000063" count="5"/>
-		    <item id="186000051" count="5"/>
+		    <item id="186000051" count="1"/>
 		    <item id="186000055" count="5"/>
 		    <item id="186000059" count="5"/>
 		</items>
@@ -13578,7 +13578,7 @@
 			<item id="186000242" count="5"/>
 			<item id="165020014" count="5"/>
 			<item id="166030005" count="5"/>
-			<item id="186000051" count="5"/>
+			<item id="186000051" count="1"/>
 			<item id="165020015" count="5"/>
 			<item id="188052479"/>
 			<item id="186000236" count="5"/>
@@ -13769,7 +13769,7 @@
 	<!-- Udas Temple Contribution Bundle -->
 	<decomposable_select_item item_id="188052306">
 		<items>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -15531,7 +15531,7 @@
 	<!-- Meager Ancient Relic Bundle -->
 	<decomposable_select_item item_id="188052531">
 		<items>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -15552,7 +15552,7 @@
 	<!-- Mondarinrinerk's Meager Ancient Relic Bundle -->
 	<decomposable_select_item item_id="188052532">
 	    <items>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -15573,7 +15573,7 @@
 	<!-- Mamerunerk's Meager Ancient Relic Bundle -->
 	<decomposable_select_item item_id="188052533">
 	    <items>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -15594,7 +15594,7 @@
 	<!-- Karochirinerk's Meager Ancient Relic Bundle -->
 	<decomposable_select_item item_id="188052534">
 	    <items>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -15615,7 +15615,7 @@
 	<!-- Stuffed Ancient Relic Bundle -->
 	<decomposable_select_item item_id="188052535">
 	    <items>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -15636,7 +15636,7 @@
 	<!-- Mondarinrinerk's Stuffed Ancient Relic Bundle -->
 	<decomposable_select_item item_id="188052536">
 	    <items>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -15657,7 +15657,7 @@
 	<!-- Mamerunerk's Stuffed Ancient Relic Bundle -->
 	<decomposable_select_item item_id="188052537">
 	    <items>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -15678,7 +15678,7 @@
 	<!-- Karochirinerk's Stuffed Ancient Relic Bundle -->
 	<decomposable_select_item item_id="188052538">
 	    <items>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -15699,7 +15699,7 @@
 	<!-- Overflowing Ancient Relic Bundle -->
 	<decomposable_select_item item_id="188052539">
 	    <items>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -15720,7 +15720,7 @@
 	<!-- Mondarinrinerk's Overflowing Ancient Relic Bundle -->
 	<decomposable_select_item item_id="188052540">
 	    <items>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -15741,7 +15741,7 @@
 	<!-- Mamerunerk's Overflowing Ancient Relic Bundle -->
 	<decomposable_select_item item_id="188052541">
 	    <items>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -15762,7 +15762,7 @@
 	<!-- Karochirinerk's Overflowing Ancient Relic Bundle -->
 	<decomposable_select_item item_id="188052542">
 	    <items>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -15785,7 +15785,7 @@
 		<items>
 			<item id="186000057" count="2"/>
 			<item id="186000055" count="2"/>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 		</items>
 	</decomposable_select_item>
@@ -15990,6 +15990,7 @@
 	    <items>
             <item id="167000682"/>
 			<item id="167000683"/>
+			<item id="167000749"/>
 			<item id="167000684"/>
 			<item id="167000685"/>
 			<item id="167000686"/>
@@ -18779,7 +18780,7 @@
 			<item id="186000236" count="50"/>
 			<item id="186000143" count="50"/>
 			<item id="186000242" count="50"/>
-			<item id="186000051" count="50"/>
+			<item id="186000051" count="1"/>
 			<item id="186000199" count="50"/>
 			<item id="167000518" count="100"/>
 			<item id="167000558" count="100"/>
@@ -19005,7 +19006,7 @@
 			<item id="188052939"/>
 			<item id="188052568" count="2"/>
 			<item id="186000236" count="20"/>
-			<item id="186000051" count="10"/>
+			<item id="186000051" count="1"/>
 			<item id="188052820"/>
 			<item id="188052590"/>
 			<item id="186000201" count="20"/>
@@ -19033,7 +19034,7 @@
 	<!-- Linkgate Foundry Relic Bundle -->
 	<decomposable_select_item item_id="188052953">
 	    <items>
-			<item id="186000051" count="2"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="2"/>
 			<item id="186000053" count="2"/>
 			<item id="186000054" count="2"/>
@@ -20624,7 +20625,7 @@
 	<decomposable_select_item item_id="188053101">
 	    <items>
 			<item id="186000242" count="5"/>
-			<item id="186000051" count="10"/>
+			<item id="186000051" count="1"/>
 			<item id="164002222"/>
 			<item id="188052559"/>
 			<item id="188052560"/>
@@ -22640,7 +22641,16 @@
 	<decomposable_select_item item_id="188053234"/>
 	<decomposable_select_item item_id="188053235"/>
 	<decomposable_select_item item_id="188053236"/>
-	<decomposable_select_item item_id="188053237"/>
+	<decomposable_select_item item_id="188053237">
+	    <items>
+	        <item id="167010312" count="5"/>
+			<item id="167010311" count="5"/>
+			<item id="167010314" count="5"/>
+			<item id="167010310" count="5"/>
+			<item id="167010313" count="5"/>
+			<item id="167010315" count="5"/>
+	    </items>
+	</decomposable_select_item>
 	<decomposable_select_item item_id="188053240"/>
 	<decomposable_select_item item_id="188053241"/>
 	<decomposable_select_item item_id="188053242"/>
@@ -24292,7 +24302,7 @@
 			<item id="186000236" count="5"/>
 			<item id="188052479"/>
 			<item id="188052559"/>
-			<item id="186000051" count="5"/>
+			<item id="186000051" count="1"/>
 			<item id="188052478"/>
 			<item id="188052709"/>
 			<item id="188052385"/>
@@ -24368,7 +24378,7 @@
 			<item id="186000147" count="5"/>
 			<item id="186000237" count="5"/>
 			<item id="186000242" count="5"/>
-			<item id="186000051" count="5"/>
+			<item id="186000051" count="1"/>
 			<item id="188052554"/>
 			<item id="188051213"/>
 			<item id="186000201" count="5"/>
@@ -24393,7 +24403,7 @@
 			<item id="186000236" count="5"/>
 			<item id="188052479"/>
 			<item id="188052559"/>
-			<item id="186000051" count="5"/>
+			<item id="186000051" count="1"/>
 			<item id="188052478"/>
 			<item id="188052709"/>
 			<item id="188052385"/>
@@ -24469,7 +24479,7 @@
 			<item id="186000147" count="5"/>
 			<item id="186000237" count="5"/>
 			<item id="186000242" count="5"/>
-			<item id="186000051" count="5"/>
+			<item id="186000051" count="1"/>
 			<item id="188052554"/>
 			<item id="188051213"/>
 			<item id="186000201" count="5"/>
@@ -24499,7 +24509,7 @@
 			<item id="186000236" count="5"/>
 			<item id="188052479"/>
 			<item id="188052559"/>
-			<item id="186000051" count="5"/>
+			<item id="186000051" count="1"/>
 			<item id="188052478"/>
 			<item id="188052709"/>
 			<item id="188052385"/>
@@ -24575,7 +24585,7 @@
 			<item id="186000147" count="5"/>
 			<item id="186000237" count="5"/>
 			<item id="186000242" count="5"/>
-			<item id="186000051" count="5"/>
+			<item id="186000051" count="1"/>
 			<item id="188052554"/>
 			<item id="188051213"/>
 			<item id="186000201" count="5"/>
@@ -24605,7 +24615,7 @@
 			<item id="186000236" count="5"/>
 			<item id="188052479"/>
 			<item id="188052559"/>
-			<item id="186000051" count="5"/>
+			<item id="186000051" count="1"/>
 			<item id="188052478"/>
 			<item id="188052709"/>
 			<item id="188052385"/>
@@ -24681,7 +24691,7 @@
 			<item id="186000147" count="5"/>
 			<item id="186000237" count="5"/>
 			<item id="186000242" count="5"/>
-			<item id="186000051" count="5"/>
+			<item id="186000051" count="1"/>
 			<item id="188052554"/>
 			<item id="188051213"/>
 			<item id="186000201" count="5"/>
@@ -24711,7 +24721,7 @@
 			<item id="186000236" count="5"/>
 			<item id="188052479"/>
 			<item id="188052559"/>
-			<item id="186000051" count="5"/>
+			<item id="186000051" count="1"/>
 			<item id="188052478"/>
 			<item id="188052709"/>
 			<item id="188052385"/>
@@ -24787,7 +24797,7 @@
 			<item id="186000147" count="5"/>
 			<item id="186000237" count="5"/>
 			<item id="186000242" count="5"/>
-			<item id="186000051" count="5"/>
+			<item id="186000051" count="1"/>
 			<item id="188052554"/>
 			<item id="188051213"/>
 			<item id="186000201" count="5"/>
@@ -24828,7 +24838,7 @@
 			<item id="186000236" count="50"/>
 			<item id="186000143" count="50"/>
 			<item id="186000242" count="50"/>
-			<item id="186000051" count="50"/>
+			<item id="186000051" count="1"/>
 			<item id="186000199" count="50"/>
 			<item id="167000518" count="100"/>
 			<item id="167000558" count="100"/>
@@ -25100,7 +25110,7 @@
 	<decomposable_select_item item_id="188053498">
 	    <items>
 			<item id="190020107"/>
-			<item id="186000051" count="50"/>
+			<item id="186000051" count="1"/>
 		</items>
 	</decomposable_select_item>
 	<!-- Ferechin's Gift (Level 51 or higher) -->
@@ -25114,7 +25124,7 @@
 	<decomposable_select_item item_id="188053500">
 	    <items>
 			<item id="188053493"/>
-			<item id="186000051" count="50"/>
+			<item id="186000051" count="1"/>
 		</items>
 	</decomposable_select_item>
 	<!-- Momorinrinerk's Gift (Level 41 or higher) -->
@@ -25307,7 +25317,7 @@
 			<item id="188053083" count="3"/>
 			<item id="186000143" count="50"/>
 			<item id="186000242" count="50"/>
-			<item id="186000051" count="50"/>
+			<item id="186000051" count="1"/>
 			<item id="188052709"/>
 			<item id="188051906" count="5"/>
 			<item id="186000199" count="50"/>
@@ -27746,7 +27756,7 @@
 			<item id="188100335" count="200"/>
 			<item id="186000236" count="50"/>
 			<item id="186000143" count="50"/>
-			<item id="186000051" count="50"/>
+			<item id="186000051" count="1"/>
 			<item id="186000199" count="50"/>
 			<item id="167000518" count="100"/>
 			<item id="167000558" count="100"/>
@@ -27763,7 +27773,7 @@
 	<!-- Captured Shelter Relics Bundle -->
 	<decomposable_select_item item_id="188053710">
 	    <items>
-			<item id="186000051" count="10"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="10"/>
 			<item id="186000053" count="10"/>
 			<item id="186000054" count="10"/>
@@ -28162,7 +28172,46 @@
 		</items>
 	</decomposable_select_item>
 	<decomposable_select_item item_id="188053743"/>
-	<decomposable_select_item item_id="188053744"/>
+	<decomposable_select_item item_id="188053744">
+	    <items>
+            <item id="167000682"/>
+			<item id="167000683"/>
+			<item id="167000684"/>
+			<item id="167000685"/>
+			<item id="167000686"/>
+			<item id="167000687"/>
+			<item id="167000688"/>
+			<item id="167000689"/>
+			<item id="167000690"/>
+			<item id="167000691"/>
+			<item id="167000692"/>
+			<item id="167000693"/>
+			<item id="167000694"/>
+			<item id="167000695"/>
+			<item id="167000696"/>
+			<item id="167000697"/>
+			<item id="167000698"/>
+			<item id="167000699"/>
+			<item id="167000700"/>
+			<item id="167000701"/>
+			<item id="167000702"/>
+			<item id="167000703"/>
+			<item id="167000704"/>
+			<item id="167000705"/>
+			<item id="167000706"/>
+			<item id="167000707"/>
+			<item id="167000708"/>
+			<item id="167000709"/>
+			<item id="167000710"/>
+			<item id="167000711"/>
+			<item id="167000712"/>
+			<item id="167000713"/>
+			<item id="167000714"/>
+			<item id="167000749"/>
+			<item id="167000750"/>
+			<item id="167000751"/>
+		</items>
+	</decomposable_select_item>
 	<decomposable_select_item item_id="188053745"/>
 	<!-- Elegant High Grade Idian Bundle -->
 	<decomposable_select_item item_id="188053746">
@@ -29741,7 +29790,7 @@
 	<!-- Protectorate Box Bundle -->
 	<decomposable_select_item item_id="188053900">
 	    <items>
-			<item id="186000051" count="10"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="10"/>
 			<item id="186000053" count="10"/>
 			<item id="186000054" count="10"/>
@@ -29762,7 +29811,7 @@
 	<!-- Protectorate Crate Bundle -->
 	<decomposable_select_item item_id="188053901">
 	    <items>
-			<item id="186000051" count="10"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="10"/>
 			<item id="186000053" count="10"/>
 			<item id="186000054" count="10"/>
@@ -29783,7 +29832,7 @@
 	<!-- Protectorate Chest Bundle -->
 	<decomposable_select_item item_id="188053902">
 	    <items>
-			<item id="186000051" count="10"/>
+			<item id="186000051" count="1"/>
 			<item id="186000052" count="10"/>
 			<item id="186000053" count="10"/>
 			<item id="186000054" count="10"/>
@@ -33509,7 +33558,7 @@
 			<item id="188052741" count="3"/>
 			<item id="188053083" count="3"/>
 			<item id="186000143" count="50"/>
-			<item id="186000051" count="50"/>
+			<item id="186000051" count="1"/>
 			<item id="188052709"/>
 			<item id="188051906" count="5"/>
 			<item id="186000199" count="50"/>
@@ -33541,7 +33590,7 @@
 			<item id="188052741" count="3"/>
 			<item id="188053083" count="3"/>
 			<item id="186000143" count="50"/>
-			<item id="186000051" count="50"/>
+			<item id="186000051" count="1"/>
 			<item id="188052709"/>
 			<item id="188051906" count="5"/>
 			<item id="186000199" count="50"/>
@@ -38302,9 +38351,12 @@
 	    </items>
 	</decomposable_select_item>
 	<decomposable_select_item item_id="188055188"/>
-	<decomposable_select_item item_id="188055189"/>
 	<decomposable_select_item item_id="188055190"/>
-	<decomposable_select_item item_id="188055191"/>
+	<decomposable_select_item item_id="188055191">
+	    <items>
+		    <item id="162001063"/>
+		</items>
+	</decomposable_select_item>
 	<decomposable_select_item item_id="188055192"/>
 	<decomposable_select_item item_id="188055193"/>
 	<decomposable_select_item item_id="188055194"/>
@@ -42212,7 +42264,55 @@
 		</items>
 	</decomposable_select_item>
 	<decomposable_select_item item_id="188055592"/>
-	<decomposable_select_item item_id="188055593"/>
+	<decomposable_select_item item_id="188055593">
+		<items>
+            <item id="167000718"/>
+            <item id="167000719"/>
+            <item id="167000720"/>
+            <item id="167000721"/>
+            <item id="167000722"/>
+            <item id="167000723"/>
+            <item id="167000724"/>
+            <item id="167000725"/>
+            <item id="167000726"/>
+            <item id="167000736"/>
+            <item id="167000737"/>
+            <item id="167000738"/>
+            <item id="167000739"/>
+            <item id="167000740"/>
+            <item id="167000741"/>
+            <item id="167000742"/>
+            <item id="167000743"/>
+            <item id="167000744"/>
+            <item id="167010250"/>
+            <item id="167010251"/>
+            <item id="167010252"/>
+            <item id="167010253"/>
+            <item id="167010254"/>
+            <item id="167010255"/>
+            <item id="167010256"/>
+            <item id="167010257"/>
+            <item id="167010258"/>
+            <item id="167010259"/>
+            <item id="167010260"/>
+            <item id="167010261"/>
+            <item id="167010262"/>
+            <item id="167010263"/>
+            <item id="167010264"/>
+            <item id="167010265"/>
+            <item id="167010266"/>
+            <item id="167010267"/>
+            <item id="167010219"/>
+            <item id="167010222"/>
+            <item id="167010223"/>
+            <item id="167010220"/>
+            <item id="167010224"/>
+            <item id="167010225"/>
+            <item id="167010218"/>
+            <item id="167010221"/>
+            <item id="167010226"/>
+        </items>
+	</decomposable_select_item>
 	<decomposable_select_item item_id="188055594"/>
 	<decomposable_select_item item_id="188055595"/>
 	<decomposable_select_item item_id="188055596"/>

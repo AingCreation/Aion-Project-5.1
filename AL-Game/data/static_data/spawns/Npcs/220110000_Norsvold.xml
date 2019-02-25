@@ -2636,7 +2636,7 @@
 		The Epic Cataclysm caused Ferson to be trapped in the time and space rift,
 		and now mistakes Daevas nearby for Balaur. He can be found at Death'.
 		-->
-		<spawn npc_id="241217" respawn_time="3600">
+		<spawn npc_id="241217" respawn_time="6600">
 			<spot x="145.01932" y="2540.03" z="260.99347" h="20"/>
 		</spawn>
 		<!-- DF6_F2_Environment_Undead_Fi_69_An -->

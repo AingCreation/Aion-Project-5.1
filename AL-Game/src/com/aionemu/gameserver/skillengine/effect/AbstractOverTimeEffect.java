@@ -1,18 +1,18 @@
-/*
- * This file is part of aion-lightning <aion-lightning.com>.
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
  *
- *  aion-lightning is free software: you can redistribute it and/or modify
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  aion-lightning is distributed in the hope that it will be useful,
+ *  Aion-Lightning is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
+ *  GNU General Public License for more details. *
  *  You should have received a copy of the GNU General Public License
- *  along with aion-lightning.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.aionemu.gameserver.skillengine.effect;
 
@@ -38,7 +38,10 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
 	protected int checktime;
 	@XmlAttribute
 	protected boolean percent;
+	@XmlAttribute
+	protected boolean shared;
 
+	@Override
 	public int getValue() {
 		return value;
 	}
@@ -60,9 +63,10 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
 			effect.setAbnormal(abnormal.getId());
 			effected.getEffectController().setAbnormal(abnormal.getId());
 		}
-
-		if (checktime == 0)
+		// TODO figure out what to do with such cases
+		if (checktime == 0) {
 			return;
+		}
 		try {
 			Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
@@ -80,8 +84,8 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
 	}
 
 	public void endEffect(Effect effect, AbnormalState abnormal) {
-		if (abnormal != null)
+		if (abnormal != null) {
 			effect.getEffected().getEffectController().unsetAbnormal(abnormal.getId());
+		}
 	}
-
 }

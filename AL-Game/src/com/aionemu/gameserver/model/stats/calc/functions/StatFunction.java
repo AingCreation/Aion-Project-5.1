@@ -16,14 +16,11 @@
  */
 package com.aionemu.gameserver.model.stats.calc.functions;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.stats.calc.Stat2;
@@ -46,6 +43,8 @@ public class StatFunction implements IStatFunction {
 	protected int value;
 	@XmlElement(name = "conditions")
 	private Conditions conditions;
+	@XmlTransient
+	private int rndNumber;
 
 	public StatFunction() {
 	}
@@ -113,62 +112,29 @@ public class StatFunction implements IStatFunction {
 		return conditions != null;
 	}
 	
-	/**
-	 * Creates a final list of modifiers combining bonuses with random bonuses 
-	 * @param modifiers - can be null if do not exist
-	 * @param rndBonuses - can be null if do not exist
-	 * @return a list of modifiers, empty if none
-	 */
-	public static List<StatFunction> mergeRandomBonuses(List<StatFunction> modifiers, List<StatFunction> rndBonuses) {
-		if (modifiers == null)
-			modifiers = new ArrayList<StatFunction>();
-
-		if (rndBonuses == null)
-			return modifiers;
-
-		List<StatFunction> allModifiers = new ArrayList<StatFunction>();
-		EnumSet<StatEnum> rndNames = EnumSet.noneOf(StatEnum.class);
-
-		for (IStatFunction func : rndBonuses)
-			rndNames.add(func.getName());
-
-		// add values to original stats
-		for (StatFunction modifier : modifiers) {
-			if (!rndNames.contains(modifier.getName()) || !modifier.isBonus() || modifier.hasConditions()) {
-				allModifiers.add(modifier);
-				continue;
-			}
-
-			IStatFunction rndBonus = null;
-			for (IStatFunction func : rndBonuses) {
-				if (func.getName() == modifier.getName()) {
-					rndBonus = func;
-					rndNames.remove(func.getName());
-					break;
-				}
-			}
-
-			int finalValue = modifier.getValue() + rndBonus.getValue();
-
-			if (modifier instanceof StatAddFunction) {
-				if (finalValue != 0)
-					allModifiers.add(new StatAddFunction(modifier.getName(), finalValue, true));
-			}
-			else if (modifier instanceof StatRateFunction) {
-				if (finalValue != 0)
-					allModifiers.add(new StatRateFunction(modifier.getName(), finalValue, true));
-			}
-			else
-				allModifiers.add(modifier);
-		}
-
-		// add new stat values
-		for (StatFunction modifier : rndBonuses) {
-			if (rndNames.contains(modifier.getName()))
-				allModifiers.add(modifier);
-		}
-
-		return allModifiers;
+	public Conditions getConditions() {
+		return conditions;
 	}
-
+	
+	@Override
+	public int getRandomNumber() {
+		return rndNumber;
+	}
+	  
+	public void setRandomNumber(int rndNumber) {
+		this.rndNumber = rndNumber;
+	}
+	
+	public boolean HitemStatsExcept() {
+		switch (getName()) {
+			case ATTACK_SPEED: 
+			case SPEED: 
+			case ATTACK_RANGE: 
+			case FLY_SPEED: 
+				return true;
+		default:
+			break;
+		}
+		return false;
+	  }
 }

@@ -91,6 +91,8 @@ public class NpcTemplate extends VisibleObjectTemplate
 	private BoundRadius boundRadius;
 	@XmlAttribute(name = "type")
 	private NpcTemplateType npcTemplateType;
+	@XmlAttribute(name = "ui_type")
+	private NpcUiType npcUiType;
 	@XmlAttribute(name = "abyss_type")
 	private AbyssNpcType abyssNpcType;
 	@XmlElement(name = "talk_info")
@@ -223,6 +225,10 @@ public class NpcTemplate extends VisibleObjectTemplate
 	
 	public NpcTemplateType getNpcTemplateType() {
 		return npcTemplateType != null ? npcTemplateType : NpcTemplateType.NONE;
+	}
+	
+	public NpcUiType getNpcUiType() {
+		return npcUiType != null ? npcUiType : NpcUiType.NONE;
 	}
 	
 	public AbyssNpcType getAbyssNpcType() {

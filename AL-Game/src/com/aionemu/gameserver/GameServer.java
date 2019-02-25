@@ -44,8 +44,10 @@ import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.services.*;
+import com.aionemu.gameserver.services.dreamergames.CustomBosses.BossSpawnService;
 import com.aionemu.gameserver.services.abyss.AbyssRankCleaningService;
 import com.aionemu.gameserver.services.abyss.AbyssRankUpdateService;
+import com.aionemu.gameserver.services.dreamergames.services.WarSystemService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.events.*;
 import com.aionemu.gameserver.services.instance.*;
@@ -55,7 +57,6 @@ import com.aionemu.gameserver.services.player.PlayerEventService2;
 import com.aionemu.gameserver.services.player.PlayerEventService3;
 import com.aionemu.gameserver.services.player.PlayerEventService4;
 import com.aionemu.gameserver.services.player.PlayerLimitService;
-import com.aionemu.gameserver.services.player.CreativityPanel.CreativityEssenceService;
 import com.aionemu.gameserver.services.reward.RewardService;
 import com.aionemu.gameserver.services.abysslandingservice.LandingUpdateService;
 import com.aionemu.gameserver.services.territory.TerritoryService;
@@ -64,6 +65,7 @@ import com.aionemu.gameserver.services.thedevils.EventGebukMantan;
 import com.aionemu.gameserver.services.thedevils.ExpoEventAsmo;
 import com.aionemu.gameserver.services.thedevils.ExpoEventElyos;
 import com.aionemu.gameserver.services.thedevils.TreasureAbyss;
+import com.aionemu.gameserver.services.reward.TollOnlineBonus;
 import com.aionemu.gameserver.services.transfers.PlayerTransferService;
 import com.aionemu.gameserver.spawnengine.ShugoImperialTombSpawnManager;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
@@ -80,6 +82,7 @@ import com.aionemu.gameserver.utils.gametime.DateTimeUtil;
 import com.aionemu.gameserver.utils.gametime.GameTimeManager;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.utils.javaagent.JavaAgentUtils;
+import com.aionemu.gameserver.utils.mui.MuiEngine;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneService;
@@ -90,7 +93,7 @@ import ch.qos.logback.core.joran.spi.JoranException;
 
 public class GameServer
 {
-	private static final Logger log = LoggerFactory.getLogger(GameServer.class);
+	public static final Logger log = LoggerFactory.getLogger(GameServer.class);
 	private static int ELYOS_COUNT = 0;
 	private static int ASMOS_COUNT = 0;
 	private static double ELYOS_RATIO = 0.0;
@@ -144,9 +147,31 @@ public class GameServer
 	public static void main(String[] args) throws InterruptedException {
 		long start = System.currentTimeMillis();
 		final GameEngine[] parallelEngines = { QuestEngine.getInstance(), InstanceEngine.getInstance(), AI2Engine.getInstance(), ChatProcessor.getInstance() };
+		
 		final CountDownLatch progressLatch = new CountDownLatch(parallelEngines.length);
+		final GameEngine[] loadFirstEngine = new GameEngine[]{MuiEngine.getInstance()};
+		final CountDownLatch progressFirstLatch = new CountDownLatch(loadFirstEngine.length);
+		
 		initalizeLoggger();
 		initUtilityServicesAndConfig();
+		
+		Util.printSection("MULTI LANGUAGE ENGINE");
+		for (int i = 0; i < loadFirstEngine.length; i++) {
+			final int index = i;
+			ThreadPoolManager.getInstance().execute(new Runnable() {
+				@Override
+				public void run() {
+					loadFirstEngine[index].load(progressFirstLatch);
+				}
+			});
+		}
+		try {
+			progressFirstLatch.await();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		MuiService.getInstance().load();
+		
 		DataManager.getInstance();
 		Util.printSection("Zone");
 		ZoneService.getInstance().load(null);
@@ -263,15 +288,17 @@ public class GameServer
 			CrazyDaevaService.getInstance().startTimer();
 		}
 		TemporarySpawnEngine.spawnAll();
+		Util.printSection("War System");
+		WarSystemService.getInstance().InitSystemWar();
 		Util.printSection("PvP System");
 		if (PvPModConfig.FFA_ENABLED) {
 			FFAService.getInstance();
 		} if (PvPModConfig.BG_ENABLED) {
-			LadderService.getInstance();
+			//LadderService.getInstance();
 			BGService.getInstance();
 		}
 		Util.printSection("Limits");
-		LimitedItemTradeService.getInstance().start();
+		//LimitedItemTradeService.getInstance().start();
 		if (CustomConfig.LIMITS_ENABLED) {
 			PlayerLimitService.getInstance().scheduleUpdate();
 		}
@@ -344,6 +371,9 @@ public class GameServer
 		TreasureAbyss.ScheduleCron();
 		Util.printSection("Gebuk Mantan Event");
         EventGebukMantan.ScheduleCron();
+		//Custom Spawn boss
+		Util.printSection("Custom Boss Spawn");
+		BossSpawnService.getInstance();
 		//Custom
 		if (CustomConfig.ENABLE_REWARD_SERVICE) {
 			RewardService.getInstance();
@@ -359,11 +389,13 @@ public class GameServer
 			EventService.getInstance().start();
 		} if (EventsConfig.ENABLE_ATREIAN_PASSPORT) {
 			AtreianPassportService.getInstance().onStart();
-		} if (WeddingsConfig.WEDDINGS_ENABLE) {
-			WeddingService.getInstance();
+		/*} if (WeddingsConfig.WEDDINGS_ENABLE) {
+			WeddingService.getInstance();*/
 		}
+		  if (MembershipConfig.TOLL_ONLINE_BONUS_ENABLE) {
+            TollOnlineBonus.getInstance();
+        }
 		AdminService.getInstance();
-		CreativityEssenceService.getInstance();
 		PlayerTransferService.getInstance();
 		MaintenanceTask.getInstance();
 		HousingBidService.getInstance().start();

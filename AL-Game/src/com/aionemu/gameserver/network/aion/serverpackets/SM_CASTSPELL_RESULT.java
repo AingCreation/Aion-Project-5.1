@@ -2,12 +2,17 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.List;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.skillengine.condition.Condition;
+import com.aionemu.gameserver.skillengine.condition.LeftHandCondition;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
 
 public class SM_CASTSPELL_RESULT extends AionServerPacket
 {
@@ -21,6 +26,7 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket
 	private int dashStatus;
 	private int targetType;
 	private boolean chainSuccess;
+	private boolean dualSkill = false;
 	
 	public SM_CASTSPELL_RESULT(Skill skill, List<Effect> effects, int hitTime, boolean chainSuccess, int spellStatus, int dashStatus) {
 		this.skill = skill;
@@ -42,6 +48,10 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket
 	
 	@Override
 	protected void writeImpl(AionConnection con) {
+		Player player = con.getActivePlayer();
+		if (player == null) {
+			return;
+		}
 		writeD(effector.getObjectId());
 		writeC(targetType);
 		switch (targetType) {
@@ -71,9 +81,37 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket
 		}
 		writeH(skill.getSkillTemplate().getSkillId());
 		writeC(skill.getSkillTemplate().getLvl());
-		cooldown = skill.StigmaEnchantCoolDown(skill, cooldown);
-		writeD(cooldown);
-		writeH(hitTime);
+		
+		int skillEnchantLvl = 0;
+	    int level = player.getLevel();
+		int reduceDelay = skill.getSkillTemplate().getDelayTimeLv();
+		for (int i = 0; i <= level; i++) {
+			SkillLearnTemplate[] skilltemplates = DataManager.SKILL_TREE_DATA.getTemplatesFor(player.getPlayerClass(), i, player.getRace());
+			PlayerSkillList playerSkillList = player.getSkillList();
+			for (SkillLearnTemplate template : skilltemplates) {
+				if (template.getSkillGroup() != null) {
+					if (template.getSkillGroup().equals(skill.getSkillTemplate().getSkillGroup())) {
+						skillEnchantLvl = playerSkillList.getSkillLevel(template.getSkillId());
+					}
+				}
+			}
+		} if (player.getSkillList().isSkillPresent(skill.getSkillTemplate().getSkillId())) {
+			if (player.getSkillList().getSkillLevel(skill.getSkillTemplate().getSkillId()) > 1) {
+				int cooldownReduce = cooldown + reduceDelay * skillEnchantLvl;
+				
+				writeD(cooldownReduce);
+				writeH(hitTime);
+			} else {
+				int cooldownReduce = cooldown + reduceDelay * skillEnchantLvl;
+				writeD(cooldownReduce);
+				writeH(hitTime);
+			}
+		} else {
+			int cooldownReduce = cooldown + reduceDelay * skillEnchantLvl;
+			writeD(cooldownReduce);
+			writeH(hitTime);
+		}
+		
 		writeC(0);
 		
 		if (effects.isEmpty()) {
@@ -85,8 +123,11 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket
 		} else {
 			writeH(0);
 		}
-		writeC(this.dashStatus);
-		switch (this.dashStatus) {
+		
+		writeC(dashStatus);
+		switch (dashStatus) {
+			case 0:
+				break;
 		    case 1:
             case 2:
             case 3:
@@ -96,9 +137,9 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket
 			    writeF(skill.getX());
 			    writeF(skill.getY());
 			    writeF(skill.getZ());
-			break;
-		    default:
-			break;
+			    break;
+            default:
+            	break;
 		}
 		writeH(effects.size());
 		for (Effect effect : effects) {
@@ -131,6 +172,16 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket
                 case 3:
 				    writeC(effect.getEffector().getHeading());
 			    break;
+                case 5: 
+                case 6: 
+                case 7: 
+                case 9: 
+                case 10: 
+                case 11: 
+                case 12: 
+                case 13: 
+                case 14: 
+                case 15:
 			    default:
 				switch (effect.getSkillMoveType()) {
 				    case PULL:
@@ -143,41 +194,82 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket
 				}
 				break;
 			}
-			writeC(1); {
-				writeC(effect.isMphealInstant() ? 1 : 0);
-                if (effect.isDelayedDamage()) {
-                    writeD(0);
-                } else {
-                    writeD(effect.getReserved1());
-                }
-                writeC(effect.getAttackStatus().getId());
-				if (effect.getEffected() instanceof Player) {
-					if (effect.getAttackStatus().isCounterSkill()) {
-						((Player) effect.getEffected()).setLastCounterSkill(effect.getAttackStatus());
+			if (effect.getSkillTemplate().getUseEquipmentconditions() != null) {
+				if (effect.getSkillTemplate().getUseEquipmentconditions().getConditions() != null) {
+					for (Condition condition : effect.getSkillTemplate().getUseEquipmentconditions().getConditions()) {
+						if (condition instanceof LeftHandCondition) {
+							dualSkill = true;
+							writeC(2);
+						}
 					}
 				}
-				writeC(effect.getShieldDefense());
-				
-				switch (effect.getShieldDefense()) {
-				    case 0:
-				    case 2:
-					break;
-				    case 8:
-				    case 10:
-					    writeD(effect.getMpShield());
-					    writeD(effect.getProtectorId());
-					    writeD(effect.getProtectedDamage());
-					    writeD(effect.getProtectedSkillId());
-				    break;
-				    default:
-					    writeD(effect.getProtectorId());
-					    writeD(effect.getProtectedDamage());
-					    writeD(effect.getProtectedSkillId());
-					    writeD(effect.getReflectedDamage());
-					    writeD(effect.getReflectedSkillId());
-				    break;
+			} else {
+				writeC(1);
+			}
+			
+			writeC(effect.isMphealInstant() ? 1 : 0);
+			if (effect.isDelayedDamage()) {
+				writeD(0);
+			} else {
+				writeD(effect.getReserved1());
+			}
+			
+			writeC(effect.getAttackStatus().getId());
+			
+			if (effect.getEffected() instanceof Player) {
+				if (effect.getAttackStatus().isCounterSkill()) {
+					((Player) effect.getEffected()).setLastCounterSkill(effect.getAttackStatus());
 				}
 			}
+			
+			writeC(effect.getShieldDefense());
+			
+			if (dualSkill) {
+				writeC(1);
+				writeD(0);
+				writeC(10);
+				writeC(0);
+				dualSkill = false;
+			}
+				
+			switch (effect.getShieldDefense()) {
+				case 0:
+				case 2:
+					break;
+				case 8:
+				case 10:
+					writeD(effect.getProtectorId());
+					writeD(effect.getProtectedDamage());
+					writeD(effect.getProtectedSkillId());
+					break;
+				case 16:
+					writeD(0);
+					writeD(0);
+					writeD(0);
+					writeD(0);
+					writeD(0);
+					writeD(effect.getMpShield());
+					writeD(effect.getReflectedSkillId());
+					break;
+				case 32: 
+					writeD(effect.getProtectorId());
+					writeD(effect.getProtectedDamage());
+					writeD(effect.getProtectedSkillId());
+					writeD(effect.getReflectedDamage());
+					writeD(effect.getReflectedSkillId());
+					writeD(0);
+					writeD(0);
+					break;
+				default:
+					writeD(effect.getProtectorId());
+					writeD(effect.getProtectedDamage());
+					writeD(effect.getProtectedSkillId());
+					writeD(effect.getReflectedDamage());
+					writeD(effect.getReflectedSkillId());
+					writeD(0);
+					writeD(0);
+					break;
+			}	
 		}
 	}
 }

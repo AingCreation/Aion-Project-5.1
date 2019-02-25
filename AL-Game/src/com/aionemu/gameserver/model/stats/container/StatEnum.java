@@ -206,7 +206,15 @@ public enum StatEnum
 	INDUN_DROP_BOOST,
 	DEATH_PENALTY_REDUCE,
 	ENCHANT_OPTION_BOOST,
-	ORDALIE_REWARD;
+	ORDALIE_REWARD,
+	
+	//5.1
+	HSTR,  
+	HVIT,  
+	HDEX,  
+	HAGI,  
+	HKNO,  
+	HWIL;
 	
 	private boolean replace;
 	private int sign;

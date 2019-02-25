@@ -19,11 +19,10 @@ package instance.pvparenas;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
-import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -57,7 +56,7 @@ public class ArenaOfDisciplineInstance extends PvPArenaInstance
 		int totalPoints = instanceReward.getTotalPoints();
 		int size = instanceReward.getInstanceRewards().size();
 		float totalAP = (1.0f * size) * 100;
-		float totalGP = (1.0f * size) * 100;
+		//float totalGP = (1.0f * size) * 100;
 		float totalCrucible = (0.01f * size) * 100;
 		float totalCourage = (0.01f * size) * 100;
 		float totalInfinity = (0.01f * size) * 100;
@@ -74,15 +73,15 @@ public class ArenaOfDisciplineInstance extends PvPArenaInstance
 				int rank = instanceReward.getRank(score);
 				float percent = reward.getParticipation();
 				int basicAP = 100;
-				int basicGP = 100;
+				//int basicGP = 100;
 				int rankingAP = 431;
-				int rankingGP = 231;
+				//int rankingGP = 231;
 				if (size > 1) {
 					rankingAP = rank == 0 ? 1108 : 431;
-					rankingGP = rank == 0 ? 908 : 231;
+					//rankingGP = rank == 0 ? 908 : 231;
 				}
 				int scoreAP = (int) (totalAP * scoreRate);
-				int scoreGP = (int) (totalGP * scoreRate);
+				//int scoreGP = (int) (totalGP * scoreRate);
 				//<Abyss Points>
 				basicAP *= percent;
 				rankingAP *= percent;
@@ -91,12 +90,12 @@ public class ArenaOfDisciplineInstance extends PvPArenaInstance
 				reward.setRankingAP(rankingAP);
 				reward.setScoreAP(scoreAP);
 				//<Glory Points>
-				basicGP *= percent;
-				rankingGP *= percent;
-				rankingGP *= playerRate;
-				reward.setBasicGP(basicGP);
-				reward.setRankingGP(rankingGP);
-				reward.setScoreGP(scoreGP);
+				//basicGP *= percent;
+				//rankingGP *= percent;
+				//rankingGP *= playerRate;
+				//reward.setBasicGP(basicGP);
+				//reward.setRankingGP(rankingGP);
+				//reward.setScoreGP(scoreGP);
 				int basicCrI = 0;
 				basicCrI *= percent;
 				int rankingCrI = 150;

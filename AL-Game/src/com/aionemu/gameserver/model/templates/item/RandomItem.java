@@ -22,6 +22,8 @@ import javax.xml.bind.annotation.XmlType;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.model.PlayerClass;
+import com.aionemu.gameserver.model.Race;
 
 /**
  * @author vlog
@@ -39,6 +41,11 @@ public class RandomItem {
 
 	@XmlAttribute(name = "rnd_max")
 	public int rndMax;
+	
+	@XmlAttribute(name = "race")
+	public Race race = Race.PC_ALL;
+	@XmlAttribute(name = "player_class")
+	public PlayerClass playerClass = PlayerClass.ALL;
 
 	public int getCount() {
 		return count;
@@ -54,6 +61,14 @@ public class RandomItem {
 
 	public int getRndMax() {
 		return rndMax;
+	}
+	
+	public final Race getRace() {
+		return race;
+	}
+
+	public PlayerClass getPlayerClass() {
+		return playerClass;
 	}
 
 	public final int getResultCount() {

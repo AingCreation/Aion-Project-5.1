@@ -18,7 +18,7 @@ ECHO.
 SET /P OPTION=Type your option and press ENTER: 
 IF %OPTION% == 1 (
 SET MODE=DEVELOPMENT
-SET JAVA_OPTS=-Xms4000m -Xmx4000m -Xdebug -Xrunjdwp:transport=dt_socket,address=8998,server=y,suspend=n -ea
+SET JAVA_OPTS=-Xms14000m -Xmx14000m -Xdebug -Xrunjdwp:transport=dt_socket,address=8998,server=y,suspend=n -ea
 CALL StartGS.bat
 )
 IF %OPTION% == 2 (
@@ -28,7 +28,7 @@ CALL StartGS.bat
 )
 IF %OPTION% == 3 (
 SET MODE=PRODUCTION X2
-SET JAVA_OPTS=-Xms3072m -Xmx4096m -server
+SET JAVA_OPTS=-Xms9000m -Xmx9000m -server
 CALL StartGS.bat
 )
 IF %OPTION% == 4 (

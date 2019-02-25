@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cp_infos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<cp_info id="1" name="HSTR" category="stat_up" skill_group="HSTR" stat_value="1" cp_count_max="255" cp_cost_adj="1" />
+	<cp_info id="2" name="HVIT" category="stat_up" skill_group="HVIT" stat_value="1" cp_count_max="255" cp_cost_adj="1" />
+	<cp_info id="3" name="HDEX" category="stat_up" skill_group="HDEX" stat_value="1" cp_count_max="255" cp_cost_adj="1" />
+	<cp_info id="4" name="HAGI" category="stat_up" skill_group="HAGI" stat_value="1" cp_count_max="255" cp_cost_adj="1" />
+	<cp_info id="5" name="HKNO" category="stat_up" skill_group="HKNO" stat_value="1" cp_count_max="255" cp_cost_adj="1" />
+	<cp_info id="6" name="HWIL" category="stat_up" skill_group="HWIL" stat_value="1" cp_count_max="255" cp_cost_adj="1" />
+	<cp_info id="7" name="ALL_Highdeva_1_LEARN" category="learn_skill" skill_group="ALL_Highdeva_1" cp_cost="5" additional_learn_skill="ALL_Highdeva_1_2th" />
+	<cp_info id="8" name="ALL_Highdeva_1_ENCHANT" category="enchant_skill" skill_group="ALL_Highdeva_1" cp_count_max="5" cp_cost="1" cp_cost_adj="2" />
+	<cp_info id="9" name="ALL_Highdeva_3_LEARN" category="learn_skill" skill_group="ALL_Highdeva_3" cp_cost="5" additional_learn_skill="ALL_Highdeva_3_2th" />
+	<cp_info id="10" name="ALL_Highdeva_3_ENCHANT" category="enchant_skill" skill_group="ALL_Highdeva_3" cp_count_max="5" cp_cost="1" cp_cost_adj="2" />
+	<cp_info id="11" name="ALL_Highdeva_4_LEARN" category="learn_skill" skill_group="ALL_Highdeva_4" cp_cost="5" additional_learn_skill="ALL_Highdeva_4_2th" />
+	<cp_info id="12" name="ALL_Highdeva_4_ENCHANT" category="enchant_skill" skill_group="ALL_Highdeva_4" cp_count_max="5" cp_cost="1" cp_cost_adj="2" />
+	<cp_info id="13" name="ALL_Highdeva_2_LEARN" category="learn_skill" skill_group="ALL_Highdeva_2" cp_cost="5" additional_learn_skill="ALL_Highdeva_2_2th" />
+	<cp_info id="14" name="ALL_Highdeva_2_ENCHANT" category="enchant_skill" skill_group="ALL_Highdeva_2" cp_count_max="5" cp_cost="1" cp_cost_adj="2" />
+	<cp_info id="15" name="FI_SlashigForce" category="enchant_skill" skill_group="FI_SlashigForce" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="16" name="FI_DestructBlow" category="enchant_skill" skill_group="FI_DestructBlow" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="17" name="FI_RaisingImpact" category="enchant_skill" skill_group="FI_RaisingImpact" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="18" name="FI_ConsecutiveHit" category="enchant_skill" skill_group="FI_ConsecutiveHit" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="19" name="WA_RobustHit" category="enchant_skill" skill_group="WA_RobustHit" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="20" name="WA_PowerSlash" category="enchant_skill" skill_group="WA_PowerSlash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="21" name="FI_TripleSlash" category="enchant_skill" skill_group="FI_TripleSlash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="22" name="FI_BodySmash" category="enchant_skill" skill_group="FI_BodySmash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="23" name="FI_RobustImpulse" category="enchant_skill" skill_group="FI_RobustImpulse" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="24" name="FI_RobustCrash" category="enchant_skill" skill_group="FI_RobustCrash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="25" name="FI_Stigma_ShockBurst" category="enchant_skill" skill_group="FI_Stigma_ShockBurst" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="26" name="FI_EnfeebleHit" category="enchant_skill" skill_group="FI_EnfeebleHit" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="27" name="FI_WingBlade" category="enchant_skill" skill_group="FI_WingBlade" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="28" name="FI_GustBlade" category="enchant_skill" skill_group="FI_GustBlade" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="29" name="FI_StormBlade" category="enchant_skill" skill_group="FI_StormBlade" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="30" name="FI_RobustSmash" category="enchant_skill" skill_group="FI_RobustSmash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="31" name="WA_RobustBlow" category="enchant_skill" skill_group="WA_RobustBlow" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="32" name="FI_CounterDrain" category="enchant_skill" skill_group="FI_CounterDrain" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="33" name="FI_DropImpact" category="enchant_skill" skill_group="FI_DropImpact" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="34" name="FI_AbysalRage" category="enchant_skill" skill_group="FI_AbysalRage" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="35" name="FI_FlyingSlash" category="enchant_skill" skill_group="FI_FlyingSlash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="36" name="FI_SeismicBillow" category="enchant_skill" skill_group="FI_SeismicBillow" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="41" name="FI_RageBurst" category="enchant_skill" skill_group="FI_RageBurst" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="42" name="FI_Whirlwind" category="enchant_skill" skill_group="FI_Whirlwind" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="44" name="FI_SeismicImpact" category="enchant_skill" skill_group="FI_SeismicImpact" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="45" name="FI_DragonSlash" category="enchant_skill" skill_group="FI_DragonSlash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="47" name="FI_DrainWave" category="enchant_skill" skill_group="FI_DrainWave" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="48" name="FI_SeismicDrain" category="enchant_skill" skill_group="FI_SeismicDrain" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="49" name="FI_JumpingCut" category="enchant_skill" skill_group="FI_JumpingCut" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="50" name="FI_CruelBlow" category="enchant_skill" skill_group="FI_CruelBlow" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="51" name="KN_WindBlade" category="enchant_skill" skill_group="KN_WindBlade" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="52" name="KN_TurnAggressive" category="enchant_skill" skill_group="KN_TurnAggressive" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="53" name="KN_WeaponBreak" category="enchant_skill" skill_group="KN_WeaponBreak" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="54" name="KN_ShieldCharge" category="enchant_skill" skill_group="KN_ShieldCharge" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="55" name="KN_ShieldStrike" category="enchant_skill" skill_group="KN_ShieldStrike" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="56" name="KN_ShieldSwing" category="enchant_skill" skill_group="KN_ShieldSwing" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="57" name="KN_Judgement" category="enchant_skill" skill_group="KN_Judgement" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="58" name="KN_CrossBlade" category="enchant_skill" skill_group="KN_CrossBlade" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="59" name="KN_GodJudgement" category="enchant_skill" skill_group="KN_GodJudgement" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="62" name="KN_ShineBlade" category="enchant_skill" skill_group="KN_ShineBlade" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="63" name="KN_BloodySlash" category="enchant_skill" skill_group="KN_BloodySlash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="64" name="KN_BleedingSword" category="enchant_skill" skill_group="KN_BleedingSword" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="65" name="KN_TripleSnacher" category="enchant_skill" skill_group="KN_TripleSnacher" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="66" name="KN_LandSnacher" category="enchant_skill" skill_group="KN_LandSnacher" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="68" name="KN_ShieldImpact" category="enchant_skill" skill_group="KN_ShieldImpact" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="69" name="WA_AvengingCrash" category="enchant_skill" skill_group="WA_AvengingCrash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="70" name="KN_CaptureOne" category="enchant_skill" skill_group="KN_CaptureOne" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="71" name="KN_ProtectShield" category="enchant_skill" skill_group="KN_ProtectShield" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="75" name="KN_SlashDown" category="enchant_skill" skill_group="KN_SlashDown" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="76" name="KN_BreakPower" category="enchant_skill" skill_group="KN_BreakPower" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="77" name="KN_AvengingBlade" category="enchant_skill" skill_group="KN_AvengingBlade" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="78" name="SC_AssaultStabber" category="enchant_skill" skill_group="SC_AssaultStabber" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="79" name="AS_TigerKick" category="enchant_skill" skill_group="AS_TigerKick" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="80" name="AS_TigerBeat" category="enchant_skill" skill_group="AS_TigerBeat" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="81" name="AS_TigerFang" category="enchant_skill" skill_group="AS_TigerFang" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="82" name="AS_TigerUpper" category="enchant_skill" skill_group="AS_TigerUpper" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="83" name="AS_GenocidalSword" category="enchant_skill" skill_group="AS_GenocidalSword" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="84" name="AS_CarveSignet" category="enchant_skill" skill_group="AS_CarveSignet" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="85" name="AS_SignetFlare" category="enchant_skill" skill_group="AS_SignetFlare" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="86" name="AS_SignetBurst" category="enchant_skill" skill_group="AS_SignetBurst" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="87" name="AS_BackAssault" category="enchant_skill" skill_group="AS_BackAssault" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="88" name="AS_BlindStrike" category="enchant_skill" skill_group="AS_BlindStrike" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="89" name="SC_SwiftEdge" category="enchant_skill" skill_group="SC_SwiftEdge" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="90" name="AS_CorruptingCut" category="enchant_skill" skill_group="AS_CorruptingCut" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="91" name="AS_PollutionCut" category="enchant_skill" skill_group="AS_PollutionCut" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="92" name="SC_SwiftShock" category="enchant_skill" skill_group="SC_SwiftShock" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="93" name="AS_DashAttack" category="enchant_skill" skill_group="AS_DashAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="94" name="AS_BackSlash" category="enchant_skill" skill_group="AS_BackSlash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="95" name="AS_BackStrike" category="enchant_skill" skill_group="AS_BackStrike" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="96" name="AS_DrainBurst" category="enchant_skill" skill_group="AS_DrainBurst" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="97" name="AS_SignetAssault" category="enchant_skill" skill_group="AS_SignetAssault" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="98" name="AS_HeavensEdge" category="enchant_skill" skill_group="AS_HeavensEdge" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="99" name="AS_StraightCounter" category="enchant_skill" skill_group="AS_StraightCounter" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="100" name="AS_SpiralStab" category="enchant_skill" skill_group="AS_SpiralStab" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="101" name="AS_HellsBlade" category="enchant_skill" skill_group="AS_HellsBlade" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="102" name="AS_Tumbling" category="enchant_skill" skill_group="AS_Tumbling" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="103" name="AS_SoulBreak" category="enchant_skill" skill_group="AS_SoulBreak" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="104" name="AS_DeathBringer" category="enchant_skill" skill_group="AS_DeathBringer" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="107" name="AS_DivineAssault" category="enchant_skill" skill_group="AS_DivineAssault" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="110" name="AS_SilentBurst" category="enchant_skill" skill_group="AS_SilentBurst" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="112" name="AS_StormSlash" category="enchant_skill" skill_group="AS_StormSlash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="113" name="SC_CounterSlash" category="enchant_skill" skill_group="SC_CounterSlash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="114" name="AS_Blindside" category="enchant_skill" skill_group="AS_Blindside" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="115" name="AS_FlowingSpiner" category="enchant_skill" skill_group="AS_FlowingSpiner" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="116" name="RA_HeavyShot" category="enchant_skill" skill_group="RA_HeavyShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="117" name="RA_Stigma_AncientArrow" category="enchant_skill" skill_group="RA_Stigma_AncientArrow" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="118" name="RA_SpiralArrow" category="enchant_skill" skill_group="RA_SpiralArrow" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="119" name="RA_ThroughShot" category="enchant_skill" skill_group="RA_ThroughShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="120" name="RA_SteelArrow" category="enchant_skill" skill_group="RA_SteelArrow" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="121" name="RA_DrainShot" category="enchant_skill" skill_group="RA_DrainShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="123" name="RA_WoundingArrow" category="enchant_skill" skill_group="RA_WoundingArrow" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="125" name="RA_ArrowStrike" category="enchant_skill" skill_group="RA_ArrowStrike" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="126" name="RA_EntangleShot" category="enchant_skill" skill_group="RA_EntangleShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="127" name="RA_TrueShot" category="enchant_skill" skill_group="RA_TrueShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="128" name="RA_BasicShot" category="enchant_skill" skill_group="RA_BasicShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="129" name="RA_RootArrow" category="enchant_skill" skill_group="RA_RootArrow" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="130" name="RA_SilentArrow" category="enchant_skill" skill_group="RA_SilentArrow" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="131" name="RA_CrushShot" category="enchant_skill" skill_group="RA_CrushShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="132" name="RA_AimShot" category="enchant_skill" skill_group="RA_AimShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="133" name="RA_ArrowStorm" category="enchant_skill" skill_group="RA_ArrowStorm" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="136" name="RA_PoisonTrap" category="enchant_skill" skill_group="RA_PoisonTrap" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="138" name="RA_FinalFire" category="enchant_skill" skill_group="RA_FinalFire" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="139" name="RA_ShockwaveTrap" category="enchant_skill" skill_group="RA_ShockwaveTrap" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="140" name="RA_CrisisCounter" category="enchant_skill" skill_group="RA_CrisisCounter" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="141" name="RA_BackdashStab" category="enchant_skill" skill_group="RA_BackdashStab" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="143" name="RA_BrainShot" category="enchant_skill" skill_group="RA_BrainShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="144" name="RA_ApproachShot" category="enchant_skill" skill_group="RA_ApproachShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="145" name="PR_Meditation" category="enchant_skill" skill_group="PR_Meditation" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="146" name="PR_HolyExplosion" category="enchant_skill" skill_group="PR_HolyExplosion" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="147" name="PR_LightningShock" category="enchant_skill" skill_group="PR_LightningShock" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="148" name="PR_ThunderBolt" category="enchant_skill" skill_group="PR_ThunderBolt" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="149" name="PR_LightningBolt" category="enchant_skill" skill_group="PR_LightningBolt" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="150" name="CL_HallowSwing" category="enchant_skill" skill_group="CL_HallowSwing" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="151" name="PR_Purgatory" category="enchant_skill" skill_group="PR_Purgatory" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="152" name="CL_Smite" category="enchant_skill" skill_group="CL_Smite" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="153" name="PR_PowerSmite" category="enchant_skill" skill_group="PR_PowerSmite" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="154" name="PR_RaiseRepentance" category="enchant_skill" skill_group="PR_RaiseRepentance" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="155" name="PR_DivineSpark" category="enchant_skill" skill_group="PR_DivineSpark" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="156" name="PR_DivineTouch" category="enchant_skill" skill_group="PR_DivineTouch" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="157" name="PR_HolyServent" category="enchant_skill" skill_group="PR_HolyServent" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="158" name="PR_HarshPain" category="enchant_skill" skill_group="PR_HarshPain" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="159" name="PR_Repentance" category="enchant_skill" skill_group="PR_Repentance" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="161" name="PR_DivineBolt" category="enchant_skill" skill_group="PR_DivineBolt" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="162" name="CL_SonicEruption" category="enchant_skill" skill_group="CL_SonicEruption" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="163" name="PR_InvinsibleVeill" category="enchant_skill" skill_group="PR_InvinsibleVeill" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="165" name="PR_InvinsibleWall" category="enchant_skill" skill_group="PR_InvinsibleWall" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="166" name="PR_CloakOfRemedy" category="enchant_skill" skill_group="PR_CloakOfRemedy" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="168" name="PR_RapidRegeneration" category="enchant_skill" skill_group="PR_RapidRegeneration" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="170" name="PR_HolyLightwave" category="enchant_skill" skill_group="PR_HolyLightwave" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="171" name="PR_MassHeal" category="enchant_skill" skill_group="PR_MassHeal" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="172" name="PR_BlessedShield" category="enchant_skill" skill_group="PR_BlessedShield" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="173" name="CL_Heal" category="enchant_skill" skill_group="CL_Heal" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="174" name="PR_HolyLight" category="enchant_skill" skill_group="PR_HolyLight" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="175" name="PR_GreatHeal" category="enchant_skill" skill_group="PR_GreatHeal" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="176" name="PR_MassEmergentHeal" category="enchant_skill" skill_group="PR_MassEmergentHeal" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="177" name="PR_EmergentHeal" category="enchant_skill" skill_group="PR_EmergentHeal" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="178" name="PR_FirstAid" category="enchant_skill" skill_group="PR_FirstAid" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="179" name="PR_GodsVoice" category="enchant_skill" skill_group="PR_GodsVoice" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="180" name="EL_StoneShock" category="enchant_skill" skill_group="EL_StoneShock" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="181" name="EL_EarthGrab" category="enchant_skill" skill_group="EL_EarthGrab" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="182" name="EL_Order_Assail" category="enchant_skill" skill_group="EL_Order_Assail" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="183" name="EL_Order_Decaying" category="enchant_skill" skill_group="EL_Order_Decaying" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="184" name="EL_Pet_ElementalWraith" category="enchant_skill" skill_group="EL_Pet_ElementalWraith" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="185" name="EL_Order_Explode" category="enchant_skill" skill_group="EL_Order_Explode" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="188" name="EL_SoulSteal" category="enchant_skill" skill_group="EL_SoulSteal" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="189" name="EL_ElementalStrike" category="enchant_skill" skill_group="EL_ElementalStrike" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="191" name="EL_DimissPolymorph" category="enchant_skill" skill_group="EL_DimissPolymorph" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="193" name="EL_VacuumExplosion" category="enchant_skill" skill_group="EL_VacuumExplosion" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="194" name="MA_GravityCage" category="enchant_skill" skill_group="MA_GravityCage" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="195" name="EL_QuickHPMPDrain" category="enchant_skill" skill_group="EL_QuickHPMPDrain" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="196" name="EL_CountHPMPDrain" category="enchant_skill" skill_group="EL_CountHPMPDrain" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="197" name="MA_StoneSkin" category="enchant_skill" skill_group="MA_StoneSkin" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="198" name="EL_AreaCage" category="enchant_skill" skill_group="EL_AreaCage" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="200" name="EL_EternalShield" category="enchant_skill" skill_group="EL_EternalShield" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="201" name="EL_PlagueSwam" category="enchant_skill" skill_group="EL_PlagueSwam" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="202" name="EL_DarkBurst" category="enchant_skill" skill_group="EL_DarkBurst" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="203" name="EL_DispelExplosion" category="enchant_skill" skill_group="EL_DispelExplosion" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="204" name="EL_Pet_RecoverHealth" category="enchant_skill" skill_group="EL_Pet_RecoverHealth" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="205" name="WI_GainMana" category="enchant_skill" skill_group="WI_GainMana" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="206" name="WI_HydroImpact" category="enchant_skill" skill_group="WI_HydroImpact" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="207" name="MA_FrozenShock" category="enchant_skill" skill_group="MA_FrozenShock" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="208" name="WI_MagicalChain" category="enchant_skill" skill_group="WI_MagicalChain" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="209" name="WI_MagicalFlame" category="enchant_skill" skill_group="WI_MagicalFlame" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="210" name="WI_WindSpear" category="enchant_skill" skill_group="WI_WindSpear" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="211" name="WI_BurningSoul" category="enchant_skill" skill_group="WI_BurningSoul" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="212" name="MA_FlameBolt" category="enchant_skill" skill_group="MA_FlameBolt" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="214" name="MA_IceGrab" category="enchant_skill" skill_group="MA_IceGrab" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="215" name="WI_ChainBurn" category="enchant_skill" skill_group="WI_ChainBurn" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="216" name="WI_SoulFreeze" category="enchant_skill" skill_group="WI_SoulFreeze" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="217" name="WI_SoulEater" category="enchant_skill" skill_group="WI_SoulEater" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="218" name="WI_VitalityDrain" category="enchant_skill" skill_group="WI_VitalityDrain" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="219" name="MA_IgnicBurn" category="enchant_skill" skill_group="MA_IgnicBurn" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="220" name="WI_FlameCage" category="enchant_skill" skill_group="WI_FlameCage" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="221" name="WI_MeltDown" category="enchant_skill" skill_group="WI_MeltDown" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="222" name="WI_FrozenField" category="enchant_skill" skill_group="WI_FrozenField" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="223" name="WI_WizardryHook" category="enchant_skill" skill_group="WI_WizardryHook" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="224" name="WI_MagicFist" category="enchant_skill" skill_group="WI_MagicFist" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="226" name="WI_AbysalSlayer" category="enchant_skill" skill_group="WI_AbysalSlayer" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="227" name="WI_AbysalStalker" category="enchant_skill" skill_group="WI_AbysalStalker" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="228" name="MA_PandemoniumFocus" category="enchant_skill" skill_group="MA_PandemoniumFocus" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="229" name="WI_RapidShield" category="enchant_skill" skill_group="WI_RapidShield" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="230" name="WI_RaisingStorm" category="enchant_skill" skill_group="WI_RaisingStorm" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="231" name="WI_DelayedExplosion" category="enchant_skill" skill_group="WI_DelayedExplosion" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="232" name="WI_DelayedStrike" category="enchant_skill" skill_group="WI_DelayedStrike" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="237" name="WI_Stigma_VolcanicFlame" category="enchant_skill" skill_group="WI_Stigma_VolcanicFlame" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="238" name="WI_Meteor" category="enchant_skill" skill_group="WI_Meteor" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="239" name="WI_FrozenCore" category="enchant_skill" skill_group="WI_FrozenCore" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="240" name="WI_FireShooter" category="enchant_skill" skill_group="WI_FireShooter" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="242" name="CH_SonicSwing" category="enchant_skill" skill_group="CH_SonicSwing" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="243" name="CH_SonicGenoside" category="enchant_skill" skill_group="CH_SonicGenoside" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="244" name="CH_SonicRush" category="enchant_skill" skill_group="CH_SonicRush" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="245" name="CH_MortalStrike" category="enchant_skill" skill_group="CH_MortalStrike" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="246" name="CH_ImbueEarth" category="enchant_skill" skill_group="CH_ImbueEarth" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="247" name="CH_TearingCrash" category="enchant_skill" skill_group="CH_TearingCrash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="248" name="CH_TriangleShock" category="enchant_skill" skill_group="CH_TriangleShock" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="249" name="CH_SonicAssault" category="enchant_skill" skill_group="CH_SonicAssault" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="250" name="CH_PressSmash" category="enchant_skill" skill_group="CH_PressSmash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="251" name="CH_TearingStrike" category="enchant_skill" skill_group="CH_TearingStrike" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="252" name="CH_LightningStrike" category="enchant_skill" skill_group="CH_LightningStrike" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="253" name="CH_ParryingStrike" category="enchant_skill" skill_group="CH_ParryingStrike" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="254" name="CH_ViolentSwing" category="enchant_skill" skill_group="CH_ViolentSwing" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="255" name="CH_PentacleShock" category="enchant_skill" skill_group="CH_PentacleShock" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="256" name="CH_HeroicStrike" category="enchant_skill" skill_group="CH_HeroicStrike" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="257" name="CH_PowerAttack" category="enchant_skill" skill_group="CH_PowerAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="258" name="CH_Chakra" category="enchant_skill" skill_group="CH_Chakra" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="262" name="CH_Rejuvenation" category="enchant_skill" skill_group="CH_Rejuvenation" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="264" name="CH_ShockAttack" category="enchant_skill" skill_group="CH_ShockAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="265" name="CH_AngelicWall" category="enchant_skill" skill_group="CH_AngelicWall" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="266" name="CH_Tremor" category="enchant_skill" skill_group="CH_Tremor" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="268" name="CH_Stigma_RecoverWord" category="enchant_skill" skill_group="CH_Stigma_RecoverWord" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="270" name="CH_RapidThrust" category="enchant_skill" skill_group="CH_RapidThrust" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="271" name="Gu_HeavyFireChain" category="enchant_skill" skill_group="Gu_HeavyFireChain" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="272" name="Gu_CurbingFireChain" category="enchant_skill" skill_group="Gu_CurbingFireChain" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="273" name="Gu_CrackSnipe" category="enchant_skill" skill_group="Gu_CrackSnipe" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="274" name="En_DoubleFireChain" category="enchant_skill" skill_group="En_DoubleFireChain" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="275" name="Gu_AimingStrike" category="enchant_skill" skill_group="Gu_AimingStrike" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="276" name="Gu_ForeHeadSnipe" category="enchant_skill" skill_group="Gu_ForeHeadSnipe" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="277" name="Gu_MentalicShot" category="enchant_skill" skill_group="Gu_MentalicShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="278" name="Gu_WeakspotSnipe" category="enchant_skill" skill_group="Gu_WeakspotSnipe" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="279" name="Gu_RapidEnFire" category="enchant_skill" skill_group="Gu_RapidEnFire" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="280" name="En_EnFireChain" category="enchant_skill" skill_group="En_EnFireChain" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="281" name="En_AnkleSnipe" category="enchant_skill" skill_group="En_AnkleSnipe" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="282" name="Gu_MentalicFireChain" category="enchant_skill" skill_group="Gu_MentalicFireChain" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="283" name="Gu_MentalicRapidFire" category="enchant_skill" skill_group="Gu_MentalicRapidFire" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="284" name="Gu_BreakingFireChain" category="enchant_skill" skill_group="Gu_BreakingFireChain" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="285" name="Gu_SnipingShot" category="enchant_skill" skill_group="Gu_SnipingShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="286" name="Gu_SnipingFire" category="enchant_skill" skill_group="Gu_SnipingFire" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="287" name="Gu_FireCannon" category="enchant_skill" skill_group="Gu_FireCannon" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="288" name="Gu_DrainAttack" category="enchant_skill" skill_group="Gu_DrainAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="289" name="Gu_GateBlowCannon" category="enchant_skill" skill_group="Gu_GateBlowCannon" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="291" name="Gu_GravityCannon" category="enchant_skill" skill_group="Gu_GravityCannon" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="292" name="Gu_AimWing" category="enchant_skill" skill_group="Gu_AimWing" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="293" name="Gu_WingBlaster" category="enchant_skill" skill_group="Gu_WingBlaster" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="294" name="Gu_MagicCannon" category="enchant_skill" skill_group="Gu_MagicCannon" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="295" name="Gu_CondensedBlaster" category="enchant_skill" skill_group="Gu_CondensedBlaster" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="297" name="Gu_MagicalPromise" category="enchant_skill" skill_group="Gu_MagicalPromise" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="299" name="En_FormWall" category="enchant_skill" skill_group="En_FormWall" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="300" name="Gu_MentalicBlaster" category="enchant_skill" skill_group="Gu_MentalicBlaster" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="301" name="Gu_SilenceShot" category="enchant_skill" skill_group="Gu_SilenceShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="302" name="Gu_RefreshingAttack" category="enchant_skill" skill_group="Gu_RefreshingAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="303" name="Gu_BacksteppingSnipe" category="enchant_skill" skill_group="Gu_BacksteppingSnipe" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="304" name="Gu_IceBallCannon" category="enchant_skill" skill_group="Gu_IceBallCannon" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="305" name="RI_PowerJab" category="enchant_skill" skill_group="RI_PowerJab" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="306" name="RI_ForwardAttack" category="enchant_skill" skill_group="RI_ForwardAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="307" name="RI_DrainJab" category="enchant_skill" skill_group="RI_DrainJab" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="308" name="RI_ChainDrain" category="enchant_skill" skill_group="RI_ChainDrain" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="309" name="RI_BreakingAttack" category="enchant_skill" skill_group="RI_BreakingAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="310" name="RI_ExplodingPunch" category="enchant_skill" skill_group="RI_ExplodingPunch" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="311" name="RI_LeftJab" category="enchant_skill" skill_group="RI_LeftJab" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="312" name="RI_ChainFire" category="enchant_skill" skill_group="RI_ChainFire" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="313" name="RI_ChargedPunch" category="enchant_skill" skill_group="RI_ChargedPunch" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="314" name="RI_RightJab" category="enchant_skill" skill_group="RI_RightJab" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="315" name="RI_BindingAttack" category="enchant_skill" skill_group="RI_BindingAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="316" name="RI_TanglingAttack" category="enchant_skill" skill_group="RI_TanglingAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="317" name="RI_ChargeAttack" category="enchant_skill" skill_group="RI_ChargeAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="318" name="RI_WeakeningAttack" category="enchant_skill" skill_group="RI_WeakeningAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="319" name="RI_AngryPunch" category="enchant_skill" skill_group="RI_AngryPunch" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="320" name="RI_DirectFire" category="enchant_skill" skill_group="RI_DirectFire" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="321" name="RI_AimingAttack" category="enchant_skill" skill_group="RI_AimingAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="322" name="RI_DrainingNet" category="enchant_skill" skill_group="RI_DrainingNet" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="323" name="RI_FallingAttack" category="enchant_skill" skill_group="RI_FallingAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="324" name="RI_RapidCharge" category="enchant_skill" skill_group="RI_RapidCharge" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="326" name="RI_ProvokingAttack" category="enchant_skill" skill_group="RI_ProvokingAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="331" name="RI_ExplodeDP" category="enchant_skill" skill_group="RI_ExplodeDP" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="332" name="RI_ShockAttack" category="enchant_skill" skill_group="RI_ShockAttack" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="333" name="RI_UpperCut" category="enchant_skill" skill_group="RI_UpperCut" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="335" name="RI_ActivateGenerator" category="enchant_skill" skill_group="RI_ActivateGenerator" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="336" name="RI_ShockStrike" category="enchant_skill" skill_group="RI_ShockStrike" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="339" name="Ba_SongofAnger" category="enchant_skill" skill_group="Ba_SongofAnger" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="340" name="Ba_SongofInjury" category="enchant_skill" skill_group="Ba_SongofInjury" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="341" name="Ar_SongofCold" category="enchant_skill" skill_group="Ar_SongofCold" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="342" name="Ba_SongofLand" category="enchant_skill" skill_group="Ba_SongofLand" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="343" name="Ba_SongofGust" category="enchant_skill" skill_group="Ba_SongofGust" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="344" name="Ba_SongofMentalic" category="enchant_skill" skill_group="Ba_SongofMentalic" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="345" name="Ba_SongofWeight" category="enchant_skill" skill_group="Ba_SongofWeight" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="346" name="Ar_SongofAir" category="enchant_skill" skill_group="Ar_SongofAir" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="347" name="Ba_SongofGravity" category="enchant_skill" skill_group="Ba_SongofGravity" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="348" name="Ba_SongofWind" category="enchant_skill" skill_group="Ba_SongofWind" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="349" name="Ar_SongofFire" category="enchant_skill" skill_group="Ar_SongofFire" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="350" name="Ba_SongofShock" category="enchant_skill" skill_group="Ba_SongofShock" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="351" name="Ar_SongofBattle" category="enchant_skill" skill_group="Ar_SongofBattle" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="352" name="Ba_SongofMinddamage" category="enchant_skill" skill_group="Ba_SongofMinddamage" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="353" name="Ba_SongofDelayDamage" category="enchant_skill" skill_group="Ba_SongofDelayDamage" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="354" name="Ba_SongofMentalicBlaster" category="enchant_skill" skill_group="Ba_SongofMentalicBlaster" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="355" name="Ba_SongofTidalwave" category="enchant_skill" skill_group="Ba_SongofTidalwave" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="356" name="Ba_Requiem" category="enchant_skill" skill_group="Ba_Requiem" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="357" name="Ba_SongofSoulextinction" category="enchant_skill" skill_group="Ba_SongofSoulextinction" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="358" name="Ba_SongofAppreciation" category="enchant_skill" skill_group="Ba_SongofAppreciation" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="359" name="Ba_Sanctuary" category="enchant_skill" skill_group="Ba_Sanctuary" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="360" name="Ar_Songofshield" category="enchant_skill" skill_group="Ar_Songofshield" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="361" name="Ar_SongofRelax" category="enchant_skill" skill_group="Ar_SongofRelax" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="362" name="Ar_SongofHeal" category="enchant_skill" skill_group="Ar_SongofHeal" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="363" name="Ba_SongofGreatHeal" category="enchant_skill" skill_group="Ba_SongofGreatHeal" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="364" name="Ba_SongofEmergentHeal" category="enchant_skill" skill_group="Ba_SongofEmergentHeal" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="366" name="Ba_SongofRefreshMind" category="enchant_skill" skill_group="Ba_SongofRefreshMind" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="367" name="Ba_SongofResistance" category="enchant_skill" skill_group="Ba_SongofResistance" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="369" name="RA_RapidShot" category="enchant_skill" skill_group="RA_RapidShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="370" name="KN_AbysalJudgement" category="enchant_skill" skill_group="KN_AbysalJudgement" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="371" name="Mending" category="enchant_skill" skill_group="Mending" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="372" name="Aromatherapy" category="enchant_skill" skill_group="Aromatherapy" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="373" name="EV_SC_AssaultStabber_ENCHANT" category="enchant_skill" skill_group="EV_SC_AssaultStabber" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="374" name="EV_SC_SwiftShock_ENCHANT" category="enchant_skill" skill_group="EV_SC_SwiftShock" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="375" name="EV_AS_Blindside_ENCHANT" category="enchant_skill" skill_group="EV_AS_Blindside" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="376" name="EV_AS_FlowingSpiner_ENCHANT" category="enchant_skill" skill_group="EV_AS_FlowingSpiner" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="377" name="EV_PR_LightningBolt_ENCHANT" category="enchant_skill" skill_group="EV_PR_LightningBolt" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="378" name="EV_PR_HolyExplosion_ENCHANT" category="enchant_skill" skill_group="EV_PR_HolyExplosion" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="379" name="EV_HolyLightwave_ENCHANT" category="enchant_skill" skill_group="EV_HolyLightwave" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="380" name="EV_ElementalStrike_ENCHANT" category="enchant_skill" skill_group="EV_ElementalStrike" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="381" name="EV_Order_Explode_ENCHANT" category="enchant_skill" skill_group="EV_Order_Explode" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="382" name="EV_EternalShield_ENCHANT" category="enchant_skill" skill_group="EV_EternalShield" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="383" name="EV_SnipingShot_ENCHANT" category="enchant_skill" skill_group="EV_SnipingShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="384" name="EV_SongofGust_ENCHANT" category="enchant_skill" skill_group="EV_SongofGust" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="385" name="EV_Sanctuary_ENCHANT" category="enchant_skill" skill_group="EV_Sanctuary" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="386" name="EV_ProvokeWave_ENCHANT" category="enchant_skill" skill_group="EV_ProvokeWave" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="387" name="EV_ChargedPunch_ENCHANT" category="enchant_skill" skill_group="EV_ChargedPunch" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="388" name="EV_FI_DrainWave_ENCHANT" category="enchant_skill" skill_group="EV_FI_DrainWave" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="389" name="EV_FI_FlyingSlash_ENCHANT" category="enchant_skill" skill_group="EV_FI_FlyingSlash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="390" name="EV_KN_AvengingBlade_ENCHANT" category="enchant_skill" skill_group="EV_KN_AvengingBlade" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="391" name="EV_KN_SlashDown_ENCHANT" category="enchant_skill" skill_group="EV_KN_SlashDown" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="392" name="EV_KN_TripleSnacher_ENCHANT" category="enchant_skill" skill_group="EV_KN_TripleSnacher" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="393" name="EV_ApproachShot_ENCHANT" category="enchant_skill" skill_group="EV_RA_ApproachShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="394" name="EV_AimShot_ENCHANT" category="enchant_skill" skill_group="EV_RA_AimShot" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="395" name="EV_GainMana_ENCHANT" category="enchant_skill" skill_group="EV_WI_GainMana" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="396" name="EV_WindSpear_ENCHANT" category="enchant_skill" skill_group="EV_WI_WindSpear" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="397" name="EV_MagicalFlame_ENCHANT" category="enchant_skill" skill_group="EV_WI_MagicalFlame" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="398" name="EV_SonicGenoside_ENCHANT" category="enchant_skill" skill_group="EV_CH_SonicGenoside" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="399" name="EV_RapidThrust_ENCHANT" category="enchant_skill" skill_group="EV_CH_RapidThrust" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="400" name="EV_ImbueEarth_ENCHANT" category="enchant_skill" skill_group="EV_CH_ImbueEarth" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="401" name="ALL_Highdeva_Wind_G2_LEARN" category="learn_skill" skill_group="Highdeva_wind_G2" cp_cost="5" />
+	<cp_info id="402" name="ALL_Highdeva_Wind_G2_ENCHANT" category="enchant_skill" skill_group="Highdeva_wind_G2" cp_count_max="5" cp_cost="1" cp_cost_adj="2" />
+	<cp_info id="403" name="ALL_Highdeva_Fire_G2_LEARN" category="learn_skill" skill_group="Highdeva_fire_G2" cp_cost="5" />
+	<cp_info id="404" name="ALL_Highdeva_Fire_G2_ENCHANT" category="enchant_skill" skill_group="Highdeva_fire_G2" cp_count_max="5" cp_cost="1" cp_cost_adj="2" />
+	<cp_info id="405" name="ALL_Highdeva_Water_G2_LEARN" category="learn_skill" skill_group="Highdeva_water_G2" cp_cost="5" />
+	<cp_info id="406" name="ALL_Highdeva_Water_G2_ENCHANT" category="enchant_skill" skill_group="Highdeva_water_G2" cp_count_max="5" cp_cost="1" cp_cost_adj="2" />
+	<cp_info id="407" name="ALL_Highdeva_Earth_G2_LEARN" category="learn_skill" skill_group="Highdeva_earth_G2" cp_cost="5" />
+	<cp_info id="408" name="ALL_Highdeva_Earth_G2_ENCHANT" category="enchant_skill" skill_group="Highdeva_earth_G2" cp_count_max="5" cp_cost="1" cp_cost_adj="2" />
+	<cp_info id="409" name="EV_FI_DrainWave_LEARN" category="learn_skill" skill_group="EV_FI_DrainWave" cp_cost="5" />
+	<cp_info id="410" name="EV_FI_FlyingSlash_LEARN" category="learn_skill" skill_group="EV_FI_FlyingSlash" cp_cost="10" />
+	<cp_info id="411" name="EV_FI_ParryFocus_LEARN" category="learn_skill" skill_group="EV_FI_ParryFocus" cp_cost="15" />
+	<cp_info id="412" name="EV_FI_BerserkStance_LEARN" category="learn_skill" skill_group="EV_FI_BerserkStance" cp_cost="20" />
+	<cp_info id="413" name="EV_KN_AvengingBlade_LEARN" category="learn_skill" skill_group="EV_KN_AvengingBlade" cp_cost="5" />
+	<cp_info id="414" name="EV_KN_SlashDown_LEARN" category="learn_skill" skill_group="EV_KN_SlashDown" cp_cost="10" />
+	<cp_info id="415" name="EV_WA_Dash_LEARN" category="learn_skill" skill_group="EV_WA_Dash" cp_cost="15" />
+	<cp_info id="416" name="EV_KN_TripleSnacher_LEARN" category="learn_skill" skill_group="EV_KN_TripleSnacher" cp_cost="20" />
+	<cp_info id="417" name="EV_RA_ApproachShot_LEARN" category="learn_skill" skill_group="EV_RA_ApproachShot" cp_cost="5" />
+	<cp_info id="418" name="EV_RA_AimShot_LEARN" category="learn_skill" skill_group="EV_RA_AimShot" cp_cost="10" />
+	<cp_info id="419" name="EV_RA_SleepingTrap_LEARN" category="learn_skill" skill_group="EV_RA_SleepingTrap" cp_cost="15" />
+	<cp_info id="420" name="EV_RA_BreathofNature_LEARN" category="learn_skill" skill_group="EV_RA_BreathofNature" cp_cost="20" />
+	<cp_info id="421" name="EV_WI_WindSpear_LEARN" category="learn_skill" skill_group="EV_WI_WindSpear" cp_cost="5" />
+	<cp_info id="422" name="EV_WI_GainMana_LEARN" category="learn_skill" skill_group="EV_WI_GainMana" cp_cost="10" />
+	<cp_info id="423" name="EV_WI_MagicalFlame_LEARN" category="learn_skill" skill_group="EV_WI_MagicalFlame" cp_cost="15" />
+	<cp_info id="424" name="EV_WI_PhysicalWall_LEARN" category="learn_skill" skill_group="EV_WI_PhysicalWall" cp_cost="20" />
+	<cp_info id="425" name="EV_CH_SonicGenoside_LEARN" category="learn_skill" skill_group="EV_CH_SonicGenoside" cp_cost="5" />
+	<cp_info id="426" name="EV_CH_RapidThrust_LEARN" category="learn_skill" skill_group="EV_CH_RapidThrust" cp_cost="10" />
+	<cp_info id="427" name="EV_CH_CrossParry_LEARN" category="learn_skill" skill_group="EV_CH_CrossParry" cp_cost="15" />
+	<cp_info id="428" name="EV_CH_ImbueEarth_LEARN" category="learn_skill" skill_group="EV_CH_ImbueEarth" cp_cost="20" />
+	<cp_info id="429" name="EV_SC_AssaultStabber_LEARN" category="learn_skill" skill_group="EV_SC_AssaultStabber" cp_cost="5" />
+	<cp_info id="430" name="EV_SC_SwiftShock_LEARN" category="learn_skill" skill_group="EV_SC_SwiftShock" cp_cost="10" />
+	<cp_info id="431" name="EV_AS_Blindside_LEARN" category="learn_skill" skill_group="EV_AS_Blindside" cp_cost="15" />
+	<cp_info id="432" name="EV_AS_FlowingSpiner_LEARN" category="learn_skill" skill_group="EV_AS_FlowingSpiner" cp_cost="20" />
+	<cp_info id="433" name="EV_PR_LightningBolt_LEARN" category="learn_skill" skill_group="EV_PR_LightningBolt" cp_cost="5" />
+	<cp_info id="434" name="EV_PR_HolyExplosion_LEARN" category="learn_skill" skill_group="EV_PR_HolyExplosion" cp_cost="10" />
+	<cp_info id="435" name="EV_HolyLightwave_LEARN" category="learn_skill" skill_group="EV_HolyLightwave" cp_cost="15" />
+	<cp_info id="436" name="EV_PR_FocusCasting_LEARN" category="learn_skill" skill_group="EV_PR_FocusCasting" cp_cost="20" />
+	<cp_info id="437" name="EV_ElementalStrike_LEARN" category="learn_skill" skill_group="EV_ElementalStrike" cp_cost="5" />
+	<cp_info id="438" name="EV_Order_Explode_LEARN" category="learn_skill" skill_group="EV_Order_Explode" cp_cost="10" />
+	<cp_info id="439" name="EV_EternalShield_LEARN" category="learn_skill" skill_group="EV_EternalShield" cp_cost="15" />
+	<cp_info id="440" name="EV_ResistMagic_LEARN" category="learn_skill" skill_group="EV_ResistMagic" cp_cost="20" />
+	<cp_info id="441" name="EV_SnipingShot_LEARN" category="learn_skill" skill_group="EV_SnipingShot" cp_cost="5" />
+	<cp_info id="442" name="EV_RapidStance_LEARN" category="learn_skill" skill_group="EV_RapidStance" cp_cost="10" />
+	<cp_info id="443" name="EV_SurvivalInstinct_LEARN" category="learn_skill" skill_group="EV_SurvivalInstinct" cp_cost="15" />
+	<cp_info id="444" name="EV_MindReading_LEARN" category="learn_skill" skill_group="EV_MindReading" cp_cost="20" />
+	<cp_info id="445" name="EV_SongofGust_LEARN" category="learn_skill" skill_group="EV_SongofGust" cp_cost="5" />
+	<cp_info id="446" name="EV_ExcitingMelody_LEARN" category="learn_skill" skill_group="EV_ExcitingMelody" cp_cost="10" />
+	<cp_info id="447" name="EV_Sanctuary_LEARN" category="learn_skill" skill_group="EV_Sanctuary" cp_cost="15" />
+	<cp_info id="448" name="EV_SongofDimensionDoor_LEARN" category="learn_skill" skill_group="EV_SongofDimensionDoor" cp_cost="20" />
+	<cp_info id="449" name="EV_EathiumShield_LEARN" category="learn_skill" skill_group="EV_EathiumShield" cp_cost="5" />
+	<cp_info id="450" name="EV_ProvokeWave_LEARN" category="learn_skill" skill_group="EV_ProvokeWave" cp_cost="10" />
+	<cp_info id="451" name="EV_ChargedPunch_LEARN" category="learn_skill" skill_group="EV_ChargedPunch" cp_cost="15" />
+	<cp_info id="452" name="EV_PowerOverDrive_LEARN" category="learn_skill" skill_group="EV_PowerOverDrive" cp_cost="20" />
+	<cp_info id="453" name="P_Highdeva_PvEDefend_LEARN" category="learn_skill" skill_group="P_Highdeva_PvEDefend" cp_cost="5" />
+	<cp_info id="454" name="P_Highdeva_PvEAttack_LEARN" category="learn_skill" skill_group="P_Highdeva_PvEAttack" cp_cost="5" />
+	<cp_info id="455" name="P_Highdeva_PvPDefend_LEARN" category="learn_skill" skill_group="P_Highdeva_PvPDefend" cp_cost="10" />
+	<cp_info id="456" name="P_Highdeva_PvPAttack_LEARN" category="learn_skill" skill_group="P_Highdeva_PvPAttack" cp_cost="15" />
+	<cp_info id="457" name="P_ProcReduceRate_LEARN" category="learn_skill" skill_group="P_ProcReduceRate" cp_cost="3" />
+	<cp_info id="458" name="P_ProcReduceRate_ENCHANT" category="enchant_skill" skill_group="P_ProcReduceRate" cp_count_max="4" cp_cost="0" cp_cost_adj="3"/>
+	<cp_info id="459" name="EV_CH_ProtectSelf_LEARN" category="learn_skill" skill_group="EV_CH_ProtectSelf" cp_cost="25"/>
+	<cp_info id="460" name="EV_PR_HolyServent_LEARN" category="learn_skill" skill_group="EV_PR_HolyServent" cp_cost="25"/>
+	<cp_info id="461" name="EV_Ba_SongofPurify_LEARN" category="learn_skill" skill_group="EV_Ba_SongofPurify" cp_cost="25"/>
+	<cp_info id="462" name="EV_KN_BloodySlash_LEARN" category="learn_skill" skill_group="EV_KN_BloodySlash" cp_cost="25"/>
+	<cp_info id="463" name="EV_EL_TerrorSpirit_LEARN" category="learn_skill" skill_group="EV_EL_TerrorSpirit" cp_cost="25"/>
+	<cp_info id="464" name="EV_En_FormWall_LEARN" category="learn_skill" skill_group="EV_En_FormWall" cp_cost="25"/>
+	<cp_info id="465" name="EV_RA_SabageRoar_LEARN" category="learn_skill" skill_group="EV_RA_SabageRoar" cp_cost="25"/>
+	<cp_info id="466" name="EV_RI_HighEndOverDrive_LEARN" category="learn_skill" skill_group="EV_RI_HighEndOverDrive" cp_cost="25"/>
+	<cp_info id="467" name="EV_FI_Fortitude_LEARN" category="learn_skill" skill_group="EV_FI_Fortitude" cp_cost="25"/>
+	<cp_info id="468" name="EV_AS_DefendRoar_LEARN" category="learn_skill" skill_group="EV_AS_DefendRoar" cp_cost="25"/>
+	<cp_info id="469" name="EV_WI_Meteor_LEARN" category="learn_skill" skill_group="EV_WI_Meteor" cp_cost="25"/>
+	<cp_info id="470" name="EV_PR_HolyServent_ENCHANT" category="enchant_skill" skill_group="EV_PR_HolyServent" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="471" name="EV_Ba_SongofPurify_ENCHANT" category="enchant_skill" skill_group="EV_Ba_SongofPurify" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="472" name="EV_KN_BloodySlash_ENCHANT" category="enchant_skill" skill_group="EV_KN_BloodySlash" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+	<cp_info id="473" name="EV_WI_Meteor_ENCHANT" category="enchant_skill" skill_group="EV_WI_Meteor" cp_count_max="5" cp_cost="1" cp_cost_max="5"/>
+</cp_infos>

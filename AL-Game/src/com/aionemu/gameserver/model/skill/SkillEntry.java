@@ -25,12 +25,13 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 public abstract class SkillEntry {
 
 	protected final int skillId;
-
 	protected int skillLevel;
+	protected int skillLevelBoost;
 
-	SkillEntry(int skillId, int skillLevel) {
+	SkillEntry(int skillId, int skillLevel, int skillLevelBoost) {
 		this.skillId = skillId;
 		this.skillLevel = skillLevel;
+		this.skillLevelBoost = skillLevelBoost;
 	}
 
 	public final int getSkillId() {
@@ -38,7 +39,11 @@ public abstract class SkillEntry {
 	}
 
 	public final int getSkillLevel() {
-		return skillLevel;
+		return skillLevel + skillLevelBoost;
+	}
+	
+	public void setSKillLvlBoost(int skillLevelBoost) {
+		this.skillLevelBoost = skillLevelBoost;
 	}
 
 	public final String getSkillName() {

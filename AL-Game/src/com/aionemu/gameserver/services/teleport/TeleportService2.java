@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.dao.PlayerTransformDAO;
+import com.aionemu.gameserver.dao.PlayerTransformationDAO;
 import com.aionemu.gameserver.configs.network.*;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData.LocationData;
@@ -551,8 +551,8 @@ public class TeleportService2
     }
 	
 	public static void playerTransformation(Player player) {
-		DAOManager.getDAO(PlayerTransformDAO.class).loadPlTransfo(player);
-		PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, player.getTransformModel().getPanelId(), true, player.getTransformModel().getItemId()));
+		DAOManager.getDAO(PlayerTransformationDAO.class).loadPlTransfo(player);
+		PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, player.getTransformModel().getPanelId(), true));
 	}
 	
    /**
@@ -566,49 +566,49 @@ public class TeleportService2
 		    if (player.getEffectController().hasAbnormalEffect(4752)) {
 			    if (player.getCommonData().getRace() == Race.ELYOS) {
 				    player.getTransformModel().setPanelId(76);
-					player.getTransformModel().setItemId(102301000);
+					//player.getTransformModel().setItemId(102301000);
 					PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, 76, true, 102301000));
 			    }
 		    } if (player.getEffectController().hasAbnormalEffect(4757)) {
 			    if (player.getCommonData().getRace() == Race.ELYOS) {
 				    player.getTransformModel().setPanelId(77);
-					player.getTransformModel().setItemId(102303000);
+					//player.getTransformModel().setItemId(102303000);
 					PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, 77, true, 102303000));
 			    }
 		    } if (player.getEffectController().hasAbnormalEffect(4762)) {
 			    if (player.getCommonData().getRace() == Race.ELYOS) {
 				    player.getTransformModel().setPanelId(78);
-					player.getTransformModel().setItemId(102302000);
+					//player.getTransformModel().setItemId(102302000);
 					PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, 78, true, 102302000));
 			    }
 		    } if (player.getEffectController().hasAbnormalEffect(4768)) {
 			    if (player.getCommonData().getRace() == Race.ELYOS) {
 				    player.getTransformModel().setPanelId(79);
-					player.getTransformModel().setItemId(102304000);
+					//player.getTransformModel().setItemId(102304000);
 					PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, 79, true, 102304000));
 			    }
 		    } if (player.getEffectController().hasAbnormalEffect(4804)) {
 			    if (player.getCommonData().getRace() == Race.ASMODIANS) {
 				    player.getTransformModel().setPanelId(76);
-					player.getTransformModel().setItemId(102301000);
+					//player.getTransformModel().setItemId(102301000);
 					PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, 76, true, 102301000));
 			    }
 		    } if (player.getEffectController().hasAbnormalEffect(4805)) {
 			    if (player.getCommonData().getRace() == Race.ASMODIANS) {
 				    player.getTransformModel().setPanelId(77);
-					player.getTransformModel().setItemId(102303000);
+					//player.getTransformModel().setItemId(102303000);
 					PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, 77, true, 102303000));
 			    }
 		    } if (player.getEffectController().hasAbnormalEffect(4806)) {
 			    if (player.getCommonData().getRace() == Race.ASMODIANS) {
 				    player.getTransformModel().setPanelId(78);
-					player.getTransformModel().setItemId(102302000);
+					//player.getTransformModel().setItemId(102302000);
 					PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, 78, true, 102302000));
 			    }
 		    } if (player.getEffectController().hasAbnormalEffect(4807)) {
 			    if (player.getCommonData().getRace() == Race.ASMODIANS) {
 				    player.getTransformModel().setPanelId(79);
-					player.getTransformModel().setItemId(102304000);
+					//player.getTransformModel().setItemId(102304000);
 					PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, 79, true, 102304000));
 			    }
 		    }
@@ -645,19 +645,19 @@ public class TeleportService2
 				PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, 81, true, 0));
 		    } if (player.getEffectController().hasAbnormalEffect(4808)) {
 			    player.getTransformModel().setPanelId(82);
-				player.getTransformModel().setItemId(102301000);
+				//player.getTransformModel().setItemId(102301000);
 				PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, 82, true, 102301000));
 			} if (player.getEffectController().hasAbnormalEffect(4813)) {
 				player.getTransformModel().setPanelId(83);
-				player.getTransformModel().setItemId(102303000);
+				//player.getTransformModel().setItemId(102303000);
 				PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, 83, true, 102303000));
 			} if (player.getEffectController().hasAbnormalEffect(4818)) {
 			    player.getTransformModel().setPanelId(84);
-				player.getTransformModel().setItemId(102302000);
+				//player.getTransformModel().setItemId(102302000);
 				PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, 84, true, 102302000));
 			} if (player.getEffectController().hasAbnormalEffect(4824)) {
 			    player.getTransformModel().setPanelId(85);
-				player.getTransformModel().setItemId(102304000);
+				//player.getTransformModel().setItemId(102304000);
 				PacketSendUtility.sendPacket(player, new SM_TRANSFORM(player, 85, true, 102304000));
 			}
 			//Aturam Sky Fortress 4.8
@@ -860,4 +860,29 @@ public class TeleportService2
 			}
 		}
 	}
+	public static void teleportToCapital(Player player) {
+        switch (player.getRace()) {
+            case ELYOS:
+                TeleportService2.teleportTo(player, WorldMapType.SANCTUM.getId(), 1322, 1511, 568);
+                break;
+            case ASMODIANS:
+                TeleportService2.teleportTo(player, WorldMapType.PANDAEMONIUM.getId(), 1679, 1400, 195);
+                break;
+		default:
+			break;
+        }
+    }
+
+    public static void teleportToCapital2(Player player) {
+        switch (player.getRace()) {
+            case ELYOS:
+                teleportTo(player, WorldMapType.SANCTUM.getId(), 1322, 1511, 568, player.getHeading(), TeleportAnimation.JUMP_ANIMATION);
+                break;
+            case ASMODIANS:
+                teleportTo(player, WorldMapType.PANDAEMONIUM.getId(), 1679, 1400, 195, player.getHeading(), TeleportAnimation.JUMP_ANIMATION);
+                break;
+		default:
+			break;
+        }
+    }
 }

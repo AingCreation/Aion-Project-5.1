@@ -21,6 +21,10 @@ import ai.AggressiveNpcAI2;
 import com.aionemu.commons.network.util.ThreadPoolManager;
 
 import com.aionemu.gameserver.ai2.*;
+import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.ingameshop.InGameShopEn;
+import com.aionemu.gameserver.services.abyss.AbyssPointsService;
+import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
@@ -53,6 +57,7 @@ public class Wealhtheow_Keep_Rune_EliteAI2 extends AggressiveNpcAI2
 			case 251825:
 			case 251830:
 				treasureChest();
+				doRewardBoss();
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
 			        @Override
 			        public void run() {
@@ -75,6 +80,29 @@ public class Wealhtheow_Keep_Rune_EliteAI2 extends AggressiveNpcAI2
 			}
 		});
 	}
+	
+	public void doRewardBoss() {
+        World.getInstance().getWorldMap(WorldMapType.KALDOR.getId()).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+            @Override
+            public void visit(Player player) {
+                if (player.getRace() == Race.ELYOS) {
+                    int qt = 10;
+                    AbyssPointsService.addGp(player, 1000);
+					ItemService.addItem(player, 185000199, 1);
+					ItemService.addItem(player, 166030005, 50);
+                    InGameShopEn.getInstance().addToll(player, qt);
+                    PacketSendUtility.sendBrightYellowMessage(player, "You obtained " + qt + " Web Point.");
+					} else {
+                    int qt = 10;
+                    AbyssPointsService.addGp(player, 1000);
+					ItemService.addItem(player, 185000199, 1);
+					ItemService.addItem(player, 166030005, 50);
+                    InGameShopEn.getInstance().addToll(player, qt);
+                    PacketSendUtility.sendBrightYellowMessage(player, "You obtained " + qt + " Web Point.");
+                }
+            }
+        });
+    }
 	
 	private void announceRuneElite() {
 		World.getInstance().doOnAllPlayers(new Visitor<Player>() {

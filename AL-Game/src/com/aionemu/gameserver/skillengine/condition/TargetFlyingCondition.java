@@ -46,6 +46,8 @@ public class TargetFlyingCondition extends Condition {
 				return env.getFirstTarget().isFlying();
 			case GROUND:
 				return !env.getFirstTarget().isFlying();
+		default:
+			break;
 		}
 
 		return true;
@@ -61,6 +63,8 @@ public class TargetFlyingCondition extends Condition {
 				return effect.getEffected().isFlying();
 			case GROUND:
 				return !effect.getEffected().isFlying();
+		default:
+			break;
 		}
 
 		return true;

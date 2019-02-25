@@ -1,6 +1,23 @@
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
+ *
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Aion-Lightning is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details. *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.aionemu.gameserver.skillengine.effect;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.Future;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,10 +35,17 @@ import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
+/**
+ * @author ATracer
+ * @modified Kill3r
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SummonTrapEffect")
-public class SummonTrapEffect extends SummonEffect
-{
+public class SummonTrapEffect extends SummonEffect {
+
+	@XmlAttribute(name = "skill_id", required = true)
+	protected int skillId;
+
 	@Override
 	public void applyEffect(Effect effect) {
 		Creature effector = effect.getEffector();
@@ -49,7 +73,7 @@ public class SummonTrapEffect extends SummonEffect
         }
 		maxTraps(effector);
 		SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, x, y, z, heading);
-		final Trap trap = VisibleObjectSpawner.spawnTrap(spawn, instanceId, effector);
+		final Trap trap = VisibleObjectSpawner.spawnTrap(spawn, instanceId, effector, skillId);
 		Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
 			@Override
 			public void run() {

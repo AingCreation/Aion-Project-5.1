@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.configs.main.EnchantsConfig;
 import org.apache.commons.lang.StringUtils;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -43,6 +42,9 @@ public class ItemTemplate extends VisibleObjectTemplate
 
 	@XmlElement(name = "actions", required = false)
 	protected ItemActions actions;
+	
+	@XmlAttribute(name = "name_desc")
+	private String namedesc;
 
 	@XmlAttribute(name = "mask")
 	private int mask;
@@ -227,8 +229,20 @@ public class ItemTemplate extends VisibleObjectTemplate
 	@XmlAttribute(name = "enchant_base")
 	private int enchant_base = 0;
 	
+	@XmlAttribute(name="item_archdaeva")
+	private boolean item_archdaeva;
+	
 	@XmlAttribute(name = "item_custom_set")
 	private int itemCustomSet = 0;
+	
+	@XmlAttribute(name = "exceed_enchant")
+	private boolean exceedEnchant = false;
+	
+	@XmlAttribute(name="enchant_type")
+	private int enchant_type;
+	
+	@XmlAttribute(name="authorize_type")
+	private int authorize_type;
 
 	private static final WeaponStats emptyWeaponStats = new WeaponStats();
 
@@ -332,6 +346,10 @@ public class ItemTemplate extends VisibleObjectTemplate
 
 	public int getRobotId() {
 		return robot_id;
+	}
+	
+	public String getNamedesc() {
+		return namedesc;
 	}
 
 	public int getAbyssPoint() {
@@ -440,7 +458,7 @@ public class ItemTemplate extends VisibleObjectTemplate
 	}
 
 	public boolean isStigma() {
-		return itemId > 140000001 && itemId < 140001493; //Last Stigma Stone in 4.8
+		return itemId > 140001102 && itemId < 140001493 || itemId > 140000000 && itemId < 140000005; // checked 5.1
 	}
 	
 	public boolean isPlume() {
@@ -453,8 +471,7 @@ public class ItemTemplate extends VisibleObjectTemplate
 	
 	public boolean isManaStone() {
 		return category == ItemCategory.MANASTONE ||
-		category == ItemCategory.SPECIAL_MANASTONE ||
-		category == ItemCategory.PRIMARY_MANASTONE;
+		category == ItemCategory.ANCIENT_MANASTONE;
 	}
 	
 	public boolean isEstima() {
@@ -562,7 +579,7 @@ public class ItemTemplate extends VisibleObjectTemplate
 	}
 
 	public boolean isArchdaeva() {
-		return (getMask() & ItemMask.ITEM_ARCHDAEVA) == ItemMask.ITEM_ARCHDAEVA;
+		return item_archdaeva;
 	}
 
 	public boolean isTwoHandWeapon() {
@@ -674,10 +691,6 @@ public class ItemTemplate extends VisibleObjectTemplate
 		return category == ItemCategory.ENCHANTMENT;
 	}
 	
-	public boolean isAmplificationStone() {
-		return category == ItemCategory.ENCHANTMENT_AMPLIFICATION;
-	}
-	
 	public boolean isCloth() {
 		return armorType != null && equipmentType == EquipType.ARMOR;
 	}
@@ -730,5 +743,31 @@ public class ItemTemplate extends VisibleObjectTemplate
 	
 	public int getItemCustomSet() {
 		return itemCustomSet;
+	}
+	
+	public boolean getExceedEnchant() {
+		return exceedEnchant;
+	}
+
+	public boolean isWing() {
+		return armorType == ArmorType.WING;
+	}
+
+	public int getAuthorizedType() {
+		return authorize_type;
+	}
+	  
+	public boolean isDestroyWhenTemperFail() {
+		return authorize_type == 1;
+	}
+	
+	public boolean isDestroyWhenEnchantFail() {
+		if (enchant_type == 1) {
+			return true;
+		}
+		if (level >= 66) {
+			return true;
+		}
+		return false;
 	}
 }

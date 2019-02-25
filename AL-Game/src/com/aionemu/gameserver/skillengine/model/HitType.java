@@ -11,5 +11,5 @@ public enum HitType
 	NMLATK,
 	BACKATK,
 	MAHIT,
-	PHHIT;
+	PHHIT, FEAR;
 }

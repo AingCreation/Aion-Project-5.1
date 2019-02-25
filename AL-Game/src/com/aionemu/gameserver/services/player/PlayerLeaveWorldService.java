@@ -37,7 +37,7 @@ import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.ProtectorConquerorService;
 import com.aionemu.gameserver.services.PunishmentService;
 import com.aionemu.gameserver.services.RepurchaseService;
-import com.aionemu.gameserver.services.StigmaLinkedService;
+import com.aionemu.gameserver.services.dreamergames.services.CpPlayerService;
 import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.summons.SummonsService;
@@ -46,8 +46,7 @@ import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.GMService;
 
-public class PlayerLeaveWorldService
-{
+public class PlayerLeaveWorldService {
 	private static final Logger log = LoggerFactory.getLogger(PlayerLeaveWorldService.class);
 
 	public static final void startLeaveWorldDelay(final Player player, int delay) {
@@ -77,6 +76,7 @@ public class PlayerLeaveWorldService
 		BrokerService.getInstance().removePlayerCache(player);
 		ExchangeService.getInstance().cancelExchange(player);
 		RepurchaseService.getInstance().removeRepurchaseItems(player);
+		CpPlayerService.onPlayerLogout(player);
 		if (AutoGroupConfig.AUTO_GROUP_ENABLED) {
 			AutoGroupService.getInstance().onPlayerLogOut(player);
 		}
@@ -148,7 +148,6 @@ public class PlayerLeaveWorldService
 		//****//
 		PlayerAccountData pad = player.getPlayerAccount().getPlayerAccountData(player.getObjectId());
 		pad.setEquipment(player.getEquipment().getEquippedItems());
-		StigmaLinkedService.onLogOut(player);
 	}
 
 	public static void tryLeaveWorld(Player player) {

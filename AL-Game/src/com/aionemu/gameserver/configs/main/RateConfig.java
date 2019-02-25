@@ -203,13 +203,24 @@ public class RateConfig
      */
     @Property(key = "gameserver.rate.holiday.enable", defaultValue = "true")
 	public static boolean ENABLE_HOLIDAY_RATE;
-    @Property(key = "gameserver.rate.holiday.regular", defaultValue = "true")
+    @Property(key = "gameserver.rate.holiday.regular", defaultValue = "1")
 	public static int HOLIDAY_RATE_REGULAR;
-    @Property(key = "gameserver.rate.holiday.premium", defaultValue = "true")
+    @Property(key = "gameserver.rate.holiday.premium", defaultValue = "2")
     public static int HOLIDAY_RATE_PREMIUM;
-    @Property(key = "gameserver.rate.holiday.vip", defaultValue = "true")
+    @Property(key = "gameserver.rate.holiday.vip", defaultValue = "3")
     public static int HOLIDAY_RATE_VIP;
     @Property(key = "gameserver.rate.holiday.days", defaultValue = "1,7")
     public static String HOLIDAY_RATE_DAYS;
+    
+    /**
+     * Manastone Socket Rates
+     */
+    @Property(key = "gameserver.rate.regular.manastone.socket", defaultValue = "1")
+    public static int MANASTONE_RATE_SOCKET;
+    @Property(key = "gameserver.rate.premium.manastone.socket", defaultValue = "2")
+    public static int PREMIUM_MANASTONE_RATE_SOCKET;
+    @Property(key = "gameserver.rate.vip.manastone.socket", defaultValue = "3")
+    public static int VIP_MANASTONE_RATE_SOCKET;
+    
     
 }

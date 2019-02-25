@@ -16,26 +16,32 @@
  */
 package ai.agentFight;
 
-import java.util.*;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import ai.AggressiveNpcAI2;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import com.aionemu.gameserver.ai2.*;
-import com.aionemu.gameserver.model.*;
-import com.aionemu.gameserver.model.gameobjects.*;
+import com.aionemu.gameserver.ai2.AIName;
+import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.AionObject;
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.*;
-import com.aionemu.gameserver.services.abyss.*;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.AgentService;
+import com.aionemu.gameserver.services.BaseService;
+import com.aionemu.gameserver.services.HTMLService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.utils.MathUtil;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.knownlist.Visitor;
-import com.aionemu.gameserver.utils.*;
-import com.aionemu.gameserver.world.*;
 
 /****/
 /** Author Rinzler (Encom)
+ * @rework idhacker542
+ */
 /****/
 
 @AIName("empowered_mastarius")
@@ -72,7 +78,6 @@ public class Empowered_MastariusAI2 extends AggressiveNpcAI2
 	protected void handleDied() {
 		final WorldPosition p = getPosition();
 		if (p != null) {
-			addGpPlayer();
 			sendMastariusGuide();
 		}
 		despawnNpc(296913); //Mastarius's Aether Concentrator I.
@@ -81,6 +86,8 @@ public class Empowered_MastariusAI2 extends AggressiveNpcAI2
 		announceKilledMarchutan();
         announceEmpoweredMastariusDie();
 		AgentService.getInstance().stopAgentFight(1);
+		AgentService.getInstance().onRewardMasta();
+		AgentService.getInstance().onRewardMastas();
         BaseService.getInstance().capture(90, Race.ELYOS);
 		super.handleDied();
 	}
@@ -91,16 +98,6 @@ public class Empowered_MastariusAI2 extends AggressiveNpcAI2
 			public void visit(Player player) {
 				if (MathUtil.isIn3dRange(player, getOwner(), 15)) {
 					HTMLService.sendGuideHtml(player, "Agent_Fight");
-				}
-			}
-		});
-	}
-	private void addGpPlayer() {
-		World.getInstance().doOnAllPlayers(new Visitor<Player>() {
-			@Override
-			public void visit(Player player) {
-				if (MathUtil.isIn3dRange(player, getOwner(), 15)) {
-					AbyssPointsService.addGp(player, 500);
 				}
 			}
 		});

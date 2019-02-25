@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
+import com.aionemu.gameserver.dao.AdminCommandLogDAO;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
@@ -19,7 +20,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemId;
 import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.items.storage.Storage;
-import com.aionemu.gameserver.model.templates.item.ItemCustomSetTeamplate;
 import com.aionemu.gameserver.model.templates.item.ArmorType;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
@@ -28,6 +28,7 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.google.common.base.Preconditions;
@@ -53,78 +54,145 @@ public class ItemService {
 	}
 
 	public static long addItem(Player player, int itemId, long count, ItemUpdatePredicate predicate) {
-		return addItem(player, itemId, count, null, predicate, 0);
+		return addItem(player, itemId, count, null, predicate);
 	}
+
+    public static long addItem(Player player, int itemId, long count, String creator) {
+        return addItem(player, itemId, count, DEFAULT_UPDATE_PREDICATE, creator);
+    }
+
+    public static long addItem(Player player, int itemId, long count, ItemUpdatePredicate predicate, String creator) {
+        return addItem(player, itemId, count, null, predicate, creator);
+    }
+    public static long addItem(Player player, int itemId, long count, Item sourceItem, ItemUpdatePredicate predicate, String creator) {
+        ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
+        if (count <= 0 || itemTemplate == null) {
+            return 0;
+        }
+        Preconditions.checkNotNull(itemTemplate, "No item with id " + itemId);
+        Preconditions.checkNotNull(predicate, "Predicate is not supplied");
+
+        if (LoggingConfig.LOG_ITEM) {
+            log.info("[ITEM] ID/Count"
+                    + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "/Item Name - " + itemTemplate.getTemplateId() + "/" + count + "/"
+                    + itemTemplate.getName() : " - " + itemTemplate.getTemplateId() + "/" + count) + " to player " + player.getName());
+        }
+
+        Storage inventory = player.getInventory();
+        if (itemTemplate.isKinah()) {
+            // quests do not add here
+            inventory.increaseKinah(count);
+            return 0;
+        }
+
+        if (itemTemplate.isStackable()) {
+            count = addStackableItem(player, itemTemplate, count, predicate, creator);
+        } else {
+            count = addNonStackableItem(player, itemTemplate, count, sourceItem, predicate, creator);
+        }
+
+        if (inventory.isFull(itemTemplate.getExtraInventoryId()) && count > 0) {
+            PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR);
+        }
+        return count;
+    }
 
 	/**
 	 * Add new item based on all sourceItem values
 	 */
 	public static long addItem(Player player, Item sourceItem) {
-		return addItem(player, sourceItem.getItemId(), sourceItem.getItemCount(), sourceItem, DEFAULT_UPDATE_PREDICATE, 0);
+		return addItem(player, sourceItem.getItemId(), sourceItem.getItemCount(), sourceItem, DEFAULT_UPDATE_PREDICATE);
 	}
 
 	public static long addItem(Player player, Item sourceItem, ItemUpdatePredicate predicate) {
-		return addItem(player, sourceItem.getItemId(), sourceItem.getItemCount(), sourceItem, predicate, 0);
+		return addItem(player, sourceItem.getItemId(), sourceItem.getItemCount(), sourceItem, predicate);
 	}
 
 	public static long addItem(Player player, int itemId, long count, Item sourceItem) {
-		return addItem(player, itemId, count, sourceItem, DEFAULT_UPDATE_PREDICATE, 0);
-	}
-
-	public static long addItemAndEnchant(Player player, int itemId, long count, int enchantLevel, ItemUpdatePredicate predicate) {
-		return addItem(player, itemId, count, null, predicate, enchantLevel);
+		return addItem(player, itemId, count, sourceItem, DEFAULT_UPDATE_PREDICATE);
 	}
 
 	/**
 	 * Add new item based on sourceItem values
 	 */
-	public static long addItem(Player player, int itemId, long count, Item sourceItem, ItemUpdatePredicate predicate, int enchantLevel) {
+	public static long addItem(Player player, int itemId, long count, Item sourceItem, ItemUpdatePredicate predicate) {
 		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
 		if (count <= 0 || itemTemplate == null) {
 			return 0;
 		}
 		Preconditions.checkNotNull(itemTemplate, "No item with id " + itemId);
 		Preconditions.checkNotNull(predicate, "Predicate is not supplied");
+
 		if (LoggingConfig.LOG_ITEM) {
-			log.info("[ITEM] ID/Count"
-			+ (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "/Item Name - " + itemTemplate.getTemplateId() + "/" + count + "/"
-			+ itemTemplate.getName() : " - " + itemTemplate.getTemplateId() + "/" + count) + " to player " + player.getName());
+			log.info("[ITEM] ID/Count" + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "/Item Name - " + itemTemplate.getTemplateId() + "/" + count + "/" + itemTemplate.getName() : " - " + itemTemplate.getTemplateId() + "/" + count) + " to player " + player.getName());
 		}
+
 		Storage inventory = player.getInventory();
 		if (itemTemplate.isKinah()) {
+			// quests do not add here
 			inventory.increaseKinah(count);
 			return 0;
-		} if (itemTemplate.isStackable()) {
+		}
+
+		if (itemTemplate.isStackable()) {
 			count = addStackableItem(player, itemTemplate, count, predicate);
-		} else {
-			count = addNonStackableItem(player, itemTemplate, count, sourceItem, predicate, enchantLevel);
-		} if (inventory.isFull(itemTemplate.getExtraInventoryId()) && count > 0) {
+		}
+		else {
+			count = addNonStackableItem(player, itemTemplate, count, sourceItem, predicate);
+		}
+
+		if (inventory.isFull(itemTemplate.getExtraInventoryId()) && count > 0) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR);
 		}
 		return count;
 	}
+	
+	private static long addNonStackableItem(Player player, ItemTemplate itemTemplate, long count, Item sourceItem, ItemUpdatePredicate predicate, String creator) {
+        Storage inventory = player.getInventory();
+        while (!inventory.isFull(itemTemplate.getExtraInventoryId()) && count > 0) {
+            Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId());
+            newItem.setItemCreator(creator);
+            if (!itemTemplate.getExceedEnchant() && itemTemplate.isWeapon() || !itemTemplate.getExceedEnchant() && itemTemplate.isArmor()) {
+                newItem.setEnchantLevel(itemTemplate.getMaxEnchantLevel());
+            }
+            if (newItem.getExpireTime() != 0) {
+                ExpireTimerTask.getInstance().addTask(newItem, player);
+            }
+            if (sourceItem != null) {
+                copyItemInfo(sourceItem, newItem);
+            }
+            predicate.changeItem(newItem);
+            inventory.add(newItem, predicate.getAddType());
+
+            if (creator.contains("Added By GM")) {
+                String[] splitString = creator.split(":");
+                String adminName = splitString[1].replaceAll("\\s", "");
+                Player admin = World.getInstance().findPlayer(Util.convertName(adminName));
+                if (admin != null) {
+                	DAOManager.getDAO(AdminCommandLogDAO.class).insertCommandAdd(admin.getObjectId(), admin.getName(), player.getObjectId(), player.getName(), newItem.getObjectId(), newItem.getItemId(), newItem.getItemName(), (int)count, "");
+                }
+            }
+            count--;
+        }
+        return count;
+    }
 
 	/**
 	 * Add non-stackable item to inventory
 	 */
-	private static long addNonStackableItem(Player player, ItemTemplate itemTemplate, long count, Item sourceItem, ItemUpdatePredicate predicate, int enchantlevel) {
+	private static long addNonStackableItem(Player player, ItemTemplate itemTemplate, long count, Item sourceItem, ItemUpdatePredicate predicate) {
 		Storage inventory = player.getInventory();
-		ItemCustomSetTeamplate itemCustomSet = DataManager.ITEM_CUSTOM_SET_DATA.getCustomTemplate(itemTemplate.getItemCustomSet());
 		while (!inventory.isFull(itemTemplate.getExtraInventoryId()) && count > 0) {
 			Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId());
+
 			if (newItem.getExpireTime() != 0) {
 				ExpireTimerTask.getInstance().addTask(newItem, player);
-			} if (sourceItem != null) {
+			}
+			if (sourceItem != null) {
 				copyItemInfo(sourceItem, newItem);
-			} if (itemTemplate.getMaxEnchantBonus() != 0) {
-				newItem.setEnchantBonus(Rnd.get(0, itemTemplate.getMaxEnchantBonus()));
-			} if (enchantlevel > 0) {
-				enchant(player, enchantlevel, newItem);
-			} if (itemTemplate.getItemCustomSet() != 0) {
-				enchant(player, itemCustomSet.getCustomEnchantValue(), newItem);
 			}
 			predicate.changeItem(newItem);
-			inventory.add(newItem);
+			inventory.add(newItem, predicate.getAddType());
 			count--;
 		}
 		return count;
@@ -160,6 +228,49 @@ public class ItemService {
 		newItem.setItemColor(sourceItem.getItemColor());
 		newItem.setItemSkinTemplate(sourceItem.getItemSkinTemplate());
 	}
+	
+	 /**
+     * Add stackable item to inventory
+     */
+    private static long addStackableItem(Player player, ItemTemplate itemTemplate, long count, ItemUpdatePredicate predicate, String creator) {
+        Storage inventory = player.getInventory();
+        Collection<Item> items = inventory.getItemsByItemId(itemTemplate.getTemplateId());
+        for (Item item : items) {
+            if (count == 0) {
+                break;
+            }
+            count = inventory.increaseItemCount(item, count, predicate.getUpdateType(item, true));
+        }
+
+        // dirty & hacky check for arrows and shards...
+        if (itemTemplate.getArmorType() == ArmorType.SHARD) {
+            Equipment equipement = player.getEquipment();
+            items = equipement.getEquippedItemsByItemId(itemTemplate.getTemplateId());
+            for (Item item : items) {
+                if (count == 0) {
+                    break;
+                }
+                count = equipement.increaseEquippedItemCount(item, count);
+                item.setItemCreator(item.getItemCreator());
+            }
+        }
+
+        while (!inventory.isFull(itemTemplate.getExtraInventoryId()) && count > 0) {
+            Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId(), count);
+            count -= newItem.getItemCount();
+            inventory.add(newItem, predicate.getAddType());
+            newItem.setItemCreator(creator);
+            if (creator.contains("Added By GM")) {
+                String[] splitString = creator.split(":");
+                String adminName = splitString[1].replaceAll("\\s", "");
+                Player admin = World.getInstance().findPlayer(Util.convertName(adminName));
+                if (admin != null) {
+                	DAOManager.getDAO(AdminCommandLogDAO.class).insertCommandAdd(admin.getObjectId(), admin.getName(), player.getObjectId(), player.getName(), newItem.getObjectId(), newItem.getItemId(), newItem.getItemName(), (int)count, "");
+                }
+            }
+        }
+        return count;
+    }
 
 	/**
 	 * Add stackable item to inventory
@@ -186,7 +297,7 @@ public class ItemService {
 		while (!inventory.isFull(itemTemplate.getExtraInventoryId()) && count > 0) {
 			Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId(), count);
 			count -= newItem.getItemCount();
-			inventory.add(newItem);
+			inventory.add(newItem, predicate.getAddType());
 		}
 		return count;
 	}
@@ -333,26 +444,41 @@ public class ItemService {
 		}
 	}
 	
-	public static void makeUpgradeItem(Item sourceItem, Item newItem) {
-		if (sourceItem.hasManaStones()) {
-			for (ManaStone manaStone : sourceItem.getItemStones()) {
-				ItemSocketService.addManaStone(newItem, manaStone.getItemId());
-			}
-		} if (sourceItem.getGodStone() != null) {
-			newItem.addGodStone(sourceItem.getGodStone().getItemId());
-		} if (sourceItem.getEnchantLevel() > 0) {
-			newItem.setEnchantLevel(sourceItem.getEnchantLevel() - 5);
-		} if (sourceItem.getAuthorize() > 0 && sourceItem.getItemTemplate().isWeapon()) {
-			newItem.setAuthorize(sourceItem.getAuthorize() - 5);
-		} if (sourceItem.getAuthorize() > 0 && sourceItem.getItemTemplate().isPlume()) {
-			newItem.setAuthorize(0);
-		} if (sourceItem.isSoulBound()) {
-			newItem.setSoulBound(true);
-		} if (sourceItem.isAmplified()) {
-			newItem.setEnchantLevel(sourceItem.getItemTemplate().getMaxEnchantLevel() + sourceItem.getItemTemplate().getMaxEnchantBonus());
-			newItem.setAmplification(false);
+	public static void makeUpgradeItem(Player player, Item sourceItem, Item newItem) {
+		Storage inventory = player.getInventory();
+		newItem.setOptionalSocket(sourceItem.getOptionalSocket());
+		if (sourceItem.getFusionedItemId() != 0) {
+			newItem.setFusionedItem(sourceItem.getFusionedItemTemplate());
 		}
-		newItem.setPersistentState(PersistentState.UPDATE_REQUIRED);
+
+		ItemSocketService.copyManaStones(sourceItem, newItem);
+
+		if (sourceItem.getGodStone() != null) {
+			newItem.addGodStone(sourceItem.getGodStone().getItemId());
+		}
+
+		int enchantLevel = sourceItem.getEnchantLevel() - 5;
+		if (enchantLevel >= 20) {
+			newItem.setEnchantLevel(enchantLevel);
+			newItem.setAmplificationSkill(sourceItem.getAmplificationSkill());
+			newItem.setAmplification(true);
+		}
+		else {
+			newItem.setEnchantLevel(enchantLevel);
+		}
+
+		if (sourceItem.isSoulBound()) {
+			newItem.setSoulBound(true);
+		}
+
+		if (sourceItem.getBonusNumber() > 0) {
+			newItem.setBonusNumber(sourceItem.getBonusNumber());
+			newItem.setRandomStats(sourceItem.getRandomStats());
+			newItem.setRandomCount(sourceItem.getRandomCount());
+		}
+		ItemUpdatePredicate predicate = DEFAULT_UPDATE_PREDICATE;
+		predicate.changeItem(newItem);
+		inventory.add(newItem, predicate.getAddType());
 	}
 	
 	private static void enchant(Player player, int enchant, Item item) {

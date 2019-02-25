@@ -33,11 +33,7 @@
         <bonus_attr stat="BOOST_GROUP_HUNTING_XP_RATE" func="ADD" value="30"/>
         <bonus_attr stat="BOOST_HUNTING_XP_RATE" func="ADD" value="30"/>
 		<bonus_attr stat="DR_BOOST" func="ADD" value="10"/>
-		<bonus_attr stat="ATTACK_SPEED" func="PERCENT" value="-16"/>
-		<bonus_attr stat="BOOST_CASTING_TIME" func="PERCENT" value="16"/>
 		<bonus_attr stat="AP_BOOST" func="ADD" value="10"/>
-		<bonus_attr stat="PVP_ATTACK_RATIO" func="ADD" value="15"/>
-		<bonus_attr stat="PVP_DEFEND_RATIO" func="ADD" value="15"/>
 	</service_bonusattr>
 	<!-- Legion Bonus Buff 2nd -->
 	<service_bonusattr buff_id="5">
@@ -393,6 +389,7 @@
 	<!-- VIP_OP_B_CN_01 -->
 	<service_bonusattr buff_id="1000013">
 		<bonus_attr stat="INDUN_DROP_BOOST" func="ADD" value="10"/>
+		<bonus_attr stat="AP_BOOST" func="ADD" value="10"/>
         <bonus_attr stat="ENCHANT_BOOST" func="ADD" value="3"/>
         <bonus_attr stat="AUTHORIZE_BOOST" func="ADD" value="3"/>
         <bonus_attr stat="ENCHANT_OPTION_BOOST" func="ADD" value="3"/>

@@ -91,7 +91,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STANCE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PRIVATE_STORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TRANSFORM;
@@ -103,6 +102,7 @@ import com.aionemu.gameserver.services.ClassChangeService;
 import com.aionemu.gameserver.services.DuelService;
 import com.aionemu.gameserver.services.HTMLService;
 import com.aionemu.gameserver.services.LegionService;
+import com.aionemu.gameserver.services.NewbieGuideService;
 import com.aionemu.gameserver.services.ProtectorConquerorService;
 import com.aionemu.gameserver.services.PvPSpreeService;
 import com.aionemu.gameserver.services.PvpService;
@@ -117,7 +117,6 @@ import com.aionemu.gameserver.services.events.bg.DeathmatchBg;
 import com.aionemu.gameserver.services.events.bg.SoloSurvivorBg;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemService;
-import com.aionemu.gameserver.services.player.CreativityPanel.CreativityEssenceService;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.services.toypet.PetSpawnService;
@@ -383,71 +382,6 @@ public class PlayerController extends CreatureController<Player> {
 				break;
 			}
 		}
-	   /**
-		* For Protect City.
-		* If a opposite race player enter on these zone ==> return to "Bind Location"
-		*/
-		if (player.getAccessLevel() == 0) {
-		    if (
-			    //Morheim.
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("MORHEIM_SNOW_FIELD_220020000") ||
-				//Beluslan.
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("KURNGALFBERG_220040000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("RED_MANE_CAVERN_220040000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("BELUSLAN_FORTRESS_220040000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("HOARFROST_SHELTER_220040000") ||
-				//Brusthonin.
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("POLLUTED_WASTE_220050000") ||
-				//Gelkmaros.
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("ANTAGOR_BATTLEFIELD_220070000") ||
-				//Enshar.
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("DAWNBREAK_TEMPLE_220080000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("WHIRLPOOL_TEMPLE_220080000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("DRAGONREST_TEMPLE_220080000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("FATEBOUND_LEGION_OUTPOST_220080000") ||
-				//Norsvold.
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("AZPHEL_SANCTUARY_220110000")) {
-				switch (player.getRace()) {
-					case ELYOS:
-					    TeleportService2.moveToBindLocation(player, true);
-					break;
-				default:
-					break;
-				}
-			} else if (
-			    //Eltnen.
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("MANDURI_FOREST_210020000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("GOLDEN_BOUGH_GARRISON_210020000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("MYSTIC_SPRING_OF_AGAIRON_210020000") ||
-				//Heiron.
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("HEIRONOPOLIS_210040000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("PATEMA_RUINS_210040000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("ARBOLUS_HAVEN_210040000") ||
-				//Inggison.
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("CALMHEART_GROVE_210050000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("WILDHEART_GROVE_210050000") ||
-				//Theobomos.
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("PORT_ANANGKE_210060000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("JOSNACKS_VIGIL_210060000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("CRIMSON_BARRENS_210060000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("OBSERVATORY_VILLAGE_210060000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("SOUTHERN_LATHERON_COAST_210060000") ||
-				//Cygnea.
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("AEQUIS_OUTPOST_210070000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("AEQUIS_HEADQUARTERS_210070000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("AEQUIS_ADVANCE_POST_210070000") ||
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("AEQUIS_DETACHMENT_POST_210070000") ||
-				//Iluma.
-				zone.getAreaTemplate().getZoneName() == ZoneName.get("ARIEL_SANCTUARY_210100000")) {
-				switch (player.getRace()) {
-					case ASMODIANS:
-					    TeleportService2.moveToBindLocation(player, true);
-					break;
-				default:
-					break;
-				}
-			}
-		}
 	}
 
 	@Override
@@ -488,6 +422,9 @@ public class PlayerController extends CreatureController<Player> {
 				getOwner().getEffectController().clearEffect(ef);
 			}
 		}
+		if (getOwner().getCommonData().isInNewbieGuide()) {
+            NewbieGuideService.getInstance().initData(getOwner(), getOwner().getCommonData().getinNewbieGuide());
+        }
 	}
 
 	// TODO [AT] move
@@ -727,7 +664,7 @@ public class PlayerController extends CreatureController<Player> {
 		cancelGathering();
 		super.onAttack(creature, skillId, type, damage, notifyAttack, log);
 
-		PacketSendUtility.broadcastPacket(getOwner(), new SM_ATTACK_STATUS(getOwner(), type, skillId, damage, log), true);
+		PacketSendUtility.broadcastPacket(getOwner(), new SM_ATTACK_STATUS(getOwner(), creature, type, skillId, damage, log), true);
 
 		lastAttackedMilis = System.currentTimeMillis();
 	}
@@ -745,8 +682,12 @@ public class PlayerController extends CreatureController<Player> {
 		Skill skill = SkillEngine.getInstance().getSkillFor(player, skillId, player.getTarget());
 
 		if (skill != null) {
-			if (!RestrictionsManager.canUseSkill(player, skill))
+			if (!player.getPosition().getWorldMapInstance().getInstanceHandler().useSkill(player, skill)) {
 				return;
+			}
+			if (!RestrictionsManager.canUseSkill(player, skill)) {
+				return;
+			}
 
 			skill.setTargetType(targetType, x, y, z);
 			skill.setHitTime(time);
@@ -766,7 +707,7 @@ public class PlayerController extends CreatureController<Player> {
 		Player player = getOwner();
 		Skill skill = null;
 		skill = SkillEngine.getInstance().getSkillFor(player, template, player.getTarget());
-		if ((skill == null) && (player.isTransformed())) {
+		if (skill == null && player.isTransformed()) {
 			SkillPanel panel = DataManager.PANEL_SKILL_DATA.getSkillPanel(player.getTransformModel().getPanelId());
 			if (panel != null && panel.canUseSkill(template.getSkillId(), skillLevel)) {
 				skill = SkillEngine.getInstance().getSkillFor(player, template, player.getTarget(), skillLevel);
@@ -776,13 +717,17 @@ public class PlayerController extends CreatureController<Player> {
 		if (skill != null) {
 			if (!RestrictionsManager.canUseSkill(player, skill)) {
 				return;
+			} if (skill.getSkillTemplate().isDeityAvatar()) {
+				return;
+			} if (!player.getPosition().getWorldMapInstance().getInstanceHandler().useSkill(player, skill)) {
+				return;
 			}
 
 			skill.setTargetType(targetType, x, y, z);
 			skill.setHitTime(clientHitTime);
 			skill.useSkill();
-			QuestEnv env = new QuestEnv(player.getTarget(), player, 0, 0);
-			QuestEngine.getInstance().onUseSkill(env, template.getSkillId());
+			//QuestEnv env = new QuestEnv(player.getTarget(), player, 0, 0);
+			//QuestEngine.getInstance().onUseSkill(env, template.getSkillId());
 		}
 	}
 
@@ -820,7 +765,7 @@ public class PlayerController extends CreatureController<Player> {
 		Player player = getOwner();
 		Skill castingSkill = player.getCastingSkill();
 		castingSkill.cancelCast();
-		player.removeSkillCoolDown(castingSkill.getSkillTemplate().getDelayId());
+		player.removeSkillCoolDown(castingSkill.getSkillTemplate().getCooldownId());
 		player.setCasting(null);
 		player.setNextSkillUse(0);
 		if (castingSkill.getSkillMethod() == SkillMethod.CAST) {
@@ -852,6 +797,21 @@ public class PlayerController extends CreatureController<Player> {
 		if (player.getTarget() instanceof Gatherable) {
 			Gatherable g = (Gatherable) player.getTarget();
 			g.getController().finishGathering(player);
+		}
+	}
+	
+	public void cancelUseItem(int itemObjId) {
+		Player player = getOwner();
+		Item usingItem = player.getUsingItem();
+		if (usingItem != null && itemObjId == usingItem.getObjectId()) {
+			return;
+		}
+		
+		player.setUsingItem(null);
+		
+		if (hasTask(TaskId.ITEM_USE)) {
+			cancelTask(TaskId.ITEM_USE);
+			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), usingItem == null ? 0 : usingItem.getObjectId(), usingItem == null ? 0 : usingItem.getItemTemplate().getTemplateId(), 0, 3, 0), true);
 		}
 	}
 
@@ -913,22 +873,36 @@ public class PlayerController extends CreatureController<Player> {
 	public void upgradePlayer() {
 		Player player = getOwner();
 		byte level = player.getLevel();
+		
 		PlayerStatsTemplate statsTemplate = DataManager.PLAYER_STATS_DATA.getTemplate(player);
 		player.setPlayerStatsTemplate(statsTemplate);
+		
 		player.getLifeStats().synchronizeWithMaxStats();
 		player.getLifeStats().updateCurrentStats();
-		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, level), true);
+		
+		int effectId = player.getRace() == Race.ELYOS ? 0 : 4;
+		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), effectId, level), true);
+		
 		if (HTMLConfig.ENABLE_GUIDES) {
 			HTMLService.sendGuideHtml(player);
 		}
+		
 		ClassChangeService.showClassChangeDialog(player);
+		if (!player.getCommonData().isInNewbieGuide()) {
+            QuestEngine.getInstance().onLvlUp(new QuestEnv(null, player, 0, 0));
+            player.getController().updateNearbyQuests();
+            // add new skills
+            SkillLearnService.addNewSkills(player);
+        }
 		QuestEngine.getInstance().onLvlUp(new QuestEnv(null, player, 0, 0));
-		player.getController().updateNearbyQuests();
+        player.getController().updateNearbyQuests();
 		player.getController().updatePassiveStats();
 		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
+		
 		if (level == 10) {
 			CraftSkillUpdateService.getInstance().setMorphRecipe(player);
 		}
+		
 		//Stigma 5.1
 		//Characters will receive "Chargeable Stigma" bundles based on their class and level.
 		//http://static.ncsoft.com/aion/store/PatchNotes/AION_Patch_Notes_110916.pdf
@@ -955,8 +929,7 @@ public class PlayerController extends CreatureController<Player> {
 			//An additional Major Stigma slot is now available.
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_STIGMA_OPEN_ENHANCED2_SLOT);
         }
-		SkillLearnService.addNewSkills(player);
-		PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(player, player.getSkillList().getBasicSkills()));
+		
 		if (player.isInTeam()) {
 			TeamEffectUpdater.getInstance().startTask(player);
 		} if (player.isLegionMember()) {
@@ -973,12 +946,14 @@ public class PlayerController extends CreatureController<Player> {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_BE_MENTEE_BY_LEVEL_LIMIT);
 			}
 		} if (level == 66) { //TODO This is temporary solution, player need to complete quests to become highdeava, i guess
-			player.getCommonData().setArchDaeva(true);
+			if (!player.isArchDaeva()) {
+				player.getCommonData().setArchDaeva(true);
+			}
 		} if (level >= 66 && level <= 83) {
 			reachedPlayerLvl(player);
 		}
+		
 		player.getNpcFactions().onLevelUp();
-		CreativityEssenceService.getInstance().pointPerLevel(player);
 	}
 
 	public static final void reachedPlayerLvl(final Player player) {

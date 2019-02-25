@@ -99,7 +99,7 @@ public final class DataManager
 	public static Mails SYSTEM_MAIL_TEMPLATES;
 	public static ChallengeData CHALLENGE_DATA;
 	public static TownSpawnsData TOWN_SPAWNS_DATA;
-	public static ChargeSkillData CHARGE_SKILL_DATA;
+	public static SkillChargeData SKILL_CHARGE_DATA;
 	public static SpringObjectsData SPRING_OBJECTS_DATA;
 	public static RobotData ROBOT_DATA;
 	public static AbyssBuffData ABYSS_BUFF_DATA;
@@ -134,7 +134,8 @@ public final class DataManager
 	public static AreianPassportData ATREIAN_PASSPORT_DATA;
 	public static GameExperienceData GAME_EXPERIENCE_DATA;
 	public static AbyssOpData ABYSS_OP_DATA;
-	public static PanelCpData PANEL_CP_DATA;
+	public static SkillEnchantData SKILL_ENCHANT_DATA;
+	public static PlayerCpTable PLAYER_CP_TABLE;
 	public static DecomposableSelectItemsData DECOMPOSABLE_SELECT_ITEM_DATA;
 	public static PetBuffData PET_BUFF_DATA;
 	public static MultiReturnItemData MULTI_RETURN_ITEM_DATA;
@@ -143,6 +144,8 @@ public final class DataManager
 	public static LunaConsumeRewardsData LUNA_CONSUME_REWARDS_DATA;
 	public static ItemCustomSetData ITEM_CUSTOM_SET_DATA;
 	public static F2PBonusData F2P_BONUS_DATA;
+	public static EnchantRateData ENCHANT_RATE;
+	public static TemperingRateData TEMPERING_RATE;
 	private XmlDataLoader loader;
 	
 	public static final DataManager getInstance() {
@@ -230,7 +233,7 @@ public final class DataManager
 		NPC_DROP_DATA = data.npcDropData;
 		CHALLENGE_DATA = data.challengeData;
 		TOWN_SPAWNS_DATA = data.townSpawnsData;
-		CHARGE_SKILL_DATA = data.chargeSkillData;
+		SKILL_CHARGE_DATA = data.skillChargeData;
 		SPRING_OBJECTS_DATA = data.springObjectsData;
 		ROBOT_DATA = data.robotData;
 		ABYSS_BUFF_DATA = data.abyssBuffData;
@@ -265,7 +268,8 @@ public final class DataManager
 		ATREIAN_PASSPORT_DATA = data.areianPassportData;
 		GAME_EXPERIENCE_DATA = data.gameExperienceData;
 		ABYSS_OP_DATA = data.abyssOpData;
-		PANEL_CP_DATA = data.panelCpData;
+		SKILL_ENCHANT_DATA = data.skillEnchantData;
+		PLAYER_CP_TABLE = data.playerCpData;
 		DECOMPOSABLE_SELECT_ITEM_DATA = data.decomposableSelectItemsData;
 		PET_BUFF_DATA = data.petBuffData;
 		MULTI_RETURN_ITEM_DATA = data.multiReturnItemData;
@@ -274,7 +278,11 @@ public final class DataManager
 		LUNA_CONSUME_REWARDS_DATA = data.lunaConsumeRewardsData;
 		ITEM_CUSTOM_SET_DATA = data.itemCustomSet;
 		F2P_BONUS_DATA = data.f2pBonus;
+		ENCHANT_RATE = data.enchantRateData;
+	    TEMPERING_RATE = data.temperingRateData;
 		String timeMsg = (time / 1000) + " seconds";
+		Util.printSection("SkillTree");
+		DataManager.SKILL_TREE_DATA.loadStigmaDataTree();
 		log.info("##### [load time: " + timeMsg + "] #####");
 		log.info("##### END LOADING STATIC DATA 5.1 #####");
 	}

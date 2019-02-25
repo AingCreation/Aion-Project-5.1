@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_drops xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_drops.xsd">
+	<npc_drop npc_id="833015"> <!-- Sacred Beast of Balaur Lord Beritra -->
+		<drop_group name="BUNDLE" use_category="true" race="PC_ALL">
+			<drop item_id="188053898" chance="100" min_amount="1" max_amount="1" no_reduce="false" eachmember="false" name="Sacred Beast of Balaur Lord Beritra"/>
+		</drop_group>
+		<drop_group name="CHEST" use_category="true" race="PC_ALL">
+			<drop item_id="188053728" chance="100" min_amount="1" max_amount="1" no_reduce="true" eachmember="true" name="Beritra's Equipment Box"/>
+		</drop_group>
+		<drop_group name="CHEST_SUPPLY" use_category="true" race="PC_ALL">
+			<drop item_id="188053791" chance="100" min_amount="1" max_amount="1" no_reduce="true" eachmember="true" name="Drakenspire Depths Detachment's Supplies"/>
+		</drop_group>
+	</npc_drop>
+</npc_drops>

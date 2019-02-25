@@ -22,7 +22,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author ATracer
@@ -31,28 +34,35 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 @XmlType(name = "MpUseAction")
 public class MpUseAction extends Action {
 
-	@XmlAttribute(required = true)
+	@XmlAttribute(name="value", required=true)
 	protected int value;
-
-	@XmlAttribute
+	@XmlAttribute(name="delta")
 	protected int delta;
-
-	@XmlAttribute
+	@XmlAttribute(name="ratio")
 	protected boolean ratio;
-
+	  
 	@Override
-	public void act(Skill skill) {
+	public boolean act(Skill skill) {
 		Creature effector = skill.getEffector();
+		int currentMp = effector.getLifeStats().getCurrentMp();
 		int valueWithDelta = value + delta * skill.getSkillLevel();
-		if (ratio)
-			valueWithDelta = (int) ((skill.getEffector().getLifeStats().getMaxMp() * valueWithDelta) / 100);
+		if (ratio) {
+			valueWithDelta = (skill.getEffector().getLifeStats().getMaxMp() * valueWithDelta) / 100;
+		}
 		int changeMpPercent = skill.getBoostSkillCost();
 		if (changeMpPercent != 0) {
 			// changeMpPercent is negative
 			valueWithDelta = valueWithDelta - ((valueWithDelta / ((100 / changeMpPercent))));
 		}
 
-		effector.getLifeStats().reduceMp(valueWithDelta);
-	}
+		if (effector instanceof Player) {
+			if (currentMp <= 0 || currentMp < valueWithDelta) {
+				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_MP);
+				return false;
+			}
+		}
 
+		effector.getLifeStats().reduceMp(valueWithDelta);
+		return true;
+	}
 }

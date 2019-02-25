@@ -1,18 +1,18 @@
-/*
- * This file is part of aion-lightning <aion-lightning.com>.
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
  *
- *  aion-lightning is free software: you can redistribute it and/or modify
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  aion-lightning is distributed in the hope that it will be useful,
+ *  Aion-Lightning is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
+ *  GNU General Public License for more details. *
  *  You should have received a copy of the GNU General Public License
- *  along with aion-lightning.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.aionemu.gameserver.skillengine.effect;
 
@@ -45,8 +45,9 @@ public class HealCastorOnAttackedEffect extends EffectTemplate {
 
 	@Override
 	public void calculate(Effect effect) {
-		if (effect.getEffected() instanceof Player)
+		if (effect.getEffected() instanceof Player) {
 			super.calculate(effect, null, null);
+		}
 	}
 
 	@Override
@@ -62,21 +63,25 @@ public class HealCastorOnAttackedEffect extends EffectTemplate {
 			public void attacked(Creature creature) {
 				if (player.getPlayerGroup2() != null) {
 					for (Player p : player.getPlayerGroup2().getMembers()) {
-						if (MathUtil.isIn3dRange(effect.getEffected(), p, range))
+						if (MathUtil.isIn3dRange(effect.getEffected(), p, range)) {
 							p.getController().onRestore(type, valueWithDelta);
+						}
 					}
 				}
 				else if (player.isInAlliance2()) {
 					for (Player p : player.getPlayerAllianceGroup2().getMembers()) {
-						if (!p.isOnline())
+						if (!p.isOnline()) {
 							continue;
-						if (MathUtil.isIn3dRange(effect.getEffected(), p, range))
+						}
+						if (MathUtil.isIn3dRange(effect.getEffected(), p, range)) {
 							p.getController().onRestore(type, valueWithDelta);
+						}
 					}
 				}
 				else {
-					if (MathUtil.isIn3dRange(effect.getEffected(), player, range))
+					if (MathUtil.isIn3dRange(effect.getEffected(), player, range)) {
 						player.getController().onRestore(type, valueWithDelta);
+					}
 				}
 			}
 		};
@@ -89,7 +94,8 @@ public class HealCastorOnAttackedEffect extends EffectTemplate {
 	public void endEffect(Effect effect) {
 		super.endEffect(effect);
 		ActionObserver observer = effect.getActionObserver(position);
-		if (observer != null)
+		if (observer != null) {
 			effect.getEffected().getObserveController().removeObserver(observer);
+		}
 	}
 }

@@ -1,3 +1,3 @@
  CLS
- cd AL-Game
+ cd D-Gameserver
  start ..\AL-Tools\Ant\bin\ant

@@ -59,4 +59,8 @@ public enum Gender {
 	public int getGenderId() {
 		return genderId;
 	}
+	
+	public boolean isFemale() {
+        return genderId == 1;
+    }
 }

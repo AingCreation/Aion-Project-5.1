@@ -58,6 +58,8 @@ public class Config
 			ConfigurableProcessor.process(CleaningConfig.class, mainProps);
 			ConfigurableProcessor.process(CraftConfig.class, mainProps);
 			ConfigurableProcessor.process(CustomConfig.class, mainProps);
+			ConfigurableProcessor.process(CustomRewardAgentConfig.class, mainProps);
+			ConfigurableProcessor.process(WarConfig.class, mainProps);
 			ConfigurableProcessor.process(DropConfig.class, mainProps);
 			ConfigurableProcessor.process(EnchantsConfig.class, mainProps);
 			ConfigurableProcessor.process(EventsConfig.class, mainProps);
@@ -90,6 +92,7 @@ public class Config
 			ConfigurableProcessor.process(AdvCustomConfig.class, mainProps);
 			ConfigurableProcessor.process(AutoGroupConfig.class, mainProps);
 			ConfigurableProcessor.process(PvPModConfig.class, mainProps);
+			ConfigurableProcessor.process(NewbieGuide.class, mainProps);
 			String network = "./config/network";
 			Properties[] networkProps = PropertiesUtils.loadAllFromDirectory(network);
 			PropertiesUtils.overrideProperties(networkProps, myProps);
@@ -127,6 +130,8 @@ public class Config
 			ConfigurableProcessor.process(CleaningConfig.class, mainProps);
 			ConfigurableProcessor.process(CraftConfig.class, mainProps);
 			ConfigurableProcessor.process(CustomConfig.class, mainProps);
+			ConfigurableProcessor.process(CustomRewardAgentConfig.class, mainProps);
+			ConfigurableProcessor.process(WarConfig.class, mainProps);
 			ConfigurableProcessor.process(DropConfig.class, mainProps);
 			ConfigurableProcessor.process(EnchantsConfig.class, mainProps);
 			ConfigurableProcessor.process(EventsConfig.class, mainProps);
@@ -159,6 +164,7 @@ public class Config
 			ConfigurableProcessor.process(AdvCustomConfig.class, mainProps);
 			ConfigurableProcessor.process(AutoGroupConfig.class, mainProps);
 			ConfigurableProcessor.process(PvPModConfig.class, mainProps);
+			ConfigurableProcessor.process(NewbieGuide.class, mainProps);
 		} catch (Exception e) {
 			log.error("Can't reload configuration: ", e);
 			throw new Error("Can't reload configuration: ", e);

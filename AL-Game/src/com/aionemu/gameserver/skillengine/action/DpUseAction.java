@@ -22,7 +22,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author ATracer Effector: Player only
@@ -35,13 +37,16 @@ public class DpUseAction extends Action {
 	protected int value;
 
 	@Override
-	public void act(Skill skill) {
+	public boolean act(Skill skill) {
 		Player effector = (Player) skill.getEffector();
 		int currentDp = effector.getCommonData().getDp();
 
-		if (currentDp <= 0 || currentDp < value)
-			return;
+		if (currentDp <= 0 || currentDp < value) {
+			PacketSendUtility.sendPacket(effector, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_DP);
+			return false;
+		}
 
 		effector.getCommonData().setDp(currentDp - value);
+		return true;
 	}
 }

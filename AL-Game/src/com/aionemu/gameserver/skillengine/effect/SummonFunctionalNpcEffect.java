@@ -1,18 +1,18 @@
-/*
- * This file is part of Encom. **ENCOM FUCK OTHER SVN**
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
  *
- *  Encom is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser Public License as published by
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  Encom is distributed in the hope that it will be useful,
+ *  Aion-Lightning is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser Public License
- *  along with Encom.  If not, see <http://www.gnu.org/licenses/>.
+ *  GNU General Public License for more details. *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.aionemu.gameserver.skillengine.effect;
 
@@ -28,12 +28,12 @@ import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Rolandas
+ * @author ginho1
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SummonFunctionalNpcEffect")
-public class SummonFunctionalNpcEffect extends SummonEffect
-{
+public class SummonFunctionalNpcEffect extends SummonEffect {
+
 	@XmlAttribute(name = "owner")
 	private SummonOwner owner;
 
@@ -43,10 +43,12 @@ public class SummonFunctionalNpcEffect extends SummonEffect
 		final Npc functionalNpc = VisibleObjectSpawner.spawnFunctionalNpc(effected, npcId, owner);
 
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
-				if(functionalNpc != null && functionalNpc.isSpawned())
+				if (functionalNpc != null && functionalNpc.isSpawned()) {
 					functionalNpc.getController().onDelete();
+				}
 			}
 		}, 300000);
 	}

@@ -94,8 +94,8 @@ public class ServerPacketsOpcodes
 		addPacketOpcode(SM_CUBE_UPDATE.class, 0x82, idSet); //5.1
 		addPacketOpcode(SM_QUEST_ACTION.class, 0x7C, idSet); //5.1
 		addPacketOpcode(SM_LEGION_ADD_MEMBER.class, 0x6F, idSet); //5.1
-		addPacketOpcode(SM_SELECT_ITEM.class, 0x11C, idSet); //5.1
 		addPacketOpcode(SM_SELECT_ITEM_ADD.class, 0x11E, idSet); //5.1
+		addPacketOpcode(SM_SELECT_ITEM_LIST.class, 0x11C, idSet); //5.1
 		addPacketOpcode(SM_PRIVATE_STORE_NAME.class, 0x91, idSet); //5.1
 		addPacketOpcode(SM_MACRO_RESULT.class, 0xe8, idSet); //5.1
 		addPacketOpcode(SM_UPDATE_NOTE.class, 0x68, idSet); //5.1
@@ -243,8 +243,8 @@ public class ServerPacketsOpcodes
 		addPacketOpcode(SM_USE_ROBOT.class, 0x5C, idSet); //5.1
 		addPacketOpcode(SM_CASH_BUFF.class, 0xFB, idSet); //5.1
 		addPacketOpcode(SM_UPGRADE_ARCADE.class, 0x12A, idSet); //5.1
-		addPacketOpcode(SM_PLAYER_ESSENCE_CONTROL.class, 0x5E, idSet); //5.1
-		addPacketOpcode(SM_PLAYER_ESSENCE.class, 0x5D, idSet); //5.1
+		addPacketOpcode(SM_ESSENCE_INFO.class, 0x5D, idSet); //5.1
+		addPacketOpcode(SM_ESSENCE_LIST.class, 0x5E, idSet); //5.1
 		addPacketOpcode(SM_STONESPEAR_SIEGE.class, 0x12E, idSet); //5.1
 		addPacketOpcode(SM_TERRITORY_LIST.class, 0x12F, idSet); //5.1
 		addPacketOpcode(SM_LUNA_SHOP.class, 0x148, idSet); //5.1
@@ -252,10 +252,10 @@ public class ServerPacketsOpcodes
 		addPacketOpcode(SM_EVENT_DICE.class, 0x149, idSet); //5.1
 		addPacketOpcode(SM_TOLL_INFO.class, 0x9F, idSet); //5.1
 		addPacketOpcode(SM_MEGAPHONE_MESSAGE.class, 0x123, idSet); //5.1
-		addPacketOpcode(SM_TUNE_RESULT.class, 0x120, idSet); //To Do 5.1
-		addPacketOpcode(SM_AETHERFORGING_ANIMATION.class, 0x14A, idSet); //5.1
-		addPacketOpcode(SM_AETHERFORGING_PLAYER.class, 0x14B, idSet); //5.1
-		addPacketOpcode(SM_COALESCENCE_RESULT.class, 0x14C, idSet); //5.1
+		addPacketOpcode(SM_TUNE_RESULT.class, 0x122, idSet); // 5.1 TODO
+		addPacketOpcode(SM_AETHERFORGING_ANIMATION.class, 0x14D, idSet); //5.1
+		addPacketOpcode(SM_AETHERFORGING_PLAYER.class, 0x14A, idSet); //5.1
+		addPacketOpcode(SM_COALESCENCE_RESULT.class, 0x14B, idSet); //5.1
 		addPacketOpcode(SM_COALESCENCE_WINDOW.class, 0x15B, idSet); //5.1
 		addPacketOpcode(SM_BOOST_EVENTS.class, 0x146, idSet); //5.1
 	}

@@ -18,6 +18,7 @@ package com.aionemu.gameserver.model.items.storage;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 
@@ -96,6 +97,11 @@ public class PlayerStorage extends Storage {
 	@Override
 	public Item add(Item item) {
 		return add(item, actor);
+	}
+	
+	@Override
+	public Item add(Item item, ItemAddType addType) {
+		return add(item, addType, actor);
 	}
 	
 	@Override

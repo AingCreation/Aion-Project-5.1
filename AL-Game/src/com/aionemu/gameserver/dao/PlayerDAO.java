@@ -61,4 +61,5 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO
 	public abstract void clearJoinRequest(final int playerId);
 	public abstract void getJoinRequestState(Player player);
 	public abstract int getPlayerLunaConsumeByObjId(final int playerObjId);
+	public abstract void updateNewbieGuide(final int playerObjId, final int state);
 }

@@ -111,15 +111,6 @@
 	<item_collecting id="48505" start_npc_ids="799424"/>
 	<item_collecting id="48506" start_npc_ids="799425"/>
 	
-	<relic_rewards id="21281" start_npc_ids="799949 205621" relic_var1="186000066" relic_var2="186000065" relic_var3="186000064" relic_var4="186000063"/>
-	<relic_rewards id="21282" start_npc_ids="799950 205622" relic_var1="186000062" relic_var2="186000061" relic_var3="186000060" relic_var4="186000059"/>
-	<relic_rewards id="21283" start_npc_ids="799951 205623" relic_var1="186000058" relic_var2="186000057" relic_var3="186000056" relic_var4="186000055"/>
-	<relic_rewards id="21284" start_npc_ids="799952 205624" relic_var1="186000054" relic_var2="186000053" relic_var3="186000052" relic_var4="186000051"/>
-	<relic_rewards id="21285" start_npc_ids="205634" relic_var1="186000066" relic_var2="186000065" relic_var3="186000064" relic_var4="186000063" relic_count="10"/>
-	<relic_rewards id="21286" start_npc_ids="205635" relic_var1="186000062" relic_var2="186000061" relic_var3="186000060" relic_var4="186000059" relic_count="10"/>
-	<relic_rewards id="21287" start_npc_ids="205636" relic_var1="186000058" relic_var2="186000057" relic_var3="186000056" relic_var4="186000055" relic_count="10"/>
-	<relic_rewards id="21288" start_npc_ids="205637" relic_var1="186000054" relic_var2="186000053" relic_var3="186000052" relic_var4="186000051" relic_count="10"/>
-	
 	<monster_hunt id="21002" start_npc_ids="799228">
 		<monster var="0" end_var="5" npc_ids="216092 216096"/>
 		<monster var="1" end_var="5" npc_ids="216093 216097"/>

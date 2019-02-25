@@ -43,67 +43,87 @@ public class SM_ATTACK extends AionServerPacket
 		writeC((int) (100f * targetCurrHp / targetMaxHp));
 		writeC((int) (100f * attackerCurrHp / attackerMaxHp));
 		switch (attackList.get(0).getAttackStatus().getId()) {
-			case 196:
-            case 4:
-            case 5:
-            case 213:
-				writeH(32);
-			break;
-			case 194:
-            case 2:
-            case 3:
-            case 211:
-				writeH(64);
-			break;
-			case 192:
-            case 0:
-            case 1:
-            case 209:
-				writeH(128);
-			break;
-			case 198:
-            case 6:
-            case 7:
-            case 215:
-				writeH(256);
-			break;
-			default:
-				writeH(0);
+			case 4: // case BLOCK
+			case 5:
+			case 196: // case CRITICAL_BLOCK 4.5
+			case 213:
+				writeD(32);
 				break;
-		} if (target instanceof Player) {
-            if (attackList.get(0).getAttackStatus().isCounterSkill()) {
-                ((Player) target).setLastCounterSkill(attackList.get(0).getAttackStatus());
-            }
-        }
-		writeH(0);
+			case 2: // case PARRY
+			case 3:
+			case 194: // case CRITICAL_PARRY 4.5
+			case 211:
+				writeD(64);
+				break;
+			case 0: // case DODGE
+			case 1:
+			case 192: // case CRITICAL_DODGE 4.5
+			case 209:
+				writeD(128);
+				break;
+			case 6: // case RESIST
+			case 7:
+			case 198: // case CRITICAL_RESIST 4.5
+			case 215:
+				writeD(256); // need more info becuz sometimes 0
+				break;
+			default:
+				writeD(0);
+				break;
+		} 
+		
+		if (target instanceof Player) {
+			if (attackList.get(0).getAttackStatus().isCounterSkill()) {
+				((Player) target).setLastCounterSkill(attackList.get(0).getAttackStatus());
+			}
+		}
+		
 		writeC(attackList.size());
 		for (AttackResult attack : attackList) {
 			writeD(attack.getDamage());
 			writeC(attack.getAttackStatus().getId());
+			
 			byte shieldType = (byte) attack.getShieldType();
 			writeC(shieldType);
 			switch (shieldType) {
 				case 0:
 				case 2:
-				break;
+					break;
 				case 8:
 				case 10:
-				    writeD(attack.getShieldMp());
 					writeD(attack.getProtectorId());
 					writeD(attack.getProtectedDamage());
 					writeD(attack.getProtectedSkillId());
-				break;
+					break;
+				case 16:
+					writeD(0);
+					writeD(0);
+					writeD(0);
+					writeD(0);
+					writeD(0);
+					writeD(attack.getShieldMp());
+					writeD(attack.getReflectedSkillId());
+					break;
+				case 32: 
+					writeD(0);
+					writeD(0);
+					writeD(0);
+					writeD(0);
+					writeD(attack.getReflectedSkillId());
+					writeD(0);
+					writeD(0);
+					break;
 				default:
 					writeD(attack.getProtectorId());
 					writeD(attack.getProtectedDamage());
 					writeD(attack.getProtectedSkillId());
-					writeD(attack.getReflectedDamage()); 
+					writeD(attack.getReflectedDamage());
 					writeD(attack.getReflectedSkillId());
 					writeD(0);
 					writeD(0);
-				break;
+					break;
+				}
 			}
-		}
 		writeC(0);
 	}
 }

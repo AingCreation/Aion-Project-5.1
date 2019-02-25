@@ -245,7 +245,7 @@ public class GoTo extends AdminCommand
 		else if (destination.equalsIgnoreCase("IDAbPro"))
 			goTo(player, 300010000, 270, 200, 206);
 		else if (destination.equalsIgnoreCase("gm"))
-			goTo(player, 120020000, 1442, 1133, 302);
+			goTo(player, 900180000, 469, 390, 103);
 		else if (destination.equalsIgnoreCase("kaisinel2"))
 			goTo(player, 110070000, 459, 251, 128);
 		else if (destination.equalsIgnoreCase("marchutan2"))

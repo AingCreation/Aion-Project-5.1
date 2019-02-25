@@ -55,4 +55,7 @@ public class WeddingsConfig {
 
 	@Property(key = "gameserver.weddings.announce", defaultValue = "true")
 	public static boolean WEDDINGS_ANNOUNCE;
+	
+	@Property(key = "gameserver.weddings.tag", defaultValue = "\uE020 %s")
+	public static String TAG_WEDDING;
 }

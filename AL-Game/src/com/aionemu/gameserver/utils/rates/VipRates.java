@@ -157,4 +157,9 @@ public class VipRates extends Rates {
 	public float getTollRewardRate() {
 	    return RateConfig.VIP_TOLL_REWARD_RATE + holidayRate;
 	}
+	
+	@Override
+	public int getRateMsSocket() {
+		return RateConfig.VIP_MANASTONE_RATE_SOCKET;
+	}
 }

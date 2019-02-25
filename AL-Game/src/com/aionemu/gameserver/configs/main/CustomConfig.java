@@ -286,4 +286,64 @@ public class CustomConfig
 	// Auto Powershard
 	@Property(key = "gameserver.enable.auto.powershard", defaultValue = "false")
 	public static boolean ENABLE_AUTO_POWERSHARD;
+	
+	/**
+     * Rank Item Limit
+     */
+    @Property(key="gameserver.allow.rank.item.limit", defaultValue="false")
+    public static boolean RANK_ITEM_LIMIT;
+    
+    @Property(key="gameserver.rank.min.item", defaultValue="15")
+    public static int RANK_LIMIT;
+    
+    /**
+     * Custom Enchant Skills
+     */
+    @Property(key="gameserver.enable.breakthrough.skill", defaultValue="true")
+	public static boolean ENABLE_BREAKTHOUGH_SKILL;
+	
+	/**
+     * PvP GP Config
+     */
+    @Property(key = "gameserver.enable.gp.reward", defaultValue = "true")
+    public static boolean ENABLE_GP_REWARD;
+
+    @Property(key = "gameserver.gp.rate.modifier", defaultValue = "2.0")
+    public static float GP_RATE_MODIFIER;
+
+    @Property(key = "gameserver.gp.rate.lost.minus.rank.player", defaultValue = "2.0")
+    public static float GP_RATE_LOST_MINUS_RANK;
+
+    @Property(key = "gameserver.gp.rate.lost.equal.higher.rank.player", defaultValue = "2.0")
+    public static float GP_RATE_LOST_EQUAL_HIGHER_RANK;
+
+    @Property(key = "gameserver.gp.rate.gain.minus.rank.player", defaultValue = "2.0")
+    public static float GP_RATE_GAIN_MINUS_RANK;
+
+    @Property(key = "gameserver.gp.rate.gain.equal.higher.rank.player", defaultValue = "2.0")
+    public static float GP_RATE_GAIN_EQUAL_HIGHER_RANK;
+
+    @Property(key = "gameserver.member.gp.gain", defaultValue = "0.7")
+    public static float MEMBER_GP_GAIN;
+
+    @Property(key = "gameserver.alliance.gp.gain", defaultValue = "0.7")
+    public static float ALLIANCE_GP_GAIN;
+
+    @Property(key = "gameserver.min.player.gp.reward", defaultValue = "70")
+    public static int REWARD_GP_MIN_LEVEL;
+
+    @Property(key = "gameserver.gp.gain.aggro.attacker", defaultValue = "0.1")
+    public static float GP_GAIN_AGGRO_ATTACKER;
+
+    @Property(key = "gameserver.enable.gp.lose", defaultValue = "false")
+    public static boolean ENABLE_GP_LOSE;
+	
+	/**
+	 * Custom BossSpawnService
+	 */
+	@Property(key = "gameserver.custombosses.enable", defaultValue = "true")
+	public static boolean CUSTOMBOSSES_ENABLE;
+	
+	@Property(key = "gameserver.custombosses.delay", defaultValue = "60")
+    public static int CUSTOMBOSSES_DELAY;
 }

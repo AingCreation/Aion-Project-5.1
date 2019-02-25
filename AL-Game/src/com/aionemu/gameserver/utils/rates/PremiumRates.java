@@ -141,4 +141,9 @@ public class PremiumRates extends Rates {
 	public float getTollRewardRate() {
 	    return RateConfig.PREMIUM_TOLL_REWARD_RATE;
 	}
+	
+	@Override
+	public int getRateMsSocket() {
+		return RateConfig.PREMIUM_MANASTONE_RATE_SOCKET;
+	}
 }

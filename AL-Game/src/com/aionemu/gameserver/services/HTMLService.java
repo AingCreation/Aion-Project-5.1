@@ -119,19 +119,27 @@ public class HTMLService {
 	public static void onPlayerLogin(Player player) {
 		if (player == null)
 			return;
-
+		
+		int count = 0;
+		
 		List<Guide> guides = DAOManager.getDAO(GuideDAO.class).loadGuides(player.getObjectId());
 
 		for (Guide guide : guides) {
 			GuideTemplate template = DataManager.GUIDE_HTML_DATA.getTemplateByTitle(guide.getTitle());
 			if (template != null) {
-				if (template.isActivated())
+				if (template.isActivated()) {
+					count++;
 					sendData(player, guide.getGuideId(), getHTMLTemplate(template));
+				}
 			}
 			else {
 				log.warn("Null guide template for title: {}", guide.getTitle());
 			}
 		}
+		
+		if (count > 0) {
+            log.warn("Guide HTML Count 0 on player : " + player.getObjectId() + " Name: " + player.getName());
+        }
 	}
 
 	public static void getReward(Player player, int messageId, List<Integer> items) {
@@ -170,7 +178,7 @@ public class HTMLService {
 				return;
 			}
 			for (SurveyTemplate item : templates) {
-				ItemService.addItem(player, item.getItemId(), item.getCount());
+				ItemService.addItem(player, item.getItemId(), item.getCount(), "Survey Items");
 				if (LoggingConfig.LOG_ITEM) {
 					log.info(String.format("[ITEM] Item Guide ID/Count - %d/%d to player %s.", item.getItemId(), item.getCount(), player.getName()));
 				}

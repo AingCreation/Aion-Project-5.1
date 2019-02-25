@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <spawns>
     <spawn_map map_id="110010000">
-        <spawn custom="true" respawn_time="295" npc_id="801774" difficult_id="0"/>
-        <spawn custom="true" respawn_time="295" npc_id="730213" difficult_id="0">
-            <spot h="95" z="572.873" y="1589.7698" x="1454.0347"/>
+        <spawn custom="true" respawn_time="295" npc_id="209809" difficult_id="0"/>
+        <spawn custom="true" respawn_time="295" npc_id="209808" difficult_id="0"/>
+        <spawn custom="true" respawn_time="295" npc_id="831210" difficult_id="0"/>
+        <spawn custom="true" respawn_time="295" npc_id="831235" difficult_id="0"/>
+        <spawn custom="true" respawn_time="0" npc_id="831413" difficult_id="0"/>
+        <spawn custom="true" respawn_time="295" npc_id="831985" difficult_id="0"/>
+        <spawn custom="true" respawn_time="295" npc_id="834203" difficult_id="0">
+            <spot h="77" z="573.0719" y="1535.875" x="1454.7207"/>
+        </spawn>
+        <spawn custom="true" respawn_time="295" npc_id="834204" difficult_id="0">
+            <spot h="82" z="573.0719" y="1536.9285" x="1452.7462"/>
+        </spawn>
+        <spawn custom="true" respawn_time="295" npc_id="215280" difficult_id="0"/>
+        <spawn custom="true" respawn_time="295" npc_id="831026" difficult_id="0"/>
+        <spawn custom="true" respawn_time="295" npc_id="702723" difficult_id="0">
+            <spot h="60" z="573.0719" y="1489.0618" x="1433.17"/>
+        </spawn>
+        <spawn custom="true" respawn_time="295" npc_id="802020" difficult_id="0">
+            <temporary_spawn spawn_time="3.*.*" despawn_time="9.*.*"/>
+            <spot h="111" z="573.0719" y="1527.941" x="1437.371"/>
+            <spot h="114" z="573.0719" y="1526.068" x="1437.4503"/>
+            <spot h="113" z="573.0719" y="1529.7155" x="1438.632"/>
+            <spot h="113" z="573.0719" y="1527.5515" x="1438.9338"/>
+        </spawn>
+        <spawn custom="true" respawn_time="295" npc_id="834205" difficult_id="0">
+            <spot h="60" z="573.0719" y="1511.6466" x="1455.5251"/>
         </spawn>
     </spawn_map>
 </spawns>

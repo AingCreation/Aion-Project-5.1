@@ -119,16 +119,8 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
         return getStat(StatEnum.PHYSICAL_CRITICAL_RESIST, 0);
     }
 	@Override
-    public Stat2 getStrikeFort() {
-        return getStat(StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, 0);
-    }
-	@Override
     public Stat2 getSpellResist() {
         return getStat(StatEnum.MAGICAL_CRITICAL_RESIST, 0);
-    }
-	@Override
-    public Stat2 getSpellFort() {
-        return getStat(StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, 0);
     }
 	@Override
     public Stat2 getBCastingTime() {
@@ -311,5 +303,15 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 	@Override
 	public void updateSpeedInfo() {
 		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.START_EMOTE2, 0, 0));
+	}
+	
+	@Override
+	public Stat2 getPvpAttack() {
+		return null;
+	}
+
+	@Override
+	public Stat2 getPvpDeff() {
+		return null;
 	}
 }

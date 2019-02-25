@@ -7,11 +7,11 @@
 	<!-- [AGENT FIGHT LEVINSHOR 4.7] -->
 	<!-- [EMPOWERED MASTARIUS & EMPOWERED VEILLE] -->
 	<agent id="1">
-		<fightTime>0 0 20 ? * SAT,SUN *</fightTime>
-		<fightTime>0 0 20 ? * SAT,SUN *</fightTime>
-		<fightTime>0 0 20 ? * SAT,SUN *</fightTime>
-		<fightTime>0 0 20 ? * SAT,SUN *</fightTime>
-		<fightTime>0 0 20 ? * SAT,SUN *</fightTime>
+		<fightTime>0 0 11 ? * SAT,SUN *</fightTime>
+		<fightTime>0 0 11 ? * SAT,SUN *</fightTime>
+		<fightTime>0 0 11 ? * SAT,SUN *</fightTime>
+		<fightTime>0 0 11 ? * SAT,SUN *</fightTime>
+		<fightTime>0 0 11 ? * SAT,SUN *</fightTime>
 	</agent>
 	<!-- [AGENT INGGISON & GELKMAROS 2.0] -->
 	<!-- [ENRAGED VEILLE] -->
@@ -29,5 +29,14 @@
 		<fightTime>0 0 17 ? * MON-SUN *</fightTime>
 		<fightTime>0 0 1 ? * MON-SUN *</fightTime>
 		<fightTime>0 0 5 ? * MON-SUN *</fightTime>
+	</agent>
+	<!-- [AGENT FIGHT KALDOR 4.7] -->
+	<!-- [EMPOWERED MASTARIUS & EMPOWERED VEILLE] -->
+	<agent id="4">
+		<fightTime>0 0 11 ? * SAT,SUN *</fightTime>
+		<fightTime>0 0 11 ? * SAT,SUN *</fightTime>
+		<fightTime>0 0 11 ? * SAT,SUN *</fightTime>
+		<fightTime>0 0 11 ? * SAT,SUN *</fightTime>
+		<fightTime>0 0 11 ? * SAT,SUN *</fightTime>
 	</agent>
 </agent_schedule>

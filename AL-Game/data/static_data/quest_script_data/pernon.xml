@@ -83,7 +83,7 @@
 	<!-- [Weekly] A Room For The Guestbloom (Asmodians Only) -->
 	<item_collecting id="28848" start_npc_ids="830532"/>
 	<!-- [Relic Bundle Reward] Ancient Goblet (Asmodians Only) -->
-	<relic_rewards id="28849" start_npc_ids="831383" relic_var1="186000058" relic_var2="186000057" relic_var3="186000056" relic_var4="186000055" relic_count="10"/>
+	<relic_rewards id="28849" start_npc_ids="831383" relic_var1="186000058" relic_var2="186000057" relic_var3="186000056" relic_var4="186000055" relic_count="1"/>
 	<!-- [Relic Bundle Reward] Ancient Crown (Asmodians Only) -->
-	<relic_rewards id="28850" start_npc_ids="831235 831253 831414 801360" relic_var1="186000054" relic_var2="186000053" relic_var3="186000052" relic_var4="186000051" relic_count="10"/>
+	<relic_rewards id="28850" start_npc_ids="831235 831253 831414 801360" relic_var1="186000054" relic_var2="186000053" relic_var3="186000052" relic_var4="186000051" relic_count="1"/>
 </quest_scripts>

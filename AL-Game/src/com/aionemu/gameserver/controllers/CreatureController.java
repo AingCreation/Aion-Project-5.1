@@ -49,6 +49,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.ChargeSkill;
 import com.aionemu.gameserver.skillengine.model.HealType;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
@@ -475,6 +476,20 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		}
 		return false;
 	}
+	
+	public boolean useChargeSkill(int skillId, int skillLevel) {
+		try {
+			Player creature = (Player) getOwner();
+			ChargeSkill skill = SkillEngine.getInstance().getChargeSkill(creature, skillId, skillLevel, creature.getTarget());
+			if (skill != null) {
+				return skill.useSkill();
+			}
+		}
+		catch (Exception ex) {
+			log.error("Exception during skill use: " + skillId, ex);
+		}
+		return false;
+	}
 
 	/**
 	 * Notify hate value to all visible creatures
@@ -508,7 +523,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		Creature creature = getOwner();
 		Skill castingSkill = creature.getCastingSkill();
 		castingSkill.cancelCast();
-		creature.removeSkillCoolDown(castingSkill.getSkillTemplate().getDelayId());
+		creature.removeSkillCoolDown(castingSkill.getSkillTemplate().getCooldownId());
 		creature.setCasting(null);
 		PacketSendUtility.broadcastPacketAndReceive(creature, new SM_SKILL_CANCEL(creature, castingSkill.getSkillTemplate()
 				.getSkillId()));

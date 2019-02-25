@@ -141,4 +141,9 @@ public class RegularRates extends Rates {
 	public float getTollRewardRate() {
 	    return RateConfig.TOLL_REWARD_RATE + holidayRate;
 	}
+	
+	@Override
+	public int getRateMsSocket() {
+		return RateConfig.MANASTONE_RATE_SOCKET;
+	}
 }

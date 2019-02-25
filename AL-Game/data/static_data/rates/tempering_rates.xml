@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copy Right Archsoft Development-->
+<tempering_rates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <tempering_rate item_category="BRACELET">        
+		<tempering_level min="0" max="1" chance="100"/>
+		<tempering_level min="2" max="4" chance="70"/>
+		<tempering_level min="5" max="7" chance="40"/>
+		<tempering_level min="8" max="10" chance="20"/>
+		<tempering_level min="11" max="15" chance="10"/>
+		<tempering_level min="16" max="255" chance="1"/>
+	</tempering_rate>
+	<tempering_rate item_category="PLUME">        
+		<tempering_level min="0" max="1" chance="100"/>
+		<tempering_level min="2" max="4" chance="70"/>
+		<tempering_level min="5" max="7" chance="60"/>
+		<tempering_level min="8" max="10" chance="50"/>
+		<tempering_level min="11" max="15" chance="20"/>
+		<tempering_level min="16" max="255" chance="0"/>
+	</tempering_rate>
+	<tempering_rate item_category="NECKLACE">        
+		<tempering_level min="0" max="1" chance="100"/>
+		<tempering_level min="2" max="4" chance="70"/>
+		<tempering_level min="5" max="7" chance="50"/>
+		<tempering_level min="7" max="8" chance="30"/>
+		<tempering_level min="9" max="15" chance="0"/>
+		<tempering_level min="16" max="255" chance="0"/>
+	</tempering_rate>
+	<tempering_rate item_category="EARRINGS">        
+		<tempering_level min="0" max="1" chance="100"/>
+		<tempering_level min="2" max="4" chance="70"/>
+		<tempering_level min="5" max="7" chance="50"/>
+		<tempering_level min="7" max="8" chance="30"/>
+		<tempering_level min="9" max="15" chance="0"/>
+		<tempering_level min="16" max="255" chance="0"/>
+	</tempering_rate>
+	<tempering_rate item_category="RINGS">        
+		<tempering_level min="0" max="1" chance="100"/>
+		<tempering_level min="2" max="4" chance="70"/>
+		<tempering_level min="5" max="7" chance="50"/>
+		<tempering_level min="7" max="8" chance="30"/>
+		<tempering_level min="9" max="15" chance="0"/>
+		<tempering_level min="16" max="255" chance="0"/>
+	</tempering_rate>
+	<tempering_rate item_category="BELT">        
+		<tempering_level min="0" max="1" chance="100"/>
+		<tempering_level min="2" max="4" chance="70"/>
+		<tempering_level min="5" max="7" chance="50"/>
+		<tempering_level min="7" max="8" chance="30"/>
+		<tempering_level min="9" max="15" chance="0"/>
+		<tempering_level min="16" max="255" chance="0"/>
+	</tempering_rate>
+	<tempering_rate item_category="HELMET">        
+		<tempering_level min="0" max="1" chance="100"/>
+		<tempering_level min="2" max="4" chance="70"/>
+		<tempering_level min="5" max="7" chance="50"/>
+		<tempering_level min="7" max="8" chance="30"/>
+		<tempering_level min="9" max="15" chance="0"/>
+		<tempering_level min="16" max="255" chance="0"/>
+	</tempering_rate>
+	<tempering_rate item_category="ALL">        
+		<tempering_level min="0" max="1" chance="100"/>
+		<tempering_level min="2" max="4" chance="70"/>
+		<tempering_level min="5" max="7" chance="50"/>
+		<tempering_level min="7" max="8" chance="30"/>
+		<tempering_level min="9" max="15" chance="0"/>
+		<tempering_level min="16" max="255" chance="0"/>
+	</tempering_rate>
+</tempering_rates>

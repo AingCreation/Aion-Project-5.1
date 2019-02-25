@@ -276,11 +276,11 @@ public class TheEternalBastionInstance extends GeneralInstanceHandler
 				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 185000137, 1)); //Mobile Turret Key.
 			break;
 			case 802185: //The Eternal Bastion Opportunity Bundle.
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000051, 30)); //Major Ancient Crown.
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000052, 30)); //Greater Ancient Crown.
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000051, 1)); //Major Ancient Crown.
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000052, 1)); //Greater Ancient Crown.
 				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000236, 50)); //Blood Mark.
 				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000237, 50)); //Ancient Coin.
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000242, 50)); //Ceramium Medal.
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 186000242, 2)); //Ceramium Medal.
 			break;
         }
     }

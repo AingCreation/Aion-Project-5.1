@@ -22,7 +22,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author ATracer
@@ -41,13 +44,23 @@ public class HpUseAction extends Action {
 	protected boolean ratio;
 
 	@Override
-	public void act(Skill skill) {
+	public boolean act(Skill skill) {
 		Creature effector = skill.getEffector();
-		int valueWithDelta = value + delta * skill.getSkillLevel();
-		if (ratio)
-			valueWithDelta = (int) (valueWithDelta / 100f * skill.getEffector().getLifeStats().getMaxHp());
-
+		int valueWithDelta = this.value + this.delta * skill.getSkillLevel();
+		int currentHp = effector.getLifeStats().getCurrentHp();
+		if (this.ratio) {
+			valueWithDelta = (int)(valueWithDelta / 100.0F * skill.getEffector().getLifeStats().getMaxHp());
+		}
+		
+		if (effector instanceof Player) {
+			if (currentHp <= 0 || currentHp < valueWithDelta) {
+				PacketSendUtility.sendPacket((Player)effector, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_HP);
+				return false;
+			}
+	    }
+		
 		effector.getLifeStats().reduceHp(valueWithDelta, effector);
+	    return true;
 	}
 
 }

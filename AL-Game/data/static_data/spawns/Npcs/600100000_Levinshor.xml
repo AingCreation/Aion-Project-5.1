@@ -333,35 +333,35 @@
 			<spot x="1882.7357" y="1159.098" z="243.44809" entity_id="299"/>
 		</spawn>
 		<!-- Vocolith [North Warden] (Object Normal lvl:3) -->
-		<spawn npc_id="804573" respawn_time="3600">
+		<spawn npc_id="804573" respawn_time="295">
 			<spot x="155.23886" y="896.09412" z="241.84668" entity_id="13"/>
 		</spawn>
 		<!-- Vocolith [Coast Warden] (Object Normal lvl:3) -->
-		<spawn npc_id="804574" respawn_time="3600">
+		<spawn npc_id="804574" respawn_time="295">
 			<spot x="238.54105" y="1581.0961" z="227.63638" entity_id="20"/>
 		</spawn>
 		<!-- Vocolith [South Warden] (Object Normal lvl:3) -->
-		<spawn npc_id="804575" respawn_time="3600">
+		<spawn npc_id="804575" respawn_time="295">
 			<spot x="605.80560" y="1462.2771" z="276.73804" entity_id="23"/>
 		</spawn>
 		<!-- Vocolith [East Woods Warden] (Object Normal lvl:3) -->
-		<spawn npc_id="804579" respawn_time="3600">
+		<spawn npc_id="804579" respawn_time="295">
 			<spot x="1663.5723" y="612.97003" z="226.95126" entity_id="24"/>
 		</spawn>
 		<!-- Vocolith [North Woods Warden] (Object Normal lvl:3) -->
-		<spawn npc_id="804580" respawn_time="3600">
+		<spawn npc_id="804580" respawn_time="295">
 			<spot x="1491.7522" y="312.94736" z="253.36563" entity_id="47"/>
 		</spawn>
 		<!-- Vocolith [Cut Warden] (Object Normal lvl:3) -->
-		<spawn npc_id="804581" respawn_time="3600">
+		<spawn npc_id="804581" respawn_time="295">
 			<spot x="1211.6776" y="583.93884" z="277.81192" entity_id="48"/>
 		</spawn>
 		<!-- Vocolith [West Warden] (Object Normal lvl:3) -->
-		<spawn npc_id="804582" respawn_time="3600">
+		<spawn npc_id="804582" respawn_time="295">
 			<spot x="894.83118" y="838.97162" z="313.50354" entity_id="53"/>
 		</spawn>
 		<!-- Vocolith [East Warden] (Object Normal lvl:3) -->
-		<spawn npc_id="804583" respawn_time="3600">
+		<spawn npc_id="804583" respawn_time="295">
 			<spot x="1106.4246" y="1231.3024" z="308.38782" entity_id="60"/>
 		</spawn>
 		<!-- Florrick (Npc Normal lvl:65) -->
@@ -390,18 +390,6 @@
 		<spawn npc_id="832854" respawn_time="295">
             <spot x="1834.431" y="1791.4484" z="305.5" h="88"/>
         </spawn>
-		<!-- Sacred Image Of Kaisinel -->
-		<spawn npc_id="258313" respawn_time="295">
-			<spot x="482.72803" y="304.7647" z="309.39398" h="15"/>
-            <spot x="210.76367" y="394.6935" z="323.52777" h="14"/>
-            <spot x="266.06155" y="184.93933" z="350.8036" h="15"/>
-		</spawn>
-		<!-- Sacred Image Of Marchutan -->
-		<spawn npc_id="258314" respawn_time="295">
-			<spot x="1813.7158" y="1518.964" z="285.7756" h="1"/>
-            <spot x="1666.184" y="1737.3779" z="286.8526" h="92"/>
-            <spot x="1548.4872" y="1616.9042" z="303.15872" h="16"/>
-		</spawn>
 		
 		<!-- Aion 4.8 -->
 		<!-- Kabalu

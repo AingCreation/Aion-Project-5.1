@@ -19,7 +19,6 @@ package instance.pvparenas;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
@@ -58,7 +57,7 @@ public class ArenaOfChaosInstance extends PvPArenaInstance
 		int totalPoints = instanceReward.getTotalPoints();
 		int size = instanceReward.getInstanceRewards().size();
 		float totalScoreAP = (1.0f * size) * 100;
-		float totalScoreGP = (1.0f * size) * 100;
+		//float totalScoreGP = (1.0f * size) * 100;
 		float totalScoreCrucible = (0.01f * size) * 100;
 		float totalScoreCourage = (0.01f * size) * 100;
 		float totalScoreInfinity = (0.01f * size) * 100;
@@ -67,7 +66,7 @@ public class ArenaOfChaosInstance extends PvPArenaInstance
 			rankingRate = (0.077f * (8 - size));
 		}
 		float totalRankingAP = 750 - 750 * rankingRate;
-		float totalRankingGP = 250 - 250 * rankingRate;
+		//float totalRankingGP = 250 - 250 * rankingRate;
 		float totalRankingCrucible = 500 - 500 * rankingRate;
 		float totalRankingCourage = 100 - 100 * rankingRate;
 		float totalRankingInfinity = 100 - 100 * rankingRate;
@@ -85,15 +84,15 @@ public class ArenaOfChaosInstance extends PvPArenaInstance
 				float percent = reward.getParticipation();
 				float generalRate = 0.167f + rank * 0.095f;
 				int basicAP = 100;
-				int basicGP = 100;
+				//int basicGP = 100;
 				float rankingAP = totalRankingAP;
-				float rankingGP = totalRankingGP;
+				//float rankingGP = totalRankingGP;
 				if (rank > 0) {
 					rankingAP = rankingAP - rankingAP * generalRate;
-					rankingGP = rankingGP - rankingGP * generalRate;
+					//rankingGP = rankingGP - rankingGP * generalRate;
 				}
 				int scoreAP = (int) (totalScoreAP * scoreRate);
-				int scoreGP = (int) (totalScoreGP * scoreRate);
+				//int scoreGP = (int) (totalScoreGP * scoreRate);
 				//<Abyss Points>
 				basicAP *= percent;
 				rankingAP *= percent;
@@ -102,12 +101,12 @@ public class ArenaOfChaosInstance extends PvPArenaInstance
 				reward.setRankingAP((int) rankingAP);
 				reward.setScoreAP(scoreAP);
 				//<Glory Points>
-				basicGP *= percent;
-				rankingGP *= percent;
-				rankingGP *= playerRate;
-				reward.setBasicGP(basicGP);
-				reward.setRankingGP((int) rankingGP);
-				reward.setScoreGP(scoreGP);
+				//basicGP *= percent;
+				//rankingGP *= percent;
+				//rankingGP *= playerRate;
+				//reward.setBasicGP(basicGP);
+				//reward.setRankingGP((int) rankingGP);
+				//reward.setScoreGP(scoreGP);
 				int basicCrI = 0;
 				basicCrI *= percent;
 				float rankingCrI = totalRankingCrucible;

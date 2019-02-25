@@ -8,4 +8,16 @@ class PDefFunction extends StatFunction {
 	PDefFunction() {
 		stat = StatEnum.PHYSICAL_DEFENSE;
 	}
+
+	@Override
+	public void apply(Stat2 stat) {
+		if (stat.getOwner().isInFlyingState()) {
+			stat.setBonus(stat.getBonus() - (stat.getBase() / 2));
+		}
+	}
+
+	@Override
+	public int getPriority() {
+		return 60;
+	}
 }

@@ -17,6 +17,9 @@
 package ai.kisk;
 
 import com.aionemu.gameserver.ai2.*;
+import com.aionemu.gameserver.ai2.poll.AIAnswer;
+import com.aionemu.gameserver.ai2.poll.AIAnswers;
+import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.*;
 import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -31,7 +34,7 @@ import com.aionemu.gameserver.utils.*;
 @AIName("kisk")
 public class KiskAI2 extends NpcAI2
 {
-    private final int CANCEL_DIALOG_METERS = 9;
+	private final int CANCEL_DIALOG_METERS = 9;
 	
 	@Override
 	public Kisk getOwner() {
@@ -96,12 +99,16 @@ public class KiskAI2 extends NpcAI2
 	}
 	
 	@Override
-	public int modifyOwnerDamage(int damage) {
-		return 1;
-	}
-	
-	@Override
-	public int modifyDamage(int damage) {
-		return 1;
-	}
+    protected AIAnswer pollInstance(AIQuestion question) {
+        switch (question) {
+            case SHOULD_DECAY:
+                return AIAnswers.NEGATIVE;
+            case SHOULD_RESPAWN:
+                return AIAnswers.NEGATIVE;
+            case SHOULD_REWARD:
+                return AIAnswers.NEGATIVE;
+            default:
+                return null;
+        }
+    }
 }

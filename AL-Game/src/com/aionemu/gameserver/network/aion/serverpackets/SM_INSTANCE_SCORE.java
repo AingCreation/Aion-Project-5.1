@@ -121,7 +121,7 @@ public class SM_INSTANCE_SCORE extends AionServerPacket
 				    writeD(harmonyGroupReward.getBasicCourage());
 				    writeD(harmonyGroupReward.getScoreCourage());
 				    writeD(harmonyGroupReward.getRankingCourage());
-					writeD(186000442); //무한의 템페르 휘장.
+					writeD(186000442); //ë¬´í•œì�˜ í…œíŽ˜ë¥´ íœ˜ìž¥.
 				    writeD(harmonyGroupReward.getBasicInfinity());
 				    writeD(harmonyGroupReward.getScoreInfinity());
 				    writeD(harmonyGroupReward.getRankingInfinity());
@@ -897,9 +897,9 @@ public class SM_INSTANCE_SCORE extends AionServerPacket
 				writeD(0);
 				writeD(0);
 			    if (smfr.getPoints() >= 50) {
-				    writeD(188055648); //Mechaturerk’s Special Treasure Box.
+				    writeD(188055648); //Mechaturerkâ€™s Special Treasure Box.
 					writeD(playerReward.getMechaturerkSpecialTreasureBox());
-					writeD(188055647); //Mechaturerk’s Normal Treasure Chest.
+					writeD(188055647); //Mechaturerkâ€™s Normal Treasure Chest.
 			    } else {
 				    writeD(0);
 				    writeD(0);
@@ -1046,7 +1046,7 @@ public class SM_INSTANCE_SCORE extends AionServerPacket
 					writeD(rewardedPlayer.getBasicCourage());
 					writeD(rewardedPlayer.getScoreCourage());
 					writeD(rewardedPlayer.getRankingCourage());
-					writeD(186000442); //무한의 템페르 휘장.
+					writeD(186000442); //ë¬´í•œì�˜ í…œíŽ˜ë¥´ íœ˜ìž¥.
 					writeD(rewardedPlayer.getBasicInfinity());
 					writeD(rewardedPlayer.getScoreInfinity());
 					writeD(rewardedPlayer.getRankingInfinity());

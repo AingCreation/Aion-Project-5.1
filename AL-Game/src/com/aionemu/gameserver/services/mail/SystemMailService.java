@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.MailDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
@@ -117,7 +118,10 @@ public class SystemMailService {
 		} if (!recipientCommonData.isOnline()) {
 			recipientCommonData.setMailboxLetters(recipientCommonData.getMailboxLetters() + 1);
 			DAOManager.getDAO(MailDAO.class).updateOfflineMailCounter(recipientCommonData);
-		}
+		} if (LoggingConfig.LOG_SYSMAIL) {
+            log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] RETURN ITEM ID:" + itemId
+                    + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MESSAGE SUCCESSFULLY SENDED ");
+        }
 		return true;
 	}
 	

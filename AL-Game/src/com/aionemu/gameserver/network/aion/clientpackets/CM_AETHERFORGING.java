@@ -16,9 +16,13 @@
  */
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.services.craft.AetherForging;
 import com.aionemu.gameserver.services.craft.CraftService;
 
 /**
@@ -27,12 +31,13 @@ import com.aionemu.gameserver.services.craft.CraftService;
 
 public class CM_AETHERFORGING extends AionClientPacket
 {
-	private int itemID;
+	List<Integer> itemList = new ArrayList<Integer>();
+	private int action;
 	@SuppressWarnings("unused")
-	private long itemCount;
-	private int actionId;
 	private int targetTemplateId;
 	private int recipeId;
+	@SuppressWarnings("unused")
+	private int targetObjId;
 	private int materialsCount;
 	private int craftType;
 	
@@ -42,37 +47,51 @@ public class CM_AETHERFORGING extends AionClientPacket
 	
 	@Override
 	protected void readImpl() {
-		Player player = getConnection().getActivePlayer();
-		actionId = readC();
-		targetTemplateId = readD();
-		recipeId = readD();
-		readD();
-		materialsCount = readH();
-		craftType = readC();
-		if (actionId == 1 && craftType == 0) {
-			for(int i = 0 ; i < materialsCount ; i++) {
-				itemID = readD();
-				itemCount = readQ();
-				CraftService.checkComponents(player, recipeId, itemID, materialsCount);
-			}
-		} else if (actionId == 0 && craftType == 0) {
-			CraftService.stopAetherforging(player, recipeId);
+		action = readC();
+		switch (action) {
+			case 0: // Cancel MagicCraft
+				targetTemplateId = readD();
+				recipeId = readD();
+				targetObjId = readD();
+				materialsCount = readH();
+				craftType = readC();
+				break;
+			case 1: // Start MagicCraft
+				if (this.itemList != null) {
+					this.itemList.clear();
+				}
+				targetTemplateId = readD(); // TODO
+				recipeId = readD();
+				targetObjId = readD(); // TODO
+				materialsCount = readH();
+				craftType = readC(); // TODO
+				for (int i = 0; i < materialsCount; i++) {
+					this.itemList.add(readD()); // materialId
+					readQ(); // materialCount
+				}
 		}
 	}
 	
 	@Override
 	protected void runImpl() {
-		Player player = getConnection().getActivePlayer();
-        if (player == null || !player.isSpawned()) {
-            return;
-		} if (player.getController().isInShutdownProgress()) {
-		      return;
-	    } switch (actionId) {
-	    case 0 :
-	    	CraftService.stopAetherforging(player, recipeId);
-	    	break;
-	    case 1 :
-	    	CraftService.startAetherforging(player, recipeId, craftType);
-	    }
+		final Player player = getConnection().getActivePlayer();
+
+		if (player == null || !player.isSpawned()) {
+			return;
+		}
+		if (player.getController().isInShutdownProgress()) {
+			return;
+		}
+
+		switch (action) {
+			case 0: { // cancel
+				AetherForging.sendCancelForgingCraft(player); // TODO (NullPointer)
+				break;
+			}
+			case 1: { // start
+				AetherForging.startForgingCraft(player, recipeId, craftType);
+				break;
+			}
+		}
 	}
 }

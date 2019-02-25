@@ -31,12 +31,20 @@ public class SM_UPDATE_PLAYER_APPEARANCE extends AionServerPacket
 	public int playerId;
     public int size;
     public FastList<Item> items;
+    public boolean isPreview = false;
 
     public SM_UPDATE_PLAYER_APPEARANCE(int playerId, FastList<Item> items) {
         this.playerId = playerId;
         this.items = items;
         this.size = items.size();
     }
+    
+    public SM_UPDATE_PLAYER_APPEARANCE(int playerId, FastList<Item> items, boolean isPreview) {
+		this.playerId = playerId;
+		this.items = items;
+	    this.size = items.size();
+	    this.isPreview = isPreview;
+	}
 
     @Override
 	protected void writeImpl(AionConnection con) {
@@ -55,7 +63,7 @@ public class SM_UPDATE_PLAYER_APPEARANCE extends AionServerPacket
 		writeD(mask); // item size HBS
 
 		for (Item item : items) {
-			writeD(item.getItemSkinTemplate().getTemplateId());
+			writeD(this.isPreview ? item.getItemSkinTemplate().getTemplateId() : item.getItemSkinTemplate().getTemplateId());
 			GodStone godStone = item.getGodStone();
 			writeD(godStone != null ? godStone.getItemId() : 0);
 			writeD(item.getItemColor());

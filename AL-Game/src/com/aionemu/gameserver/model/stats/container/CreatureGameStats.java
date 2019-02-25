@@ -250,11 +250,7 @@ public abstract class CreatureGameStats<T extends Creature>
 
 	public abstract Stat2 getStrikeResist();
 
-	public abstract Stat2 getStrikeFort();
-
 	public abstract Stat2 getSpellResist();
-
-	public abstract Stat2 getSpellFort();
 
 	public abstract Stat2 getBCastingTime();
 
@@ -271,6 +267,10 @@ public abstract class CreatureGameStats<T extends Creature>
     public abstract Stat2 getSleepResistance();
 
 	public abstract Stat2 getAllSpeed();
+	
+	public abstract Stat2 getPvpAttack();
+
+	public abstract Stat2 getPvpDeff();
 
     public int getMagicalDefenseFor(SkillElement element) {
         switch (element) {

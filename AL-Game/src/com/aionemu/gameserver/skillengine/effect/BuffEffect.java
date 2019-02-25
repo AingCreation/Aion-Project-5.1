@@ -1,18 +1,18 @@
-/*
- * This file is part of aion-unique <aion-unique.com>.
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
  *
- *  aion-unique is free software: you can redistribute it and/or modify
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  aion-unique is distributed in the hope that it will be useful,
+ *  Aion-Lightning is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
+ *  GNU General Public License for more details. *
  *  You should have received a copy of the GNU General Public License
- *  along with aion-unique.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.aionemu.gameserver.skillengine.effect;
 
@@ -47,7 +47,6 @@ public abstract class BuffEffect extends EffectTemplate {
 
 	@XmlAttribute
 	protected boolean maxstat;
-
 	private static final Logger log = LoggerFactory.getLogger(BuffEffect.class);
 
 	@Override
@@ -69,18 +68,20 @@ public abstract class BuffEffect extends EffectTemplate {
 	 */
 	@Override
 	public void startEffect(Effect effect) {
-		if (change == null)
+		if (this.change == null) {
 			return;
+		}
 
 		Creature effected = effect.getEffected();
 		CreatureGameStats<? extends Creature> cgs = effected.getGameStats();
 
 		List<IStatFunction> modifiers = getModifiers(effect);
 
-		if (modifiers.size() > 0)
+		if (modifiers.size() > 0) {
 			cgs.addEffect(effect, modifiers);
+		}
 
-		if (maxstat) {
+		if (this.maxstat) {
 			effected.getLifeStats().increaseHp(TYPE.HP, effected.getGameStats().getMaxHp().getCurrent());
 			effected.getLifeStats().increaseMp(TYPE.HEAL_MP, effected.getGameStats().getMaxMp().getCurrent());
 		}
@@ -113,7 +114,7 @@ public abstract class BuffEffect extends EffectTemplate {
 					modifiers.add(new StatRateFunction(changeItem.getStat(), valueWithDelta, true).withConditions(conditions));
 					break;
 				case REPLACE:
-					modifiers.add(new StatSetFunction(changeItem.getStat(), valueWithDelta, true).withConditions(conditions));
+					modifiers.add(new StatSetFunction(changeItem.getStat(), valueWithDelta).withConditions(conditions));
 					break;
 			}
 		}

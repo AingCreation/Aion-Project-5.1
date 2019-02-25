@@ -51,6 +51,30 @@ public class InstanceService
 		}
 	}
 	
+	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, boolean noSpawn) {
+        return getNextAvailableInstance(worldId, 0, noSpawn);
+    }
+
+    public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId, boolean nospawn) {
+        WorldMap map = World.getInstance().getWorldMap(worldId);
+
+        if (!map.isInstanceType()) {
+            throw new UnsupportedOperationException("Invalid call for next available instance  of " + worldId);
+        }
+
+        int nextInstanceId = map.getNextInstanceId();
+        log.info("Creating new instance for new player:" + worldId + " id:" + nextInstanceId + " owner:" + ownerId);
+        WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId, ownerId);
+
+        map.addInstance(nextInstanceId, worldMapInstance);
+        // finally start the checker
+        if (map.isInstanceType()) {
+            startInstanceChecker(worldMapInstance);
+        }
+
+        return worldMapInstance;
+    }
+	
 	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId) {
 		WorldMap map = World.getInstance().getWorldMap(worldId);
 		if (!map.isInstanceType()) {

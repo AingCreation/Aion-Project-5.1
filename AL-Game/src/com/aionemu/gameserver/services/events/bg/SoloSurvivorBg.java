@@ -978,7 +978,7 @@ public class SoloSurvivorBg extends Battleground
 				if (level >= 10 && level <= 50) {
 					ItemService.addItem(pl, 186000030, 2); //Gold Medal.
 					ItemService.addItem(pl, 186000031, 2); //Silver Medal.
-					ItemService.addItem(pl, 166030005, 1); //Tempering Solution.
+					//ItemService.addItem(pl, 166030005, 1); //Tempering Solution.
 					ItemService.addItem(pl, 166020000, 1); //Omega Enchantment Stone.
 					ItemService.addItem(pl, 188100335, 50); //Enchantment Stone Dust.
 					AbyssPointsService.addAp(pl, 5000);
@@ -987,7 +987,7 @@ public class SoloSurvivorBg extends Battleground
 					ItemService.addItem(pl, 186000096, 2); //Platinum Medal.
 					ItemService.addItem(pl, 186000147, 2); //Mithril Medal.
 					ItemService.addItem(pl, 186000223, 2); //Honorable Mithril Medal.
-					ItemService.addItem(pl, 166030005, 1); //Tempering Solution.
+					//ItemService.addItem(pl, 166030005, 1); //Tempering Solution.
 					ItemService.addItem(pl, 166020000, 1); //Omega Enchantment Stone.
 					ItemService.addItem(pl, 188100335, 100); //Enchantment Stone Dust.
 					AbyssPointsService.addAp(pl, 25000);
@@ -995,7 +995,7 @@ public class SoloSurvivorBg extends Battleground
 				} if (level >= 66 && level <= 83) {
 					ItemService.addItem(pl, 186000236, 2); //Blood Mark.
 					ItemService.addItem(pl, 186000414, 2); //Blood Medal.
-					ItemService.addItem(pl, 166030005, 1); //Tempering Solution.
+					//ItemService.addItem(pl, 166030005, 1); //Tempering Solution.
 					ItemService.addItem(pl, 166020000, 1); //Omega Enchantment Stone.
 					ItemService.addItem(pl, 188100335, 150); //Enchantment Stone Dust.
 					AbyssPointsService.addAp(pl, 50000);
@@ -1012,7 +1012,7 @@ public class SoloSurvivorBg extends Battleground
 					if (level >= 10 && level <= 50) {
 						ItemService.addItem(pl, 186000030, 5); //Gold Medal.
 						ItemService.addItem(pl, 186000031, 5); //Silver Medal.
-						ItemService.addItem(pl, 166030005, 2); //Tempering Solution.
+						//ItemService.addItem(pl, 166030005, 2); //Tempering Solution.
 						ItemService.addItem(pl, 166020000, 2); //Omega Enchantment Stone.
 						ItemService.addItem(pl, 188100335, 100); //Enchantment Stone Dust.
 						ItemService.addItem(pl, 188710113, 1); //No Limits Pack "1 Day"
@@ -1022,7 +1022,7 @@ public class SoloSurvivorBg extends Battleground
 						ItemService.addItem(pl, 186000096, 5); //Platinum Medal.
 						ItemService.addItem(pl, 186000147, 5); //Mithril Medal.
 						ItemService.addItem(pl, 186000223, 5); //Honorable Mithril Medal.
-						ItemService.addItem(pl, 166030005, 2); //Tempering Solution.
+						//ItemService.addItem(pl, 166030005, 2); //Tempering Solution.
 						ItemService.addItem(pl, 166020000, 2); //Omega Enchantment Stone.
 						ItemService.addItem(pl, 188100335, 200); //Enchantment Stone Dust.
 						ItemService.addItem(pl, 188710113, 1); //No Limits Pack "1 Day"
@@ -1031,7 +1031,7 @@ public class SoloSurvivorBg extends Battleground
 					} if (level >= 66 && level <= 83) {
 						ItemService.addItem(pl, 186000236, 5); //Blood Mark.
 						ItemService.addItem(pl, 186000414, 5); //Blood Medal.
-						ItemService.addItem(pl, 166030005, 2); //Tempering Solution.
+						//ItemService.addItem(pl, 166030005, 2); //Tempering Solution.
 						ItemService.addItem(pl, 166020000, 2); //Omega Enchantment Stone.
 						ItemService.addItem(pl, 188100335, 300); //Enchantment Stone Dust.
 						ItemService.addItem(pl, 188710113, 1); //No Limits Pack "1 Day"
@@ -1047,7 +1047,7 @@ public class SoloSurvivorBg extends Battleground
 					if (level >= 10 && level <= 50) {
 						ItemService.addItem(pl, 186000030, 2); //Gold Medal.
 						ItemService.addItem(pl, 186000031, 2); //Silver Medal.
-						ItemService.addItem(pl, 166030005, 1); //Tempering Solution.
+						//ItemService.addItem(pl, 166030005, 1); //Tempering Solution.
 						ItemService.addItem(pl, 166020000, 1); //Omega Enchantment Stone.
 						ItemService.addItem(pl, 188100335, 50); //Enchantment Stone Dust.
 						AbyssPointsService.addAp(pl, -5000);
@@ -1056,7 +1056,7 @@ public class SoloSurvivorBg extends Battleground
 						ItemService.addItem(pl, 186000096, 2); //Platinum Medal.
 						ItemService.addItem(pl, 186000147, 2); //Mithril Medal.
 						ItemService.addItem(pl, 186000223, 2); //Honorable Mithril Medal.
-						ItemService.addItem(pl, 166030005, 1); //Tempering Solution.
+						//ItemService.addItem(pl, 166030005, 1); //Tempering Solution.
 						ItemService.addItem(pl, 166020000, 1); //Omega Enchantment Stone.
 						ItemService.addItem(pl, 188100335, 50); //Enchantment Stone Dust.
 						AbyssPointsService.addAp(pl, -25000);
@@ -1064,7 +1064,7 @@ public class SoloSurvivorBg extends Battleground
 					} if (level >= 66 && level <= 83) {
 						ItemService.addItem(pl, 186000236, 2); //Blood Mark.
 						ItemService.addItem(pl, 186000414, 2); //Blood Medal.
-						ItemService.addItem(pl, 166030005, 1); //Tempering Solution.
+						//ItemService.addItem(pl, 166030005, 1); //Tempering Solution.
 						ItemService.addItem(pl, 166020000, 1); //Omega Enchantment Stone.
 						ItemService.addItem(pl, 188100335, 50); //Enchantment Stone Dust.
 						AbyssPointsService.addAp(pl, -50000);

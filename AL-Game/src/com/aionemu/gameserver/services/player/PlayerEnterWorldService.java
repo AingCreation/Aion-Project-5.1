@@ -30,8 +30,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.commons.versionning.Version;
-import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.AStationConfig;
@@ -46,7 +44,7 @@ import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.PlayerPasskeyDAO;
 import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
-import com.aionemu.gameserver.dao.WeddingDAO;
+import com.aionemu.gameserver.model.wedding.WeddingService;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
@@ -84,6 +82,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_CUBE_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ENTER_WORLD_CHECK;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ESSENCE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GAME_TIME;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_INFO;
@@ -118,11 +117,11 @@ import com.aionemu.gameserver.services.DisputeLandService;
 import com.aionemu.gameserver.services.EnchantService;
 import com.aionemu.gameserver.services.EventService;
 import com.aionemu.gameserver.services.F2pService;
-import com.aionemu.gameserver.services.gmservice.*;
 import com.aionemu.gameserver.services.HTMLService;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.KiskService;
 import com.aionemu.gameserver.services.LegionService;
+import com.aionemu.gameserver.services.NewbieGuideService;
 import com.aionemu.gameserver.services.PetitionService;
 import com.aionemu.gameserver.services.ProtectorConquerorService;
 import com.aionemu.gameserver.services.PunishmentService;
@@ -135,10 +134,12 @@ import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.AbyssSkillService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
+import com.aionemu.gameserver.services.dreamergames.services.CombatPointService;
+import com.aionemu.gameserver.services.dreamergames.services.CpPlayerService;
 import com.aionemu.gameserver.services.events.RollDiceEventService;
+import com.aionemu.gameserver.services.gmservice.GmSpecialSkills;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.mail.MailService;
-import com.aionemu.gameserver.services.player.CreativityPanel.CreativityEssenceService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.services.territory.TerritoryService;
 import com.aionemu.gameserver.services.toypet.PetService;
@@ -155,36 +156,18 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
-public final class PlayerEnterWorldService
-{
+public final class PlayerEnterWorldService {
 	private static final Logger log = LoggerFactory.getLogger("GAMECONNECTION_LOG");
-	private static final String serverName = "Have Fun ! on : " + GSConfig.SERVER_NAME + "!";
-	private static final String serverIntro = "Please remember: Accountsharing is not permitted";
-	private static final String serverInfo;
-	private static final String alInfo;
+	private static final String ServerName = ColorChat.colorChat("Welcome to Unity Aion", "1 0.5 0");
+	private static final String ServerTut1 = "use .help for see another player commands.";
+	private static final String ServerLine = "=======================";
+	private static final String ServerNotice = "Happy Aion & Fair Play";
+	private static final String Copyright = "2018 @ Unity Aion.";
+	private static final String DevTeam = "* Unity Team *";
 	private static final Set<Integer> pendingEnterWorld = new HashSet<Integer>();
 	private static ServiceBuff serviceBuff;
 	private static PlayersBonus playersBonus;
 	static ScheduledFuture<?> adv = null;
-
-	static {
-		String infoBuffer = "";
-		infoBuffer = infoBuffer + "=============================\n";
-		infoBuffer = infoBuffer + "Use .faction to use race commands.";
-		infoBuffer = infoBuffer + "=============================\n";
-		String alBuffer = "=============================\n";
-		alBuffer = alBuffer + "This emu is developed by Aion Unity.\n";
-		alBuffer = alBuffer + "Copyright 2009 - 2017 Aion Unity\n";
-		if (GSConfig.SERVER_MOTD_DISPLAYREV) {
-			alBuffer = alBuffer + "=============================\n";
-			alBuffer = alBuffer + "Server Revision: " + String.format("%-6s", new Object[] { new Version(GameServer.class).getRevision() }) + "\n";
-		}
-		alBuffer = alBuffer + "=============================\n";
-		serverInfo = infoBuffer;
-		alInfo = alBuffer;
-		infoBuffer = null;
-		alBuffer = null;
-	}
 
 	public static final void startEnterWorld(final int objectId, final AionConnection client) {
 		PlayerAccountData playerAccData = client.getAccount().getPlayerAccountData(objectId);
@@ -270,10 +253,12 @@ public final class PlayerEnterWorldService
 			log.info("[MAC_AUDIT] Player " + player.getName() + " (account " + account.getName() + ") has entered world with " + client.getMacAddress() + " MAC.");
 			World.getInstance().storeObject(player);
 			StigmaService.onPlayerLogin(player);
+			CpPlayerService.onPlayerLogin(player);
 			if (playerAccData.getPlayerCommonData().getLastOnline() != null) {
 				long lastOnline = playerAccData.getPlayerCommonData().getLastOnline().getTime();
 				PlayerCommonData pcd = player.getCommonData();
 				long secondsOffline = (System.currentTimeMillis() / 1000) - lastOnline / 1000;
+				pcd.setMaxCp(player.getLevel());
 				if (pcd.isReadyForSalvationPoints()) {
 					//The level of Energy of Salvation will now be maintained up to 1 hour after disconnect.
 					if (secondsOffline > 60 * 60) {
@@ -323,12 +308,20 @@ public final class PlayerEnterWorldService
 				}
 			}
 			InstanceService.onPlayerLogin(player);
-			client.sendPacket(new SM_A_STATION(0, 1, true));
+			client.sendPacket(new SM_A_STATION(1, 1, true));
+			
+			// Update player skills first + HotFix ?!!!
+			if (!player.getSkillList().isSkillPresent(302)) {
+				player.getSkillList().addSkill(player, 302, 129);
+			}
+			
 			AbyssSkillService.onEnterWorld(player);
 			client.sendPacket(new SM_SKILL_LIST(player, player.getSkillList().getBasicSkills()));
 			for (PlayerSkillEntry stigmaSkill : player.getSkillList().getStigmaSkills()) {
 				client.sendPacket(new SM_SKILL_LIST(player, stigmaSkill));
-			} if (player.getSkillCoolDowns() != null) {
+			} 
+			
+			if (player.getSkillCoolDowns() != null) {
 				client.sendPacket(new SM_SKILL_COOLDOWN(player.getSkillCoolDowns()));
 			} if (player.getItemCoolDowns() != null) {
 				client.sendPacket(new SM_ITEM_COOLDOWN(player.getItemCoolDowns()));
@@ -362,7 +355,8 @@ public final class PlayerEnterWorldService
 				client.sendPacket(new SM_UI_SETTINGS(houseBuddies, 2));
 			}
 			
-			CreativityEssenceService.getInstance().onLogin(player);
+			client.sendPacket(new SM_ESSENCE_INFO(player, player.getCpList().getAllCps()));
+			CombatPointService.getInstance().onPlayerLogin(player);
 			sendItemInfos(client, player);
 			if (AStationConfig.A_STATION_ENABLE) {
 				AStationService.getInstance().checkAuthorizationRequest(player);
@@ -390,7 +384,13 @@ public final class PlayerEnterWorldService
 			player.getController().validateLoginZone();
 			SiegeService.getInstance().validateLoginZone(player);
 			VortexService.getInstance().validateLoginZone(player);
-			client.sendPacket(new SM_PLAYER_SPAWN(player));
+			//client.sendPacket(new SM_PLAYER_SPAWN(player));
+			if (player.getCommonData().isInNewbieGuide()) {
+                NewbieGuideService.getInstance().onPlayerEnterWorld(player);
+            } else {
+                // SM_PLAYER_SPAWN
+                client.sendPacket(new SM_PLAYER_SPAWN(player));
+            }
 			client.sendPacket(new SM_GAME_TIME());
 			ProtectorConquerorService.getInstance().onProtectorConquerorLogin(player);
 			//Legion Request 4.9.1
@@ -413,14 +413,22 @@ public final class PlayerEnterWorldService
 			client.sendPacket(new SM_PRICES());
 			DisputeLandService.getInstance().onLogin(player);
 			client.sendPacket(new SM_ABYSS_RANK(player.getAbyssRank()));
-			//Intro message
-			PacketSendUtility.sendWhiteMessage(player, serverName);
-			PacketSendUtility.sendBrightYellowMessageOnCenter(player, ColorChat.colorChat("Welcome to AionUnity " + player.getName() , "1 0 5 0"));
-			PacketSendUtility.sendYellowMessage(player, serverIntro);
-			PacketSendUtility.sendBrightYellowMessage(player, serverInfo);
-			PacketSendUtility.sendWhiteMessage(player, alInfo);
-			if (player.isMarried())
-				PacketSendUtility.sendYellowMessage(player, "You are Married !");
+			//Player Welcome Message
+			PacketSendUtility.sendBrightYellowMessageOnCenter(player, ColorChat.colorChat("Welcome " + player.getName() + ". Use .skills for Learn New Skills. ", "1 0 5 0"));
+			//Color Chat.
+			PacketSendUtility.sendMessage(player, ServerName);
+			PacketSendUtility.sendMessage(player, ServerTut1);
+			PacketSendUtility.sendBrightYellowMessage(player, ServerLine);
+			PacketSendUtility.sendBrightYellowMessage(player, ServerNotice);
+			PacketSendUtility.sendBrightYellowMessage(player, ServerLine);
+			PacketSendUtility.sendBrightYellowMessage(player, Copyright);
+			PacketSendUtility.sendBrightYellowMessage(player, DevTeam);
+			PacketSendUtility.sendBrightYellowMessage(player, ServerLine);
+			if (player.isMarried()) {
+				serviceBuff = new ServiceBuff(1000013);
+				serviceBuff.applyEffect(player, 1000013);
+				PacketSendUtility.sendYellowMessage(player, "You are Married get extra benefit !");
+			}
 			//"\uE026" //Timer.
 			//"\uE027" //Speaker.
 			player.setRates(Rates.getRatesFor(client.getAccount().getMembership()));
@@ -479,19 +487,19 @@ public final class PlayerEnterWorldService
 			Calendar calendar = Calendar.getInstance();
 			if (PvPConfig.ADVANCED_PVP_SYSTEM) {
 				if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
-					PacketSendUtility.sendMessage(player, "Today PvP Map: Levinshor");
+					PacketSendUtility.sendMessage(player, "Pvp hari ini di map levinshor, dan silentera canyon");
 				}
 				else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY || calendar.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) {
-					PacketSendUtility.sendMessage(player, "Today PvP Map: Levinshor");
+					PacketSendUtility.sendMessage(player, "Pvp hari ini di map levinshor, dan silentera canyon");
 				}
 				else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY || calendar.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY) {
-					PacketSendUtility.sendMessage(player, "Today PvP Map: Levinshor");
+					PacketSendUtility.sendMessage(player, "Pvp hari ini di map levinshor, dan silentera canyon");
 				}
 				else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
-				    PacketSendUtility.sendMessage(player, "Today PvP Map: Levinshor");
+				    PacketSendUtility.sendMessage(player, "Pvp hari ini di map levinshor, dan silentera canyon");
 				}
 				else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-				    PacketSendUtility.sendMessage(player, "Today PvP Map: Levinshor");
+				    PacketSendUtility.sendMessage(player, "Pvp hari ini di map levinshor, dan silentera canyon");
 				}
 			}
 			//Service Security Buff.
@@ -572,12 +580,15 @@ public final class PlayerEnterWorldService
 			if (AutoGroupConfig.AUTO_GROUP_ENABLED) {
 				AutoGroupService.getInstance().onPlayerLogin(player);
 			}
-			ClassChangeService.showClassChangeDialog(player);
-			// Check auto learn lvl 9
-            SkillLearnService.addMissingSkills(player);
+			// display Class Change Dialog
+            if (!player.getCommonData().isInNewbieGuide()) {
+                ClassChangeService.showClassChangeDialog(player);
+            }
 			GMService.getInstance().onPlayerLogin(player);
 			player.getLifeStats().updateCurrentStats();
-			player.getEquipment().checkRankLimitItems();
+			if (!CustomConfig.RANK_ITEM_LIMIT) {
+				player.getEquipment().checkRankLimitItems();
+			}
 			if (HTMLConfig.ENABLE_HTML_WELCOME) {
 				HTMLService.showHTML(player, HTMLCache.getInstance().getHTML("welcome.xhtml"));
 			}
@@ -629,10 +640,19 @@ public final class PlayerEnterWorldService
 			}
 			RelinquishCraftStatus.removeExcessCraftStatus(player, false);
 			PlayerTransferService.getInstance().onEnterWorld(player);
-			player.setPartnerId(DAOManager.getDAO(WeddingDAO.class).loadPartnerId(player));
+			WeddingService.getInstance().onEnterWorld(player);
+			//player.setPartnerId(DAOManager.getDAO(WeddingDAO.class).loadPartnerId(player));
 			EnchantService.GloryShieldSkill(player);
 			RollDiceEventService.getInstance().onEnterWorld(player);
 			LunaShopService.getInstance().onLogin(player);
+			SkillLearnService.addMissingSkills(player);
+			if (player.getActiveHouse() != null) {
+				if (player.getSkillList().getSkillEntry(296) == null && player.getRace() == Race.ASMODIANS) {
+					player.getSkillList().addSkill(player, 296, 1);
+				} if (player.getSkillList().getSkillEntry(295) == null && player.getRace() == Race.ELYOS) {
+					player.getSkillList().addSkill(player, 295, 1);
+				}
+			}
 		} else {
 			log.info("[DEBUG] enter world" + objectId + ", Player: " + player);
 		}

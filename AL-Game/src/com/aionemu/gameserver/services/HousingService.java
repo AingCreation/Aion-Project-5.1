@@ -18,19 +18,18 @@ package com.aionemu.gameserver.services;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javolution.util.FastList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.utils.internal.chmv8.PlatformDependent;
-
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.commons.utils.internal.chmv8.PlatformDependent;
 import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.dao.HousesDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -38,15 +37,19 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.*;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.PlayerHouseOwnerFlags;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseStatus;
-import com.aionemu.gameserver.model.templates.housing.*;
+import com.aionemu.gameserver.model.templates.housing.Building;
+import com.aionemu.gameserver.model.templates.housing.BuildingType;
+import com.aionemu.gameserver.model.templates.housing.HouseAddress;
+import com.aionemu.gameserver.model.templates.housing.HousingLand;
 import com.aionemu.gameserver.model.templates.spawns.SpawnType;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MARK_FRIENDLIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_ACQUIRE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_OWNER_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_MARK_FRIENDLIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;

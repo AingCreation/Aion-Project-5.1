@@ -44,7 +44,7 @@ public class BindEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(Effect effect) {
-		final Creature effected = effect.getEffected();
+		Creature effected = effect.getEffected();
 		effect.setAbnormal(AbnormalState.BIND.getId());
 		effected.getEffectController().setAbnormal(AbnormalState.BIND.getId());
 		if (effected.getCastingSkill() != null && effected.getCastingSkill().getSkillTemplate().getType() == SkillType.PHYSICAL)

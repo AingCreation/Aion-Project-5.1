@@ -89,21 +89,7 @@ public class Research_TeselikAI2 extends AggressiveNpcAI2
 			return;
 		} else {
 			SkillEngine.getInstance().getSkill(getOwner(), 20657, 1, getOwner()).useNoAnimationSkill(); //Summoning Ritual.
-			ShebanMysticalTyrhund();
 			scheduleDelayStage1(delay);
-		}
-	}
-	
-	private void ShebanMysticalTyrhund() {
-	    if (!isAlreadyDead()) {
-		    enrageTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-			    public void run() {
-					if (!isAlreadyDead()) {
-					    spawn(284455, 482.25043f, 337.24167f, 181.71579f, (byte) 30); //Sheban Mystical Tyrhund.
-					    spawn(284455, 476.00104f, 337.45627f, 181.71579f, (byte) 30); //Sheban Mystical Tyrhund.
-					}
-				}
-			}, 3000);
 		}
 	}
 	
@@ -127,21 +113,5 @@ public class Research_TeselikAI2 extends AggressiveNpcAI2
 				npc.getController().onDelete();
 			}
 		}
-	}
-	
-	@Override
-	protected void handleBackHome() {
-		super.handleBackHome();
-        despawnNpcs(284455); //Sheban Mystical Tyrhund.
-		isStart = false;
-		stage = 0;
-	}
-	
-	@Override
-	protected void handleDied() {
-		super.handleDied();
-        despawnNpcs(284455); //Sheban Mystical Tyrhund.
-		isStart = false;
-		stage = 0;
 	}
 }

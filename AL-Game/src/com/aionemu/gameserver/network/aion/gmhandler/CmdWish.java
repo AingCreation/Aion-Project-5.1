@@ -16,6 +16,7 @@
  */
 package com.aionemu.gameserver.network.aion.gmhandler;
 
+import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.configs.administration.PanelConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -57,44 +58,54 @@ public class CmdWish extends AbstractGMHandler {
             Integer qty = Integer.parseInt(p[0]);
             Integer itemId = Integer.parseInt(p[1]);
 
-            if (qty > 0 && itemId > 0) {
-            	if(itemId >= 187100023 && itemId <= 187100030) {//Those Items wont work correct on 4.9.
-                	PacketSendUtility.sendPacket(admin, new SM_SYSTEM_MESSAGE(1300493)); 
-                	return;
-                }
-                if (DataManager.ITEM_DATA.getItemTemplate(itemId) == null) {
-                    PacketSendUtility.sendMessage(admin, "Item id is incorrect: " + itemId);
-                } else {
-                    long count = ItemService.addItem(t, itemId, qty);
-                    if (count == 0) {
-                        PacketSendUtility.sendMessage(admin, "You successfully gave " + qty + " x [item:" + itemId + "] to " + t.getName() + ".");
+            if (admin.getAccessLevel() >= CommandsConfig.ADD) {
+            	if (qty > 0 && itemId > 0) {
+                	if(itemId >= 187100023 && itemId <= 187100030) {//Those Items wont work correct on 4.9.
+                    	PacketSendUtility.sendPacket(admin, new SM_SYSTEM_MESSAGE(1300493)); 
+                    	return;
+                    }
+                    if (DataManager.ITEM_DATA.getItemTemplate(itemId) == null) {
+                        PacketSendUtility.sendMessage(admin, "Item id is incorrect: " + itemId);
                     } else {
-                        PacketSendUtility.sendMessage(admin, "Item couldn't be added");
+                    	long count = ItemService.addItem(t, itemId, qty, "Added By GM: " + admin.getName());
+                        if (count == 0) {
+                            PacketSendUtility.sendMessage(admin, "You successfully gave " + qty + " x [item:" + itemId + "] to " + t.getName() + ".");
+                        } else {
+                            PacketSendUtility.sendMessage(admin, "Item couldn't be added");
+                        }
                     }
                 }
-            }
+            } else {
+				PacketSendUtility.sendMessage(admin, "You cant use this action !?");
+				return;
+			}
         }
 
         if (p[0].length() > 6) {
             String itemDesc = p[0];
             Integer countitems = Integer.parseInt(p[1]);
 
-            if (itemDesc != null && countitems > 0) {
-                for (ItemTemplate template : DataManager.ITEM_DATA.getItemData().valueCollection()) {
-                    if (template.getName() != null && template.getName().equalsIgnoreCase(itemDesc)) {
-                    	if(template.getTemplateId() >= 187100023 && template.getTemplateId() <= 187100030) {//Those Items wont work correct on 4.9.
-                        	PacketSendUtility.sendPacket(admin, new SM_SYSTEM_MESSAGE(1300493)); 
-                        	return;
-                        }
-                        long count = ItemService.addItem(t, template.getTemplateId(), countitems);
-                        if (count == 0) {
-                            PacketSendUtility.sendMessage(admin, "You successfully gave " + countitems + " x [item:" + template.getTemplateId() + "] ID: " + template.getTemplateId() + " to " + t.getName() + ".");
-                        } else {
-                            PacketSendUtility.sendMessage(admin, "Item couldn't be added");
+            if (admin.getAccessLevel() >= CommandsConfig.ADD) {
+            	if (itemDesc != null && countitems > 0) {
+                    for (ItemTemplate template : DataManager.ITEM_DATA.getItemData().valueCollection()) {
+                        if (template.getName() != null && template.getName().equalsIgnoreCase(itemDesc)) {
+                        	if(template.getTemplateId() >= 187100023 && template.getTemplateId() <= 187100030) {//Those Items wont work correct on 4.9.
+                            	PacketSendUtility.sendPacket(admin, new SM_SYSTEM_MESSAGE(1300493)); 
+                            	return;
+                            }
+                        	long count = ItemService.addItem(t, template.getTemplateId(), countitems, "Added By GM: " + admin.getName());
+                            if (count == 0) {
+                                PacketSendUtility.sendMessage(admin, "You successfully gave " + countitems + " x [item:" + template.getTemplateId() + "] ID: " + template.getTemplateId() + " to " + t.getName() + ".");
+                            } else {
+                                PacketSendUtility.sendMessage(admin, "Item couldn't be added");
+                            }
                         }
                     }
                 }
-            }
+            } else {
+				PacketSendUtility.sendMessage(admin, "You cant use this action !?");
+				return;
+			}
         }
     }
 }

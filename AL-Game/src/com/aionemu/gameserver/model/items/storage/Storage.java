@@ -14,8 +14,10 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
+import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
+import com.aionemu.gameserver.services.item.ItemService;
 
 /**
  * @author KID, ATracer
@@ -146,8 +148,12 @@ public abstract class Storage implements IStorage {
 		else
 			itemStorage.putItem(item);
 	}
-
+	
 	Item add(Item item, Player actor) {
+		return add(item, ItemService.DEFAULT_UPDATE_PREDICATE.getAddType(), actor);
+	}
+
+	Item add(Item item, ItemAddType addType, Player actor) {
 		if (item.getItemTemplate().isKinah()) {
 			this.kinahItem = item;
 		}
@@ -156,11 +162,14 @@ public abstract class Storage implements IStorage {
 		}
 		item.setItemLocation(storageType.getId());
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
-		ItemPacketService.sendStorageUpdatePacket(actor, storageType, item);
+		ItemPacketService.sendStorageUpdatePacket(actor, storageType, item, addType);
 		// TODO: move to ItemService
-		QuestEngine.getInstance().onItemGet(new QuestEnv(null, actor, 0, 0), item.getItemTemplate().getTemplateId());
-		if (item.getItemTemplate().isQuestUpdateItem())
-			actor.getController().updateNearbyQuests();
+		if (storageType == StorageType.CUBE) {
+			QuestEngine.getInstance().onItemGet(new QuestEnv(null, actor, 0, 0), item.getItemTemplate().getTemplateId());
+			if (item.getItemTemplate().isQuestUpdateItem()) {
+				actor.getController().updateNearbyQuests();
+			}
+		}
 		return item;
 	}
 

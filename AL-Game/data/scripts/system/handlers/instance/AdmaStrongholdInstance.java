@@ -70,10 +70,10 @@ public class AdmaStrongholdInstance extends GeneralInstanceHandler
 				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 185000026, 1)); //Inner Chamber Key.
 		    break;
 			case 702658: //Abbey Box.
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 188053579, 1)); //[Event] Abbey Bundle.
+				//dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 188053579, 1)); //[Event] Abbey Bundle.
 		    break;
 			case 702659: //Noble Abbey Box.
-				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 188053580, 1)); //[Event] Noble Abbey Bundle.
+				//dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 188053580, 1)); //[Event] Noble Abbey Bundle.
 		    break;
 			case 237241: //Enthralled Karemiwen.
 				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, 0, npcId, 170175031, 1)); //[Souvenir] Karemiwen's Teddy Bear.

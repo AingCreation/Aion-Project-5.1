@@ -13,7 +13,7 @@ public class cmd_skills extends PlayerCommand
 	
 	@Override
 	public void execute(Player player, String... params) {
-		SkillLearnService.addMissingSkills4P(player);
+		SkillLearnService.addMissingSkills(player);
 	}
 	
 	@Override

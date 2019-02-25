@@ -59,7 +59,10 @@ public abstract class Creature extends VisibleObject
 	private int skillNumber;
 	private int attackedCount;
 	private long spawnTime = System.currentTimeMillis();
+	protected int type = CreatureType.NULL.getId();
 	private int PulledMulti = 1;
+	private int CriticalEffectMulti = 1;
+	private TribeClass tribe = TribeClass.GENERAL;
 
 	/**
 	 * @param objId
@@ -469,6 +472,14 @@ public abstract class Creature extends VisibleObject
 	}
 
 	public TribeClass getTribe() {
+		return tribe;
+	}
+
+	public void setTribe(TribeClass tribe) {
+		this.tribe = tribe;
+	}
+
+	public TribeClass getBaseTribe() {
 		return TribeClass.GENERAL;
 	}
 
@@ -580,7 +591,7 @@ public abstract class Creature extends VisibleObject
 		if (skillCoolDowns == null)
 			return false;
 
-		int delayId = template.getDelayId();
+		int delayId = template.getCooldownId();
 		Long coolDown = skillCoolDowns.get(delayId);
 		if (coolDown == null) {
 			return false;
@@ -787,6 +798,13 @@ public abstract class Creature extends VisibleObject
 	public Race getRace() {
 		return Race.NONE;
 	}
+	
+	/**
+	 * @param creature
+	 */
+	public int getType(Creature creature) {
+		return type;
+	}
 
 	public int getSkillCooldown(SkillTemplate template) {
 		return template.getCooldown();
@@ -806,5 +824,15 @@ public abstract class Creature extends VisibleObject
 
     public void setPulledMulti(int pulledMulti) {
         PulledMulti = pulledMulti;
+    }
+    
+    public int getCriticalEffectMulti()
+    {
+      return this.CriticalEffectMulti;
+    }
+    
+    public void setCriticalEffectMulti(int criticalEffectMulti)
+    {
+      this.CriticalEffectMulti = criticalEffectMulti;
     }
 }

@@ -9,6 +9,7 @@ import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList;
+import com.aionemu.gameserver.model.wedding.WeddingService;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
@@ -40,6 +41,10 @@ public class CM_CHAT_MESSAGE_WHISPER extends AionClientPacket
 	@Override
 	protected void runImpl() {
 		name = ChatUtil.getRealAdminName(name);
+        if (name.contains("\ue020")) {
+            name = WeddingService.getRealWeddingsName(name);
+        }
+		//name = ChatUtil.getRealAdminName(name);
 		String formatname = Util.convertName(name);
 		Player sender = getConnection().getActivePlayer();
 		Player receiver = World.getInstance().findPlayer(formatname);

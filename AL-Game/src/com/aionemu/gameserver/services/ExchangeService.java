@@ -20,11 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.dao.AdminTradeLogDAO;
 import com.aionemu.gameserver.dao.InventoryDAO;
+import com.aionemu.gameserver.dao.PlayerTradeLogDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
@@ -47,8 +46,6 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
  * @author ATracer
  */
 public class ExchangeService {
-
-	private static final Logger log = LoggerFactory.getLogger("EXCHANGE_LOG");
 
 	private Map<Integer, Exchange> exchanges = new HashMap<Integer, Exchange>();
 
@@ -143,10 +140,17 @@ public class ExchangeService {
 		long countToAdd = availableCount > itemCount ? itemCount : availableCount;
 
 		if (countToAdd > 0) {
+			int itemId = 182400001;
+			String itemName = "kinah";
 			Player partner = getCurrentParter(activePlayer);
 			PacketSendUtility.sendPacket(activePlayer, new SM_EXCHANGE_ADD_KINAH(countToAdd, 0));
 			PacketSendUtility.sendPacket(partner, new SM_EXCHANGE_ADD_KINAH(countToAdd, 1));
 			currentExchange.addKinah(countToAdd);
+			if (activePlayer.isGM()) {
+				DAOManager.getDAO(AdminTradeLogDAO.class).insertExchange(activePlayer.getObjectId(), activePlayer.getName(), partner.getObjectId(), partner.getName(), itemId, itemName, (int)itemCount, "");
+			} else {
+				DAOManager.getDAO(PlayerTradeLogDAO.class).insertExchange(activePlayer.getObjectId(), activePlayer.getName(), partner.getObjectId(), partner.getName(), itemId, itemName, (int)itemCount, "");
+			}
 		}
 	}
 
@@ -222,6 +226,11 @@ public class ExchangeService {
 		PacketSendUtility.sendPacket(partner, new SM_EXCHANGE_ADD_ITEM(1, exchangeItem.getItem(), partner));
 
 		Item exchangedItem = exchangeItem.getItem();
+		if (activePlayer.isGM()) {
+			DAOManager.getDAO(AdminTradeLogDAO.class).insertExchange(activePlayer.getObjectId(), activePlayer.getName(), partner.getObjectId(), partner.getName(), exchangedItem.getItemId(), exchangedItem.getItemName(), (int)exchangedItem.getItemCount(), "");
+		} else {
+			DAOManager.getDAO(PlayerTradeLogDAO.class).insertExchange(activePlayer.getObjectId(), activePlayer.getName(), partner.getObjectId(), partner.getName(), exchangedItem.getItemId(), exchangedItem.getItemName(), (int)exchangedItem.getItemCount(), "");
+		}
 	}
 
 	/**

@@ -104,7 +104,7 @@ public class cmd_enchant extends PlayerCommand {
         if (item.getItemTemplate().isArmor()) {
             int at = item.getItemTemplate().getItemSlot();
             int au = item.getItemTemplate().getMaxAuthorize();
-            if (au == 9) {
+            if (au == 9 || au == 255) {
             	return false;
             }
             if (at == 1

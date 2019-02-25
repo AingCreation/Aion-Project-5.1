@@ -1,24 +1,9 @@
-/*
- * This file is part of aion-unique <aion-unique.com>.
- *
- *  aion-unique is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  aion-unique is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with aion-unique.  If not, see <http://www.gnu.org/licenses/>.
- */
 package com.aionemu.gameserver.dataholders;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -27,28 +12,40 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
 
 /**
  * @author ATracer
+ * @Rework idhacker542
  */
 @XmlRootElement(name = "skill_tree")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SkillTreeData {
+	
+	private static Logger log = LoggerFactory.getLogger(SkillTreeData.class);
 
 	@XmlElement(name = "skill")
 	private List<SkillLearnTemplate> skillTemplates;
-
+	
+	private final HashMap<Race, HashMap<String, HashMap<Integer, Integer>>> stigmaTree = new HashMap<Race, HashMap<String, HashMap<Integer, Integer>>>();
 	private final TIntObjectHashMap<ArrayList<SkillLearnTemplate>> templates = new TIntObjectHashMap<ArrayList<SkillLearnTemplate>>();
 	private final TIntObjectHashMap<ArrayList<SkillLearnTemplate>> templatesById = new TIntObjectHashMap<ArrayList<SkillLearnTemplate>>();
 
+	private static int makeHash(int classId, int race, int level) {
+		int result = classId << 8;
+		result = (result | race) << 8;
+		return result | level;
+	}
+	
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (SkillLearnTemplate template : skillTemplates) {
 			addTemplate(template);
 		}
-		skillTemplates = null;
 	}
 
 	private void addTemplate(SkillLearnTemplate template) {
@@ -80,6 +77,10 @@ public class SkillTreeData {
 	public TIntObjectHashMap<ArrayList<SkillLearnTemplate>> getTemplates() {
 		return templates;
 	}
+	
+	public ArrayList<SkillLearnTemplate> getSkillTemplate(int skillId) {
+	    return templates.get(skillId);
+	}
 
 	/**
 	 * Perform search for: - class specific skills (race = ALL) - class and race specific skills - non-specific skills
@@ -93,12 +94,14 @@ public class SkillTreeData {
 	public SkillLearnTemplate[] getTemplatesFor(PlayerClass playerClass, int level, Race race) {
 		List<SkillLearnTemplate> newSkills = new ArrayList<SkillLearnTemplate>();
 
-		List<SkillLearnTemplate> classRaceSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), race.ordinal(),
+		List<SkillLearnTemplate> classRaceSpecificTemplates = templates.get(makeHash(PlayerClass.ALL.ordinal(), race.ordinal(),
 			level));
 		List<SkillLearnTemplate> classSpecificTemplates = templates.get(makeHash(playerClass.ordinal(),
 			Race.PC_ALL.ordinal(), level));
 		List<SkillLearnTemplate> generalTemplates = templates.get(makeHash(PlayerClass.ALL.ordinal(),
 			Race.PC_ALL.ordinal(), level));
+		List<SkillLearnTemplate> classBySpecificTemplates = templates.get(makeHash(playerClass.ordinal(),
+				race.ordinal(), level));
 
 		if (classRaceSpecificTemplates != null)
 			newSkills.addAll(classRaceSpecificTemplates);
@@ -106,6 +109,9 @@ public class SkillTreeData {
 			newSkills.addAll(classSpecificTemplates);
 		if (generalTemplates != null)
 			newSkills.addAll(generalTemplates);
+		if (classBySpecificTemplates != null) 
+			newSkills.addAll(classBySpecificTemplates);
+		    
 
 		return newSkills.toArray(new SkillLearnTemplate[newSkills.size()]);
 	}
@@ -130,10 +136,44 @@ public class SkillTreeData {
 			size += templates.get(key).size();
 		return size;
 	}
-
-	private static int makeHash(int classId, int race, int level) {
-		int result = classId << 10;
-		result = (result | race) << 10;
-		return result | level;
+	
+	public void loadStigmaDataTree() {
+	    log.info("Loading stigma skill data...");
+	    String skillStackName;
+	    int playerLevel;
+	    for (SkillLearnTemplate skillLearnTemplate : skillTemplates) {
+	    	skillStackName = DataManager.SKILL_DATA.getSkillTemplate(skillLearnTemplate.getSkillId()).getStack();
+	    	playerLevel = skillLearnTemplate.getMinLevel();
+	    	ArrayList<Race> addRaceList = new ArrayList<Race>();
+	    	if (skillLearnTemplate.getRace() == Race.PC_ALL) {
+	    		addRaceList.add(Race.ASMODIANS);
+	    		addRaceList.add(Race.ELYOS);
+	    	} else {
+	    		addRaceList.add(skillLearnTemplate.getRace());
+	    	}
+	    	for (Race addRace : addRaceList) {
+	    		if (stigmaTree.get(addRace) != null) {
+	    			if (stigmaTree.get(addRace).get(skillStackName) != null) {
+	    				stigmaTree.get(addRace).get(skillStackName).put(playerLevel, skillLearnTemplate.getSkillId());
+	    			} else {
+	    				HashMap<Integer, Integer> skillMap = new HashMap<Integer, Integer>();
+	    				skillMap.put(playerLevel, skillLearnTemplate.getSkillId());
+	    				stigmaTree.get(addRace).put(skillStackName, skillMap);
+	    			}
+	    		} else {
+	    			HashMap<String, HashMap<Integer, Integer>> stackMap = new HashMap<String, HashMap<Integer, Integer>>();
+	    			HashMap<Integer, Integer> skillMap = new HashMap<Integer, Integer>();
+	    			skillMap.put(Integer.valueOf(skillLearnTemplate.getSkillId()), Integer.valueOf(playerLevel));
+	    			stackMap.put(skillStackName, skillMap);
+	    			stigmaTree.put(addRace, stackMap);
+	    		}
+	    	}
+	    }
+	    log.info("Loaded " + this.stigmaTree.size() + " stigma skill data.");
+	    skillTemplates = null;
+	}
+	
+	public HashMap<Race, HashMap<String, HashMap<Integer, Integer>>> getStigmaTree() {
+		return stigmaTree;
 	}
 }

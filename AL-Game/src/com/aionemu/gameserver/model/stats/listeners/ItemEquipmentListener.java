@@ -23,11 +23,9 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.IdianStone;
-import com.aionemu.gameserver.model.items.ItemMask;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.items.RandomStats;
@@ -84,9 +82,7 @@ public class ItemEquipmentListener {
 			owner.getObserveController().addObserver(item.getConditioningInfo());
 			item.getConditioningInfo().setPlayer(owner);
 		}
-		if (item.getAmplificationSkill() > 0) {
-			owner.getSkillList().addSkill(owner, item.getAmplificationSkill(), 1);
-		}
+		
 		if (item.getItemSkinSkill() > 0) {
 			owner.getSkillList().addSkill(owner, item.getItemSkinSkill(), 1);
 		}
@@ -129,11 +125,6 @@ public class ItemEquipmentListener {
 		if (randomStats != null) {
 			randomStats.onUnEquip(owner);
 		}
-		if (item.getAmplificationSkill() > 0) {
-			if (owner.getSkillList().isSkillPresent(item.getAmplificationSkill())) {
-				SkillLearnService.removeSkill(owner, item.getAmplificationSkill());
-			}
-		}
 		if (item.getItemSkinSkill() > 0) {
 			if (owner.getSkillList().isSkillPresent(item.getItemSkinSkill())) {
 				SkillLearnService.removeSkill(owner, item.getItemSkinSkill());
@@ -156,7 +147,7 @@ public class ItemEquipmentListener {
 		}
 
 		List<StatFunction> allModifiers = null;
-		List<StatFunction> decreaseAllModifiers = null;
+		//List<StatFunction> decreaseAllModifiers = null;
 
 		if ((slot & ItemSlot.MAIN_OR_SUB.getSlotIdMask()) != 0) {
 			allModifiers = wrapModifiers(item, modifiers);
@@ -173,6 +164,20 @@ public class ItemEquipmentListener {
 				if (weaponStats != null) {
 					int boostMagicalSkill = Math.round(0.1f * weaponStats.getBoostMagicalSkill());
 					int attack = Math.round(0.1f * weaponStats.getMeanDamage());
+					if (itemTemplate.isArchdaeva()) {
+			            int level = player.getLevel() - itemTemplate.getLevel();
+			            level += item.getReductionLevel();
+			            if (level < 0) {
+			            	boostMagicalSkill += (int)(boostMagicalSkill * (2 * level) / 100);
+			            	attack += (int)(attack * (2 * level) / 100);
+			            	if (boostMagicalSkill < 0) {
+			            		boostMagicalSkill = 0;
+			            	}
+			            	if (attack < 0) {
+			            		attack = 0;
+			            	}
+			            }
+					}
 					if (weaponType == WeaponType.ORB_2H ||
 						weaponType == WeaponType.BOOK_2H ||
 						weaponType == WeaponType.GUN_1H || //4.3
@@ -184,52 +189,60 @@ public class ItemEquipmentListener {
 					} else {
 						allModifiers.add(new StatAddFunction(StatEnum.MAIN_HAND_POWER, attack, false));
 					}
+				} if (itemTemplate.isArchdaeva()) {
+					for (StatFunction a : fusionedItemModifiers) {
+						if (!a.HitemStatsExcept()) {
+							int level = player.getLevel() - itemTemplate.getLevel();
+							level += item.getReductionLevel();
+							if (level < 0) {
+								int value = a.getValue();
+								int formula = (int)(value * (2.0F * level) / 100.0F);
+								allModifiers.add(new StatAddFunction(a.getName(), formula, a.isBonus()));
+							}
+						}
+					}
 				}
-			} if (CustomConfig.ITEM_NOT_FOR_ARCHDAEVA_ENABLE) {
-				if (player.getLevel() >= 65 && !itemTemplate.isArchdaeva()) {
-					for (StatFunction a: modifiers) {
+			} 
+		} else {
+			WeaponStats weaponStat = itemTemplate.getWeaponStats();
+			if (weaponStat != null) {
+				allModifiers = wrapModifiersW(item, modifiers);
+			} else {
+				allModifiers = modifiers;
+			}
+		} if (itemTemplate.isArchdaeva()) {
+			for (StatFunction a : modifiers) {
+				if (!a.HitemStatsExcept()) {
+					int level = player.getLevel() - itemTemplate.getLevel();
+					level += item.getReductionLevel();
+					if (level < 0) {
 						int value = a.getValue();
-						int formula = (int)(value * (20.0f / 100.0f));
-						allModifiers.add(new StatAddFunction(a.getName(), -formula, false));
+						int formula = (int)(value * (2.0F * level) / 100.0F);
+						allModifiers.add(new StatAddFunction(a.getName(), formula, a.isBonus()));
 					}
 				}
 			}
-			//ArchDaeva item level limitations
-			if (player.getLevel() >= 65 && itemTemplate.isArchdaeva()) {
-				int pLevel = player.getLevel();
-				int iLevel = itemTemplate.getLevel();
-				float percentageDecrease = 0;
-				if (iLevel - pLevel == 1) {
-					percentageDecrease = 2.0f;
-				} else if (iLevel - pLevel == 2) {
-					percentageDecrease = 4.0f;
-				} else if (iLevel - pLevel == 3) {
-					percentageDecrease = 6.0f;
-				} else if (iLevel - pLevel == 4) {
-					percentageDecrease = 8.0f;
-				} else if (iLevel - pLevel == 5) {
-					percentageDecrease = 10.0f;
-				} else if (iLevel - pLevel == 6) {
-					percentageDecrease = 12.0f;
-				} else if (iLevel - pLevel == 7) {
-					percentageDecrease = 14.0f;
-				} else if (iLevel - pLevel == 8) {
-					percentageDecrease = 16.0f;
-				} else if (iLevel - pLevel == 9) {
-					percentageDecrease = 18.0f;
-				} else if (iLevel - pLevel == 10) {
-					percentageDecrease = 20.0f;
-				} for (StatFunction a: modifiers) {
-					int value = a.getValue();
-					int formula = (int)(value * (percentageDecrease / 100.0f));
-					allModifiers.add(new StatAddFunction(a.getName(), -formula, false));
-				}
-			}
-		} else {
-			allModifiers = modifiers;
 		}
 		item.setCurrentModifiers(allModifiers);
 		cgs.addEffect(item, allModifiers);
+	}
+
+	private static List<StatFunction> wrapModifiersW(Item item, List<StatFunction> modifiers) {
+		List<StatFunction> allModifiers = new ArrayList<StatFunction>();
+		ItemTemplate itemTemplate = item.getItemTemplate();
+		WeaponStats weaponStats = itemTemplate.getWeaponStats();
+		for (StatFunction modifier : modifiers) {
+			switch (modifier.getName()) {
+			default:
+				break;
+			}
+			allModifiers.add(modifier);
+		}
+		allModifiers.add(new StatAddFunction(StatEnum.PARRY, weaponStats.getParry(), false));
+		allModifiers.add(new StatAddFunction(StatEnum.MAGICAL_ACCURACY, weaponStats.getMagicalAccuracy(), false));
+		allModifiers.add(new StatAddFunction(StatEnum.PHYSICAL_ACCURACY, weaponStats.getPhysicalAccuracy(), false));
+	    
+		return allModifiers;
 	}
 
 	/**
@@ -381,5 +394,13 @@ public class ItemEquipmentListener {
 
 	public static void removeIdianBonusStats(Item item, CreatureGameStats<?> cgs) {
 		cgs.endEffect(item);
+	}
+	
+	public static void UpdateEquipmentItem(Player player, Item item) {
+		if (!item.isEquipped()) {
+			return;
+		}
+		player.getGameStats().endEffect(item);
+		onItemEquipment(item, player.getGameStats(), player);
 	}
 }

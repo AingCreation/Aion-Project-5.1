@@ -41,28 +41,23 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 public class cmd_toll extends PlayerCommand {
 
 	public cmd_toll() {
-        super("toll");
+        super("gptoll");
     }
 
     @Override
     public void execute(Player player, String... params) {
-        int ap = 1000000;
+        int gp = 50000;
         int toll = 1000;
-        if (player.getAbyssRank().getAp() < ap) {
-            PacketSendUtility.sendMessage(player, "You Dont Have Abyss Point : " + ap);
+        if (player.getAbyssRank().getGp() < gp) {
+            PacketSendUtility.sendMessage(player, "You Dont Have Glory Point : 50.000GP / 1000 Toll" + "");
             return;
         }
         addToll(player, toll);
-        AbyssPointsService.addAp(player, -ap);
-
+        AbyssPointsService.addGp(player, -gp);
+		PacketSendUtility.sendMessage(player, "You Get : " + toll + " Toll");
     }
     
     private void addToll (Player player, int toll) {
     	InGameShopEn.getInstance().addToll(player, toll);
     }
-    
-    @Override
-	public void onFail(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Syntax: .toll (only have 1.000.000 abyss point / 1 Toll = 1000 ");
-	}
 }

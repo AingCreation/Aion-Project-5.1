@@ -45,6 +45,8 @@ public class SelfFlyingCondition extends Condition {
 				return env.getEffector().isFlying();
 			case GROUND:
 				return !env.getEffector().isFlying();
+		default:
+			break;
 		}
 
 		return true;
@@ -60,6 +62,8 @@ public class SelfFlyingCondition extends Condition {
 				return effect.getEffector().isFlying();
 			case GROUND:
 				return !effect.getEffector().isFlying();
+		default:
+			break;
 		}
 
 		return true;

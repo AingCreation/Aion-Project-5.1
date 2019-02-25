@@ -73,7 +73,7 @@ public class CM_PURIFICATION_ITEM extends AionClientPacket
 			return;
 		}
 		Item resultItem = ItemService.newItem(resultItemId, 1, null, 0, 0, 0);
-		ItemService.makeUpgradeItem(baseItem, resultItem);
+		ItemService.makeUpgradeItem(player, baseItem, resultItem);
 		if (!ItemUpgradeService.decreaseMaterial(player, baseItem, resultItemId)) {
 			return;
 		}

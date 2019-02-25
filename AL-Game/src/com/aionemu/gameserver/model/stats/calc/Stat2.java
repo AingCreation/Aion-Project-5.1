@@ -60,7 +60,7 @@ public abstract class Stat2 {
 	}
 
 	public final int getCurrent() {
-		return this.base + this.bonus;
+		return this.base + this.bonus; // <-- This breaks our Stats !!!
 
 	}
 
@@ -77,7 +77,7 @@ public abstract class Stat2 {
 	}
 
 	public abstract void addToBonus(int bonus);
-	
+
 	public abstract float calculatePercent(int delta);
 
 	public final Creature getOwner() {
@@ -86,7 +86,6 @@ public abstract class Stat2 {
 
 	@Override
 	public String toString() {
-		return "[base=" + base + ", bonus=" + bonus + "]";
+		return "[" + stat.name() + " base=" + base + ", bonus=" + bonus + "]";
 	}
-
 }

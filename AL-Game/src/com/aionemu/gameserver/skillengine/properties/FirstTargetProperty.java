@@ -16,6 +16,7 @@
  */
 package com.aionemu.gameserver.skillengine.properties;
 
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
@@ -47,7 +48,7 @@ public class FirstTargetProperty
 				} else if ((skill.getFirstTarget() instanceof Player) && (skill.getEffector() instanceof Player)) {
 					Player playerEffected = (Player) skill.getFirstTarget();
 					Player playerEffector = (Player) skill.getEffector();
-					if (playerEffected.isEnemy(playerEffector)) {
+					if (!playerEffected.getRace().equals(playerEffector.getRace()) || playerEffected.isEnemy(playerEffector)) {
 						changeTargetToMe = true;
 					}
 				} else if (skill.getFirstTarget() instanceof Npc) {
@@ -124,11 +125,11 @@ public class FirstTargetProperty
 					return false;
 				boolean myParty = false;
 				for (Player member : ((Player) skill.getEffector()).getPlayerGroup2().getMembers()) {
-					if (member != skill.getEffector()) {
-						if (member == effected) {
-							myParty = true;
-							break;
-						}
+					if (member == skill.getEffector()) {
+						continue;
+					} if (member == effected) {
+						myParty = true;
+						break;
 					}
 				} if (!myParty) {
 					return false;

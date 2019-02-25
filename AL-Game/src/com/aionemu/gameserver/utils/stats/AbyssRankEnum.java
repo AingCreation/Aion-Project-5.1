@@ -27,27 +27,26 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 @XmlEnum
 public enum AbyssRankEnum
 {
-	//Ap Rank 5.3
-	GRADE9_SOLDIER(1, 300, 90, 0, 0, 0, 1802431),
-	GRADE8_SOLDIER(2, 414, 103, 1200, 0, 0, 1802433),
-	GRADE7_SOLDIER(3, 475, 118, 4220, 0, 0, 1802435),
-	GRADE6_SOLDIER(4, 546, 136, 10990, 0, 0, 1802437),
-	GRADE5_SOLDIER(5, 627, 156, 23500, 0, 0, 1802439),
-	GRADE4_SOLDIER(6, 721, 180, 42780, 0, 0, 1802441),
-	GRADE3_SOLDIER(7, 865, 216, 69700, 0, 0, 1802443),
-	GRADE2_SOLDIER(8, 1038, 259, 105600, 0, 0, 1802445),
-	GRADE1_SOLDIER(9, 1245, 311, 150800, 0, 0, 1802447),
-	
-	//Glory Rank 5.3
-	STAR1_OFFICER(10, 1868, 467, 0, 1244, 1000, 1802449),
-	STAR2_OFFICER(11, 2241, 560, 0, 1368, 700, 1802451),
-	STAR3_OFFICER(12, 2577, 644, 0, 1915, 500, 1802453),
-	STAR4_OFFICER(13, 2964, 741, 0, 3064, 300, 1802455),
-	STAR5_OFFICER(14, 4446, 1511, 0, 5210, 100, 1802457),
-	GENERAL(15, 4890, 1662, 0, 8335, 30, 1802459),
-	GREAT_GENERAL(16, 5378, 1828, 0, 10002, 10, 1802461),
-	COMMANDER(17, 5916, 2011, 0, 11503, 3, 1802463),
-	SUPREME_COMMANDER(18, 7099, 2413, 0, 12437, 1, 1802465);
+	// Abyss Points
+	GRADE9_SOLDIER(1, 300, 90, 0, 0, 0, 0, 0, 1802431),
+	GRADE8_SOLDIER(2, 414, 103, 1200, 0, 0, 0, 0, 1802433),
+	GRADE7_SOLDIER(3, 475, 118, 4220, 0, 0, 0, 0, 1802435),
+	GRADE6_SOLDIER(4, 546, 136, 10990, 0, 0, 0, 0, 1802437),
+	GRADE5_SOLDIER(5, 627, 156, 23500, 0, 0, 0, 0, 1802439),
+	GRADE4_SOLDIER(6, 721, 180, 42780, 0, 0, 0, 0, 1802441),
+	GRADE3_SOLDIER(7, 865, 216, 69700, 0, 0, 0, 0, 1802443),
+	GRADE2_SOLDIER(8, 1038, 259, 105600, 0, 0, 0, 0, 1802445),
+	GRADE1_SOLDIER(9, 1245, 311, 150800, 0, 0, 0, 0, 1802447),
+	// Glory Points
+	STAR1_OFFICER(10, 1868, 467, 0, 1244, 1000, 7, 49, 1802449),
+	STAR2_OFFICER(11, 2241, 560, 0, 1368, 700, 14, 98, 1802451),
+	STAR3_OFFICER(12, 2577, 644, 0, 1915, 500, 28, 196, 1802453),
+	STAR4_OFFICER(13, 2964, 741, 0, 3064, 300, 49, 343, 1802455),
+	STAR5_OFFICER(14, 4446, 1511, 0, 5210, 100, 107, 749, 1802457),
+	GENERAL(15, 4890, 1662, 0, 8335, 30, 119, 833, 1802459),
+	GREAT_GENERAL(16, 5378, 1828, 0, 10002, 10, 122, 854, 1802461),
+	COMMANDER(17, 5916, 2011, 0, 11503, 3, 127, 889, 1802463),
+	SUPREME_COMMANDER(18, 7099, 2413, 0, 12437, 1, 147, 1029, 1802465);
 	
 	static Logger log = LoggerFactory.getLogger(AbyssRankEnum.class);
 	
@@ -57,6 +56,8 @@ public enum AbyssRankEnum
 	private int apRequired;
 	private int gpRequired;
 	private int quota;
+	private int dailyReduceGp;
+	private int weeklyReduceGp;
 	private int descriptionId;
 
 	/**
@@ -66,13 +67,15 @@ public enum AbyssRankEnum
 	 * @param required
 	 * @param quota
 	 */
-	private AbyssRankEnum(int id, int pointsGained, int pointsLost, int apRequired, int gpRequired, int quota, int descriptionId) {
+	private AbyssRankEnum(int id, int pointsGained, int pointsLost, int apRequired, int gpRequired, int quota, int dailyReduceGp, int weeklyReduceGp, int descriptionId) {
 		this.id = id;
 		this.pointsGained = pointsGained;
 		this.pointsLost = pointsLost;
 		this.apRequired = apRequired;
 		this.gpRequired = gpRequired;
 		this.quota = quota;
+		this.dailyReduceGp = dailyReduceGp;
+		this.weeklyReduceGp = weeklyReduceGp;
 		this.descriptionId = descriptionId;
 	}
 
@@ -113,6 +116,14 @@ public enum AbyssRankEnum
 	 */
 	public int getQuota() {
 		return quota;
+	}
+	
+	public int getDailyReduceGp() {
+		return dailyReduceGp;
+	}
+
+	public int getWeeklyReduceGp() {
+		return weeklyReduceGp;
 	}
 
 	public int getDescriptionId() {

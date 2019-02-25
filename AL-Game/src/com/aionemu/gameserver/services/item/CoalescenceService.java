@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.GameServer;
+import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DescriptionId;
@@ -39,133 +41,137 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 
 public class CoalescenceService {
-	private static final int ItemId = 0;
+	public static void startMagicMorph(final Player player, final int upgradedItemObjectId, final List<Integer> ItemsList) {
 
-	public static void startCoalescence(final Player player, final int upgradedItemObjectId, final List<Integer> ItemsList) {
 		final Item firstItem = player.getInventory().getItemByObjId(upgradedItemObjectId);
 		final List<Integer> list = new ArrayList<Integer>();
 		int ItemsCount = 0;
-		
-		if(firstItem == null) {
+
+		if (firstItem == null) {
 			return;
 		}
+
+		/*
+		 * Check if item is in bag
+		 */
+		/*for (Integer ItemObjId : ItemsList) {
+			try {
+				if (ItemObjId != null && player.getInventory().getItemByObjId(ItemObjId).getItemCount() > 0) {
+					ItemsCount++;
+				}
+			} catch (NullPointerException e) {
+				GameServer.log.warn("Null Starting Coalescence : " + ItemObjId, e);
+				break;*/
+			
 		
-		//check if item is in bag
-		for (Integer ItemObjId : ItemsList) {
-			if (player.getInventory().getItemByObjId(ItemObjId).getItemCount() > 0) {
-				ItemsCount++;
-			}
-		}
-		
-		if (ItemsCount < ItemsList.size()) {
+
+		/*if (ItemsCount < ItemsList.size()) {
 			return;
-		}
-		
-		//get random item
+		}*/
+
+		/*
+		 * Get a random Item
+		 */
 		for (ItemTemplate template : DataManager.ITEM_DATA.getItemData().valueCollection()) {
 			if (template.getCategory() == firstItem.getItemTemplate().getCategory()) {
-				if (template.getLevel() > 65) {
-					if (!template.getName().contains("test_") &&
-							!template.getName().contains("Test_") &&
-							!template.getName().contains("5.0_") &&
-							!template.getName().contains("5.0 ") &&
-							!template.getName().contains("Test ") &&
-							!template.getName().contains("test ") &&
-							!template.getName().contains("You_") &&
-							!template.getName().contains("NPC ")) {
+				if (template.getLevel() > 65 && !template.getItemType().equals("ABYSS")) {
 						switch (ItemsList.size()) {
-						case 1:
-							if (template.getArmorType() == firstItem.getItemTemplate().getArmorType()) {
-								if (template.getLevel() <= Rnd.get(66, 68)) {
-									list.add(template.getTemplateId());
-								}
-							}
-							break;
-						case 2:
-							if (template.getArmorType() == firstItem.getItemTemplate().getArmorType()) {
-								if (template.getLevel() <= Rnd.get(67, 69)) {
-									list.add(template.getTemplateId());
-								}
-							}
-							break;
-						case 3:
-							if (template.getArmorType() == firstItem.getItemTemplate().getArmorType()) {
-								if (template.getLevel() <= Rnd.get(68, 70)) {
-									list.add(template.getTemplateId());
-								}
-							}
-						case 4:
-							if (template.getItemQuality() == firstItem.getItemTemplate().getItemQuality()) {
+							case 1:
 								if (template.getArmorType() == firstItem.getItemTemplate().getArmorType()) {
-									if (template.getLevel() <= Rnd.get(70, 72)) {
+									if (template.getLevel() <= Rnd.get(66, 68)) {
 										list.add(template.getTemplateId());
 									}
 								}
-							}
-							break;
-						case 5:
-							if (template.getItemQuality() == firstItem.getItemTemplate().getItemQuality()) {
+								break;
+							case 2:
 								if (template.getArmorType() == firstItem.getItemTemplate().getArmorType()) {
-									if (template.getLevel() <= Rnd.get(71, 73)) {
+									if (template.getLevel() <= Rnd.get(67, 69)) {
 										list.add(template.getTemplateId());
 									}
 								}
-							}
-							break;
-						case 6:
-							if (template.getItemQuality() == firstItem.getItemTemplate().getItemQuality()) {
+								break;
+							case 3:
 								if (template.getArmorType() == firstItem.getItemTemplate().getArmorType()) {
-									if (template.getLevel() <= Rnd.get(72, 74)) {
+									if (template.getLevel() <= Rnd.get(68, 70)) {
 										list.add(template.getTemplateId());
 									}
 								}
-							}
-							break;
+							case 4:
+								if (template.getItemQuality() == firstItem.getItemTemplate().getItemQuality()) {
+									if (template.getArmorType() == firstItem.getItemTemplate().getArmorType()) {
+										if (template.getLevel() <= Rnd.get(70, 72)) {
+											list.add(template.getTemplateId());
+										}
+									}
+								}
+								break;
+							case 5:
+								if (template.getItemQuality() == firstItem.getItemTemplate().getItemQuality()) {
+									if (template.getArmorType() == firstItem.getItemTemplate().getArmorType()) {
+										if (template.getLevel() <= Rnd.get(71, 73)) {
+											list.add(template.getTemplateId());
+										}
+									}
+								}
+								break;
+							case 6:
+								if (template.getItemQuality() == firstItem.getItemTemplate().getItemQuality()) {
+									if (template.getArmorType() == firstItem.getItemTemplate().getArmorType()) {
+										if (template.getLevel() <= Rnd.get(72, 74)) {
+											list.add(template.getTemplateId());
+										}
+									}
+								}
+								break;
 						}
-					}
 				}
 			}
 		}
-		
+
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), 0, upgradedItemObjectId, firstItem.getItemId(), 4000, 23, 0), true);
 		final ItemUseObserver observer = new ItemUseObserver() {
+
 			@Override
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1403619)); //cancel
+				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1403619)); // Magic Morph cancel
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), 0, upgradedItemObjectId, firstItem.getItemId(), 0, 25, 0), true);
 				player.getObserveController().removeObserver(this);
 				ItemsList.clear();
 				list.clear();
 			}
 		};
-		
+
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
 			@Override
 			public void run() {
 				final int random = list.get(new Random().nextInt(list.size()));
 				final int description = DataManager.ITEM_DATA.getItemTemplate(random).getNameId();
 				for (Integer ItemObjId : ItemsList) {
 					player.getInventory().decreaseByObjectId(ItemObjId, 1);
+				} if (LoggingConfig.LOG_CRAFT) {
+					GameServer.log.info("[COALESCENCE] Player: " + player.getObjectId() + "|" + player.getName() + " ItemId: " + random);
 				}
 				player.getInventory().decreaseByObjectId(upgradedItemObjectId, 1);
 				player.getObserveController().removeObserver(observer);
-				PacketSendUtility.sendPacket(player, new SM_COALESCENCE_RESULT(firstItem.getItemId(), firstItem.getObjectId()));
+				PacketSendUtility.sendPacket(player, new SM_COALESCENCE_RESULT(random));
 				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1403620, new DescriptionId(description)));
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), 0, upgradedItemObjectId, firstItem.getItemId(), 0, 24, 0), true);
-				ItemService.addItem(player, random, 1);
+				ItemService.addItem(player, random, 1, "Coalescence : " + player.getName());
 				ItemsList.clear();
 				list.clear();
 			}
 		}, 4000));
 	}
-	
+
 	public static CoalescenceService getInstance() {
 		return NewSingletonHolder.INSTANCE;
 	}
-	
+
 	private static class NewSingletonHolder {
+
 		private static final CoalescenceService INSTANCE = new CoalescenceService();
 	}
 }

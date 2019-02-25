@@ -15,7 +15,7 @@ public class ChainSkills
 		if (category == null) {
 			return 0;
 		}
-		long nullTime = player.getSkillCoolDown(template.getDelayId());
+		long nullTime = player.getSkillCoolDown(template.getCooldownId());
 		if (this.multiSkills.get(category) != null) {
 			if (System.currentTimeMillis() >= nullTime && this.multiSkills.get(category).getUseTime() <= nullTime) {
 				this.multiSkills.get(category).setChainCount(0);

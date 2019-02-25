@@ -22,6 +22,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
+import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
@@ -87,4 +88,6 @@ public interface InstanceHandler {
 	boolean onPassFlyingRing(Player player, String flyingRing);
 
 	void handleUseItemFinish(Player player, Npc npcId);
+
+	boolean useSkill(Player player, Skill skill);
 }

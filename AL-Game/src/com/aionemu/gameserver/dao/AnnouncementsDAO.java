@@ -22,6 +22,7 @@ package com.aionemu.gameserver.dao;
 import java.util.Set;
 
 import com.aionemu.commons.database.dao.DAO;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.Announcement;
 
 /**
@@ -45,5 +46,14 @@ public abstract class AnnouncementsDAO implements DAO {
 	@Override
 	public final String getClassName() {
 		return AnnouncementsDAO.class.getName();
+	}
+	
+	/**
+	 * @param lastAttacker
+	 * @param bossName
+	 */
+	public void UniqueKill(Player lastAttacker, String bossName) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -13,6 +13,7 @@ public class Agent extends AdminCommand
 {
 	private static final String COMMAND_START = "start";
 	private static final String COMMAND_STOP = "stop";
+	private static final String COMMAND_DRAW = "draw";
 	
 	public Agent() {
 		super("agent");
@@ -23,7 +24,7 @@ public class Agent extends AdminCommand
 		if (params.length == 0) {
 			showHelp(player);
 			return;
-		} if (COMMAND_STOP.equalsIgnoreCase(params[0]) || COMMAND_START.equalsIgnoreCase(params[0])) {
+		} if (COMMAND_STOP.equalsIgnoreCase(params[0]) || COMMAND_DRAW.equalsIgnoreCase(params[0]) || COMMAND_START.equalsIgnoreCase(params[0])) {
 			handleStartStopFight(player, params);
 		}
 	}
@@ -55,6 +56,21 @@ public class Agent extends AdminCommand
 				PacketSendUtility.sendMessage(player, "<Agent Fight> " + agentId + " is not start!");
 			} else {
 				PacketSendUtility.sendMessage(player, "<Agent Fight> " + agentId + " stopped!");
+				AgentService.getInstance().stopAgentFight(agentId);
+				AgentService.getInstance().onRewardDraw();
+			}
+		} else if (COMMAND_DRAW.equalsIgnoreCase(params[0])) {
+			if (!AgentService.getInstance().isFightInProgress(agentId)) {
+				PacketSendUtility.sendMessage(player, "<Agent Fight> " + agentId + " is not start!");
+			} else {
+				PacketSendUtility.sendMessage(player, "<Agent Fight> " + agentId + " stopped!");
+				World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+					@Override
+					public void visit(Player player) {
+						PacketSendUtility.sendBrightYellowMessageOnCenter(player, "<Agent Fight> Draw, You Have Acquired Reward. Check Your inventory.");
+					}
+				});
+				AgentService.getInstance().onRewardDraw();
 				AgentService.getInstance().stopAgentFight(agentId);
 			}
 		}

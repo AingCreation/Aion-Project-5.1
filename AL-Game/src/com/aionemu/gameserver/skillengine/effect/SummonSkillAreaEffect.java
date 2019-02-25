@@ -1,18 +1,18 @@
-/*
- * This file is part of aion-lightning <aion-lightning.org>.
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
  *
- *  aion-lightning is free software: you can redistribute it and/or modify
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  aion-lightning is distributed in the hope that it will be useful,
+ *  Aion-Lightning is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
+ *  GNU General Public License for more details. *
  *  You should have received a copy of the GNU General Public License
- *  along with aion-lightning.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.aionemu.gameserver.skillengine.effect;
 
@@ -29,12 +29,16 @@ import com.aionemu.gameserver.model.gameobjects.Servant;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
+/**
+ * @author ATracer
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SummonSkillAreaEffect")
-public class SummonSkillAreaEffect extends SummonServantEffect
-{
+public class SummonSkillAreaEffect extends SummonServantEffect {
+
 	@Override
 	public void applyEffect(Effect effect) {
+		// should only be set if player has no target to avoid errors
 		if (effect.getEffector().getTarget() == null) {
 			effect.getEffector().setTarget(effect.getEffector());
 		}
@@ -47,9 +51,11 @@ public class SummonSkillAreaEffect extends SummonServantEffect
 			y = effected.getY();
 			z = effected.getZ();
 		}
+		// fix for summon whirlwind
+		// TODO revisit later and find better fix - kecimis
 		int useTime = time;
 		switch (effect.getSkillId()) {
-			//Ice Sheet 4.8
+			// Ice Sheet 4.8
 			case 1308:
 			case 1309:
 			case 1310:
@@ -66,14 +72,14 @@ public class SummonSkillAreaEffect extends SummonServantEffect
 			case 1321:
 			case 1322:
 			case 1323:
-			    useTime = 15;
-			break;
-			//Mounting Explosion 4.8
+				useTime = 15;
+				break;
+			// Mounting Explosion 4.8
 			case 1431:
 			case 1432:
-			   useTime = 30;
-			break;
-			//Manifest Tornado 4.8
+				useTime = 30;
+				break;
+			// Manifest Tornado 4.8
 			case 1460:
 			case 1461:
 			case 1462:
@@ -91,22 +97,23 @@ public class SummonSkillAreaEffect extends SummonServantEffect
 			case 1474:
 			case 1475:
 				useTime = 3;
-			break;
-			//Battle Call 4.8
+				break;
+			// Battle Call 4.8
 			case 3036:
 			case 3037:
-			    useTime = 11;
-			break;
-			//Field Of Lightning 5.1
+				useTime = 11;
+				break;
+			// Field Of Lightning 5.1
 			case 4770:
 			case 4771:
 			case 4826:
-			    useTime = 9;
-			break;
+				useTime = 9;
+				break;
 		}
 		final Servant servant = spawnServant(effect, useTime, NpcObjectType.SKILLAREA, x, y, z);
 		final int finalSkillId = servant.getSkillList() != null ? servant.getSkillList().getRandomSkill().getSkillId() : 0;
 		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
 			@Override
 			public void run() {
 				servant.getController().useSkill(finalSkillId);

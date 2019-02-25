@@ -41,13 +41,13 @@ public class ArenaOfGloryInstance extends PvPArenaInstance
 		int totalPoints = instanceReward.getTotalPoints();
 		int size = instanceReward.getInstanceRewards().size();
 		float totalScoreAP = (1.0f * size) * 100;
-		float totalScoreGP = (1.0f * size) * 100;
+		//float totalScoreGP = (1.0f * size) * 100;
 		float rankingRate = 0;
 		if (size > 1) {
 			rankingRate = (0.077f * (4 - size));
 		}
 		float totalRankingAP = 30800 - 30800 * rankingRate;
-		float totalRankingGP = 800 - 800 * rankingRate;
+		//float totalRankingGP = 800 - 800 * rankingRate;
 		for (InstancePlayerReward playerReward : instanceReward.getInstanceRewards()) {
 			PvPArenaPlayerReward reward = (PvPArenaPlayerReward) playerReward;
 			if (!reward.isRewarded()) {
@@ -62,15 +62,15 @@ public class ArenaOfGloryInstance extends PvPArenaInstance
 				float percent = reward.getParticipation();
 				float generalRate = 0.167f + rank * 0.227f;
 				int basicAP = 100;
-				int basicGP = 100;
+				//int basicGP = 100;
 				float rankingAP = totalRankingAP;
-				float rankingGP = totalRankingGP;
+				//float rankingGP = totalRankingGP;
 				if (rank > 0) {
 					rankingAP = rankingAP - rankingAP * generalRate;
-					rankingGP = rankingGP - rankingGP * generalRate;
+					//rankingGP = rankingGP - rankingGP * generalRate;
 				}
 				int scoreAP = (int) (totalScoreAP * scoreRate);
-				int scoreGP = (int) (totalScoreGP * scoreRate);
+				//int scoreGP = (int) (totalScoreGP * scoreRate);
 				//<Abyss Points>
 				basicAP *= percent;
 				rankingAP *= percent;
@@ -79,12 +79,12 @@ public class ArenaOfGloryInstance extends PvPArenaInstance
 				reward.setRankingAP((int) rankingAP);
 				reward.setScoreAP(scoreAP);
 				//<Glory Points>
-				basicGP *= percent;
-				rankingGP *= percent;
-				rankingGP *= playerRate;
-				reward.setBasicGP(basicGP);
-				reward.setRankingGP((int) rankingGP);
-				reward.setScoreGP(scoreGP);
+				//basicGP *= percent;
+				//rankingGP *= percent;
+				//rankingGP *= playerRate;
+				//reward.setBasicGP(basicGP);
+				//reward.setRankingGP((int) rankingGP);
+				//reward.setScoreGP(scoreGP);
 				switch (rank) {
 					case 0:
 						reward.setGloriousInsignia(1);

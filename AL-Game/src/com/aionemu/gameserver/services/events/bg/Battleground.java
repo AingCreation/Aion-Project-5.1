@@ -663,7 +663,7 @@ public abstract class Battleground
                         continue;
                     } if (pl.getZ() < map.getKillZ()) {
                         pl.getLifeStats().reduceHp(100000, pl);
-                        PacketSendUtility.sendPacket(pl, new SM_ATTACK_STATUS(pl, SM_ATTACK_STATUS.TYPE.FALL_DAMAGE, 0, -100000));
+                        //PacketSendUtility.sendPacket(pl, new SM_ATTACK_STATUS(pl, SM_ATTACK_STATUS.TYPE.FALL_DAMAGE, 0, -100000));
                     }
                 }
             }
@@ -674,7 +674,7 @@ public abstract class Battleground
                         continue;
                     } if (pl.getZ() < map.getKillZ()) {
                         pl.getLifeStats().reduceHp(100000, pl);
-                        PacketSendUtility.sendPacket(pl, new SM_ATTACK_STATUS(pl, SM_ATTACK_STATUS.TYPE.FALL_DAMAGE, 0, -100000));
+                        //PacketSendUtility.sendPacket(pl, new SM_ATTACK_STATUS(pl, SM_ATTACK_STATUS.TYPE.FALL_DAMAGE, 0, -100000));
                     }
                 }
             }
@@ -684,7 +684,7 @@ public abstract class Battleground
                     continue;
                 } if (pl.getZ() < map.getKillZ()) {
                     pl.getLifeStats().reduceHp(100000, pl);
-                    PacketSendUtility.sendPacket(pl, new SM_ATTACK_STATUS(pl, SM_ATTACK_STATUS.TYPE.FALL_DAMAGE, 0, -100000));
+                    //PacketSendUtility.sendPacket(pl, new SM_ATTACK_STATUS(pl, SM_ATTACK_STATUS.TYPE.FALL_DAMAGE, 0, -100000));
                 }
             }
         }

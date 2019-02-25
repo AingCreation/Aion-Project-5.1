@@ -47,4 +47,8 @@ public class GSConfig
 	public static boolean ABYSSRANKING_SMALL_CACHE;
 	@Property(key = "gameserver.character.reentry.time", defaultValue = "20")
 	public static int CHARACTER_REENTRY_TIME;
+	
+	/* Server Language */
+	@Property(key = "gameserver.language", defaultValue = "en")
+	public static String SERVER_LANGUAGE;
 }

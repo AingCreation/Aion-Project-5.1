@@ -43,6 +43,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.utils.*;
 import com.aionemu.gameserver.world.*;
+import com.aionemu.gameserver.services.NewbieGuideService;
 
 /**
  Author Rinzler (Encom)
@@ -1143,6 +1144,9 @@ public class FissureOfOblivionInstance extends GeneralInstanceHandler
 	
 	@Override
 	public void onEnterInstance(final Player player) {
+		if (NewbieGuideService.isInNewbieGuide(player)){
+           return;
+        }
 		if (!instanceReward.containPlayer(player.getObjectId())) {
 			addPlayerReward(player);
 		}
@@ -17556,12 +17560,18 @@ public class FissureOfOblivionInstance extends GeneralInstanceHandler
 	
 	@Override
     public void onPlayerLogOut(Player player) {
+		if (NewbieGuideService.isInNewbieGuide(player)){
+           return;
+        }
         removeEffects(player);
 		TeleportService2.moveToInstanceExit(player, mapId, player.getRace());
     }
 	
 	@Override
 	public void onLeaveInstance(Player player) {
+		if (NewbieGuideService.isInNewbieGuide(player)){
+           return;
+        }
 		removeEffects(player);
 	}
 	

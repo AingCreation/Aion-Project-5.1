@@ -16,6 +16,17 @@
         <keyitem id="1" itemid="0" quantity="1"/>
     </chest>
 	
+	<!-- Krotan -->
+	<chest npcid="700540">
+		<keyitem id="1" itemid="0" quantity="1"/>
+	</chest>
+	<chest npcid="700559">
+		<keyitem id="1" itemid="0" quantity="1"/>
+	</chest>
+	<chest npcid="700539">
+		<keyitem id="1" itemid="0" quantity="1"/>
+	</chest>
+	
 	<!-- ARCHIVES OF ETERNITY 5.0 CHEST -->
 	<!-- Histories Of Atreia -->
 	<chest npcid="703131">
@@ -1205,11 +1216,11 @@
     </chest>
 	<!-- Abbey Box -->
 	<chest npcid="702658">
-        <keyitem id="1" itemid="185000217" quantity="1"/>
+        <keyitem id="1" itemid="985000217" quantity="1"/>
     </chest>
 	<!-- Noble Abbey Box -->
 	<chest npcid="702659">
-        <keyitem id="1" itemid="185000218" quantity="1"/>
+        <keyitem id="1" itemid="985000218" quantity="1"/>
     </chest>
 	
 	<!-- WISHING FOUNTAIN EVENT -->

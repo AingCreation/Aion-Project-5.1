@@ -1,18 +1,18 @@
-/*
- * This file is part of aion-unique <aion-unique.org>.
+/**
+ * This file is part of Aion-Lightning <aion-lightning.org>.
  *
- *  aion-unique is free software: you can redistribute it and/or modify
+ *  Aion-Lightning is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  aion-unique is distributed in the hope that it will be useful,
+ *  Aion-Lightning is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
+ *  GNU General Public License for more details. *
  *  You should have received a copy of the GNU General Public License
- *  along with aion-unique.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Aion-Lightning.
+ *  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.aionemu.gameserver.skillengine.effect;
 
@@ -44,17 +44,19 @@ public class AlwaysDodgeEffect extends EffectTemplate {
 			@Override
 			public boolean checkStatus(AttackStatus status) {
 				if (status == AttackStatus.DODGE) {
-					if (value <= 1)
+					if (value <= 1) {
 						effect.endEffect();
-					else
+					}
+					else {
 						value--;
+					}
 
 					return true;
 				}
-				else
+				else {
 					return false;
+				}
 			}
-
 		};
 		effect.getEffected().getObserveController().addAttackCalcObserver(acObserver);
 		effect.setAttackStatusObserver(acObserver, position);
@@ -63,7 +65,8 @@ public class AlwaysDodgeEffect extends EffectTemplate {
 	@Override
 	public void endEffect(Effect effect) {
 		AttackCalcObserver acObserver = effect.getAttackStatusObserver(position);
-		if (acObserver != null)
+		if (acObserver != null) {
 			effect.getEffected().getObserveController().removeAttackCalcObserver(acObserver);
+		}
 	}
 }

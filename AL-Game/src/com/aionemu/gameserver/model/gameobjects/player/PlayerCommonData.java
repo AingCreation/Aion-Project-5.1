@@ -33,12 +33,14 @@ import com.aionemu.gameserver.model.DescriptionId;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.stats.listeners.ItemEquipmentListener;
 import com.aionemu.gameserver.model.team.legion.LegionJoinRequestState;
 import com.aionemu.gameserver.model.templates.BoundRadius;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.event.AtreianPassport;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
-import com.aionemu.gameserver.services.player.CreativityPanel.CreativityEssenceService;
+import com.aionemu.gameserver.services.dreamergames.templates.PlayerCpTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.XPLossEnum;
 import com.aionemu.gameserver.world.World;
@@ -89,8 +91,6 @@ public class PlayerCommonData extends VisibleObjectTemplate
 	public Map<Integer, AtreianPassport> playerPassports = new HashMap<Integer, AtreianPassport>(1);
 	private PlayerPassports completedPassports;
 	private boolean isArchDaeva = false;
-	private int creativityPoint;
-	private int cp_step = 0;
 	private int joinRequestLegionId = 0;
     private LegionJoinRequestState joinRequestState = LegionJoinRequestState.NONE;
     private int lunaConsumePoint;
@@ -102,6 +102,10 @@ public class PlayerCommonData extends VisibleObjectTemplate
 	private long growthEnergy;
 	private long growthEnergyMax;
 	private boolean GoldenStarBoost = false;
+	private int totalCpUse;
+	private int MaxCp = 0;
+	private int addonCP = 0;
+	private int InNewbieGuide;
 	
 	public PlayerCommonData(int objId) {
 		this.playerObjId = objId;
@@ -309,8 +313,6 @@ public class PlayerCommonData extends VisibleObjectTemplate
 				break;
 			default:
 				break;
-			} if (this.isArchDaeva()) {
-				CreativityEssenceService.getInstance().pointPerExp(this.getPlayer());
 			}
 		}
 	}
@@ -413,6 +415,13 @@ public class PlayerCommonData extends VisibleObjectTemplate
 		if (player != null) {
 			player.getController().upgradePlayer();
 			resetSalvationPoints();
+			setMaxCp(level);
+			PacketSendUtility.sendPacket(getPlayer(), new SM_ESSENCE_INFO(getPlayer(), getPlayer().getCpList().getAllCps()));
+			for (Item item : player.getEquipment().getEquippedHighDaevaItems()) {
+				if (item.getItemTemplate().getLevel() > player.getLevel()) {
+					ItemEquipmentListener.UpdateEquipmentItem(player, item);
+				}
+			}
 		}
 	}
 
@@ -741,22 +750,6 @@ public class PlayerCommonData extends VisibleObjectTemplate
 		return isArchDaeva;
 	}
 
-	public int getCreativityPoint() {
-		return creativityPoint;
-	}
-
-	public void setCreativityPoint(int point) {
-		this.creativityPoint = point;
-	}
-
-	public int getCPStep() {
-		return cp_step;
-	}
-
-	public void setCPStep(int step) {
-		this.cp_step = step;
-	}
-
 	public int getJoinRequestLegionId() {
 		return joinRequestLegionId;
 	}
@@ -898,4 +891,42 @@ public class PlayerCommonData extends VisibleObjectTemplate
 	public int getCubeExpands() {
         return this.cubeExpands;
     }
+	
+	public int getTotalCpUse() {
+		return this.totalCpUse;
+	}
+	  
+	public void setTotalCpUse(int totalCpUse)	{
+		this.totalCpUse = totalCpUse;
+	}
+	
+	public int getMaxCp() {
+	    return this.MaxCp;
+	}
+	  
+	public void setMaxCp(int playerlevel) {
+		PlayerCpTemplate[] playerLevel = DataManager.PLAYER_CP_TABLE.getTemplatesForGroup(playerlevel);
+		int addonsCp = getAddonCP();
+		int maxCp = playerLevel[0].getCpPoint() + addonsCp;
+		this.MaxCp = maxCp;
+	}
+	
+	public int getAddonCP()	{
+		return this.addonCP;
+	}
+	  
+	public void setAddonCP(int addoncp) {
+		this.addonCP = addoncp;
+	}
+	public void setinNewbieGuide(int isInNewbieGuide) {
+	    this.InNewbieGuide = isInNewbieGuide;
+	}
+
+	public int getinNewbieGuide() {
+	    return InNewbieGuide;
+	}
+
+	public boolean isInNewbieGuide() {
+	     return InNewbieGuide > 0;
+	}
 }

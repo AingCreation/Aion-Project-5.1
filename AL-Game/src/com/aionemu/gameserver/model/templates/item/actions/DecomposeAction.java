@@ -33,6 +33,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.dao.PlayerDAO;
+import com.aionemu.gameserver.services.NewbieGuideService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +59,7 @@ import com.aionemu.gameserver.model.templates.item.RandomItem;
 import com.aionemu.gameserver.model.templates.item.RandomType;
 import com.aionemu.gameserver.model.templates.item.ResultedItem;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SELECT_ITEM;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SELECT_ITEM_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SELECT_ITEM_ADD;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -167,8 +170,13 @@ public class DecomposeAction extends AbstractItemAction
 								selectedList.add(resultItem);
 							}
 						}
-						PacketSendUtility.sendPacket(player, new SM_SELECT_ITEM(player, selectedList, parentItem.getObjectId()));
+						PacketSendUtility.sendPacket(player, new SM_SELECT_ITEM_LIST(player, selectedList, parentItem.getObjectId()));
 					}
+					if (player.getCommonData().isInNewbieGuide()) {
+                            player.getCommonData().setinNewbieGuide(4);
+                            DAOManager.getDAO(PlayerDAO.class).updateNewbieGuide(player.getObjectId(), 4);
+                            NewbieGuideService.getInstance().sendShoutAfterOpenStigma();
+                        }
 				}
 			}, 0));
 		} else {
@@ -212,6 +220,11 @@ public class DecomposeAction extends AbstractItemAction
 						} else {
 							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(new DescriptionId(parentItem.getNameId())));
 						}
+						if (player.getCommonData().isInNewbieGuide()) {
+                            player.getCommonData().setinNewbieGuide(4);
+                            DAOManager.getDAO(PlayerDAO.class).updateNewbieGuide(player.getObjectId(), 4);
+                            NewbieGuideService.getInstance().sendShoutAfterOpenStigma();
+                        }
 					} else if (selectedCollection.getRandomItems().size() > 0) {
 						for (RandomItem randomItem : selectedCollection.getRandomItems()) {
 							RandomType randomType = randomItem.getType();
@@ -332,7 +345,7 @@ public class DecomposeAction extends AbstractItemAction
 									do {
 										randomId = Rnd.get(186000051, 186000066);
 										i++;
-										if (i > 50) {
+										if (i > 1) {
 											randomId = 0;
 											log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
 											break;

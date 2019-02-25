@@ -1,30 +1,57 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import java.util.*;
-import org.slf4j.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 import javolution.util.FastList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.configs.administration.AdminConfig;
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dao.InventoryDAO;
-import com.aionemu.gameserver.model.*;
+import com.aionemu.gameserver.model.DescriptionId;
+import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.actions.PlayerMode;
-import com.aionemu.gameserver.model.gameobjects.*;
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.stats.listeners.ItemEquipmentListener;
-import com.aionemu.gameserver.model.templates.item.*;
+import com.aionemu.gameserver.model.templates.item.ArmorType;
+import com.aionemu.gameserver.model.templates.item.ItemCategory;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
+import com.aionemu.gameserver.model.templates.item.WeaponType;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_ITEM;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEARANCE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
+import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.StigmaService;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
-import com.aionemu.gameserver.utils.*;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
 public class Equipment
@@ -213,6 +240,9 @@ public class Equipment
 	}
 
 	private void notifyItemUnequip(Item item) {
+		if (item.isAmplified() && item.getEnchantLevel() >= 20) {
+			SkillLearnService.removeSkill(owner, item.getAmplificationSkill());
+		}
 		ItemEquipmentListener.onItemUnequipment(item, owner);
 		owner.getObserveController().notifyItemUnEquip(item, owner);
 		tryUpdateSummonStats();
@@ -639,6 +669,16 @@ public class Equipment
 		}
 		return equippedItemIds;
 	 }
+	 
+	 public FastList<Item> getEquippedHighDaevaItems() {
+		 FastList<Item> equippedItems = FastList.newInstance();
+		 for (Item item : this.equipment.values()) {
+			 if (item.getItemTemplate().isArchdaeva()) {
+				 equippedItems.add(item);
+			 }
+		 }
+		 return equippedItems;
+	 }
 
 	 /**
 	  * @return List<Item>
@@ -651,6 +691,45 @@ public class Equipment
 		 }
 		 return equippedItems;
 	 }
+	 
+	 /**
+		 * @return List<Item>
+		 */
+		public List<Item> getEquippedItemsAdvencedStigma() {
+			List<Item> equippedItems = new ArrayList<Item>();
+			for (Item item : equipment.values()) {
+				if (ItemSlot.isAdvancedStigma(item.getEquipmentSlot())) {
+					equippedItems.add(item);
+				}
+			}
+			return equippedItems;
+		}
+		
+		/**
+		 * @return List<Item>
+		 */
+		public List<Item> getEquippedItemsMajorStigma() {
+		    List<Item> equippedItems = new ArrayList<Item>();
+		    for (Item item : equipment.values()) {
+		    	if (ItemSlot.isMajorStigma(item.getEquipmentSlot())) {
+		    		equippedItems.add(item);
+		    	}
+		    }
+		    return equippedItems;
+		}
+		
+		/**
+         * @return List<Item>
+         */
+        public List<Item> getEquippedItemsSpecialStigma() {
+            List<Item> equippedItems = new ArrayList<Item>();
+            for (Item item : equipment.values()) {
+                if (ItemSlot.isSpecialStigma(item.getEquipmentSlot())) {
+                    equippedItems.add(item);
+                }
+            }
+            return equippedItems;
+        }
 
 	 /**
 	  * @return Number of parts equipped belonging to requested itemset
@@ -790,6 +869,16 @@ public class Equipment
 				 return true;
 			 }
 		 }
+		 return false;
+	 }
+	 
+	 public boolean isKeybladeEquipped() {
+		 Item keyblade = getMainHandWeapon(); // equipment.get(ItemSlot.MAIN_HAND.getSlotIdMask());
+
+		 if ((keyblade != null) && (keyblade.getItemTemplate().getWeaponType() == WeaponType.KEYBLADE_2H)) {
+			 return true;
+		 }
+
 		 return false;
 	 }
 
@@ -1150,9 +1239,11 @@ public class Equipment
 	 public void checkRankLimitItems() {
 		 for (Item item : getEquippedItems()) {
 			 if (!verifyRankLimits(item)) {
-				 unEquipItem(item.getObjectId(), item.getEquipmentSlot());
-				 PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_UNEQUIP_RANKITEM(item.getNameId()));
-				 // TODO: Check retail what happens with full inv and the task msgs.
+				 if (!CustomConfig.RANK_ITEM_LIMIT && item.getItemTemplate().getUseLimits().getMinRank() >= CustomConfig.RANK_LIMIT) {
+					 unEquipItem(item.getObjectId(), item.getEquipmentSlot());
+					 PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_UNEQUIP_RANKITEM(item.getNameId()));
+					 // TODO: Check retail what happens with full inv and the task msgs.
+				 }
 			 }
 		 }
 	 }
